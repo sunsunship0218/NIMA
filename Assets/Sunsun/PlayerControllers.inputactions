@@ -1,0 +1,76 @@
+{
+    "name": "PlayerControllers",
+    "maps": [
+        {
+            "name": "PlayerMove",
+            "id": "d9d33ad3-998f-40cd-a661-66517c263055",
+            "actions": [
+                {
+                    "name": "AD_Move",
+                    "type": "Value",
+                    "id": "9caf1161-8759-4063-b638-93615bb29fc4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Space_Jump",
+                    "type": "Value",
+                    "id": "9c3eca5d-9d57-45b8-9325-c27757bb6ae1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "2D Vector",
+                    "id": "62cc8f67-6d62-454b-9526-0bf524dc67f3",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AD_Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "right",
+                    "id": "fe2a202d-0962-4ed8-894f-951f6d4be3b1",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AD_Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "b17db34d-5bd6-44e4-9115-1254e707b10c",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AD_Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "00953c14-b6c2-45de-b0d6-94a617f6cd42",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Space_Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
