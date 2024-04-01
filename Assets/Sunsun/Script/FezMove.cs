@@ -5,8 +5,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-
-
 public class FezMove : MonoBehaviour
 {
 
