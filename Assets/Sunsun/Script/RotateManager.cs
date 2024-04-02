@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEditor.Progress;
 
-public class FezManager : MonoBehaviour
+public class RotateManager : MonoBehaviour
 {
     [Header("Player Settings")]
     //玩家物件與現在面對的方向
@@ -22,7 +22,7 @@ public class FezManager : MonoBehaviour
     public float WorldUnits = 5.0f;
 
     //玩家移動控制腳本
-   [SerializeField] FezMove fezMove;
+   [SerializeField] PlayerMove playerMove;
     //旋轉角度
     float degree =0;
     //放隱形方塊的List
@@ -37,7 +37,7 @@ public class FezManager : MonoBehaviour
     {
         //定義玩家初始朝向的地圖方向
         _myDirection = myDirection.Back;
-        fezMove = Player.GetComponent<FezMove>();
+        playerMove = Player.GetComponent<PlayerMove>();
         //強制更新隱形方塊的位置
         Upd_UnseeCube_Data(true);
 
@@ -48,7 +48,7 @@ public class FezManager : MonoBehaviour
         //fezMove.IsJump==false
         //沒有跳躍才進行玩家相機與玩家位置的判定
         //--------------------------------------------------------我還需要寫沒有攻擊的時候-----------------------------------------------------------
-        if (!fezMove.IsJump)
+        if (!playerMove.IsJump)
         {
            
             bool updateLocation = false;
@@ -99,7 +99,7 @@ public class FezManager : MonoBehaviour
             //左轉90度
             degree -= 90f;//有執行
             Upd_UnseeCube_Data(false);
-            fezMove.Upd_myFacingDirection(_myDirection, degree);//有執行
+            playerMove.Upd_myFacingDirection(_myDirection, degree);//有執行
         }
 
         //往右走
@@ -114,7 +114,7 @@ public class FezManager : MonoBehaviour
             //右轉90度
             degree += 90f;
             Upd_UnseeCube_Data(false);
-            fezMove.Upd_myFacingDirection(_myDirection, degree);
+            playerMove.Upd_myFacingDirection(_myDirection, degree);
         }
     }
     void Upd_UnseeCube_Data( bool ForceRebuild)
@@ -153,10 +153,10 @@ public class FezManager : MonoBehaviour
         foreach (var item in UnseeList)
         {
             //返回隱形方塊位置  - 玩家水平位置的絕對值。水平位置差<方塊邊長, 就代表在隱形方塊上
-            if (Mathf.Abs(item.position.x - fezMove.transform.position.x) < WorldUnits && (item.position.z - fezMove.transform.position.z) < WorldUnits)
+            if (Mathf.Abs(item.position.x - playerMove.transform.position.x) < WorldUnits && (item.position.z - playerMove.transform.position.z) < WorldUnits)
             {
                 //返回隱形方塊位置  - 玩家垂直位置的絕對值。垂直位置差<方塊邊長, 就代表在隱形方塊上,確保玩家在平台上
-                if (fezMove.transform.position.y - item.position.y <= WorldUnits + 0.2f && fezMove.transform.position.y - item.position.y > 0) ;
+                if (playerMove.transform.position.y - item.position.y <= WorldUnits + 0.2f && playerMove.transform.position.y - item.position.y > 0) ;
                 return true;
             }                         
         }       
@@ -170,12 +170,12 @@ public class FezManager : MonoBehaviour
         // 前後
         if(_myDirection ==myDirection.Front || _myDirection == myDirection.Back)
         {
-            ClosestPoint = fezMove.transform.position.z;
+            ClosestPoint = playerMove.transform.position.z;
         }
         //左右
        else if (_myDirection == myDirection.Left || _myDirection == myDirection.Right)
         {
-            ClosestPoint = fezMove.transform.position.x;
+            ClosestPoint = playerMove.transform.position.x;
         }
         //Debug.Log("Player" +Mathf.Round(ClosestPoint));
         return Mathf.Round(ClosestPoint);
@@ -192,13 +192,13 @@ public class FezManager : MonoBehaviour
             if(_myDirection == myDirection.Front ||_myDirection == myDirection.Back)
             {
                 //水平位置差 < 方塊邊長, 就代表在隱形方塊上,同IsOnInvisiCube()
-                if (Mathf.Abs(item.position.x - fezMove.transform.position.x) < WorldUnits + 0.1f)
+                if (Mathf.Abs(item.position.x - playerMove.transform.position.x) < WorldUnits + 0.1f)
                 {
                     //玩家比平台高,且高約世界單位+0.2f,才會被判定需要調整位置
-                    if ( (fezMove.transform.position.y - item.position.y <= WorldUnits + 0.2f && fezMove.transform.position.y - item.position.y > 0))
+                    if ( (playerMove.transform.position.y - item.position.y <= WorldUnits + 0.2f && playerMove.transform.position.y - item.position.y > 0))
                     {
                         //保持與平台相同的x,y座標不變,只平移不同的Z(移動到平台位置)
-                        fezMove.transform.position = new Vector3(fezMove.transform.position.x, fezMove.transform.position.y, item.position.z);
+                        playerMove.transform.position = new Vector3(playerMove.transform.position.x, playerMove.transform.position.y, item.position.z);
                         //有移動
                         return true;
                     }
@@ -206,13 +206,13 @@ public class FezManager : MonoBehaviour
                 //朝向左右
                 else
                 {
-                    if (Mathf.Abs(item.position.z - fezMove.transform.position.z) < WorldUnits + 0.1f)
+                    if (Mathf.Abs(item.position.z - playerMove.transform.position.z) < WorldUnits + 0.1f)
                     {
                         //玩家比平台高,且高約世界單位+0.2f,才會被判定需要調整位置
-                        if ((fezMove.transform.position.y - item.position.y <= WorldUnits + 0.2f && fezMove.transform.position.y - item.position.y > 0))
+                        if ((playerMove.transform.position.y - item.position.y <= WorldUnits + 0.2f && playerMove.transform.position.y - item.position.y > 0))
                         {
                             //保持與平台相同的Y,Z座標不變,只平移不同的X(移動到平台位置)
-                            fezMove.transform.position = new Vector3(item.position.x, fezMove.transform.position.y, fezMove.transform.position.z);
+                            playerMove.transform.position = new Vector3(item.position.x, playerMove.transform.position.y, playerMove.transform.position.z);
                             //有移動
                             return true;
                         }
@@ -234,23 +234,23 @@ public class FezManager : MonoBehaviour
             if (_myDirection == myDirection.Front || _myDirection == myDirection.Back)
             {
                 //水平位置差 < 方塊邊長, 就代表在隱形方塊上,同IsOnInvisiCube()
-                if (Mathf.Abs(item.position.x - fezMove.transform.position.x) < WorldUnits + 0.1f)
+                if (Mathf.Abs(item.position.x - playerMove.transform.position.x) < WorldUnits + 0.1f)
                 {
                     //玩家比平台高,且高約世界單位+0.2f,才會被判定需要調整位置
-                    if ((fezMove.transform.position.y - item.position.y <= WorldUnits + 0.2f && fezMove.transform.position.y - item.position.y > 0 && !fezMove.IsJump))
+                    if ((playerMove.transform.position.y - item.position.y <= WorldUnits + 0.2f && playerMove.transform.position.y - item.position.y > 0 && !playerMove.IsJump))
                     {
                         //移動到最接近相機的平台位置,面相前方則移動到面前的,面相後方則移動到後面的
-                        if (_myDirection == myDirection.Front && item.position.z < fezMove.transform.position.z)
+                        if (_myDirection == myDirection.Front && item.position.z < playerMove.transform.position.z)
                             IsCamMove = true; 
 
-                        if (_myDirection == myDirection.Back && item.position.z > fezMove.transform.position.z)
+                        if (_myDirection == myDirection.Back && item.position.z > playerMove.transform.position.z)
                             IsCamMove= true;
 
                         //開始移動相機位置
                         if (IsCamMove)
                         {
                             //保持與平台相同的x,y座標不變,只平移不同的Z(移動到平台位置)
-                            fezMove.transform.position = new Vector3(fezMove.transform.position.x, fezMove.transform.position.y, item.position.z);
+                            playerMove.transform.position = new Vector3(playerMove.transform.position.x, playerMove.transform.position.y, item.position.z);
                             return true;
                         }
                     }
@@ -258,23 +258,23 @@ public class FezManager : MonoBehaviour
                 //朝向左右
                 else
                 {
-                    if (Mathf.Abs(item.position.z - fezMove.transform.position.z) < WorldUnits + 0.1f)
+                    if (Mathf.Abs(item.position.z - playerMove.transform.position.z) < WorldUnits + 0.1f)
                     {
                         //玩家比平台高,且高約世界單位+0.2f,才會被判定需要調整位置
-                        if ((fezMove.transform.position.y - item.position.y <= WorldUnits + 0.2f && fezMove.transform.position.y - item.position.y > 0 && !fezMove.IsJump))
+                        if ((playerMove.transform.position.y - item.position.y <= WorldUnits + 0.2f && playerMove.transform.position.y - item.position.y > 0 && !playerMove.IsJump))
                         {
                             //移動到最接近相機的平台位置,面相前方則移動到面前的,面相後方則移動到後面的
-                            if (_myDirection == myDirection.Left && item.position.x < fezMove.transform.position.x)
+                            if (_myDirection == myDirection.Left && item.position.x < playerMove.transform.position.x)
                                 IsCamMove = true;
 
-                            if (_myDirection == myDirection.Right && item.position.x > fezMove.transform.position.x)
+                            if (_myDirection == myDirection.Right && item.position.x > playerMove.transform.position.x)
                                 IsCamMove = true;
 
                             //開始移動相機位置
                             if (IsCamMove)
                             {
                                 //保持與平台相同的x,y座標不變,只平移不同的Z(移動到平台位置)
-                                fezMove.transform.position = new Vector3(item.transform.position.x, fezMove.transform.position.y, fezMove.transform.position.z);
+                                playerMove.transform.position = new Vector3(item.transform.position.x, playerMove.transform.position.y, playerMove.transform.position.z);
                                 return true;
                             }
                         }
@@ -299,7 +299,7 @@ public class FezManager : MonoBehaviour
         }
 
         //回傳enum值決定方向
-        Debug.Log((myDirection)(count));
+        //Debug.Log((myDirection)(count));
         return (myDirection)(count);
     }
 
@@ -315,7 +315,7 @@ public class FezManager : MonoBehaviour
             count = 3;
         }
         //回傳enum值決定方向
-        Debug.Log((myDirection)(count));
+       // Debug.Log((myDirection)(count));
         return (myDirection)(count);
        
     }

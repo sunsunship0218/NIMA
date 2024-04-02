@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-public class FezMove : MonoBehaviour
+public class PlayerMove : MonoBehaviour
 {
 
     [SerializeField]
@@ -26,12 +26,10 @@ public class FezMove : MonoBehaviour
     public bool IsJump  =false;
 
     private void Awake()
-    {
-     
+    {     
         rb = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
-        playerControllers_ = new PlayerControllers();
-      
+        playerControllers_ = new PlayerControllers();     
     }
     void Start()
     {
@@ -58,7 +56,7 @@ public class FezMove : MonoBehaviour
      void FixedUpdate()
      {
         Move();    
-    }
+     }
     //²¾°Êª±®a¦ì¸m
     private void MoveCharacter(float moveFactor)
     {
