@@ -58,28 +58,23 @@ public class RotateManager : MonoBehaviour
                 //如果移動玩家到附近的平台了
                 if (MovePlayerToNearPlatform())
                 {
-                    Debug.Log("Move");
                     updateLocation = true;
                 }
 
                 //如果相機移動方向了
                 if (MoveCamToNearPlatfoem())
-                {
-                    Debug.Log("CamMove");
+                {   
                     updateLocation = true;
                 }
 
                 if (updateLocation)
                 {
                     //更新隱形方塊的位置,但不強制rebuild
-                    Upd_UnseeCube_Data(false);
-                    Debug.Log("UPD");
+                    Upd_UnseeCube_Data(false);        
                 }
                 
             }
-        }
-        
-        
+        }       
         Controll();
     }
 
@@ -125,7 +120,6 @@ public class RotateManager : MonoBehaviour
             //沒有轉動( 最後朝向方向==玩家起始朝向方向  && 沒有深度差'
             if( LastDirection==_myDirection && LastDepth == GetPlayerDepth())
             {
-                Debug.Log("Didnt Move");
                 return; 
             }
         }

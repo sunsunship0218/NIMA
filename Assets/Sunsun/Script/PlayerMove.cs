@@ -16,6 +16,10 @@ public class PlayerMove : MonoBehaviour
     Collider collider;
     [SerializeField]
     CharacterController characterController;
+
+    public Animator animator;
+    public CharacterController CharacterController;
+
     PlayerControllers playerControllers_;
     Keyboard keyboard;
     myDirection MyDirection;
@@ -47,10 +51,12 @@ public class PlayerMove : MonoBehaviour
             IsJump = true;
         }
 
-        // 移動到正確的position
-        float moveFactor = Move_speed * Time.deltaTime * 10f;
-        MoveCharacter(moveFactor);
-
+        if (animator)
+        {
+            // 移動到正確的position
+            float moveFactor = Move_speed * Time.deltaTime * 10f;
+            MoveCharacter(moveFactor);
+        }
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, degree, 0), 8 * Time.deltaTime);       
     }
      void FixedUpdate()
@@ -62,9 +68,8 @@ public class PlayerMove : MonoBehaviour
     {
         //Here is bug
         //獲取水平輸入值
-        float Horizontal = Input.GetAxis("Horizontal");
         // inputValue.x; 
-
+        float Horizontal = Input.GetAxis("Horizontal");    
         float Gravity =15f;
         float JumpHeight =0f;
         //先將座標歸0再做處理
