@@ -54,7 +54,7 @@ public class RotateManager : MonoBehaviour
             bool updateLocation = false;
             if (IsOnInvisiCube())
             {
-                Debug.Log("IsOninvisiCube");
+                //Debug.Log("IsOninvisiCube");
                 //如果移動玩家到附近的平台了
                 if (MovePlayerToNearPlatform())
                 {
@@ -88,7 +88,7 @@ public class RotateManager : MonoBehaviour
                 MovePlayerToNearPlatform();
             }
            
-            // BUG HERE
+         
             LastDirection = _myDirection;
             _myDirection = RotateDirectionLeft();//有執行
             //左轉90度
