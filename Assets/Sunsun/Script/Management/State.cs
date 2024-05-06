@@ -122,7 +122,7 @@ public  class Patrol : State
             }
             agent.SetDestination(GameEnvironment.Singleton.Checkpoints[currentIndex].transform.position);
         }    
-        base.Update();
+        //base.Update();
     }
 
     public override void Exit()
