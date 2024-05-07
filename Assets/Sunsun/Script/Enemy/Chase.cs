@@ -13,6 +13,7 @@ public class Chase : State
 
     public override void Enter()
     {
+       
         anim.SetTrigger("isChasing");
         base.Enter();
     }

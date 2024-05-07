@@ -13,7 +13,7 @@ public class AI : MonoBehaviour
     {
         agent=this.GetComponent<NavMeshAgent>();
         anim = this.GetComponent<Animator>();
-        currentState = new Idle(gameObject, agent, anim, player);
+        currentState = new Patrol(gameObject, agent, anim, player);
     }
 
     private void Update()

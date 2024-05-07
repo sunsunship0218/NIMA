@@ -8,7 +8,7 @@ public class Patrol : State
                         : base(_enemy, _agent, _anim, _player)
     {
         name = STATE.PATROL;
-        agent.speed = 2;
+        agent.speed = 3;
         agent.isStopped = false;
     }
     public override void Enter()
@@ -26,6 +26,7 @@ public class Patrol : State
         }
         currentIndex = 0;
         anim.SetTrigger("isWalking");
+        Debug.Log("Number of Checkpoints: " + GameEnvironment.Singleton.Checkpoints.Count);
         base.Enter();
     }
     public override void Update()
