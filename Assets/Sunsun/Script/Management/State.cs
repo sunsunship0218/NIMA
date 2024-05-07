@@ -214,11 +214,15 @@ public class Attack :State
     {
         anim.SetTrigger("isAttacking");
         agent.isStopped = true;
+        //source.Play();
         base.Enter();
     }
     public override void Update()
     {
-        base.   Update();
+        Vector3 direc = player.transform.position -npc.transform.position;
+        float angel =Vector3.Angle(direc, npc.transform.forward);
+        direc.y = 0;
+        base. Update();
     }
     public override void    Exit()
     {
