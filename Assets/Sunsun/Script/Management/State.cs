@@ -203,10 +203,25 @@ public class Chase : State
 public class Attack :State
 {
     float rotationspeed = 5f;
-    //AudioSource source
+    //AudioSource source;
     public Attack(GameObject _enemy, NavMeshAgent _agent, Animator _anim, Transform _player)
                      : base(_enemy, _agent, _anim, _player)
     {
         name = STATE.ATTACK;     
+       // source =npc.GetComponent<AudioSource>();
+    }
+    public override void Enter()
+    {
+        anim.SetTrigger("isAttacking");
+        agent.isStopped = true;
+        base.Enter();
+    }
+    public override void Update()
+    {
+        base.   Update();
+    }
+    public override void    Exit()
+    {
+        base.Exit();
     }
 }
