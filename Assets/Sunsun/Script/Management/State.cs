@@ -48,6 +48,8 @@ public class State
 
     public State process()
     {
+        Debug.Log("Processing State: " + name.ToString() + " at stage " + stage.ToString());
+
         if (stage == EVENT.ENTER) { Enter(); }
 
         if (stage == EVENT.UPDATE) { Update(); }
@@ -55,6 +57,7 @@ public class State
         if (stage == EVENT.EXIT)
         {
             Exit();
+            Debug.Log("Exiting State: " + name.ToString());
             return nextState;
         }
         //回傳現在狀態

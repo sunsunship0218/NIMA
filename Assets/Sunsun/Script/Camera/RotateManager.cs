@@ -151,6 +151,7 @@ namespace NIMA.Camera.Rotate
                 //返回隱形方塊位置  - 玩家水平位置的絕對值。水平位置差<方塊邊長, 就代表在隱形方塊上
                 if (Mathf.Abs(item.position.x - playerMove.transform.position.x) < WorldUnits && (item.position.z - playerMove.transform.position.z) < WorldUnits)
                 {
+                    Debug.Log("Is on invisiable cube");
                     //返回隱形方塊位置  - 玩家垂直位置的絕對值。垂直位置差<方塊邊長, 就代表在隱形方塊上,確保玩家在平台上
                     if (playerMove.transform.position.y - item.position.y <= WorldUnits + 0.2f && playerMove.transform.position.y - item.position.y > 0) ;
                     return true;
@@ -191,7 +192,7 @@ namespace NIMA.Camera.Rotate
                     if (Mathf.Abs(item.position.x - playerMove.transform.position.x) < WorldUnits + 0.1f)
                     {
                         //玩家比平台高,且高約世界單位+0.2f,才會被判定需要調整位置
-                        if ((playerMove.transform.position.y - item.position.y <= WorldUnits + 0.2f && playerMove.transform.position.y - item.position.y > 0))
+                        if ((playerMove.transform.position.y - item.position.y <= WorldUnits + 0.8f && playerMove.transform.position.y - item.position.y > 0))
                         {
                             //保持與平台相同的x,y座標不變,只平移不同的Z(移動到平台位置)
                             playerMove.transform.position = new Vector3(playerMove.transform.position.x, playerMove.transform.position.y, item.position.z);
@@ -205,7 +206,7 @@ namespace NIMA.Camera.Rotate
                         if (Mathf.Abs(item.position.z - playerMove.transform.position.z) < WorldUnits + 0.1f)
                         {
                             //玩家比平台高,且高約世界單位+0.2f,才會被判定需要調整位置
-                            if ((playerMove.transform.position.y - item.position.y <= WorldUnits + 0.2f && playerMove.transform.position.y - item.position.y > 0))
+                            if ((playerMove.transform.position.y - item.position.y <= WorldUnits + 0.8f && playerMove.transform.position.y - item.position.y > 0))
                             {
                                 //保持與平台相同的Y,Z座標不變,只平移不同的X(移動到平台位置)
                                 playerMove.transform.position = new Vector3(item.position.x, playerMove.transform.position.y, playerMove.transform.position.z);
@@ -220,6 +221,7 @@ namespace NIMA.Camera.Rotate
             return false;
         }
         //移動相機到附近平台
+      
         bool MoveCamToNearPlatfoem()
         {
             bool IsCamMove = false;

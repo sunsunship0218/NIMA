@@ -13,6 +13,7 @@ public class Patrol : State
     }
     public override void Enter()
     {
+        Debug.Log("Entering Patrol State");
         float lastDist = Mathf.Infinity;
         for (int i = 0; i < GameEnvironment.Singleton.Checkpoints.Count; i++)
         {
@@ -53,6 +54,7 @@ public class Patrol : State
 
     public override void Exit()
     {
+        Debug.Log("Exiting Patrol State");
         anim.ResetTrigger("isWalking");
         base.Exit();
     }
