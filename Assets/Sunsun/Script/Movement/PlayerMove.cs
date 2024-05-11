@@ -25,8 +25,6 @@ namespace NIMA.Movement
         [SerializeField]
         Animator animator;
 
-        [SerializeField]
-        CharacterController CharacterController;
 
         PlayerControllers playerControllers_;
         Keyboard keyboard;
@@ -59,11 +57,13 @@ namespace NIMA.Movement
                 IsJump = true;
             }
             UPD_Animator();
+            
         }
         void FixedUpdate()
         {
             Move();
         }
+
         void UPD_Animator()
         {
             //Animator°Ñ¼Æ

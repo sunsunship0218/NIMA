@@ -18,6 +18,7 @@ public sealed class GameEnvironment : MonoBehaviour
                     );
             }
             return instance;
+           
         }
     }
 }

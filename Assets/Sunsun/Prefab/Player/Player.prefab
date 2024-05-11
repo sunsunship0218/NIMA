@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8950673048483813359}
   - component: {fileID: 129146563818754296}
   - component: {fileID: 6707387482056081159}
-  - component: {fileID: 4915667691906058908}
   - component: {fileID: -8975597424471916795}
   m_Layer: 0
   m_Name: Player
@@ -36,7 +35,7 @@ Transform:
   - {fileID: 659077188892918629}
   - {fileID: 1870571362081767591}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8950673048483813359
 MonoBehaviour:
@@ -55,7 +54,6 @@ MonoBehaviour:
   collider: {fileID: 129146563818754296}
   characterController: {fileID: 129146563818754296}
   animator: {fileID: 659077188885179843}
-  CharacterController: {fileID: 129146563818754296}
   inputValue: {x: 0, y: 0}
   IsJump: 0
 --- !u!143 &129146563818754296
@@ -77,7 +75,7 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
+  m_Height: 1.5
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -111,18 +109,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &4915667691906058908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2618369497009555832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a8f1046d3852a74dbfbadb98d22d43a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-8975597424471916795
 MonoBehaviour:
   m_ObjectHideFlags: 0
