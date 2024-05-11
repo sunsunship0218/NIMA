@@ -122,7 +122,7 @@ namespace NIMA.Movement
             }
 
             characterController.SimpleMove(trans);
-             Debug.Log("Position"+trans);
+            // Debug.Log("Position"+trans);
         }
 
         void Move()

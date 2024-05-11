@@ -35,7 +35,7 @@ public class Attack : State
             stage = EVENT.EXIT;
 
         }
-        base.Update();
+       // base.Update();
     }
     public override void Exit()
     {

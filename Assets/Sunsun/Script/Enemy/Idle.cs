@@ -24,7 +24,8 @@ public class Idle : State
         {
             nextState = new Patrol(npc, agent, anim, player);
             Debug.Log("Start Partrol");
-            stage = EVENT.EXIT;
+            stage = EVENT.EXIT;//這句沒有被觸發
+            Debug.Log(stage.ToString());
         }
         //0.1的機率切換狀態
         else if (Random.Range(0, 100) < 10)
@@ -33,7 +34,10 @@ public class Idle : State
             //現在的狀態準備退出
             stage = EVENT.EXIT;
         }
-        base.Update();
+
+        //enum切成exit後又馬上變回去update了
+        //base.Update();
+
     }
 
     public override void Exit()

@@ -19,8 +19,10 @@ public class State
         UPDATE,
         EXIT
     };
+    //state
     public STATE name;
     protected EVENT stage;
+
     protected GameObject npc;
     protected Animator anim;
     protected Transform player;
@@ -29,7 +31,7 @@ public class State
     protected State nextState;
     float visDistance = 10f;
     float visAngel = 30f;
-    float attackDis = 7f;
+    float attackDis = 4f;
 
     public State(GameObject _enemy, NavMeshAgent _agent, Animator _anim, Transform _player)
     {
@@ -67,11 +69,18 @@ public class State
     {
         Vector3 direc = player.transform.position - npc.transform.position;
         float angels =Vector3.Angle(direc,npc.transform.forward);
-        if(direc.magnitude <visDistance && angels <visAngel)
+        //Debug.Log("Angels: " + angels + "  positionDifference " + direc);
+        if(direc.magnitude <visDistance)//&& angels <visAngel
         {
+            Debug.Log("Can see player True");
             return true;
         }
-        return false; 
+        else
+        {
+            Debug.Log("Can see player  False");
+            return false;
+        }
+        
     }
 
     public bool CanAttackPlayer()

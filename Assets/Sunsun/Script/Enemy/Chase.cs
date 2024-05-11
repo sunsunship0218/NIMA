@@ -35,7 +35,7 @@ public class Chase : State
                 stage = EVENT.EXIT;
             }
         }
-        base.Update();
+       // base.Update();
     }
 
     public override void Exit()

@@ -49,6 +49,11 @@ public class Patrol : State
             nextState = new Chase(npc, agent, anim, player);
             stage = EVENT.EXIT;
         }
+        else if (!CanSeePlayer())
+        {
+            nextState = new Idle(npc, agent, anim, player);
+            stage = EVENT.EXIT;
+        }
         //base.Update();
     }
 
