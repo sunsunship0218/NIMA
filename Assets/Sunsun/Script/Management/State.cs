@@ -11,7 +11,7 @@ public class State
         PATROL,
         CHASE,
         ATTACK,
-        SLEEP
+        Defend
     };
     public enum EVENT
     {
