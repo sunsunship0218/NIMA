@@ -24,7 +24,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
     ""name"": ""PlayerControllers"",
     ""maps"": [
         {
-            ""name"": ""PlayerMove"",
+            ""name"": ""Player"",
             ""id"": ""d9d33ad3-998f-40cd-a661-66517c263055"",
             ""actions"": [
                 {
@@ -44,6 +44,15 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""7ef74185-026a-4329-9a12-047c59bb37a2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -90,16 +99,28 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                     ""action"": ""Space_Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4c8b45ff-d7e8-4454-8951-55148fce76e7"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
     ],
     ""controlSchemes"": []
 }");
-        // PlayerMove
-        m_PlayerMove = asset.FindActionMap("PlayerMove", throwIfNotFound: true);
-        m_PlayerMove_AD_Move = m_PlayerMove.FindAction("AD_Move", throwIfNotFound: true);
-        m_PlayerMove_Space_Jump = m_PlayerMove.FindAction("Space_Jump", throwIfNotFound: true);
+        // Player
+        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+        m_Player_AD_Move = m_Player.FindAction("AD_Move", throwIfNotFound: true);
+        m_Player_Space_Jump = m_Player.FindAction("Space_Jump", throwIfNotFound: true);
+        m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -158,35 +179,40 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // PlayerMove
-    private readonly InputActionMap m_PlayerMove;
-    private List<IPlayerMoveActions> m_PlayerMoveActionsCallbackInterfaces = new List<IPlayerMoveActions>();
-    private readonly InputAction m_PlayerMove_AD_Move;
-    private readonly InputAction m_PlayerMove_Space_Jump;
-    public struct PlayerMoveActions
+    // Player
+    private readonly InputActionMap m_Player;
+    private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
+    private readonly InputAction m_Player_AD_Move;
+    private readonly InputAction m_Player_Space_Jump;
+    private readonly InputAction m_Player_Attack;
+    public struct PlayerActions
     {
         private @PlayerControllers m_Wrapper;
-        public PlayerMoveActions(@PlayerControllers wrapper) { m_Wrapper = wrapper; }
-        public InputAction @AD_Move => m_Wrapper.m_PlayerMove_AD_Move;
-        public InputAction @Space_Jump => m_Wrapper.m_PlayerMove_Space_Jump;
-        public InputActionMap Get() { return m_Wrapper.m_PlayerMove; }
+        public PlayerActions(@PlayerControllers wrapper) { m_Wrapper = wrapper; }
+        public InputAction @AD_Move => m_Wrapper.m_Player_AD_Move;
+        public InputAction @Space_Jump => m_Wrapper.m_Player_Space_Jump;
+        public InputAction @Attack => m_Wrapper.m_Player_Attack;
+        public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PlayerMoveActions set) { return set.Get(); }
-        public void AddCallbacks(IPlayerMoveActions instance)
+        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
+        public void AddCallbacks(IPlayerActions instance)
         {
-            if (instance == null || m_Wrapper.m_PlayerMoveActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_PlayerMoveActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
             @AD_Move.started += instance.OnAD_Move;
             @AD_Move.performed += instance.OnAD_Move;
             @AD_Move.canceled += instance.OnAD_Move;
             @Space_Jump.started += instance.OnSpace_Jump;
             @Space_Jump.performed += instance.OnSpace_Jump;
             @Space_Jump.canceled += instance.OnSpace_Jump;
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
         }
 
-        private void UnregisterCallbacks(IPlayerMoveActions instance)
+        private void UnregisterCallbacks(IPlayerActions instance)
         {
             @AD_Move.started -= instance.OnAD_Move;
             @AD_Move.performed -= instance.OnAD_Move;
@@ -194,26 +220,30 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
             @Space_Jump.started -= instance.OnSpace_Jump;
             @Space_Jump.performed -= instance.OnSpace_Jump;
             @Space_Jump.canceled -= instance.OnSpace_Jump;
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
         }
 
-        public void RemoveCallbacks(IPlayerMoveActions instance)
+        public void RemoveCallbacks(IPlayerActions instance)
         {
-            if (m_Wrapper.m_PlayerMoveActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_PlayerActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(IPlayerMoveActions instance)
+        public void SetCallbacks(IPlayerActions instance)
         {
-            foreach (var item in m_Wrapper.m_PlayerMoveActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_PlayerActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_PlayerMoveActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_PlayerActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public PlayerMoveActions @PlayerMove => new PlayerMoveActions(this);
-    public interface IPlayerMoveActions
+    public PlayerActions @Player => new PlayerActions(this);
+    public interface IPlayerActions
     {
         void OnAD_Move(InputAction.CallbackContext context);
         void OnSpace_Jump(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
     }
 }

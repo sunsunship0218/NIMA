@@ -23,9 +23,9 @@ public class Idle : State
         if (CanSeePlayer())
         {
             nextState = new Patrol(npc, agent, anim, player);
-            Debug.Log("Start Partrol");
-            stage = EVENT.EXIT;//這句沒有被觸發
-            Debug.Log(stage.ToString());
+           // Debug.Log("Start Partrol");
+            stage = EVENT.EXIT;
+           // Debug.Log(stage.ToString());
         }
         //0.1的機率切換狀態
         else if (Random.Range(0, 100) < 10)
@@ -42,7 +42,7 @@ public class Idle : State
 
     public override void Exit()
     {
-        Debug.Log("Exiting Idle State");
+       // Debug.Log("Exiting Idle State");
         anim.ResetTrigger("isIdle");
         base.Exit();
     }
