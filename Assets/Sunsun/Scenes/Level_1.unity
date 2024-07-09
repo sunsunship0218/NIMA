@@ -655,6 +655,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8a35b5e5b57c7b748960c057dae10b2f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a35b5e5b57c7b748960c057dae10b2f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a35b5e5b57c7b748960c057dae10b2f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a35b5e5b57c7b748960c057dae10b2f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.3400002
       objectReference: {fileID: 0}
@@ -1204,6 +1216,18 @@ PrefabInstance:
     - target: {fileID: 3065631814664045137, guid: 5859261e3773a4443903c8b81cda75b5, type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3065631814664045137, guid: 5859261e3773a4443903c8b81cda75b5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3065631814664045137, guid: 5859261e3773a4443903c8b81cda75b5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3065631814664045137, guid: 5859261e3773a4443903c8b81cda75b5, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3065631814664045137, guid: 5859261e3773a4443903c8b81cda75b5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2162,6 +2186,22 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 917124192}
+    - target: {fileID: -8975597424471916795, guid: becdfff38df30bd4c8017851111e5b9f, type: 3}
+      propertyPath: cooldownTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8975597424471916795, guid: becdfff38df30bd4c8017851111e5b9f, type: 3}
+      propertyPath: nextFiretime
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: -8975597424471916795, guid: becdfff38df30bd4c8017851111e5b9f, type: 3}
+      propertyPath: lastclickTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8975597424471916795, guid: becdfff38df30bd4c8017851111e5b9f, type: 3}
+      propertyPath: maxCombodelay
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 129146563818754296, guid: becdfff38df30bd4c8017851111e5b9f, type: 3}
       propertyPath: m_Enabled
       value: 1

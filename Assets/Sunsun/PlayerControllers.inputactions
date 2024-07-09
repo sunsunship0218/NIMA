@@ -69,6 +69,28 @@
                 },
                 {
                     "name": "",
+                    "id": "a2ba2e4b-11f7-49db-987e-bf62e704841c",
+                    "path": "<XInputController>/leftStick/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AD_Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1ec1b1f7-4a7f-4836-ab19-9c941e66b2b7",
+                    "path": "<Gamepad>/leftStick/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AD_Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "00953c14-b6c2-45de-b0d6-94a617f6cd42",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -82,6 +104,17 @@
                     "name": "",
                     "id": "4c8b45ff-d7e8-4454-8951-55148fce76e7",
                     "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ded64c58-eb0b-43b1-8ef9-e26872ca1415",
+                    "path": "<XInputController>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
