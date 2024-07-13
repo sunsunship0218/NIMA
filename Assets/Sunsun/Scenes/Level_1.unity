@@ -1178,6 +1178,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 903611431}
+  - component: {fileID: 903611432}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -1201,6 +1202,21 @@ Transform:
   m_Father: {fileID: 928459791}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &903611432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903611430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39c100e289d6ea849a8f9c5b9e798723, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: Weapon
+  damage: 5
+  comboLength: 3
 --- !u!1001 &917124190
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2038,6 +2054,23 @@ CapsuleCollider:
   m_Height: 1.6408464
   m_Direction: 1
   m_Center: {x: 0.37480742, y: 0.7938859, z: -1.7215176}
+--- !u!114 &1945255737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945255721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cb50678b209f2d4da30519c7b3d1338, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldownTime: 0.5
+  lastclick: 0
+  lastComboEnd: 0
+  currentWeapon: {fileID: 903611432}
+  Player: {fileID: 917124192}
 --- !u!1001 &1007180409394300260
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2187,12 +2220,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 917124192}
     - target: {fileID: -8975597424471916795, guid: becdfff38df30bd4c8017851111e5b9f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8975597424471916795, guid: becdfff38df30bd4c8017851111e5b9f, type: 3}
       propertyPath: cooldownTime
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8975597424471916795, guid: becdfff38df30bd4c8017851111e5b9f, type: 3}
       propertyPath: nextFiretime
-      value: 20
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8975597424471916795, guid: becdfff38df30bd4c8017851111e5b9f, type: 3}
       propertyPath: lastclickTime
@@ -2200,7 +2237,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8975597424471916795, guid: becdfff38df30bd4c8017851111e5b9f, type: 3}
       propertyPath: maxCombodelay
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 129146563818754296, guid: becdfff38df30bd4c8017851111e5b9f, type: 3}
       propertyPath: m_Enabled
@@ -2374,4 +2411,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2618369497009555832, guid: becdfff38df30bd4c8017851111e5b9f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1945255735}
+    - targetCorrespondingSourceObject: {fileID: 2618369497009555832, guid: becdfff38df30bd4c8017851111e5b9f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1945255737}
   m_SourcePrefab: {fileID: 100100000, guid: becdfff38df30bd4c8017851111e5b9f, type: 3}
