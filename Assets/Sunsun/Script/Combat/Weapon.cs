@@ -7,11 +7,12 @@ namespace NIMA.Combat
     public class Weapon : MonoBehaviour
     {
         public float damage;
-       BoxCollider triggerBox;
+      [SerializeField]  GameObject weapon;
+        BoxCollider triggerBox;
 
         private void Awake()
         {
-            triggerBox = GetComponent<BoxCollider>();
+            triggerBox = weapon.GetComponent<BoxCollider>();
         }
         void OnTriggerEnter(Collider other)
          {

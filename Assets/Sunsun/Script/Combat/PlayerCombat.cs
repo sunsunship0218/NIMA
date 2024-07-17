@@ -9,7 +9,7 @@ namespace NIMA.Combat
     {
         public List<AttackSO> combo;
 
-        [SerializeField] float cooldownTime = 0.5f;
+        [SerializeField] float cooldownTime = 0.1f;
         float lastclickTime;
         float lastComboEnd;
         int comboCounter;
@@ -38,6 +38,7 @@ namespace NIMA.Combat
 
         void Attack()
         {
+         
             if (Time.time - lastComboEnd > cooldownTime && comboCounter<=combo.Count)
             {
                 CancelInvoke("EndCombo");
@@ -45,21 +46,24 @@ namespace NIMA.Combat
                 {
                     //撥放對應的animation
                     animator.runtimeAnimatorController = combo[comboCounter].animatorOV;
-                    if (comboCounter >= 2) // 記得 comboCounter 是從 0 開始
+                    Debug.Log(comboCounter);                  
+                    animator.Play("Attack",0,0);
+                    if (0 >= comboCounter)
                     {
                         Player.transform.localRotation = Quaternion.Euler(0, -180, 0);
                     }
-                    animator.Play("Attack",0,0);
+
                     //撥放對應的音效
                     if (combo[comboCounter].audioClip != null)
                     {
+                        //替換掉相應的音源
                         audioSource.clip = (combo[comboCounter].audioClip);
                         audioSource.Play();
                     }
                     weapon.damage = combo[comboCounter].damage;
                     comboCounter++;
                     lastclickTime =Time.time;
-                    if (comboCounter +1> combo.Count)
+                    if (comboCounter + 1 > combo.Count)
                     {
                         comboCounter = 0;
                     }
@@ -72,8 +76,11 @@ namespace NIMA.Combat
             if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime>0.9f && animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
             {
                 Invoke("EndCombo", 1);
-                Player.transform.localRotation = Quaternion.Euler(0, -90, 0);
-                
+               
+               Player.transform.localRotation = Quaternion.Euler(0, -90, 0);
+              
+
+
             }
         }
         void EndCombo()

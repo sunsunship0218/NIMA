@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animatorOV: {fileID: 22100000, guid: 4becca0a55d9e4045b35f4886ccccc59, type: 2}
   damage: 10
+  audioClip: {fileID: 8300000, guid: 8ae8564f64957244c8df2a30ce365bb6, type: 3}
