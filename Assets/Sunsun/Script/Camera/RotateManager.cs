@@ -195,7 +195,7 @@ namespace NIMA.Camera.Rotate
                         if ((playerMove.transform.position.y - item.position.y <= WorldUnits + 0.8f && playerMove.transform.position.y - item.position.y > 0))
                         {
                             //保持與平台相同的x,y座標不變,只平移不同的Z(移動到平台位置)
-                            playerMove.transform.position = new Vector3(playerMove.transform.position.x, playerMove.transform.position.y, item.position.z);
+                            playerMove.transform.position = new Vector3(playerMove.transform.position.x, playerMove.transform.position.y, item.position.z+5f);
                             //有移動
                             return true;
                         }

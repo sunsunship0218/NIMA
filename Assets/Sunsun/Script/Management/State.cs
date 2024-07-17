@@ -50,7 +50,7 @@ public class State
 
     public State process()
     {
-        Debug.Log("Processing State: " + name.ToString() + " at stage " + stage.ToString());
+      //  Debug.Log("Processing State: " + name.ToString() + " at stage " + stage.ToString());
 
         if (stage == EVENT.ENTER) { Enter(); }
 
@@ -59,7 +59,7 @@ public class State
         if (stage == EVENT.EXIT)
         {
             Exit();
-            Debug.Log("Exiting State: " + name.ToString());
+        //    Debug.Log("Exiting State: " + name.ToString());
             return nextState;
         }
         //回傳現在狀態
@@ -72,12 +72,12 @@ public class State
         //Debug.Log("Angels: " + angels + "  positionDifference " + direc);
         if(direc.magnitude <visDistance)//&& angels <visAngel
         {
-            Debug.Log("Can see player True");
+        //    Debug.Log("Can see player True");
             return true;
         }
         else
         {
-            Debug.Log("Can see player  False");
+         //   Debug.Log("Can see player  False");
             return false;
         }
         

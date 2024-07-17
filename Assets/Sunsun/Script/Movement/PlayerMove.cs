@@ -44,9 +44,9 @@ namespace NIMA.Movement
         void Start()
         {
             //水平移動
-            playerControllers_.PlayerMove.AD_Move.performed += value => inputValue = value.ReadValue<Vector2>();
+            playerControllers_.Player.AD_Move.performed += value => inputValue = value.ReadValue<Vector2>();
             //垂直移動
-            playerControllers_.PlayerMove.AD_Move.canceled += _ => inputValue = Vector2.zero;
+            playerControllers_.Player.AD_Move.canceled += _ => inputValue = Vector2.zero;
 
         }
         void Update()
@@ -151,11 +151,11 @@ namespace NIMA.Movement
         }
         void OnEnable()
         {
-            playerControllers_.PlayerMove.Enable();
+            playerControllers_.Player.Enable();
         }
         void OnDisable()
         {
-            playerControllers_.PlayerMove.Disable();
+            playerControllers_.Player.Disable();
         }
     }
 
