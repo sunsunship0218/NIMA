@@ -8,6 +8,7 @@ namespace NIMA.Combat
     public class PlayerCombat : MonoBehaviour
     {
         public List<AttackSO> combo;
+        public bool isAttacking;
 
         [SerializeField] float cooldownTime = 0.1f;
         float lastclickTime;
@@ -33,7 +34,11 @@ namespace NIMA.Combat
             {
                 Attack();
             }
-              ExitAttack();
+            if(playercontrollers.Player.AD_Move.WasPressedThisFrame())
+            {
+                CancelAttack();
+            }
+            ExitAttack();
         }
 
         void Attack()
@@ -44,9 +49,10 @@ namespace NIMA.Combat
                 CancelInvoke("EndCombo");
                 if(Time.time - lastclickTime >=cooldownTime)
                 {
+                    isAttacking = true;
                     //撥放對應的animation
                     animator.runtimeAnimatorController = combo[comboCounter].animatorOV;
-                    Debug.Log(comboCounter);                  
+                  //  Debug.Log(comboCounter);                  
                     animator.Play("Attack",0,0);
                     if (0 >= comboCounter)
                     {
@@ -71,12 +77,24 @@ namespace NIMA.Combat
             }
         }
 
+        void CancelAttack()
+        {
+            if (isAttacking==true)
+            {
+                isAttacking = false;
+                comboCounter = 0;
+                lastComboEnd = Time.time; Player.transform.localRotation = Quaternion.Euler(0, -90, 0);
+                animator.CrossFade("Movement", 0.1f);
+
+            }
+        }
+
         void ExitAttack()
         {
             if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime>0.9f && animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
             {
                 Invoke("EndCombo", 1);
-               
+               isAttacking=false;
                Player.transform.localRotation = Quaternion.Euler(0, -90, 0);
               
 
@@ -85,6 +103,7 @@ namespace NIMA.Combat
         }
         void EndCombo()
         {
+            isAttacking = false;
             comboCounter = 0;
             lastComboEnd= Time.time;                        
         }
