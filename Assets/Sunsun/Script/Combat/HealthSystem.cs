@@ -21,7 +21,7 @@ public class HealthSystem
     }
     public float GetHealthPerscent( )
     {
-        return (float)health / MaxHealth;
+        return (float)health;
     }
     //³y¦¨¶Ë®`
     public void Damage(int damageAmount)

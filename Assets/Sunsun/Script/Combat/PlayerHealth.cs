@@ -5,21 +5,36 @@ using NIMA.UI;
 public class PlayerHealth : MonoBehaviour
 {
    HealthSystem healthSystem;
-    //做成prefab
-    HealthBar healthBar;
-    //Transform HealthBarTrans = Instantiate(prefab物件名稱, new Vector3, Quantanion.identy)
-    //HealthBar healthBar = HealthBarTrans.GetCOmponment<HealthBar>();
+  [SerializeField] HealthBar healthBar;
+
+
     void Start()
      {
-        healthBar.Setup(healthSystem);
+ 
+      //  healthBar.Setup(healthSystem);
         healthSystem = new HealthSystem(100);
+        //訂閱
+        healthSystem.onHealthChange += healthBar__onHealthChange;
+
         Debug.Log("HEalth : " + healthSystem.GetHealth());
+
+        healthBar.SetSliderMax(healthSystem.GetHealth());
+        healthBar.SetSlider(healthSystem.GetHealth());
+
         healthSystem.Damage(30);
         Debug.Log("HEalth : " + healthSystem.GetHealth());
+
         healthSystem.HealAmount(20);
         Debug.Log("HEalth : " + healthSystem.GetHealth());
 
-        Debug.Log("healthpercent : " + healthSystem.GetHealthPerscent()); 
+        Debug.Log("healthpercent : " + healthSystem.GetHealthPerscent());
 
-     }
+
+    }
+
+   void healthBar__onHealthChange(object sender , System.EventArgs e)
+   {
+        healthBar.SetSlider(healthSystem.GetHealthPerscent());
+    }
+ 
 }

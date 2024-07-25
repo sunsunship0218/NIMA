@@ -7,18 +7,18 @@ namespace NIMA.UI
 {
     public class HealthBar : MonoBehaviour
     {
-        HealthSystem healthSystem;
-        public Slider healthSlider;
-        public void Setup(HealthSystem healthSystem)
-        {
-            this.healthSystem = healthSystem;
-            healthSystem.onHealthChange += HealthSystem_OnHealthChanged;
-        }
 
-        void HealthSystem_OnHealthChanged(object sender, System.EventArgs e)
+        public Slider healthSlider;
+        
+        public void SetSlider(float amount)
         {
-            //改變healthbar長度
-            transform.Find("Bar").localScale = new Vector3(healthSystem.GetHealthPerscent(), 1);
-        }       
+            healthSlider.value = amount;
+        }
+        public void SetSliderMax(float amount)
+        {
+            healthSlider.maxValue = amount;
+            SetSlider(amount);
+        }
+     
     }
 }
