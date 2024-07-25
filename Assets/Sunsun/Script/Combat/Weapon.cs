@@ -21,7 +21,7 @@ namespace NIMA.Combat
         {
             if (other.tag == "Enemy")
             {              
-
+                //´î¤Öªº¬Oplayer£x bug
                 Debug.Log(gameManager.npc1HealthSystem.GetHealth());
                 gameManager.npc1HealthSystem.Damage(damage);
             }

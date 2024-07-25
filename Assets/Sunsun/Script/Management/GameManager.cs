@@ -29,27 +29,30 @@ public class GameManager : MonoBehaviour
      {
         //血條訂閱血量變化
         playerHealthSystem.onHealthChange += PlayerHealthBar__onHealthChange;
-        playerHealthSystem.onHealthChange += npc1HealthBar__onHealthChange;
+        npc1HealthSystem.onHealthChange += npc1HealthBar__onHealthChange;
         Debug.Log("HEalth : " + playerHealthSystem.GetHealth());
 
         //初始化玩家血條
-        PlayerHealthBar.SetSliderMax(playerHealthSystem.GetHealth());
-        PlayerHealthBar.SetSlider(playerHealthSystem.GetHealth());
+        PlayerHealthBar.SetPlayerSliderMax(playerHealthSystem.GetHealth());
+        PlayerHealthBar.SetPlayerSlider(playerHealthSystem.GetHealth());
 
         //初始化npc1血條
-        npc1HealthBar.SetSliderMax(playerHealthSystem.GetHealth());
-        npc1HealthBar.SetSlider(playerHealthSystem.GetHealth());
+        npc1HealthBar.SetNpc1SliderMax(npc1HealthSystem.GetHealth());
+        npc1HealthBar.SetNpc1Slider(npc1HealthSystem.GetHealth());
+
+      
+        
     }
 
     //根據血量變化事件扣血
     void PlayerHealthBar__onHealthChange(object sender, System.EventArgs e)
     {
-        PlayerHealthBar.SetSlider(playerHealthSystem.ReturnHealth());
+        PlayerHealthBar.SetPlayerSlider(playerHealthSystem.ReturnHealth());
     }
 
     void npc1HealthBar__onHealthChange(object sender, System.EventArgs e)
     {
-        npc1HealthBar.SetSlider(npc1HealthSystem.ReturnHealth());
+        npc1HealthBar.SetNpc1Slider(npc1HealthSystem.ReturnHealth());
     }
 
 }

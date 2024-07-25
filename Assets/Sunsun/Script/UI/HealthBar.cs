@@ -12,17 +12,28 @@ namespace NIMA.UI
         public Slider Npc1HealthSlider;
 
         //血條初始最大值
-        public void SetSliderMax(float amount)
+        public void SetPlayerSliderMax(float amount)
         {
             PlayerHealthSlider.maxValue = amount;
-            SetSlider(amount);
+            SetPlayerSlider(amount);
         }
-        //改變血條值
-        public void SetSlider(float amount)
+
+        public void SetNpc1SliderMax(float amount)
         {
-            PlayerHealthSlider.value = amount;
+            PlayerHealthSlider.maxValue = amount;
+            SetPlayerSlider(amount);
         }
-     
-     
+
+        //改變血條值
+        public void SetPlayerSlider(float amount)
+        {
+            Npc1HealthSlider.value = amount;
+        }
+        public void SetNpc1Slider(float amount)
+        {
+            Npc1HealthSlider.value = amount;
+        }
+
+
     }
 }
