@@ -8,18 +8,19 @@ namespace NIMA.UI
     public class HealthBar : MonoBehaviour
     {
 
-        public Slider healthSlider;
+        public Slider PlayerHealthSlider;
+        public Slider Npc1HealthSlider;
 
         //血條初始最大值
         public void SetSliderMax(float amount)
         {
-            healthSlider.maxValue = amount;
+            PlayerHealthSlider.maxValue = amount;
             SetSlider(amount);
         }
         //改變血條值
         public void SetSlider(float amount)
         {
-            healthSlider.value = amount;
+            PlayerHealthSlider.value = amount;
         }
      
      
