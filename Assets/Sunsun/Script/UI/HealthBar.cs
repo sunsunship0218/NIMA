@@ -9,16 +9,19 @@ namespace NIMA.UI
     {
 
         public Slider healthSlider;
-        
-        public void SetSlider(float amount)
-        {
-            healthSlider.value = amount;
-        }
+
+        //血條初始最大值
         public void SetSliderMax(float amount)
         {
             healthSlider.maxValue = amount;
             SetSlider(amount);
         }
+        //改變血條值
+        public void SetSlider(float amount)
+        {
+            healthSlider.value = amount;
+        }
+     
      
     }
 }

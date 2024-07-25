@@ -3,11 +3,12 @@ using System;
 
 public class HealthSystem 
 {
-    int health;
-    int MaxHealth;
+   float health;
+   float MaxHealth;
     public event EventHandler onHealthChange;
-    //現在血條剩多少
-    public HealthSystem(int Maxhealth)
+
+    //初始化血量
+    public HealthSystem(float Maxhealth)
     {
         //最大血量
        this.MaxHealth = Maxhealth;
@@ -15,16 +16,17 @@ public class HealthSystem
         health= Maxhealth;
     }
   
-    public int GetHealth()
+    public float GetHealth()
     {
        return health;
     }
-    public float GetHealthPerscent( )
+    //返回現在血量
+    public float ReturnHealth( )
     {
         return (float)health;
     }
     //造成傷害
-    public void Damage(int damageAmount)
+    public void Damage(float damageAmount)
     {
         health -= damageAmount;
         if (health < 0)
