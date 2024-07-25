@@ -13,16 +13,25 @@ namespace NIMA.Combat
 
         private void Awake()
         {
+<<<<<<< Updated upstream
             triggerBox = weapon.GetComponent<BoxCollider>();
           
+=======
+            triggerBox = weapon.GetComponent<BoxCollider>();        
+>>>>>>> Stashed changes
         }
         void OnTriggerEnter(Collider other)
         {
-            Debug.Log("on coli enter");
             if (other.tag == "Enemy")
             {              
+<<<<<<< Updated upstream
                 Debug.Log(gameManager.npc1HealthSystem.GetHealth());
                 gameManager.npc1HealthSystem.Damage(damage);
+=======
+                Debug.Log("ATK");
+                gameManager.npc1HealthSystem.Damage(damage);
+                Debug.Log(gameManager.npc1HealthSystem.GetHealth());
+>>>>>>> Stashed changes
 
             }
         }
