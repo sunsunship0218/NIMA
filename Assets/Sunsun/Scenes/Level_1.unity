@@ -203,8 +203,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b849dcf9b9b24fb47bd8775ca312b6a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerHealthBar: {fileID: 0}
-  npc1HealthBar: {fileID: 0}
+  PlayerHealthBar: {fileID: 557905307}
+  npc1HealthBar: {fileID: 1733945658}
 --- !u!4 &193037249
 Transform:
   m_ObjectHideFlags: 0
@@ -963,7 +963,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e32c2704f3c16448866b437eee6ab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthSlider: {fileID: 557905306}
+  PlayerHealthSlider: {fileID: 0}
+  Npc1HealthSlider: {fileID: 1733945659}
 --- !u!1001 &563055951
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1294,7 +1295,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2313,7 +2314,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e32c2704f3c16448866b437eee6ab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthSlider: {fileID: 1733945659}
+  PlayerHealthSlider: {fileID: 557905306}
+  Npc1HealthSlider: {fileID: 1733945659}
 --- !u!114 &1733945659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2726,7 +2728,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
