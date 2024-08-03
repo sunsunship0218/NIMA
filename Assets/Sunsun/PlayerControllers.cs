@@ -28,7 +28,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
             ""id"": ""d9d33ad3-998f-40cd-a661-66517c263055"",
             ""actions"": [
                 {
-                    ""name"": ""AD_Move"",
+                    ""name"": ""Move"",
                     ""type"": ""Value"",
                     ""id"": ""9caf1161-8759-4063-b638-93615bb29fc4"",
                     ""expectedControlType"": """",
@@ -63,7 +63,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""AD_Move"",
+                    ""action"": ""Move"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -74,7 +74,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""AD_Move"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -85,7 +85,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""AD_Move"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -96,7 +96,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""AD_Move"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -107,7 +107,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""AD_Move"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -151,7 +151,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_AD_Move = m_Player.FindAction("AD_Move", throwIfNotFound: true);
+        m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Space_Jump = m_Player.FindAction("Space_Jump", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
     }
@@ -215,14 +215,14 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
     // Player
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
-    private readonly InputAction m_Player_AD_Move;
+    private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Space_Jump;
     private readonly InputAction m_Player_Attack;
     public struct PlayerActions
     {
         private @PlayerControllers m_Wrapper;
         public PlayerActions(@PlayerControllers wrapper) { m_Wrapper = wrapper; }
-        public InputAction @AD_Move => m_Wrapper.m_Player_AD_Move;
+        public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Space_Jump => m_Wrapper.m_Player_Space_Jump;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -234,9 +234,9 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
-            @AD_Move.started += instance.OnAD_Move;
-            @AD_Move.performed += instance.OnAD_Move;
-            @AD_Move.canceled += instance.OnAD_Move;
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
             @Space_Jump.started += instance.OnSpace_Jump;
             @Space_Jump.performed += instance.OnSpace_Jump;
             @Space_Jump.canceled += instance.OnSpace_Jump;
@@ -247,9 +247,9 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(IPlayerActions instance)
         {
-            @AD_Move.started -= instance.OnAD_Move;
-            @AD_Move.performed -= instance.OnAD_Move;
-            @AD_Move.canceled -= instance.OnAD_Move;
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
             @Space_Jump.started -= instance.OnSpace_Jump;
             @Space_Jump.performed -= instance.OnSpace_Jump;
             @Space_Jump.canceled -= instance.OnSpace_Jump;
@@ -275,7 +275,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
     public PlayerActions @Player => new PlayerActions(this);
     public interface IPlayerActions
     {
-        void OnAD_Move(InputAction.CallbackContext context);
+        void OnMove(InputAction.CallbackContext context);
         void OnSpace_Jump(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
     }

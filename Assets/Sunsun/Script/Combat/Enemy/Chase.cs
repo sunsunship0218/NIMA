@@ -1,4 +1,4 @@
-using UnityEngine.AI;
+/*using UnityEngine.AI;
 using UnityEngine;
 
 public class Chase : State
@@ -44,3 +44,4 @@ public class Chase : State
         base.Exit();
     }
 }
+*/
