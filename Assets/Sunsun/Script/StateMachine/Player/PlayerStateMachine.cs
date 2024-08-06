@@ -18,10 +18,16 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField]
     public Animator animator { get; private set; }
 
+    [field: SerializeField]
+    public float moveRotationDamping { get; private set; }
+
+    public Transform mainCameraTransform { get; private set; }
+
     void Start()
      {
+        mainCameraTransform = Camera.main.transform;
         //this 就是現在的PlayerStateMachine實例
-        SwitchState(new PlayerTestState(this)); 
+        SwitchState(new PlayerFreeLookState(this)); 
      }
 
  

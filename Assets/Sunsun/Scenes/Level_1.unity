@@ -603,7 +603,7 @@ GameObject:
   - component: {fileID: 392049755}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1587,7 +1587,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 852327376}
-  m_LocalRotation: {x: 0.15543908, y: 0.017548451, z: -0.0027617237, w: 0.9876858}
+  m_LocalRotation: {x: 0.15543912, y: 0.017548451, z: -0.0027617244, w: 0.98768574}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2310,6 +2310,7 @@ MonoBehaviour:
   <characterController>k__BackingField: {fileID: 1945255742}
   <freeLookMoveSpeed>k__BackingField: 1
   <animator>k__BackingField: {fileID: 3065631814904575506}
+  <moveRotationDamping>k__BackingField: 1.75
 --- !u!114 &1945255740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2574,7 +2575,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2071317128}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.151792, y: 9.553131, z: 7.006523}
+  m_LocalPosition: {x: 10.97, y: 9.553131, z: 8.95}
   m_LocalScale: {x: 5.3389, y: 2.9644, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
