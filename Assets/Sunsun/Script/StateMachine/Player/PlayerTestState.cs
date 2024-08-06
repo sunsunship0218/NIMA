@@ -11,30 +11,34 @@ public class PlayerTestState : PlayerBaseState
     //base傳遞參數playerStateMachine給繼承的建構式
     public PlayerTestState(PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
 
-    //time
-    float Timer;
-
     public override void Enter()
     {
-        //Jump事件訂閱OnJump方法,Jump的實作寫在OnJump
-        playerStateMachine.playerInputHandler.jumpEvent +=OnJump;
+       
 
     }
     public override void Update(float deltatime)
     {
-        Timer+= deltatime;
-        Debug.Log( Timer);
+        Vector3 movementVec3 = new Vector3();
+        movementVec3.x = playerStateMachine.playerInputHandler.movementValue.x;
+        movementVec3.y = 0;
+        movementVec3.z = playerStateMachine.playerInputHandler.movementValue.y;
+        playerStateMachine.characterController.Move(movementVec3 * deltatime * playerStateMachine.freeLookMoveSpeed);
+
+        if (playerStateMachine.playerInputHandler.movementValue == Vector2.zero)
+        {
+            playerStateMachine.animator.SetFloat("FreeLookSpeed", 0, 0.14f,deltatime);
+            return;
+        }
+        playerStateMachine.animator.SetFloat("FreeLookSpeed", 1, 0.1f, deltatime);
+        playerStateMachine.transform.rotation = Quaternion.LookRotation(movementVec3);
+
 
     }
     public override void Exit()
     {
-        playerStateMachine.playerInputHandler.jumpEvent -= OnJump;
-        Debug.Log("Exit, exist time :  " + Timer);
+      
     }
 
-    public   void OnJump()
-    {
-        playerStateMachine.SwitchState(new PlayerTestState(playerStateMachine));
-    }
+
 
 }

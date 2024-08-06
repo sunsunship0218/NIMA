@@ -1311,8 +1311,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4339177913472640404}
-  - component: {fileID: 5498197227677346216}
-  - component: {fileID: 6356127838366158013}
   - component: {fileID: 1087436408440537459}
   m_Layer: 0
   m_Name: MainCharacter
@@ -1329,59 +1327,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7300835136300614342}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -2.444, y: -0.54, z: -1.99}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4796460676352669657}
   - {fileID: 66602048865502423}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!95 &5498197227677346216
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7300835136300614342}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: ca4a9e6d24f02bc438e3fe0e94e25015, type: 3}
-  m_Controller: {fileID: 9100000, guid: cb12c1fc9ac403a4980a8cc38f9080a3, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!136 &6356127838366158013
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7300835136300614342}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.007993665
-  m_Height: 0.08614984
-  m_Direction: 1
-  m_Center: {x: -0.0018539053, y: 0.043261226, z: 0.00042827823}
 --- !u!82 &1087436408440537459
 AudioSource:
   m_ObjectHideFlags: 0

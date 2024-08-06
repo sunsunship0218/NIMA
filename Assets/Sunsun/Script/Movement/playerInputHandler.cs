@@ -8,6 +8,8 @@ using System;
 //將輸入要處理的邏輯綁訂到回調
 public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerActions
 {
+    // 移動ㄉ值
+    public Vector2 movementValue { get; private set; }
     //Action map Action event
     public event Action jumpEvent;
     public event Action dodgeEvent;
@@ -28,7 +30,7 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
     //IPlayerActions的介面規範
     public void  OnMove(InputAction.CallbackContext context)
     {
-
+       movementValue= context.ReadValue<Vector2>();
     }
     public void OnJump(InputAction.CallbackContext context)
     {
@@ -49,6 +51,10 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
             return;
         }
         dodgeEvent?.Invoke();
+    }
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        
     }
 
 
