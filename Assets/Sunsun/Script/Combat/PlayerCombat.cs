@@ -34,7 +34,7 @@ namespace NIMA.Combat
             {
                 Attack();
             }
-            if(playercontrollers.Player.AD_Move.WasPressedThisFrame())
+            if(playercontrollers.Player.Move.WasPressedThisFrame())
             {
                 CancelAttack();
             }

@@ -1,4 +1,4 @@
-using UnityEngine.AI;
+/*using UnityEngine.AI;
 using UnityEngine;
 
 public class Patrol : State
@@ -64,4 +64,4 @@ public class Patrol : State
         base.Exit();
     }
 
-}
+}*/

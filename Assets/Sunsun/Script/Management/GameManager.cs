@@ -22,26 +22,26 @@ public class GameManager : MonoBehaviour
         playerHealthSystem = new HealthSystem(player.playerHP);
         npc1HealthSystem = new HealthSystem(npc1.enemyHP);
 
-        Debug.Log(playerHealthSystem.GetHealth());
-        Debug.Log(npc1HealthSystem.GetHealth());
+        Debug.Log("Player health :" +playerHealthSystem.GetHealth());
+        Debug.Log( "npc1 health: "+npc1HealthSystem.GetHealth());
     }
      void Start()
      {
         
         InitialHPSystem();
        
-    }
+     }
 
     void InitialHPSystem()
     {
         //血條訂閱血量變化
         playerHealthSystem.onHealthChange += PlayerHealthBar__onHealthChange;
         npc1HealthSystem.onHealthChange += npc1HealthBar__onHealthChange;
-        Debug.Log("HEalth : " + playerHealthSystem.GetHealth());
 
         //初始化玩家血條
         PlayerHealthBar.SetPlayerSliderMax(playerHealthSystem.GetHealth());
         PlayerHealthBar.SetPlayerSlider(playerHealthSystem.GetHealth());
+        Debug.Log("HEALTH : " + playerHealthSystem.GetHealth());
 
         //初始化npc1血條
         npc1HealthBar.SetNpc1SliderMax(npc1HealthSystem.GetHealth());
