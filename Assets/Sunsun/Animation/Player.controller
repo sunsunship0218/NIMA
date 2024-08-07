@@ -61,7 +61,7 @@ BlendTree:
     m_DirectBlendParameter: Horizon_Input
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: 0bcfd92de42f8ca42b2b988919df0aa9, type: 3}
+    m_Motion: {fileID: -203655887218126122, guid: 90e05d9df17fea7418af298c7a51e94f, type: 3}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -134,7 +134,7 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer

@@ -12,10 +12,13 @@ public class PlayerFreeLookState : PlayerBaseState
     public PlayerFreeLookState(PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
 
    readonly int FREELOOKSPEEDHASH = Animator.StringToHash( "FreeLookSpeed");
-    const float animatorDampSpeed = 0.14f;
+   const float animatorDampSpeed = 0.14f;
+
     public override void Enter()
     {
-       
+        playerStateMachine.playerInputHandler.isTargetting = false;
+        //按下鎖定後切換狀態
+        playerStateMachine.playerInputHandler.targetEvent += OnTarget;
 
     }
     public override void Update(float deltatime)
@@ -35,16 +38,21 @@ public class PlayerFreeLookState : PlayerBaseState
     }
     public override void Exit()
     {
-      
+        playerStateMachine.playerInputHandler.targetEvent -= OnTarget;
     }
 
+    void OnTarget()
+    {
+        playerStateMachine.SwitchState(new PlayerTargetingState( playerStateMachine));
+        Debug.Log("Ontarget");
+    }
     void FaceMovementDirection(Vector3 movementVec3,float deltatime)
     {
         playerStateMachine.transform.rotation = Quaternion.Lerp(
              playerStateMachine.transform.rotation,// current transform
              Quaternion.LookRotation(movementVec3),//rotated target's tranform
             deltatime * playerStateMachine.moveRotationDamping
-             ); ;
+             ) ;
     }
 
     Vector3 calculateMovement( )
@@ -62,5 +70,7 @@ public class PlayerFreeLookState : PlayerBaseState
         return  forward*playerStateMachine.playerInputHandler.movementValue.y+
                      right*playerStateMachine.playerInputHandler.movementValue.x;       
     }
+    
+
 
 }

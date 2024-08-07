@@ -13,6 +13,9 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
     //Action map Action event
     public event Action jumpEvent;
     public event Action dodgeEvent;
+    public event Action targetEvent;
+    public event Action cancleTargetEvent;
+    public bool isTargetting = false;
 
     PlayerControllers playercontrollers;
     void Start()
@@ -56,6 +59,25 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
     {
         
     }
+    public void OnTarget(InputAction.CallbackContext context)
+    {
+
+        if (!context.performed)
+        {
+            return;
+        }
+
+        if (isTargetting==true)
+        {
+            targetEvent?.Invoke();
+        }
+        else
+        {
+            cancleTargetEvent?.Invoke();
+        }
+      
+    }
+  
 
 
 }
