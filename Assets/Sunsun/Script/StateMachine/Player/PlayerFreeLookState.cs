@@ -16,8 +16,9 @@ public class PlayerFreeLookState : PlayerBaseState
 
     public override void Enter()
     {
-        playerStateMachine.playerInputHandler.isTargetting = false;
-        //按下鎖定後切換狀態
+        playerStateMachine.playerInputHandler.isOnLockon = false;
+        Debug.Log("Entered Free look state" + Time.deltaTime);
+        //按下鎖定後切換狀態  
         playerStateMachine.playerInputHandler.targetEvent += OnTarget;
 
     }
@@ -35,17 +36,28 @@ public class PlayerFreeLookState : PlayerBaseState
         playerStateMachine.animator.SetFloat(FREELOOKSPEEDHASH, 1, animatorDampSpeed, deltatime);
         FaceMovementDirection(movementVec3,deltatime);
 
+        if (playerStateMachine.playerInputHandler.isOnLockon)
+            OnTarget();
+      
     }
     public override void Exit()
     {
         playerStateMachine.playerInputHandler.targetEvent -= OnTarget;
+        Debug.Log("Free look exist" +Time.deltaTime);
     }
 
     void OnTarget()
     {
-        playerStateMachine.SwitchState(new PlayerTargetingState( playerStateMachine));
-        Debug.Log("Ontarget");
+        if (!playerStateMachine.playerInputHandler.isOnLockon)
+        {
+            playerStateMachine.playerInputHandler.isOnLockon = true;
+            playerStateMachine.SwitchState(new PlayerTargetingState(playerStateMachine));
+            Debug.Log("OnTarget " + Time.deltaTime);
+        }
+       
     }
+    
+
     void FaceMovementDirection(Vector3 movementVec3,float deltatime)
     {
         playerStateMachine.transform.rotation = Quaternion.Lerp(

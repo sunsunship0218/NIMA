@@ -14,21 +14,27 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
     public event Action jumpEvent;
     public event Action dodgeEvent;
     public event Action targetEvent;
-    public event Action cancleTargetEvent;
-    public bool isTargetting = false;
+    public event Action cancelTargetEvent;
+
+    public bool isOnLockon;
 
     PlayerControllers playercontrollers;
+    void Awake()
+    {
+        playercontrollers = new PlayerControllers();
+     
+    }
     void Start()
     {
-        playercontrollers= new PlayerControllers();
+
         //playerInputHandler回傳callbacks
         playercontrollers.Player.SetCallbacks(this);
         playercontrollers.Player.Enable();
     }
      void OnDestroy()
-    {
+     {
         playercontrollers.Player.Disable();
-    }
+     }
 
     //IPlayerActions的介面規範
     public void  OnMove(InputAction.CallbackContext context)
@@ -61,24 +67,21 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
     }
     public void OnTarget(InputAction.CallbackContext context)
     {
-
         if (!context.performed)
         {
             return;
         }
-
-        if (isTargetting==true)
+        if (isOnLockon)
         {
-            targetEvent?.Invoke();
+            cancelTargetEvent?.Invoke();
+       
         }
         else
         {
-            cancleTargetEvent?.Invoke();
+            targetEvent?.Invoke();
         }
-      
+        isOnLockon=!isOnLockon;
     }
-  
-
 
 }
 

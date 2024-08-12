@@ -7,24 +7,35 @@ public class PlayerTargetingState : PlayerBaseState
     public PlayerTargetingState(PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
     public override void Enter()
     {
-        playerStateMachine.playerInputHandler.isTargetting = true;
-        //取消後觸發狀態
-        playerStateMachine.playerInputHandler.cancleTargetEvent += OnCancleTarget;     
-        Debug.Log("enter targeting state");
+   playerStateMachine.playerInputHandler.isOnLockon = true;
+        Debug.Log("Entered Targeting State" + Time.deltaTime);
+        //按下鎖定後切換狀態  
+        playerStateMachine.playerInputHandler.cancelTargetEvent += OnCancleTarget;
     }
     public override void Update(float deltatime)
     {
-
+   
     }
     public override void Exit()
     {
-        playerStateMachine.playerInputHandler.cancleTargetEvent -= OnCancleTarget;
-        Debug.Log("Exited Targeting State");
+        playerStateMachine.playerInputHandler.cancelTargetEvent -= OnCancleTarget;
+        Debug.Log("Exited Targeting State" +Time.deltaTime);
     }
 
     void OnCancleTarget()
     {
-              playerStateMachine.SwitchState(new PlayerFreeLookState(playerStateMachine));
-        Debug.Log("cancletarget");
+      
+        if (playerStateMachine.playerInputHandler.isOnLockon)
+        {
+            playerStateMachine.playerInputHandler.isOnLockon = false;
+            playerStateMachine.SwitchState(new PlayerFreeLookState(playerStateMachine));
+            Debug.Log("cancletarget: " + Time.deltaTime);
+        }
+        else
+        {
+            return;
+        }
     }
+        
+
 }

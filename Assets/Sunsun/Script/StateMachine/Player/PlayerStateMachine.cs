@@ -24,7 +24,6 @@ public class PlayerStateMachine : StateMachine
    
 
     public Transform mainCameraTransform { get; private set; }
-
     void Start()
      {
         mainCameraTransform = Camera.main.transform;
@@ -32,6 +31,5 @@ public class PlayerStateMachine : StateMachine
         SwitchState(new PlayerFreeLookState(this)); 
      }
 
- 
-
+    
 }

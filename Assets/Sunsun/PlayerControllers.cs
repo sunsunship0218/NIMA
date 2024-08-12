@@ -74,7 +74,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Target"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Button"",
                     ""id"": ""20d4724b-bedd-48f8-b373-a96eb4e5d9c2"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -254,7 +254,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/rightStickPress"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Target"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
