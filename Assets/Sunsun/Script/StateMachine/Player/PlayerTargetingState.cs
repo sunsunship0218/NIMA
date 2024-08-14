@@ -18,7 +18,12 @@ public class PlayerTargetingState : PlayerBaseState
     }
     public override void Update(float deltatime)
     {
-        Debug.Log(playerStateMachine.targeter.currentTarget.name);
+        //現在沒有鎖定目標的話
+        if (playerStateMachine.targeter.currentTarget == null)
+        {
+            playerStateMachine.SwitchState(new PlayerFreeLookState(playerStateMachine));
+            return;
+        }
    
     }
     public override void Exit()
