@@ -7,6 +7,7 @@ public class Targeter : MonoBehaviour
 {
 
     public List<Target> targets = new List<Target>();
+    public Target currentTarget {  get; private set; }
 
 
     void OnTriggerEnter(Collider other)
@@ -27,5 +28,17 @@ public class Targeter : MonoBehaviour
             return;
         }
         targets.Remove(target);
+    }
+    public bool SelectTarget()
+    {
+        if (targets.Count == 0) { return false; }
+        currentTarget = targets[0];
+        return true;
+
+    }
+
+    public void CancleLockon()
+    {
+        currentTarget = null;
     }
 }

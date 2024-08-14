@@ -10,13 +10,16 @@ public class PlayerFreeLookState : PlayerBaseState
     //建構式
     //base傳遞參數playerStateMachine給繼承的建構式
     public PlayerFreeLookState(PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
-
-   readonly int FREELOOKSPEEDHASH = Animator.StringToHash( "FreeLookSpeed");
-   const float animatorDampSpeed = 0.14f;
+    //animator paramater
+    readonly int unLockOnBlendtreeHASH = Animator.StringToHash("FreeLookBlendtree");
+    readonly int FREELOOKSPEEDHASH = Animator.StringToHash("FreeLookSpeed");
+    const float animatorDampSpeed = 0.14f;
 
     public override void Enter()
     {
         playerStateMachine.playerInputHandler.isOnLockon = false;
+        playerStateMachine.animator.Play(unLockOnBlendtreeHASH);
+
         Debug.Log("Entered Free look state" + Time.deltaTime);
         //按下鎖定後切換狀態  
         playerStateMachine.playerInputHandler.targetEvent += OnTarget;
@@ -48,6 +51,7 @@ public class PlayerFreeLookState : PlayerBaseState
 
     void OnTarget()
     {
+        if (!playerStateMachine.targeter.SelectTarget()) { return; }     
         if (!playerStateMachine.playerInputHandler.isOnLockon)
         {
             playerStateMachine.playerInputHandler.isOnLockon = true;
