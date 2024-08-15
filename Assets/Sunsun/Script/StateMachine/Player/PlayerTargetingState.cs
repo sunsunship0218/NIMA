@@ -49,6 +49,13 @@ public class PlayerTargetingState : PlayerBaseState
             return;
         }
     }
-        
+
+      Vector3 CalculateMovement()
+    {
+        Vector3 movement = new Vector3();
+        movement += playerStateMachine.transform.right * playerStateMachine.playerInputHandler.movementValue.x;
+        movement += playerStateMachine.transform.forward * playerStateMachine.playerInputHandler.movementValue.y;
+        return movement;
+    }
 
 }
