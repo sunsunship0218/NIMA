@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5384265589644820854}
   - component: {fileID: 4902062801240744078}
   - component: {fileID: 1130757312577316501}
-  - component: {fileID: 4994428199290426979}
+  - component: {fileID: 8430853121322084407}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -64,12 +64,12 @@ MonoBehaviour:
   m_LookaheadIgnoreY: 0
   m_HorizontalDamping: 0.31
   m_VerticalDamping: 0.5
-  m_ScreenX: 0.501
+  m_ScreenX: 0.491
   m_ScreenY: 0.501
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
-  m_SoftZoneWidth: 0.982
-  m_SoftZoneHeight: 0.915
+  m_SoftZoneWidth: 0.953
+  m_SoftZoneHeight: 0.943
   m_BiasX: -0.061
   m_BiasY: -0.105
   m_CenterOnActivate: 1
@@ -81,11 +81,11 @@ MonoBehaviour:
   m_MaxDollyOut: 5000
   m_MinimumDistance: 1
   m_MaximumDistance: 5000
-  m_MinimumFOV: 23.2
+  m_MinimumFOV: 25.7
   m_MaximumFOV: 54.5
   m_MinimumOrthoSize: 1
   m_MaximumOrthoSize: 5000
---- !u!114 &4994428199290426979
+--- !u!114 &8430853121322084407
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 7.69, y: 3.53, z: -6.54}
-  m_XDamping: 1
+  m_FollowOffset: {x: 0, y: 0, z: -10}
+  m_XDamping: 2.58
   m_YDamping: 1
   m_ZDamping: 1
   m_AngularDampingMode: 0
@@ -131,7 +131,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1720326047130780743}
-  m_LocalRotation: {x: 0.040608723, y: -0.0016353012, z: 0.000066462395, w: 0.9991738}
+  m_LocalRotation: {x: 0.040608723, y: -0.0016353055, z: 0.00006646258, w: 0.9991738}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -257,8 +257,10 @@ MonoBehaviour:
   <playerInputHandler>k__BackingField: {fileID: 6310474752851148278}
   <characterController>k__BackingField: {fileID: 0}
   <freeLookMoveSpeed>k__BackingField: 1
-  <animator>k__BackingField: {fileID: 0}
+  <LockonMoveSpeed>k__BackingField: 0
+  <forceReceiver>k__BackingField: {fileID: 0}
   <moveRotationDamping>k__BackingField: 10
+  <animator>k__BackingField: {fileID: 0}
   <targeter>k__BackingField: {fileID: 0}
 --- !u!114 &6310474752851148278
 MonoBehaviour:
@@ -323,7 +325,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 14
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 3105744944541486959}
   m_Follow: {fileID: 0}
@@ -462,7 +464,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3167428292410020338}
-  m_LocalRotation: {x: 0.058767255, y: 0.017733725, z: -0.0010441319, w: 0.99811363}
+  m_LocalRotation: {x: 0.058767293, y: 0.017733725, z: -0.0010441324, w: 0.99811363}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -669,7 +671,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4382363817748402094}
   m_LocalRotation: {x: 0.13798928, y: -0.63555145, z: 0.11683891, w: -0.75058776}
-  m_LocalPosition: {x: 0.00725317, y: -0.004564345, z: 11.120409}
+  m_LocalPosition: {x: 0.0072484016, y: -0.004565537, z: 11.120403}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

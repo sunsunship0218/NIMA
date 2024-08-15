@@ -28,9 +28,7 @@ public class PlayerFreeLookState : PlayerBaseState
     public override void Update(float deltatime)
     {
         Vector3 movementVec3 = calculateMovement();
-
-        playerStateMachine.characterController.Move(movementVec3 * deltatime * playerStateMachine.freeLookMoveSpeed);
-
+        Move(movementVec3 *  playerStateMachine.freeLookMoveSpeed,deltatime);
         if (playerStateMachine.playerInputHandler.movementValue == Vector2.zero)
         {
             playerStateMachine.animator.SetFloat(FREELOOKSPEEDHASH, 0, animatorDampSpeed, deltatime);
@@ -39,8 +37,8 @@ public class PlayerFreeLookState : PlayerBaseState
         playerStateMachine.animator.SetFloat(FREELOOKSPEEDHASH, 1, animatorDampSpeed, deltatime);
         FaceMovementDirection(movementVec3,deltatime);
 
-        if (playerStateMachine.playerInputHandler.isOnLockon)
-            OnTarget();
+        //if (playerStateMachine.playerInputHandler.isOnLockon)
+        //    OnTarget();
       
     }
     public override void Exit()

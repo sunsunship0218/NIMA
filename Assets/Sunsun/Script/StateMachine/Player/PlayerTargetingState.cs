@@ -24,6 +24,9 @@ public class PlayerTargetingState : PlayerBaseState
             playerStateMachine.SwitchState(new PlayerFreeLookState(playerStateMachine));
             return;
         }
+        Vector3 movement = CalculateMovement();
+        Move(movement * playerStateMachine.LockonMoveSpeed, deltatime);
+        Facetarget();
    
     }
     public override void Exit()

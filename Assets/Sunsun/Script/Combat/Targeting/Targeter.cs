@@ -58,8 +58,8 @@ public class Targeter : MonoBehaviour
         {
             cineTargetGroup.RemoveMember(currentTarget.transform);
             currentTarget = null;
-            target.onDestroyed -= RemoveTarget;
-            targets.Remove(target);
         }
+        target.onDestroyed -= RemoveTarget;
+        targets.Remove(target);
     }
 }

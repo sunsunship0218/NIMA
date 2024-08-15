@@ -12,17 +12,23 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField]
     public CharacterController characterController { get; private set; }
 
+    //移動相關的參數
     [field: SerializeField]
     public float freeLookMoveSpeed{ get; private set; }
-
+    [field: SerializeField]
+    public float LockonMoveSpeed { get; private set; }
+    [field: SerializeField]
+    public ForceReceiver forceReceiver { get; private set; }
+    [field: SerializeField]
+    public float moveRotationDamping { get; private set; }
+    //其他componment
     [field: SerializeField]
     public Animator animator { get; private set; }
 
     [field: SerializeField]
-    public float moveRotationDamping { get; private set; }
-
-    [field: SerializeField]
     public Targeter targeter { get; private set; }
+
+
 
 
     public Transform mainCameraTransform { get; private set; }
@@ -33,5 +39,6 @@ public class PlayerStateMachine : StateMachine
         SwitchState(new PlayerFreeLookState(this)); 
      }
 
-    
+
+
 }
