@@ -10,20 +10,25 @@ public class PlayerFreeLookState : PlayerBaseState
     //建構式
     //base傳遞參數playerStateMachine給繼承的建構式
     public PlayerFreeLookState(PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
-
-   readonly int FREELOOKSPEEDHASH = Animator.StringToHash( "FreeLookSpeed");
+    //animator paramater
+    readonly int unLockOnBlendtreeHASH = Animator.StringToHash("FreeLookBlendtree");
+    readonly int FREELOOKSPEEDHASH = Animator.StringToHash("FreeLookSpeed");
     const float animatorDampSpeed = 0.14f;
+
     public override void Enter()
     {
-       
+        playerStateMachine.playerInputHandler.isOnLockon = false;
+        playerStateMachine.animator.Play(unLockOnBlendtreeHASH);
+
+        Debug.Log("Entered Free look state" + Time.deltaTime);
+        //按下鎖定後切換狀態  
+        playerStateMachine.playerInputHandler.targetEvent += OnTarget;
 
     }
     public override void Update(float deltatime)
     {
         Vector3 movementVec3 = calculateMovement();
-
-        playerStateMachine.characterController.Move(movementVec3 * deltatime * playerStateMachine.freeLookMoveSpeed);
-
+        Move(movementVec3 *  playerStateMachine.freeLookMoveSpeed,deltatime);
         if (playerStateMachine.playerInputHandler.movementValue == Vector2.zero)
         {
             playerStateMachine.animator.SetFloat(FREELOOKSPEEDHASH, 0, animatorDampSpeed, deltatime);
@@ -32,11 +37,28 @@ public class PlayerFreeLookState : PlayerBaseState
         playerStateMachine.animator.SetFloat(FREELOOKSPEEDHASH, 1, animatorDampSpeed, deltatime);
         FaceMovementDirection(movementVec3,deltatime);
 
+        //if (playerStateMachine.playerInputHandler.isOnLockon)
+        //    OnTarget();
+      
     }
     public override void Exit()
     {
-      
+        playerStateMachine.playerInputHandler.targetEvent -= OnTarget;
+        Debug.Log("Free look exist" +Time.deltaTime);
     }
+
+    void OnTarget()
+    {
+        if (!playerStateMachine.targeter.SelectTarget()) { return; }     
+        if (!playerStateMachine.playerInputHandler.isOnLockon)
+        {
+            playerStateMachine.playerInputHandler.isOnLockon = true;
+            playerStateMachine.SwitchState(new PlayerTargetingState(playerStateMachine));
+            Debug.Log("OnTarget " + Time.deltaTime);
+        }
+       
+    }
+    
 
     void FaceMovementDirection(Vector3 movementVec3,float deltatime)
     {
@@ -44,7 +66,7 @@ public class PlayerFreeLookState : PlayerBaseState
              playerStateMachine.transform.rotation,// current transform
              Quaternion.LookRotation(movementVec3),//rotated target's tranform
             deltatime * playerStateMachine.moveRotationDamping
-             ); ;
+             ) ;
     }
 
     Vector3 calculateMovement( )
@@ -62,5 +84,7 @@ public class PlayerFreeLookState : PlayerBaseState
         return  forward*playerStateMachine.playerInputHandler.movementValue.y+
                      right*playerStateMachine.playerInputHandler.movementValue.x;       
     }
+    
+
 
 }
