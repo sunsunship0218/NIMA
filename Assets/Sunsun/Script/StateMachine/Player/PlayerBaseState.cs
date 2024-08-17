@@ -23,11 +23,5 @@ public abstract class PlayerBaseState : State
         faceTargetPos.y = 0f;
         playerStateMachine.transform.rotation = Quaternion.LookRotation(faceTargetPos);
     }
-    protected  Vector3 CalculateMovement()
-    {
-        Vector3 movement =new Vector3();
-        movement += Vector3.right * playerStateMachine.playerInputHandler.movementValue.x;
-        movement += Vector3.forward * playerStateMachine.playerInputHandler.movementValue.y;
-        return movement;
-    }
+   
 }
