@@ -111,7 +111,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Mouse and Keyboard"",
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -119,10 +119,10 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ded64c58-eb0b-43b1-8ef9-e26872ca1415"",
-                    ""path"": ""<XInputController>/rightShoulder"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

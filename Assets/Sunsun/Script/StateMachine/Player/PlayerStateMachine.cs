@@ -21,6 +21,10 @@ public class PlayerStateMachine : StateMachine
     public ForceReceiver forceReceiver { get; private set; }
     [field: SerializeField]
     public float moveRotationDamping { get; private set; }
+
+    //攻擊combo
+    [field: SerializeField]
+    public Attack[ ] Attacks { get; private set; }
     //其他componment
     [field: SerializeField]
     public Animator animator { get; private set; }
@@ -29,7 +33,7 @@ public class PlayerStateMachine : StateMachine
     public Targeter targeter { get; private set; }
 
 
-
+    [SerializeField] TrailRenderer trailRenderer;
 
     public Transform mainCameraTransform { get; private set; }
     void Start()
@@ -39,6 +43,20 @@ public class PlayerStateMachine : StateMachine
         SwitchState(new PlayerFreeLookState(this)); 
      }
 
-
+    // Test play effect
+    public void PlayTrail()
+    {
+        if (trailRenderer != null && playerInputHandler.isAttacking)
+        {
+            trailRenderer.emitting = true;
+        }
+    }
+    public void StopTrail()
+    {
+        if (trailRenderer != null)
+        {
+            trailRenderer.emitting = false;
+        }
+    }
 
 }

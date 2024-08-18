@@ -23,6 +23,12 @@ public class PlayerTargetingState : PlayerBaseState
     }
     public override void Update(float deltatime)
     {
+        //攻擊的話要切換狀態
+        if (playerStateMachine.playerInputHandler.isAttacking)
+        {
+            playerStateMachine.SwitchState(new PlayerAttackingState(playerStateMachine , 0));
+            return;
+        }
         //現在沒有鎖定目標的話
         if (playerStateMachine.targeter.currentTarget == null)
         {
