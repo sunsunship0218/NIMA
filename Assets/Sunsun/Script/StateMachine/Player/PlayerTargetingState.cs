@@ -7,6 +7,11 @@ public class PlayerTargetingState : PlayerBaseState
     public PlayerTargetingState(PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
     //animator parameter
     readonly int LockOnBlendtreeHASH = Animator.StringToHash("LockOnBlendtree");
+
+    // animator paramators
+    readonly int LockOnForwardHASH = Animator.StringToHash("LockonForward");
+    readonly int LockonRightHASH = Animator.StringToHash("LockonRight");
+    const float animatorDampSpeed = 0.1f;
     public override void Enter()
     {
         playerStateMachine.playerInputHandler.isOnLockon = true;
@@ -18,6 +23,12 @@ public class PlayerTargetingState : PlayerBaseState
     }
     public override void Update(float deltatime)
     {
+        //攻擊的話要切換狀態
+        if (playerStateMachine.playerInputHandler.isAttacking)
+        {
+            playerStateMachine.SwitchState(new PlayerAttackingState(playerStateMachine , 0));
+            return;
+        }
         //現在沒有鎖定目標的話
         if (playerStateMachine.targeter.currentTarget == null)
         {
@@ -26,6 +37,8 @@ public class PlayerTargetingState : PlayerBaseState
         }
         Vector3 movement = CalculateMovement();
         Move(movement * playerStateMachine.LockonMoveSpeed, deltatime);
+        //更新動畫
+        UpdAnimator(deltatime);
         Facetarget();
    
     }
@@ -33,6 +46,34 @@ public class PlayerTargetingState : PlayerBaseState
     {
         playerStateMachine.playerInputHandler.cancelTargetEvent -= OnCancleTarget;
         Debug.Log("Exited Targeting State" +Time.deltaTime);
+    }
+
+   void  UpdAnimator(float deltatime)
+    {
+
+        // x,y不能用switch case判斷,移動的float值不會剛好符合條件
+        if (playerStateMachine.playerInputHandler.movementValue.y == 0)
+        {
+            playerStateMachine.animator.SetFloat(LockOnForwardHASH, 0,animatorDampSpeed,deltatime);
+        }
+        else
+        {
+            float value = playerStateMachine.playerInputHandler.movementValue.y > 0 ? 1f : -1f;
+            playerStateMachine.animator.SetFloat(LockOnForwardHASH, value, animatorDampSpeed, deltatime);
+        }
+
+        if (playerStateMachine.playerInputHandler.movementValue.x == 0)
+        {
+            playerStateMachine.animator.SetFloat(LockonRightHASH, 0, animatorDampSpeed, deltatime);
+        
+        }
+        else
+        {
+            float value = playerStateMachine.playerInputHandler.movementValue.x > 0 ? 1f : -1f;
+            playerStateMachine.animator.SetFloat(LockonRightHASH, value, animatorDampSpeed, deltatime);
+        }
+
+
     }
 
     void OnCancleTarget()

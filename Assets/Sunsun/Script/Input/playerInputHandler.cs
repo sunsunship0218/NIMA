@@ -16,7 +16,9 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
     public event Action targetEvent;
     public event Action cancelTargetEvent;
 
+    //狀態變數
     public bool isOnLockon;
+    public bool isAttacking { get; private set; }
 
     PlayerControllers playercontrollers;
     void Awake()
@@ -51,7 +53,15 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
     }
     public void OnAttack(InputAction.CallbackContext context)
     {
-
+      
+        if (context.performed)
+        {
+            isAttacking = true;
+        }
+        else  if(context.canceled)
+        {
+            isAttacking= false;
+        }
     }
     public void OnDodge(InputAction.CallbackContext context)
     {

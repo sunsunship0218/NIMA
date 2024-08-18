@@ -17,6 +17,7 @@ public class PlayerFreeLookState : PlayerBaseState
 
     public override void Enter()
     {
+        playerStateMachine.StopTrail();
         playerStateMachine.playerInputHandler.isOnLockon = false;
         playerStateMachine.animator.Play(unLockOnBlendtreeHASH);
 

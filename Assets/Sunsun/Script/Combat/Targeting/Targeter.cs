@@ -9,6 +9,13 @@ public class Targeter : MonoBehaviour
     public List<Target> targets = new List<Target>();
     public Target currentTarget {  get; private set; }
     [SerializeField] CinemachineTargetGroup cineTargetGroup;
+    Camera mainCamera;
+
+    private void Start()
+    {
+        mainCamera = Camera.main;
+    }
+
 
     void OnTriggerEnter(Collider other)
     {
@@ -38,8 +45,28 @@ public class Targeter : MonoBehaviour
     {
         //沒有所選目標物不執行
         if (targets.Count == 0) { return false; }
-        Debug.Log(currentTarget);
-        currentTarget = targets[0];
+        //-----------------------------------------------------------------------------------
+        Target closeTarget = null;
+        float closetTargetDistance = Mathf.Infinity;
+        //尋找最近目標
+        foreach (Target target in targets)
+        {            
+           //超出螢幕範圍,持續找目標直到找到
+            Vector2 viewPos = mainCamera.WorldToViewportPoint(target.transform.position);
+            if( viewPos.x<0 || viewPos.x>1 || viewPos.y<0 || viewPos.y>1) { continue; }
+
+            //螢幕範圍正中間
+            Vector2 toCenter = viewPos - new Vector2(0.5f, 0.5f);
+            if (toCenter.sqrMagnitude < closetTargetDistance)
+            {
+                closeTarget= target;
+                closetTargetDistance= toCenter.sqrMagnitude;
+            }
+        }
+
+        if (closeTarget == null) { return false; }
+        currentTarget = closeTarget;
+        //-----------------------------------------------------------------------------------
         cineTargetGroup.AddMember(currentTarget.transform, 1f ,2f);
         return true;
 
