@@ -38,9 +38,13 @@ public class PlayerFreeLookState : PlayerBaseState
         playerStateMachine.animator.SetFloat(FREELOOKSPEEDHASH, 1, animatorDampSpeed, deltatime);
         FaceMovementDirection(movementVec3,deltatime);
 
-        //if (playerStateMachine.playerInputHandler.isOnLockon)
-        //    OnTarget();
-      
+        //按下攻擊,進入攻擊狀態
+        if (playerStateMachine.playerInputHandler.isAttacking)
+        {
+            playerStateMachine.SwitchState(new PlayerAttackingState(playerStateMachine, 0));
+            return;
+        }
+
     }
     public override void Exit()
     {
@@ -82,6 +86,7 @@ public class PlayerFreeLookState : PlayerBaseState
        forward.Normalize();
        right.Normalize();
 
+        // 移動的距離*重力(movementValue.y)
         return  forward*playerStateMachine.playerInputHandler.movementValue.y+
                      right*playerStateMachine.playerInputHandler.movementValue.x;       
     }

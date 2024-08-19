@@ -195,8 +195,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4905040202852944265}
-  - component: {fileID: 8101250941800504514}
-  - component: {fileID: 1724808079606686713}
   - component: {fileID: 6310474752851148278}
   m_Layer: 0
   m_Name: Player
@@ -222,46 +220,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8101250941800504514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2618369497009555832}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cb50678b209f2d4da30519c7b3d1338, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  combo:
-  - {fileID: 11400000, guid: 6b2ef36b16f6a2245ab3a4c66561efd1, type: 2}
-  - {fileID: 11400000, guid: 9611a3fb7ff6d73479e3c207469e7e73, type: 2}
-  - {fileID: 11400000, guid: a15479bc1aa381243b6c47bdf0ec38ef, type: 2}
-  isAttacking: 0
-  cooldownTime: 0.5
-  weapon: {fileID: 0}
-  Player: {fileID: 0}
---- !u!114 &1724808079606686713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2618369497009555832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d229628582b91c74db0f169dd0ab37b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <playerInputHandler>k__BackingField: {fileID: 6310474752851148278}
-  <characterController>k__BackingField: {fileID: 0}
-  <freeLookMoveSpeed>k__BackingField: 1
-  <LockonMoveSpeed>k__BackingField: 0
-  <forceReceiver>k__BackingField: {fileID: 0}
-  <moveRotationDamping>k__BackingField: 10
-  <animator>k__BackingField: {fileID: 0}
-  <targeter>k__BackingField: {fileID: 0}
 --- !u!114 &6310474752851148278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -757,9 +715,7 @@ MonoBehaviour:
   m_AnimatedTarget: {fileID: 0}
   m_LayerIndex: 0
   m_ShowDebugText: 0
-  m_ChildCameras:
-  - {fileID: 6871463224072471398}
-  - {fileID: 7400198197329261804}
+  m_ChildCameras: []
   m_Instructions:
   - m_FullHash: -2099866513
     m_VirtualCamera: {fileID: 6871463224072471398}
