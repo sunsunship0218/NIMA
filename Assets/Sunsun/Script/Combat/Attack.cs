@@ -17,4 +17,10 @@ public class Attack
 
     [field: SerializeField]
     public float ComboAttackTime { get; private set; } = -1;
+
+    [field: SerializeField]
+    public float ForceTime { get; private set; } = -1;
+
+    [field: SerializeField]
+    public float Force { get; private set; } = -1;
 }

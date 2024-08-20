@@ -17,7 +17,6 @@ public class PlayerTargetingState : PlayerBaseState
         playerStateMachine.playerInputHandler.isOnLockon = true;
         playerStateMachine.animator.Play(LockOnBlendtreeHASH);
 
-        Debug.Log("Entered Targeting State" + Time.deltaTime);
         //按下鎖定後切換狀態  
         playerStateMachine.playerInputHandler.cancelTargetEvent += OnCancleTarget;
     }

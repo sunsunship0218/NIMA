@@ -13,7 +13,7 @@ TagManager:
   - MotionBlur
   - Water
   - UI
-  - street
+  - ignoreCamColider
   - 
   - 
   - 

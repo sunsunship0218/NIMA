@@ -19,6 +19,7 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
     //狀態變數
     public bool isOnLockon;
     public bool isAttacking { get; private set; }
+    public bool isDashing { get; private set; }
 
     PlayerControllers playercontrollers;
     void Awake()
@@ -54,7 +55,7 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
     public void OnAttack(InputAction.CallbackContext context)
     {
       
-        if (context.performed)
+        if (context.started)
         {
             isAttacking = true;
         }
@@ -92,7 +93,18 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
         }
         isOnLockon=!isOnLockon;
     }
+    public void OnParry(InputAction.CallbackContext context)
+    {
 
+        if (context.started)
+        {
+            isDashing = true;
+        }
+        else if (context.canceled)
+        {
+            isDashing = false;
+        }
+    }
 }
 
 

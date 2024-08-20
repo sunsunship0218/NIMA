@@ -10,14 +10,12 @@ public class PlayerAttackingState : PlayerBaseState
     }
     Attack  attack;
     float previousFrameTime;
+    bool alreadyApplyForce;
     public override void Enter()
     {
-        if (playerStateMachine.characterController.isGrounded)
-        {
-
-        }
+      
         playerStateMachine.animator.CrossFadeInFixedTime(attack.AnimationName, attack.TransitionDuration);
-        playerStateMachine.PlayTrail();
+   //   playerStateMachine.PlayTrail();
     }
     public override void Update(float deltatime)
     {
@@ -25,8 +23,12 @@ public class PlayerAttackingState : PlayerBaseState
        MoveWithDeltatime(deltatime);    
         //進行攻擊跟狀態判定
         float NormalizedTime = GetNormalizedTime();
-        if(NormalizedTime > previousFrameTime && NormalizedTime<1f) 
+        if(NormalizedTime >= previousFrameTime && NormalizedTime < 1f)
         {
+            if(NormalizedTime >= attack.ForceTime)
+            {
+                TryApplyForce();
+            }
             previousFrameTime = NormalizedTime;
             if (playerStateMachine.playerInputHandler.isAttacking)
             {
@@ -36,7 +38,14 @@ public class PlayerAttackingState : PlayerBaseState
         }
         else
         {
-            //回去freeLook
+            if (playerStateMachine.targeter.currentTarget != null)
+            {
+                playerStateMachine.SwitchState(new PlayerTargetingState(playerStateMachine));
+            }
+            else
+            {
+                playerStateMachine.SwitchState(new PlayerFreeLookState(playerStateMachine));
+            }
         }
         previousFrameTime = NormalizedTime;
     }
@@ -45,6 +54,12 @@ public class PlayerAttackingState : PlayerBaseState
 
     }
 
+    void TryApplyForce()
+    {
+        if(alreadyApplyForce) { return; }
+        playerStateMachine.forceReceiver.AddForce(playerStateMachine.transform.forward * attack.Force);
+        alreadyApplyForce = true;
+    }
     //Melee攻擊
     void TryComboAttack(float normalizedTime)
     {
@@ -83,4 +98,5 @@ public class PlayerAttackingState : PlayerBaseState
             return 0;
         }
     }
+
 }

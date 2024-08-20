@@ -21,15 +21,28 @@ public class PlayerFreeLookState : PlayerBaseState
         playerStateMachine.playerInputHandler.isOnLockon = false;
         playerStateMachine.animator.Play(unLockOnBlendtreeHASH);
 
-        Debug.Log("Entered Free look state" + Time.deltaTime);
         //按下鎖定後切換狀態  
         playerStateMachine.playerInputHandler.targetEvent += OnTarget;
 
     }
     public override void Update(float deltatime)
     {
+        //按下攻擊,進入攻擊狀態
+        if (playerStateMachine.playerInputHandler.isAttacking)
+        {
+            playerStateMachine.SwitchState(new PlayerAttackingState(playerStateMachine, 0));
+            return;
+        }
+        //按下躲避,進入Dashing
+        if (playerStateMachine.playerInputHandler.isDashing)
+        {
+            playerStateMachine.SwitchState(new PlayerDashingState(playerStateMachine));
+            return;
+        }
+        //計算移動距離
         Vector3 movementVec3 = calculateMovement();
         Move(movementVec3 *  playerStateMachine.freeLookMoveSpeed,deltatime);
+
         if (playerStateMachine.playerInputHandler.movementValue == Vector2.zero)
         {
             playerStateMachine.animator.SetFloat(FREELOOKSPEEDHASH, 0, animatorDampSpeed, deltatime);
@@ -38,12 +51,7 @@ public class PlayerFreeLookState : PlayerBaseState
         playerStateMachine.animator.SetFloat(FREELOOKSPEEDHASH, 1, animatorDampSpeed, deltatime);
         FaceMovementDirection(movementVec3,deltatime);
 
-        //按下攻擊,進入攻擊狀態
-        if (playerStateMachine.playerInputHandler.isAttacking)
-        {
-            playerStateMachine.SwitchState(new PlayerAttackingState(playerStateMachine, 0));
-            return;
-        }
+      
 
     }
     public override void Exit()
@@ -59,7 +67,7 @@ public class PlayerFreeLookState : PlayerBaseState
         {
             playerStateMachine.playerInputHandler.isOnLockon = true;
             playerStateMachine.SwitchState(new PlayerTargetingState(playerStateMachine));
-            Debug.Log("OnTarget " + Time.deltaTime);
+          
         }
        
     }
