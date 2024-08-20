@@ -44,19 +44,20 @@ public class PlayerStateMachine : StateMachine
      }
 
     // Test play effect
-    public void PlayTrail()
+/*
+public void PlayTrail()
+{
+    if (trailRenderer != null && playerInputHandler.isAttacking)
     {
-        if (trailRenderer != null && playerInputHandler.isAttacking)
-        {
-            trailRenderer.emitting = true;
-        }
+        trailRenderer.emitting = true;
     }
-    public void StopTrail()
+}
+public void StopTrail()
+{
+    if (trailRenderer != null)
     {
-        if (trailRenderer != null)
-        {
-            trailRenderer.emitting = false;
-        }
+        trailRenderer.emitting = false;
     }
-
+}
+*/
 }

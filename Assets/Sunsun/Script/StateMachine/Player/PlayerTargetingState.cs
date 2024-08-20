@@ -17,7 +17,6 @@ public class PlayerTargetingState : PlayerBaseState
         playerStateMachine.playerInputHandler.isOnLockon = true;
         playerStateMachine.animator.Play(LockOnBlendtreeHASH);
 
-        Debug.Log("Entered Targeting State" + Time.deltaTime);
         //按下鎖定後切換狀態  
         playerStateMachine.playerInputHandler.cancelTargetEvent += OnCancleTarget;
     }
@@ -39,6 +38,7 @@ public class PlayerTargetingState : PlayerBaseState
         Move(movement * playerStateMachine.LockonMoveSpeed, deltatime);
         //更新動畫
         UpdAnimator(deltatime);
+        //朝向目標
         Facetarget();
    
     }
@@ -91,6 +91,7 @@ public class PlayerTargetingState : PlayerBaseState
         }
     }
 
+    //計算移動距離
       Vector3 CalculateMovement()
     {
         Vector3 movement = new Vector3();

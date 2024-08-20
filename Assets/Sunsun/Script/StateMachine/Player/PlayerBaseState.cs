@@ -24,4 +24,8 @@ public abstract class PlayerBaseState : State
         playerStateMachine.transform.rotation = Quaternion.LookRotation(faceTargetPos);
     }
    
+    protected void MoveWithDeltatime(float deltatime)
+    {
+        Move(Vector3.zero,deltatime);
+    }
 }
