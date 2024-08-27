@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public HealthSystem playerHealthSystem;
     public HealthSystem npc1HealthSystem;
 
-     public  HealthBar PlayerHealthBar;
+    public  HealthBar PlayerHealthBar;
     public HealthBar npc1HealthBar;
     public Player player;
     public NPC npc1;
@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
      void Start()
      {
         
-        InitialHPSystem();
+      //  InitialHPSystem();
        
      }
 
