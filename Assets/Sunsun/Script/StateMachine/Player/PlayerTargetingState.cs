@@ -45,7 +45,7 @@ public class PlayerTargetingState : PlayerBaseState
     public override void Exit()
     {
         playerStateMachine.playerInputHandler.cancelTargetEvent -= OnCancleTarget;
-        Debug.Log("Exited Targeting State" +Time.deltaTime);
+
     }
 
    void  UpdAnimator(float deltatime)

@@ -57,7 +57,7 @@ public class PlayerFreeLookState : PlayerBaseState
     public override void Exit()
     {
         playerStateMachine.playerInputHandler.targetEvent -= OnTarget;
-        Debug.Log("Free look exist" +Time.deltaTime);
+        
     }
 
     void OnTarget()
