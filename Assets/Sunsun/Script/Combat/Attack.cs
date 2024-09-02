@@ -23,4 +23,7 @@ public class Attack
 
     [field: SerializeField]
     public float Force { get; private set; } = -1;
+
+    [field: SerializeField]
+    public int Damage{ get; private set; } = -1;
 }
