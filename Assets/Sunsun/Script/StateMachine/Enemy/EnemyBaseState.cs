@@ -10,7 +10,7 @@ public abstract class EnemyBaseState :State
         this.enemyStatemachine = enemyStatemachine;
     }
 
-    //檢查跟玩家的距離
+    //檢查跟玩家的距離,決定攻擊/追逐 巡邏,預設為idle
     protected  bool IsInChasingRange( )
     {
         float distance = (enemyStatemachine.player.transform.position - enemyStatemachine.transform.position).sqrMagnitude;
@@ -18,7 +18,9 @@ public abstract class EnemyBaseState :State
     }
     protected bool IsinAttackingRange()
     {
+        //比較距離,直接給予true /false
         float distance = (enemyStatemachine.player.transform.position - enemyStatemachine.transform.position).sqrMagnitude;
+        //比較距離,直接給予true /false
         return distance <= enemyStatemachine.AttackRange * enemyStatemachine.AttackRange;
     }
 
@@ -31,7 +33,7 @@ public abstract class EnemyBaseState :State
     {
         Move(Vector3.zero, deltatime);
     }
-
+    //手動偵測
     protected void FacePlayer()
     {
         if (enemyStatemachine.player == null) { return; }

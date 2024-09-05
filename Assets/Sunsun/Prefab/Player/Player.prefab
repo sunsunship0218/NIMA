@@ -715,14 +715,16 @@ MonoBehaviour:
   m_AnimatedTarget: {fileID: 0}
   m_LayerIndex: 0
   m_ShowDebugText: 0
-  m_ChildCameras: []
+  m_ChildCameras:
+  - {fileID: 6871463224072471398}
+  - {fileID: 7400198197329261804}
   m_Instructions:
   - m_FullHash: -2099866513
-    m_VirtualCamera: {fileID: 6871463224072471398}
+    m_VirtualCamera: {fileID: 0}
     m_ActivateAfter: 0
     m_MinDuration: 0
   - m_FullHash: -1012102768
-    m_VirtualCamera: {fileID: 7400198197329261804}
+    m_VirtualCamera: {fileID: 0}
     m_ActivateAfter: 0
     m_MinDuration: 0
   m_DefaultBlend:

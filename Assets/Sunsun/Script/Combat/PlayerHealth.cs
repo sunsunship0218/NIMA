@@ -5,9 +5,10 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
    public  HealthSystem healthSystem;
+    [SerializeField] GameManager gameManager;
     void Start()
     {
-        healthSystem = new HealthSystem(100);
+        healthSystem = new HealthSystem(gameManager.player.playerHP);
         Debug.Log(healthSystem.GetHealth());
     }
 

@@ -14,7 +14,7 @@ AnimatorStateMachine:
     m_Position: {x: 160, y: 160, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2184865300587404718}
-    m_Position: {x: -73.170166, y: 413.78732, z: 0}
+    m_Position: {x: 420, y: 160, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -117,7 +117,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: E_Smash
+  m_Name: Attack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

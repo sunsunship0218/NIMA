@@ -13,6 +13,7 @@ public class PlayerAttackingState : PlayerBaseState
     bool alreadyApplyForce;
     public override void Enter()
     {
+        //§ðÀ»¶Ë®`§P©w
         playerStateMachine.RightweaponDamage.SetAttack((attack.Damage));
         playerStateMachine.LeftweaponDamage.SetAttack((attack.Damage));
         playerStateMachine.animator.CrossFadeInFixedTime(attack.AnimationName, attack.TransitionDuration);

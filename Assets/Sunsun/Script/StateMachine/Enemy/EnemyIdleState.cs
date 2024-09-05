@@ -23,7 +23,7 @@ public class EnemyIdleState : EnemyBaseState
             enemyStatemachine.SwitchState(new EnemyChasingState(enemyStatemachine));
             return;
         }
-        else if (IsinAttackingRange)
+        else if (IsinAttackingRange())
         {
             enemyStatemachine.SwitchState(new EnemyAttackingState(enemyStatemachine));
         }

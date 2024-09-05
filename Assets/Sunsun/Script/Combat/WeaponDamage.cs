@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class WeaponDamage : MonoBehaviour
 {
-    [SerializeField] Collider playerColi;
+    [SerializeField] Collider myColi;
     [SerializeField] PlayerHealth playerHealth;
+    [SerializeField] EnemyHealth enemyHealth;
     List<Collider> alreadyColiWith =new List<Collider>();
-    int danage;
+    int damage;
 
     private void OnEnable()
     {
@@ -15,21 +16,30 @@ public class WeaponDamage : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+     
         //Á×§K­«½Æ¸I¼²¦©¦å
-        if (other == playerColi) { return; }
+        if (other == myColi) { return; }
         if (alreadyColiWith.Contains(other)) { return; }
+        if(other.tag!="Player" && other.tag != "Enemy") { return; }
         alreadyColiWith.Add(other);
+
         if (other.tag == "Enemy")
         {
-            playerHealth.healthSystem.Damage(10);
-            Debug.Log(playerHealth.healthSystem.GetHealth());
+            enemyHealth.healthSystem.Damage(damage);
+            Debug.Log("enemy HP :"+enemyHealth.healthSystem.GetHealth());
         }
-     
-
+        if (other.tag == "Player")
+        {
+            Debug.Log("player hit");
+            playerHealth.healthSystem.Damage(damage);
+            Debug.Log("player HP :"+playerHealth.healthSystem.GetHealth());
+        }
     }
 
     public  void SetAttack(int damage)
     {
-      this.danage = damage;
+        Debug.Log("IS SET ATTACK");
+        this.damage = damage;
+        Debug.Log("SetAttack called with damage: " + damage);
     }
 }

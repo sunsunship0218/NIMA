@@ -10,11 +10,17 @@ public class EnemyAttackingState : EnemyBaseState
     Attack attack;
     public override void Enter()
     {
-     enemyStatemachine.animator.CrossFadeInFixedTime(AttackHASH,TransitionDuration);
+        //§ðÀ»¶Ë®`§P©w
+        enemyStatemachine.weaponDamageL.SetAttack(enemyStatemachine.AttackingDamage);
+        //§ðÀ»¶Ë®`§P©w
+        enemyStatemachine.weaponDamageR.SetAttack(enemyStatemachine.AttackingDamage);
+        //§ðÀ»°Êµe¼·©ñ¤Á´«
+        enemyStatemachine.animator.CrossFadeInFixedTime(AttackHASH,TransitionDuration);
     }
     public override void Update(float deltaTime)
     {
       
+
     }
     public override void Exit()
     {
