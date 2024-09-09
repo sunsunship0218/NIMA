@@ -8,13 +8,18 @@ using UnityEngine;
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] GameManager gameManager;
+    [SerializeField] PlayerHealth playerHealth;
     public Slider healthBar;
     public float maxHealth;
+    public float health;
     private void Start()
     {
-        maxHealth = gameManager.player.playerHP;
+        maxHealth =playerHealth.healthSystem.GetHealth();
+        if (healthBar.value != health)
+        {
+            healthBar.value = health;
         }
+    }
 
 }
 

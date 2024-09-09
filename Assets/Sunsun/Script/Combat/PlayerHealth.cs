@@ -6,10 +6,9 @@ public class PlayerHealth : MonoBehaviour
 {
    public  HealthSystem healthSystem;
     [SerializeField] GameManager gameManager;
-    void Start()
+    void Awake()
     {
         healthSystem = new HealthSystem(gameManager.player.playerHP);
-        Debug.Log(healthSystem.GetHealth());
     }
 
     
