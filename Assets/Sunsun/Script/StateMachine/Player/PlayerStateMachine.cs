@@ -25,6 +25,11 @@ public class PlayerStateMachine : StateMachine
     //攻擊combo
     [field: SerializeField]
     public Attack[ ] Attacks { get; private set; }
+    //攻擊傷害
+    [field: SerializeField]
+    public WeaponDamage RightweaponDamage { get; private set; }
+    [field: SerializeField]
+    public WeaponDamage LeftweaponDamage { get; private set; }
     //其他componment
     [field: SerializeField]
     public Animator animator { get; private set; }

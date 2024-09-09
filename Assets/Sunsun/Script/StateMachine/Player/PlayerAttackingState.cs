@@ -13,7 +13,9 @@ public class PlayerAttackingState : PlayerBaseState
     bool alreadyApplyForce;
     public override void Enter()
     {
-      
+        //攻擊傷害判定
+        playerStateMachine.RightweaponDamage.SetAttack((attack.Damage));
+        playerStateMachine.LeftweaponDamage.SetAttack((attack.Damage));
         playerStateMachine.animator.CrossFadeInFixedTime(attack.AnimationName, attack.TransitionDuration);
    //   playerStateMachine.PlayTrail();
     }
@@ -68,9 +70,8 @@ public class PlayerAttackingState : PlayerBaseState
         {
             return;
         }
-        //如果可以連擊
         if(normalizedTime< attack.ComboAttackTime) { return; }
-
+        //如果可以連擊
         playerStateMachine.SwitchState
         (
             new PlayerAttackingState

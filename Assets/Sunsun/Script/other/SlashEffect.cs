@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class SlashEffect : MonoBehaviour
 {
-    [SerializeField] TrailRenderer trailRenderer;
-    public void PlayTrail()
-    {
-        if (trailRenderer != null)
-        {
-            trailRenderer.emitting = true;
-        }
-    }
-    public void StopTrail()
-    {
-        if (trailRenderer != null)
-        {
-            trailRenderer.emitting = false;
-        }
-    }
+ //   [SerializeField] TrailRenderer trailRenderer;
+/*  public void PlayTrail()
+  {
+      if (trailRenderer != null)
+      {
+          trailRenderer.emitting = true;
+      }
+  }
+  public void StopTrail()
+  {
+      if (trailRenderer != null)
+      {
+          trailRenderer.emitting = false;
+      }
+  }
+*/
 }

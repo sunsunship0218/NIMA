@@ -28,15 +28,21 @@ public class HealthSystem
     //³y¦¨¶Ë®`
     public void Damage(float damageAmount)
     {
-        health -= damageAmount;
-        if (health < 0)
-        {
-            health = 0;
-        }
-        if(onHealthChange != null)
+        if (health == 0) { return; }
+        health = Math.Max(health - damageAmount, 0);
+
+        /*
+         *   health -= damageAmount;
+          if (health < 0)
+          {
+              health = 0;
+          }
+         */
+      /*  if (onHealthChange != null)
         {
             onHealthChange(this, EventArgs.Empty);
         }
+      */
     }
 
     //ªvÀø
@@ -47,10 +53,11 @@ public class HealthSystem
         {
             health = MaxHealth;
         }
-        if (onHealthChange != null)
-        {
-            onHealthChange(this, EventArgs.Empty);
-        }
+        /*     if (onHealthChange != null)
+             {
+                 onHealthChange(this, EventArgs.Empty);
+             }
+        */
     }
 
 }

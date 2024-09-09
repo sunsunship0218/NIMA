@@ -14,12 +14,12 @@ public class PlayerFreeLookState : PlayerBaseState
     readonly int unLockOnBlendtreeHASH = Animator.StringToHash("FreeLookBlendtree");
     readonly int FREELOOKSPEEDHASH = Animator.StringToHash("FreeLookSpeed");
     const float animatorDampSpeed = 0.14f;
-
+    const float crossfadeDuration = 0.1f;
     public override void Enter()
     {
      //   playerStateMachine.StopTrail();
         playerStateMachine.playerInputHandler.isOnLockon = false;
-        playerStateMachine.animator.Play(unLockOnBlendtreeHASH);
+        playerStateMachine.animator.CrossFadeInFixedTime(unLockOnBlendtreeHASH, crossfadeDuration);
 
         //按下鎖定後切換狀態  
         playerStateMachine.playerInputHandler.targetEvent += OnTarget;
@@ -57,7 +57,7 @@ public class PlayerFreeLookState : PlayerBaseState
     public override void Exit()
     {
         playerStateMachine.playerInputHandler.targetEvent -= OnTarget;
-        Debug.Log("Free look exist" +Time.deltaTime);
+        
     }
 
     void OnTarget()
