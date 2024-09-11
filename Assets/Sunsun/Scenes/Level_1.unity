@@ -614,37 +614,6 @@ MonoBehaviour:
   blendDistance: 3
   weight: 1
   priority: 0
---- !u!1 &185509683
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 185509684}
-  m_Layer: 6
-  m_Name: Clothes
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &185509684
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 185509683}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0013, y: 0.0621, z: 0.0368}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3065631814904575503}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &193037247
 GameObject:
   m_ObjectHideFlags: 0
@@ -1046,7 +1015,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1065,7 +1034,7 @@ MonoBehaviour:
   playerHealth: {fileID: 1945255748}
   healthBar: {fileID: 314902042}
   maxHealth: 100
-  health: 26.47
+  health: 100
 --- !u!1 &319268410
 GameObject:
   m_ObjectHideFlags: 0
@@ -1904,7 +1873,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 574369086}
-  m_LocalRotation: {x: 0.13343471, y: -0.45549953, z: 0.06926834, w: 0.87744933}
+  m_LocalRotation: {x: 0.13343471, y: -0.4554995, z: 0.06926833, w: 0.87744933}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3989,7 +3958,7 @@ GameObject:
   - component: {fileID: 1683445161}
   - component: {fileID: 1683445162}
   m_Layer: 0
-  m_Name: Rig 1
+  m_Name: Rig 1 IK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4577,6 +4546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 1945255747}
+  agent: {fileID: 0}
   drag: 0.25
 --- !u!143 &1945255747
 CharacterController:
@@ -5185,6 +5155,7 @@ MonoBehaviour:
     <ForceTime>k__BackingField: -1
     <Force>k__BackingField: 5
     <Damage>k__BackingField: 5
+    <knockbackRange>k__BackingField: 5
   - <AnimationName>k__BackingField: Attack2
     <TransitionDuration>k__BackingField: 0.1
     <ComboStateIndex>k__BackingField: 2
@@ -5192,6 +5163,7 @@ MonoBehaviour:
     <ForceTime>k__BackingField: -1
     <Force>k__BackingField: 5
     <Damage>k__BackingField: 10
+    <knockbackRange>k__BackingField: 5
   - <AnimationName>k__BackingField: Attack3
     <TransitionDuration>k__BackingField: 0.2
     <ComboStateIndex>k__BackingField: 3
@@ -5199,6 +5171,7 @@ MonoBehaviour:
     <ForceTime>k__BackingField: -1
     <Force>k__BackingField: 5
     <Damage>k__BackingField: 15
+    <knockbackRange>k__BackingField: 5
   - <AnimationName>k__BackingField: Attack4
     <TransitionDuration>k__BackingField: 0.2
     <ComboStateIndex>k__BackingField: 4
@@ -5206,10 +5179,12 @@ MonoBehaviour:
     <ForceTime>k__BackingField: -1
     <Force>k__BackingField: 10
     <Damage>k__BackingField: 20
+    <knockbackRange>k__BackingField: 5
   <RightweaponDamage>k__BackingField: {fileID: 830355086}
   <LeftweaponDamage>k__BackingField: {fileID: 1947208772}
   <animator>k__BackingField: {fileID: 1947208776}
   <targeter>k__BackingField: {fileID: 2122614404}
+  <playerHealth>k__BackingField: {fileID: 0}
   trailRenderer: {fileID: 0}
 --- !u!95 &1947208776
 Animator:
@@ -5405,7 +5380,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -5547,7 +5522,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2096052114}
-  m_LocalRotation: {x: 0.14480862, y: -0.4545624, z: 0.07517272, w: 0.87564415}
+  m_LocalRotation: {x: 0.14480862, y: -0.45456243, z: 0.07517273, w: 0.87564415}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5918,10 +5893,12 @@ MonoBehaviour:
   <animator>k__BackingField: {fileID: 919132149498085522}
   <agent>k__BackingField: {fileID: 919132149498085528}
   <characterController>k__BackingField: {fileID: 919132149498085523}
+  <health>k__BackingField: {fileID: 919132149498085525}
   <weaponDamageL>k__BackingField: {fileID: 117724079}
   <weaponDamageR>k__BackingField: {fileID: 746735209}
   <AttackRange>k__BackingField: 0.6
   <AttackingDamage>k__BackingField: 10
+  <KnockBack>k__BackingField: 3
   <detectionPlayerRange>k__BackingField: 10
   <MovementSpeed>k__BackingField: 3
   <forceReceiver>k__BackingField: {fileID: 919132149498085527}
@@ -5938,6 +5915,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 919132149498085523}
+  agent: {fileID: 919132149498085528}
   drag: 0.3
 --- !u!195 &919132149498085528
 NavMeshAgent:
@@ -6034,6 +6012,7 @@ MonoBehaviour:
     <ForceTime>k__BackingField: -1
     <Force>k__BackingField: 5
     <Damage>k__BackingField: 5
+    <knockbackRange>k__BackingField: 10
   - <AnimationName>k__BackingField: Attack2
     <TransitionDuration>k__BackingField: 0.1
     <ComboStateIndex>k__BackingField: 2
@@ -6041,6 +6020,7 @@ MonoBehaviour:
     <ForceTime>k__BackingField: -1
     <Force>k__BackingField: 5
     <Damage>k__BackingField: 10
+    <knockbackRange>k__BackingField: 10
   - <AnimationName>k__BackingField: Attack3
     <TransitionDuration>k__BackingField: 0.2
     <ComboStateIndex>k__BackingField: 3
@@ -6048,6 +6028,7 @@ MonoBehaviour:
     <ForceTime>k__BackingField: -1
     <Force>k__BackingField: 5
     <Damage>k__BackingField: 15
+    <knockbackRange>k__BackingField: 5
   - <AnimationName>k__BackingField: Attack4
     <TransitionDuration>k__BackingField: 0.2
     <ComboStateIndex>k__BackingField: 4
@@ -6055,10 +6036,12 @@ MonoBehaviour:
     <ForceTime>k__BackingField: -1
     <Force>k__BackingField: 10
     <Damage>k__BackingField: 20
+    <knockbackRange>k__BackingField: 5
   <RightweaponDamage>k__BackingField: {fileID: 5112279532751065978}
   <LeftweaponDamage>k__BackingField: {fileID: 5112279532751065979}
   <animator>k__BackingField: {fileID: 3065631814904575506}
   <targeter>k__BackingField: {fileID: 1876610850}
+  <playerHealth>k__BackingField: {fileID: 1945255748}
   trailRenderer: {fileID: 0}
 --- !u!114 &3065631814904575512
 MonoBehaviour:
@@ -7016,9 +6999,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4339177913472640404, guid: 5859261e3773a4443903c8b81cda75b5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1876610847}
-    - targetCorrespondingSourceObject: {fileID: 4339177913472640404, guid: 5859261e3773a4443903c8b81cda75b5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 185509684}
     - targetCorrespondingSourceObject: {fileID: 4339177913472640404, guid: 5859261e3773a4443903c8b81cda75b5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1683445161}

@@ -9,6 +9,7 @@ public class WeaponDamage : MonoBehaviour
     [SerializeField] EnemyHealth enemyHealth;
     List<Collider> alreadyColiWith =new List<Collider>();
     int damage;
+    float knockback;
 
     private void OnEnable()
     {
@@ -34,12 +35,18 @@ public class WeaponDamage : MonoBehaviour
             playerHealth.healthSystem.Damage(damage);
             Debug.Log("player HP :"+playerHealth.healthSystem.GetHealth());
         }
+
+        if(other.TryGetComponent<ForceReceiver>(out ForceReceiver forceReceiver))
+        {
+            //根據擊退距離,來看需要退多遠
+            Vector3 direction = (other.transform.position - myColi.transform.position).normalized;
+            forceReceiver.AddForce(direction*knockback);
+        }
     }
 
-    public  void SetAttack(int damage)
+    public  void SetAttack(int damage, float knockback)
     {
-        Debug.Log("IS SET ATTACK");
         this.damage = damage;
-        Debug.Log("SetAttack called with damage: " + damage);
+        this.knockback = knockback;
     }
 }

@@ -15,6 +15,10 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField]
     public CharacterController characterController { get; private set; }
 
+    //血量
+    [field: SerializeField]
+    public  EnemyHealth health { get; private set; }
+
     //攻擊相關的參數
     [field: SerializeField]
     public WeaponDamage weaponDamageL { get; private set; }
@@ -27,7 +31,9 @@ public class EnemyStateMachine : StateMachine
 
     [field: SerializeField]
     public int AttackingDamage { get; private set; }
-
+    //擊退距離
+    [field: SerializeField]
+    public int KnockBack { get; private set; } = -1;
     //距離偵測的參數
     [field: SerializeField]
    public float detectionPlayerRange { get; private set; }
@@ -54,5 +60,19 @@ public class EnemyStateMachine : StateMachine
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionPlayerRange);
+    }
+
+    private void OnEnable()
+    {
+        health.healthSystem.OnTakeDamage += HandleTakeDamage;
+    }
+    private void OnDisable()
+    {
+       health.healthSystem.OnTakeDamage -= HandleTakeDamage;
+    }
+
+    void HandleTakeDamage()
+    {
+        SwitchState(new EnemyImpactState (this));
     }
 }

@@ -37,6 +37,8 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField]
     public Targeter targeter { get; private set; }
 
+    [field: SerializeField]
+    public  PlayerHealth playerHealth { get; private set; }
 
     [SerializeField] TrailRenderer trailRenderer;
 
@@ -48,21 +50,35 @@ public class PlayerStateMachine : StateMachine
         SwitchState(new PlayerFreeLookState(this)); 
      }
 
+    private void OnEnable()
+    {
+        playerHealth.healthSystem.OnTakeDamage += HandleTakeDamage;
+    }
+    private void OnDisable()
+    {
+        playerHealth.healthSystem.OnTakeDamage -= HandleTakeDamage;
+    }
+
+     void HandleTakeDamage()
+    {
+        Debug.Log("HandleTakeDamage triggered, switching to PlayerImpactState");
+        SwitchState(new PlayerImpactState(this));
+    }
     // Test play effect
-/*
-public void PlayTrail()
-{
-    if (trailRenderer != null && playerInputHandler.isAttacking)
+    /*
+    public void PlayTrail()
     {
-        trailRenderer.emitting = true;
+        if (trailRenderer != null && playerInputHandler.isAttacking)
+        {
+            trailRenderer.emitting = true;
+        }
     }
-}
-public void StopTrail()
-{
-    if (trailRenderer != null)
+    public void StopTrail()
     {
-        trailRenderer.emitting = false;
+        if (trailRenderer != null)
+        {
+            trailRenderer.emitting = false;
+        }
     }
-}
-*/
+    */
 }

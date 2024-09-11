@@ -28,4 +28,17 @@ public abstract class PlayerBaseState : State
     {
         Move(Vector3.zero,deltatime);
     }
+
+    protected void ReturntoLocomotion()
+    {
+        // 有目標的話,繼續鎖定
+        if(playerStateMachine.targeter.currentTarget != null)
+        {
+            playerStateMachine.SwitchState(new PlayerTargetingState(playerStateMachine));
+        }
+        else
+        {
+            playerStateMachine.SwitchState(new PlayerFreeLookState(playerStateMachine));
+        }
+    }
 }
