@@ -147,7 +147,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 63541651}
-  m_LocalRotation: {x: 0.15617345, y: -0.4535473, z: 0.08107239, w: 0.87368876}
+  m_LocalRotation: {x: 0.15617345, y: -0.4535473, z: 0.08107242, w: 0.87368876}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1766,7 +1766,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 392049751}
-  m_LocalRotation: {x: 0.15617344, y: -0.4535473, z: 0.081072405, w: 0.8736887}
+  m_LocalRotation: {x: 0.15617347, y: -0.4535473, z: 0.08107242, w: 0.8736887}
   m_LocalPosition: {x: 3.8367424, y: 2.8083856, z: -2.6947615}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2509,7 +2509,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 574369086}
-  m_LocalRotation: {x: 0.13343473, y: -0.4554995, z: 0.06926833, w: 0.87744933}
+  m_LocalRotation: {x: 0.13343473, y: -0.45549953, z: 0.069268346, w: 0.87744933}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5737,6 +5737,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4164729227985494585, guid: 529a92e325777c846850b8c5d7994c16, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4293801157852533013, guid: 529a92e325777c846850b8c5d7994c16, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -8112,7 +8116,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866148583}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.5826974, y: 0.7962532, z: 6.605604}
+  m_LocalPosition: {x: 4.5826974, y: 0.7962475, z: 6.6052628}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8636,7 +8640,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.03
   m_MinMoveDistance: 0
-  m_Center: {x: 0.15, y: 0.9186391, z: 0.52}
+  m_Center: {x: 0, y: 0.98, z: -0.02}
 --- !u!114 &1945255748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8667,12 +8671,12 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2.2497919
+  m_Height: 2.3660495
   m_Direction: 1
-  m_Center: {x: 0, y: 0.62489593, z: 0}
+  m_Center: {x: 0, y: 0.68302476, z: 0}
 --- !u!114 &1945255750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8680,7 +8684,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1945255721}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 182f050865b1ff4438041cddbb5a81dd, type: 3}
   m_Name: 
@@ -9794,7 +9798,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2096052114}
-  m_LocalRotation: {x: 0.14480862, y: -0.45456243, z: 0.07517273, w: 0.87564415}
+  m_LocalRotation: {x: 0.14480864, y: -0.4545624, z: 0.07517272, w: 0.8756441}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10330,7 +10334,7 @@ MonoBehaviour:
   <animator>k__BackingField: {fileID: 3065631814904575506}
   <targeter>k__BackingField: {fileID: 1876610850}
   <playerHealth>k__BackingField: {fileID: 1945255748}
-  <ragDoll>k__BackingField: {fileID: 0}
+  <ragDoll>k__BackingField: {fileID: 3065631814904575516}
   <textMeshProUGUI>k__BackingField: {fileID: 1486806767}
   trailRenderer: {fileID: 0}
 --- !u!114 &3065631814904575512
@@ -12404,7 +12408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4164729227985494585, guid: 529a92e325777c846850b8c5d7994c16, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4293801157852533013, guid: 529a92e325777c846850b8c5d7994c16, type: 3}
       propertyPath: m_Layer

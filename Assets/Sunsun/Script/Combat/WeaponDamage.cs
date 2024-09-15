@@ -18,13 +18,14 @@ public class WeaponDamage : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-     
+        Debug.Log(other.name);
         //Á×§K­«½Æ¸I¼²¦©¦å
         if (other == myColi) { return; }
         if (alreadyColiWith.Contains(other)) { return; }
         if(other.tag!="Player" && other.tag != "Enemy") { return; }
         alreadyColiWith.Add(other);
 
+        // herw is bug
         if (other.tag == "Enemy")
         {
             timeManager.DoBulletTime();
@@ -32,8 +33,7 @@ public class WeaponDamage : MonoBehaviour
             Debug.Log("enemy HP :"+enemyHealth.healthSystem.GetHealth());
         }
         if (other.tag == "Player")
-        {
-         
+        {        
             Debug.Log("player hit");
             playerHealth.healthSystem.Damage(damage);
             Debug.Log("player HP :"+playerHealth.healthSystem.GetHealth());
