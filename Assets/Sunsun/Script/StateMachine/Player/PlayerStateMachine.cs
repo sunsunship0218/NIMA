@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 //接收實際的狀態機的實作
 public class PlayerStateMachine : StateMachine
@@ -40,29 +41,46 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField]
     public  PlayerHealth playerHealth { get; private set; }
 
+    [field: SerializeField]
+    public RagDoll ragDoll { get; private set; }
+    //UI
+    [field: SerializeField]
+    public TextMeshProUGUI textMeshProUGUI{ get; private set; }
     [SerializeField] TrailRenderer trailRenderer;
 
     public Transform mainCameraTransform { get; private set; }
     void Start()
      {
+        textMeshProUGUI.gameObject.SetActive(false);
         mainCameraTransform = Camera.main.transform;
         //this 就是現在的PlayerStateMachine實例
         SwitchState(new PlayerFreeLookState(this)); 
      }
 
+    //事件啟用訂閱
     private void OnEnable()
     {
         playerHealth.healthSystem.OnTakeDamage += HandleTakeDamage;
+        playerHealth.healthSystem.OnDie += HealthSystem_OnDie;
     }
+//事件禁用訂閱
     private void OnDisable()
     {
         playerHealth.healthSystem.OnTakeDamage -= HandleTakeDamage;
+        playerHealth.healthSystem.OnDie -= HealthSystem_OnDie;
     }
 
+    //Damage事件訂閱方法
      void HandleTakeDamage()
     {
         Debug.Log("HandleTakeDamage triggered, switching to PlayerImpactState");
         SwitchState(new PlayerImpactState(this));
+    }
+    //死亡訂閱方法
+    void HealthSystem_OnDie()
+    {
+        textMeshProUGUI.gameObject.SetActive(true);
+        SwitchState(new PlayerDeadState(this));
     }
     // Test play effect
     /*

@@ -7,6 +7,7 @@ public class WeaponDamage : MonoBehaviour
     [SerializeField] Collider myColi;
     [SerializeField] PlayerHealth playerHealth;
     [SerializeField] EnemyHealth enemyHealth;
+    [SerializeField] TimeManager timeManager;
     List<Collider> alreadyColiWith =new List<Collider>();
     int damage;
     float knockback;
@@ -26,11 +27,13 @@ public class WeaponDamage : MonoBehaviour
 
         if (other.tag == "Enemy")
         {
+            timeManager.DoBulletTime();
             enemyHealth.healthSystem.Damage(damage);
             Debug.Log("enemy HP :"+enemyHealth.healthSystem.GetHealth());
         }
         if (other.tag == "Player")
         {
+         
             Debug.Log("player hit");
             playerHealth.healthSystem.Damage(damage);
             Debug.Log("player HP :"+playerHealth.healthSystem.GetHealth());

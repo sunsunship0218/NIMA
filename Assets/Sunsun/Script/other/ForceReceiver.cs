@@ -31,9 +31,14 @@ public class ForceReceiver : MonoBehaviour
 
         impact = Vector3.SmoothDamp(impact, Vector3.zero, ref dampingVelocity,drag);
         //擊退完再次開啟巡路
-        
-        if (agent!=null && impact == Vector3.zero)
+        if (agent!=null )
         {
+            //原本是impact==Vector3.zero,修改後的條件會讓切換更順
+            if (impact.magnitude <= 0.2f * 0.2f)
+            {
+                impact = Vector3.zero;
+            }
+              
             agent.enabled = true;
         }
      }

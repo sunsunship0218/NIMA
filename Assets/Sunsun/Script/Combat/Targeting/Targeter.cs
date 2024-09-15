@@ -1,3 +1,4 @@
+
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
@@ -78,7 +79,10 @@ public class Targeter : MonoBehaviour
         cineTargetGroup.RemoveMember(currentTarget.transform);
         currentTarget = null;
     }
-    //only be called when targets get destroyed and exist
+    //當target目標物被摧毀時,還存在,才呼叫此方法,進行垃圾回收
+
+    // 當某個 Collider 進入觸發區域時，如果它有 Target 組件，將該目標加入 targets 列表中
+    // 並訂閱其 onDestroyed 事件，當目標被摧毀時自動呼叫 RemoveTarget 方法
     void RemoveTarget(Target target)
     {
         if (currentTarget == target)
@@ -86,6 +90,7 @@ public class Targeter : MonoBehaviour
             cineTargetGroup.RemoveMember(currentTarget.transform);
             currentTarget = null;
         }
+     //當target物件ondestoryed摧毀時,取消訂閱remove方法,並把鎖定對象從List移除
         target.onDestroyed -= RemoveTarget;
         targets.Remove(target);
     }

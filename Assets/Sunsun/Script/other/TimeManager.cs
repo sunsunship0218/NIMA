@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
-    // §ðÀ» ®æÄÒ
     public float slowDownFactor = 0.05f;
     public float slowDownLength = 1f;
 
@@ -19,4 +18,5 @@ public class TimeManager : MonoBehaviour
         Time.fixedDeltaTime = Time.timeScale * .02f;
        
     }
+
 }
