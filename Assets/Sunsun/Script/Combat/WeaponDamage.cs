@@ -28,13 +28,13 @@ public class WeaponDamage : MonoBehaviour
         // herw is bug
         if (other.tag == "Enemy")
         {
-            timeManager.DoBulletTime();
+           // timeManager.DoBulletTime(0.1f);
             enemyHealth.healthSystem.Damage(damage);
             Debug.Log("enemy HP :"+enemyHealth.healthSystem.GetHealth());
         }
         if (other.tag == "Player")
-        {        
-            Debug.Log("player hit");
+        {
+          //  timeManager.DoBulletTime(1f);
             playerHealth.healthSystem.Damage(damage);
             Debug.Log("player HP :"+playerHealth.healthSystem.GetHealth());
         }
