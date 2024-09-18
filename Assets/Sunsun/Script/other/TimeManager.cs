@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,18 +8,29 @@ public class TimeManager : MonoBehaviour
     [SerializeField] float slowFactor =0.2f;
     public void DoBulletTime(float duration)
     {
-        //¨¾¤î­«½ÆÄ²µo
+        //é˜²æ­¢é‡è¤‡è§¸ç™¼
         if (waiting) { return; }
-        //±±¨î®É¶¡´î³t
+        Debug.Log($"Starting Bullet Time. Duration: {duration} seconds. Slow Factor: {slowFactor}");
+        Debug.Log($"Before slowdown: Time.timeScale = {Time.timeScale}, Time.fixedDeltaTime = {Time.fixedDeltaTime}");
+        //æ§åˆ¶æ™‚é–“æ¸›é€Ÿ
         Time.timeScale = slowFactor;
-        // ½Õ¾ãª«²z¨t²Îªº®É¶¡ÁY©ñ
+        // èª¿æ•´ç‰©ç†ç³»çµ±çš„æ™‚é–“ç¸®æ”¾
+        Time.fixedDeltaTime = Time.timeScale * slowFactor;
+        Debug.Log($"After slowdown: Time.timeScale = {Time.timeScale}, Time.fixedDeltaTime = {Time.fixedDeltaTime}");
         StartCoroutine(wait(duration));
     }
     IEnumerator wait(float duration)
     {
+        float startRealTime = Time.realtimeSinceStartup;
         waiting = true;
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSecondsRealtime((duration));
+        float endRealTime = Time.realtimeSinceStartup;
+        Debug.Log($"End wait. Real time elapsed: {endRealTime - startRealTime} seconds.");
         Time.timeScale = 1f;
+        //reset å› æ­£å¸¸æ™‚é–“æµé€Ÿ
+        Time.fixedDeltaTime = 0.02f; // é‡ç½®fixedDeltaTime
+        Debug.Log($"After recovery: Time.timeScale = {Time.timeScale}, Time.fixedDeltaTime = {Time.fixedDeltaTime}");
+        waiting = false; // é‡ç½®waitingæ ‡å¿—
     }
 
 
