@@ -14,8 +14,8 @@ public class PlayerAttackingState : PlayerBaseState
     public override void Enter()
     {
         //攻擊傷害判定
-        playerStateMachine.RightweaponDamage.SetAttack((attack.Damage));
-        playerStateMachine.LeftweaponDamage.SetAttack((attack.Damage));
+        playerStateMachine.RightweaponDamage.SetAttack(attack.Damage, attack.knockbackRange);
+        playerStateMachine.LeftweaponDamage.SetAttack(attack.Damage, attack.knockbackRange);
         playerStateMachine.animator.CrossFadeInFixedTime(attack.AnimationName, attack.TransitionDuration);
    //   playerStateMachine.PlayTrail();
     }
@@ -24,7 +24,7 @@ public class PlayerAttackingState : PlayerBaseState
         //移動
        MoveWithDeltatime(deltatime);    
         //進行攻擊跟狀態判定
-        float NormalizedTime = GetNormalizedTime();
+        float NormalizedTime = GetNormalizedTime(playerStateMachine.animator);
         if(NormalizedTime >= previousFrameTime && NormalizedTime < 1f)
         {
             if(NormalizedTime >= attack.ForceTime)
@@ -82,22 +82,6 @@ public class PlayerAttackingState : PlayerBaseState
         );
     }
     //計算動畫切換的時間
-    float GetNormalizedTime()
-    {
-       AnimatorStateInfo currentStateInfo= playerStateMachine.animator.GetCurrentAnimatorStateInfo(0);
-        AnimatorStateInfo NextStateInfo= playerStateMachine.animator.GetNextAnimatorStateInfo(0);
-        if (playerStateMachine.animator.IsInTransition(0) && NextStateInfo.IsTag("Attack"))
-        {
-            return NextStateInfo.normalizedTime;
-        }
-        else if(!playerStateMachine.animator.IsInTransition(0) && currentStateInfo.IsTag("Attack"))
-        {
-            return currentStateInfo.normalizedTime;
-        }
-        else
-        {
-            return 0;
-        }
-    }
+  
 
 }

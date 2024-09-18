@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,11 +15,20 @@ public class EnemyStateMachine : StateMachine
 
     [field: SerializeField]
     public CharacterController characterController { get; private set; }
+    [field: SerializeField]
+    public RagDoll ragDoll { get; private set; }
+    //目標
+    [field: SerializeField]
+    public Target target { get; private set; }
+    //血量
+    [field: SerializeField]
+    public  EnemyHealth health { get; private set; }
 
     //攻擊相關的參數
+    //處理左手攻擊
     [field: SerializeField]
     public WeaponDamage weaponDamageL { get; private set; }
-
+    //處理右手攻擊
     [field: SerializeField]
     public WeaponDamage weaponDamageR { get; private set; }
 
@@ -27,7 +37,9 @@ public class EnemyStateMachine : StateMachine
 
     [field: SerializeField]
     public int AttackingDamage { get; private set; }
-
+    //擊退距離
+    [field: SerializeField]
+    public int KnockBack { get; private set; } = -1;
     //距離偵測的參數
     [field: SerializeField]
    public float detectionPlayerRange { get; private set; }
@@ -54,5 +66,26 @@ public class EnemyStateMachine : StateMachine
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionPlayerRange);
+    }
+
+    private void OnEnable()
+    {
+        health.healthSystem.OnTakeDamage += HandleTakeDamage;
+        health.healthSystem.OnDie += HandleDie;
+    }
+
+    private void OnDisable()
+    {
+       health.healthSystem.OnTakeDamage -= HandleTakeDamage;
+        health.healthSystem.OnDie -= HandleDie;
+    }
+
+    void HandleTakeDamage()
+    {
+        SwitchState(new EnemyImpactState (this));
+    }
+    private void HandleDie()
+    {
+        SwitchState(new EnemyDeadState(this));
     }
 }

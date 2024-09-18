@@ -26,4 +26,7 @@ public class Attack
 
     [field: SerializeField]
     public int Damage{ get; private set; } = -1;
+    //À»°h¶ZÂ÷
+    [field: SerializeField]
+    public float knockbackRange { get; private set; } = 5f;
 }

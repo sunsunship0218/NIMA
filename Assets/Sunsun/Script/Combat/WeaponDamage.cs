@@ -7,8 +7,11 @@ public class WeaponDamage : MonoBehaviour
     [SerializeField] Collider myColi;
     [SerializeField] PlayerHealth playerHealth;
     [SerializeField] EnemyHealth enemyHealth;
+    [SerializeField] TimeManager timeManager;
+    [SerializeField] HitParticleEffect hitParticleEffect;
     List<Collider> alreadyColiWith =new List<Collider>();
     int damage;
+    float knockback;
 
     private void OnEnable()
     {
@@ -16,8 +19,6 @@ public class WeaponDamage : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-     
-        //Á×§K­«½Æ¸I¼²¦©¦å
         if (other == myColi) { return; }
         if (alreadyColiWith.Contains(other)) { return; }
         if(other.tag!="Player" && other.tag != "Enemy") { return; }
@@ -25,21 +26,31 @@ public class WeaponDamage : MonoBehaviour
 
         if (other.tag == "Enemy")
         {
+            Vector3 hitposition = other.ClosestPointOnBounds(transform.position);
+            hitParticleEffect.PlayHitParticle(hitposition);
+            // timeManager.DoBulletTime(0.1f);
             enemyHealth.healthSystem.Damage(damage);
             Debug.Log("enemy HP :"+enemyHealth.healthSystem.GetHealth());
         }
         if (other.tag == "Player")
         {
-            Debug.Log("player hit");
             playerHealth.healthSystem.Damage(damage);
             Debug.Log("player HP :"+playerHealth.healthSystem.GetHealth());
         }
+
+        if(other.TryGetComponent<ForceReceiver>(out ForceReceiver forceReceiver))
+        {
+            //ï¿½Ú¾ï¿½ï¿½ï¿½ï¿½hï¿½Zï¿½ï¿½,ï¿½Ó¬Ý»Ý­nï¿½hï¿½hï¿½ï¿½
+            Vector3 direction = (other.transform.position - myColi.transform.position).normalized;
+            forceReceiver.AddForce(direction*knockback);
+        }
     }
 
-    public  void SetAttack(int damage)
+    public  void SetAttack(int damage, float knockback)
     {
-        Debug.Log("IS SET ATTACK");
         this.damage = damage;
-        Debug.Log("SetAttack called with damage: " + damage);
+        this.knockback = knockback;
     }
+
+
 }

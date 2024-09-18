@@ -5,7 +5,9 @@ public class HealthSystem
 {
    float health;
    float MaxHealth;
-    public event EventHandler onHealthChange;
+   public event Action OnTakeDamage;
+   public event EventHandler OnHealthChange;
+    public event Action OnDie;
 
     //初始化血量
     public HealthSystem(float Maxhealth)
@@ -28,9 +30,19 @@ public class HealthSystem
     //造成傷害
     public void Damage(float damageAmount)
     {
-        if (health == 0) { return; }
+        if (health == 0)   { return; }
         health = Math.Max(health - damageAmount, 0);
-
+        OnTakeDamage?.Invoke();
+        //血量變化的event
+        if (OnHealthChange != null)
+         {
+             OnHealthChange(this, EventArgs.Empty);
+         }
+        //血量變化如果到0,死
+        if(health == 0)
+        {
+            OnDie?.Invoke();
+        }
         /*
          *   health -= damageAmount;
           if (health < 0)
@@ -38,11 +50,7 @@ public class HealthSystem
               health = 0;
           }
          */
-      /*  if (onHealthChange != null)
-        {
-            onHealthChange(this, EventArgs.Empty);
-        }
-      */
+
     }
 
     //治療

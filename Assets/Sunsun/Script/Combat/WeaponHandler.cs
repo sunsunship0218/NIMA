@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class Weapon : MonoBehaviour
+public class WeaponHandler : MonoBehaviour
 {
     public float damage;
     [SerializeField] List<GameObject> weapon;

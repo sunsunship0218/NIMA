@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] GameManager gameManager;
     void Awake()
     {
-        healthSystem = new HealthSystem(gameManager.player.playerHP);
+        healthSystem = new HealthSystem(100);
     }
 
     

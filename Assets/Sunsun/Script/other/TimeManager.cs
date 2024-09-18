@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
-    // 攻擊 格黨
-    public float slowDownFactor = 0.05f;
-    public float slowDownLength = 1f;
+    bool waiting;
+    [SerializeField] float slowFactor =0.2f;
+    public void DoBulletTime(float duration)
+    {
+        //防止重複觸發
+        if (waiting) { return; }
+        //控制時間減速
+        Time.timeScale = slowFactor;
+        // 調整物理系統的時間縮放
+        StartCoroutine(wait(duration));
+    }
+    IEnumerator wait(float duration)
+    {
+        waiting = true;
+        yield return new WaitForSeconds(duration);
+        Time.timeScale = 1f;
+    }
 
-    void Update()
-    {
-        Time.timeScale += (1f / slowDownLength)*Time.unscaledDeltaTime;
-        Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
-    }
-    public void DoBulletTime()
-    {
-        Time.timeScale = slowDownFactor;
-        Time.fixedDeltaTime = Time.timeScale * .02f;
-       
-    }
+
 }
