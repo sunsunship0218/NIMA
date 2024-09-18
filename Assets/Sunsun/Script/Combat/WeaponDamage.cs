@@ -28,14 +28,17 @@ public class WeaponDamage : MonoBehaviour
         {
             Vector3 hitposition = other.ClosestPointOnBounds(transform.position);
             hitParticleEffect.PlayHitParticle(hitposition);
-            // timeManager.DoBulletTime(0.1f);
+            timeManager.DoBulletTime(0.4f);
             enemyHealth.healthSystem.Damage(damage);
-            Debug.Log("enemy HP :"+enemyHealth.healthSystem.GetHealth());
+      //    Debug.Log("enemy HP :"+enemyHealth.healthSystem.GetHealth());
         }
         if (other.tag == "Player")
         {
+            Vector3 hitposition = other.ClosestPointOnBounds(transform.position);
+            hitParticleEffect.PlayHitParticle(hitposition);
             playerHealth.healthSystem.Damage(damage);
-            Debug.Log("player HP :"+playerHealth.healthSystem.GetHealth());
+            timeManager.DoBulletTime(0.2f);
+            // Debug.Log("player HP :"+playerHealth.healthSystem.GetHealth());
         }
 
         if(other.TryGetComponent<ForceReceiver>(out ForceReceiver forceReceiver))
