@@ -8,6 +8,7 @@ public class WeaponDamage : MonoBehaviour
     [SerializeField] PlayerHealth playerHealth;
     [SerializeField] EnemyHealth enemyHealth;
     [SerializeField] TimeManager timeManager;
+    [SerializeField] HitParticleEffect hitParticleEffect;
     List<Collider> alreadyColiWith =new List<Collider>();
     int damage;
     float knockback;
@@ -18,8 +19,6 @@ public class WeaponDamage : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-     
-        //Á×§K­«½Æ¸I¼²¦©¦å
         if (other == myColi) { return; }
         if (alreadyColiWith.Contains(other)) { return; }
         if(other.tag!="Player" && other.tag != "Enemy") { return; }
@@ -27,7 +26,9 @@ public class WeaponDamage : MonoBehaviour
 
         if (other.tag == "Enemy")
         {
-           // timeManager.DoBulletTime(0.1f);
+            Vector3 hitposition = other.ClosestPointOnBounds(transform.position);
+            hitParticleEffect.PlayHitParticle(hitposition);
+            // timeManager.DoBulletTime(0.1f);
             enemyHealth.healthSystem.Damage(damage);
             Debug.Log("enemy HP :"+enemyHealth.healthSystem.GetHealth());
         }
@@ -39,7 +40,7 @@ public class WeaponDamage : MonoBehaviour
 
         if(other.TryGetComponent<ForceReceiver>(out ForceReceiver forceReceiver))
         {
-            //®Ú¾ÚÀ»°h¶ZÂ÷,¨Ó¬Ý»Ý­n°h¦h»·
+            //ï¿½Ú¾ï¿½ï¿½ï¿½ï¿½hï¿½Zï¿½ï¿½,ï¿½Ó¬Ý»Ý­nï¿½hï¿½hï¿½ï¿½
             Vector3 direction = (other.transform.position - myColi.transform.position).normalized;
             forceReceiver.AddForce(direction*knockback);
         }
@@ -50,4 +51,6 @@ public class WeaponDamage : MonoBehaviour
         this.damage = damage;
         this.knockback = knockback;
     }
+
+
 }

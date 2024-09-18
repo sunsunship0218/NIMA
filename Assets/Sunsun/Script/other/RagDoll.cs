@@ -37,7 +37,7 @@ public class RagDoll : MonoBehaviour
                 rigi.useGravity = isRagdoll;
             }
         }
-       characterController.enabled =! isRagdoll;
+       characterController.enabled =!isRagdoll;
        animator.enabled = !isRagdoll;
     }
 }

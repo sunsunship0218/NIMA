@@ -23,7 +23,6 @@ public class HealthBar : MonoBehaviour
 
     private void HealthSystem_OnHealthChange(object sender, System.EventArgs e)
     {
-        Debug.Log("HandleHC");
         //更新現在血量
         health =playerHealth.healthSystem.GetHealth();
         //更新UI

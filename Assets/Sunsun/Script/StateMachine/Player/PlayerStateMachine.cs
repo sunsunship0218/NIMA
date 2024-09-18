@@ -46,7 +46,7 @@ public class PlayerStateMachine : StateMachine
     //UI
     [field: SerializeField]
     public TextMeshProUGUI textMeshProUGUI{ get; private set; }
-    [SerializeField] TrailRenderer trailRenderer;
+  //  [SerializeField] TrailRenderer trailRenderer;
 
     public Transform mainCameraTransform { get; private set; }
     void Start()
@@ -60,8 +60,16 @@ public class PlayerStateMachine : StateMachine
     //事件啟用訂閱
     private void OnEnable()
     {
-        playerHealth.healthSystem.OnTakeDamage += HandleTakeDamage;
-        playerHealth.healthSystem.OnDie += HealthSystem_OnDie;
+        if (playerHealth != null && playerHealth.healthSystem != null)
+        {
+            playerHealth.healthSystem.OnTakeDamage += HandleTakeDamage;
+            playerHealth.healthSystem.OnDie += HealthSystem_OnDie;
+            Debug.Log("Subscribed to health system events");
+        }
+        else
+        {
+            Debug.LogError("playerHealth or playerHealth.healthSystem is null in OnEnable");
+        }
     }
 //事件禁用訂閱
     private void OnDisable()
