@@ -5,9 +5,10 @@ public class HealthSystem
 {
    float health;
    float MaxHealth;
+    public bool IsInvunerable;
    public event Action OnTakeDamage;
    public event EventHandler OnHealthChange;
-    public event Action OnDie;
+   public event Action OnDie;
 
     //初始化血量
     public HealthSystem(float Maxhealth)
@@ -31,6 +32,8 @@ public class HealthSystem
     public void Damage(float damageAmount)
     {
         if (health == 0)   { return; }
+        //格黨跟防禦成功,無傷
+        if (IsInvunerable) { return; }
         health = Math.Max(health - damageAmount, 0);
         OnTakeDamage?.Invoke();
         //血量變化的event
@@ -68,4 +71,9 @@ public class HealthSystem
         */
     }
 
+    //無傷
+    public  void SetInvunerable(bool isInvunerable)
+    {
+        this.IsInvunerable = isInvunerable;     
+    }
 }

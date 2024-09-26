@@ -39,6 +39,12 @@ public class PlayerFreeLookState : PlayerBaseState
             playerStateMachine.SwitchState(new PlayerDashingState(playerStateMachine));
             return;
         }
+        //按下防禦,進入防禦
+        if (playerStateMachine.playerInputHandler.isBlocking)
+        {
+            playerStateMachine.SwitchState(new PlayerBlockingState(playerStateMachine));
+            return;
+        }
         //計算移動距離
         Vector3 movementVec3 = calculateMovement();
         Move(movementVec3 *  playerStateMachine.freeLookMoveSpeed,deltatime);
