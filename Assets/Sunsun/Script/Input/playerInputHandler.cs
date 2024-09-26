@@ -20,6 +20,7 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
     public bool isOnLockon;
     public bool isAttacking { get; private set; }
     public bool isDashing { get; private set; }
+    public bool isBlocking;
 
     PlayerControllers playercontrollers;
     void Awake()
@@ -55,7 +56,7 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
     public void OnAttack(InputAction.CallbackContext context)
     {
       
-        if (context.started)
+        if (context.performed)
         {
             isAttacking = true;
         }
@@ -96,13 +97,16 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
     public void OnParry(InputAction.CallbackContext context)
     {
 
-        if (context.started)
+    }
+    public void OnBlock(InputAction.CallbackContext context)
+    {
+        if (context.performed)
         {
-            isDashing = true;
+            isBlocking = true;
         }
         else if (context.canceled)
         {
-            isDashing = false;
+            isBlocking = false;
         }
     }
 }

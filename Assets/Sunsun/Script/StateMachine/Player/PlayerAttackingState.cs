@@ -32,6 +32,7 @@ public class PlayerAttackingState : PlayerBaseState
                 TryApplyForce();
             }
             previousFrameTime = NormalizedTime;
+            //«ö¤U§ðÀ»Áä
             if (playerStateMachine.playerInputHandler.isAttacking)
             {
                 TryComboAttack(NormalizedTime);

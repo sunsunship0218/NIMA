@@ -89,6 +89,15 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Block"",
+                    ""type"": ""Button"",
+                    ""id"": ""ee139734-8c2a-45e6-9221-f3e99a267614"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -271,7 +280,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""234a19a5-0736-4a53-bf8b-593db0c88e95"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
@@ -287,6 +296,17 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Parry"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ad0fe4ff-14a3-46e8-8475-28db11e53ada"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Block"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -332,6 +352,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Target = m_Player.FindAction("Target", throwIfNotFound: true);
         m_Player_Parry = m_Player.FindAction("Parry", throwIfNotFound: true);
+        m_Player_Block = m_Player.FindAction("Block", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -400,6 +421,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Target;
     private readonly InputAction m_Player_Parry;
+    private readonly InputAction m_Player_Block;
     public struct PlayerActions
     {
         private @PlayerControllers m_Wrapper;
@@ -411,6 +433,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Target => m_Wrapper.m_Player_Target;
         public InputAction @Parry => m_Wrapper.m_Player_Parry;
+        public InputAction @Block => m_Wrapper.m_Player_Block;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -441,6 +464,9 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
             @Parry.started += instance.OnParry;
             @Parry.performed += instance.OnParry;
             @Parry.canceled += instance.OnParry;
+            @Block.started += instance.OnBlock;
+            @Block.performed += instance.OnBlock;
+            @Block.canceled += instance.OnBlock;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -466,6 +492,9 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
             @Parry.started -= instance.OnParry;
             @Parry.performed -= instance.OnParry;
             @Parry.canceled -= instance.OnParry;
+            @Block.started -= instance.OnBlock;
+            @Block.performed -= instance.OnBlock;
+            @Block.canceled -= instance.OnBlock;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -510,5 +539,6 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnTarget(InputAction.CallbackContext context);
         void OnParry(InputAction.CallbackContext context);
+        void OnBlock(InputAction.CallbackContext context);
     }
 }

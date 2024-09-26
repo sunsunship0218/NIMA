@@ -67,6 +67,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Block",
+                    "type": "Button",
+                    "id": "ee139734-8c2a-45e6-9221-f3e99a267614",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -249,7 +258,7 @@
                 {
                     "name": "",
                     "id": "234a19a5-0736-4a53-bf8b-593db0c88e95",
-                    "path": "<Mouse>/rightButton",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "Mouse and Keyboard",
@@ -265,6 +274,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Parry",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ad0fe4ff-14a3-46e8-8475-28db11e53ada",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse and Keyboard",
+                    "action": "Block",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

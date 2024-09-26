@@ -7,7 +7,6 @@ public class PlayerTargetingState : PlayerBaseState
     public PlayerTargetingState(PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
     //animator parameter
     readonly int LockOnBlendtreeHASH = Animator.StringToHash("LockOnBlendtree");
-
     // animator paramators
     readonly int LockOnForwardHASH = Animator.StringToHash("LockonForward");
     readonly int LockonRightHASH = Animator.StringToHash("LockonRight");
@@ -25,10 +24,17 @@ public class PlayerTargetingState : PlayerBaseState
         //攻擊的話要切換狀態
         if (playerStateMachine.playerInputHandler.isAttacking)
         {
-            playerStateMachine.SwitchState(new PlayerAttackingState(playerStateMachine , 0));
+            //0是Attack陣列的combo
+            playerStateMachine.SwitchState(new PlayerAttackingState(playerStateMachine, 0));
             return;
         }
-        //現在沒有鎖定目標的話
+        //防禦的話切換狀態
+        if (playerStateMachine.playerInputHandler.isBlocking)
+        {
+            playerStateMachine.SwitchState(new PlayerBlockingState(playerStateMachine));
+            return;
+        }
+        //現在沒有鎖定目標的話,回到freelook
         if (playerStateMachine.targeter.currentTarget == null)
         {
             playerStateMachine.SwitchState(new PlayerFreeLookState(playerStateMachine));
