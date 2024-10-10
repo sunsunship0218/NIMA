@@ -11,6 +11,10 @@ public class PlayerTargetingState : PlayerBaseState
     readonly int LockOnForwardHASH = Animator.StringToHash("LockonForward");
     readonly int LockonRightHASH = Animator.StringToHash("LockonRight");
     const float animatorDampSpeed = 0.1f;
+    //躲避的方向
+    Vector2 dodgingDirectionInput;
+    //躲避維持的時間
+    float DodgingDuration;
     public override void Enter()
     {
         playerStateMachine.playerInputHandler.isOnLockon = true;
@@ -18,6 +22,8 @@ public class PlayerTargetingState : PlayerBaseState
 
         //按下鎖定後切換狀態  
         playerStateMachine.playerInputHandler.cancelTargetEvent += OnCancleTarget;
+        //按下躲避後切換狀態
+        playerStateMachine.playerInputHandler.dodgeEvent += Ondodge;
     }
     public override void Update(float deltatime)
     {
@@ -40,7 +46,7 @@ public class PlayerTargetingState : PlayerBaseState
             playerStateMachine.SwitchState(new PlayerFreeLookState(playerStateMachine));
             return;
         }
-        Vector3 movement = CalculateMovement();
+        Vector3 movement = CalculateMovement(deltatime);
         Move(movement * playerStateMachine.LockonMoveSpeed, deltatime);
         //更新動畫
         UpdAnimator(deltatime);
@@ -97,13 +103,31 @@ public class PlayerTargetingState : PlayerBaseState
         }
     }
 
-    //計算移動距離
-      Vector3 CalculateMovement()
+    void Ondodge()
     {
-        Vector3 movement = new Vector3();
-        movement += playerStateMachine.transform.right * playerStateMachine.playerInputHandler.movementValue.x;
-        movement += playerStateMachine.transform.forward * playerStateMachine.playerInputHandler.movementValue.y;
-        return movement;
+        Debug.Log("DODGE");
+        dodgingDirectionInput = playerStateMachine.playerInputHandler.movementValue;
+        DodgingDuration = playerStateMachine.DodgeTime;
     }
+
+    //計算移動距離
+      Vector3 CalculateMovement(float deltatime)
+      {
+        Vector3 movement = new Vector3();
+        if (DodgingDuration > 0f)
+        {
+            movement += playerStateMachine.transform.right * dodgingDirectionInput.x * playerStateMachine.DodgeDistance / playerStateMachine.DodgeTime;
+            movement += playerStateMachine.transform.forward * dodgingDirectionInput.y * playerStateMachine.DodgeDistance / playerStateMachine.DodgeTime;
+
+            DodgingDuration -= deltatime;
+        }
+        else
+        {
+            movement += playerStateMachine.transform.right * playerStateMachine.playerInputHandler.movementValue.x;
+            movement += playerStateMachine.transform.forward * playerStateMachine.playerInputHandler.movementValue.y;
+        }
+
+        return movement;
+      }
 
 }

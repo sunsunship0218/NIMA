@@ -22,6 +22,11 @@ public class PlayerStateMachine : StateMachine
     public ForceReceiver forceReceiver { get; private set; }
     [field: SerializeField]
     public float moveRotationDamping { get; private set; }
+    //躲避的參數
+    [field: SerializeField]
+    public float DodgeTime { get; private set; }
+    [field: SerializeField]
+    public float DodgeDistance { get; private set; }
 
     //攻擊combo
     [field: SerializeField]

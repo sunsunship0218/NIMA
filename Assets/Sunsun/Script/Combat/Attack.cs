@@ -29,4 +29,6 @@ public class Attack
     //À»°h¶ZÂ÷
     [field: SerializeField]
     public float knockbackRange { get; private set; } = 5f;
+    //­µ®Ä
+    public AudioSource HitAudioSource { get; private set; } 
 }

@@ -70,6 +70,7 @@ public class EnemyStateMachine : StateMachine
 
     private void OnEnable()
     {
+        Debug.Log("Enemy HandleTakeDamage");
         health.healthSystem.OnTakeDamage += HandleTakeDamage;
         health.healthSystem.OnDie += HandleDie;
     }
@@ -80,8 +81,10 @@ public class EnemyStateMachine : StateMachine
         health.healthSystem.OnDie -= HandleDie;
     }
 
+    //敵人事件沒有被訂閱
     void HandleTakeDamage()
     {
+       
         SwitchState(new EnemyImpactState (this));
     }
     private void HandleDie()
