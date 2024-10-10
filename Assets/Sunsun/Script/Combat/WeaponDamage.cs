@@ -9,6 +9,7 @@ public class WeaponDamage : MonoBehaviour
     [SerializeField] EnemyHealth enemyHealth;
     [SerializeField] TimeManager timeManager;
     [SerializeField] HitParticleEffect hitParticleEffect;
+    [SerializeField] AudioSource audioSource;
     List<Collider> alreadyColiWith =new List<Collider>();
     int damage;
     float knockback;
@@ -30,14 +31,18 @@ public class WeaponDamage : MonoBehaviour
             hitParticleEffect.PlayHitParticle(hitposition);
             timeManager.DoBulletTime(0.4f);
             enemyHealth.healthSystem.Damage(damage);
+            audioSource.Play();
       //    Debug.Log("enemy HP :"+enemyHealth.healthSystem.GetHealth());
         }
         if (other.tag == "Player")
         {
+            audioSource.Play();
             Vector3 hitposition = other.ClosestPointOnBounds(transform.position);
             hitParticleEffect.PlayHitParticle(hitposition);
             playerHealth.healthSystem.Damage(damage);
             timeManager.DoBulletTime(0.2f);
+            
+            
             // Debug.Log("player HP :"+playerHealth.healthSystem.GetHealth());
         }
 

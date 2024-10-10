@@ -13,6 +13,8 @@ public class PlayerAttackingState : PlayerBaseState
     bool alreadyApplyForce;
     public override void Enter()
     {
+        //·n®Ì¬Û¾÷
+      //  CinemachineShake.Instance.ShakeCamera(2f, 1f);
         //§ðÀ»¶Ë®`§P©w
         playerStateMachine.RightweaponDamage.SetAttack(attack.Damage, attack.knockbackRange);
         playerStateMachine.LeftweaponDamage.SetAttack(attack.Damage, attack.knockbackRange);
