@@ -82,21 +82,12 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Parry"",
-                    ""type"": ""Button"",
-                    ""id"": ""da43b0c4-9d7d-4721-9646-a02b207826bc"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Block"",
+                    ""name"": ""BlockAndParry"",
                     ""type"": ""Button"",
                     ""id"": ""ee139734-8c2a-45e6-9221-f3e99a267614"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Tap,Hold"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -279,34 +270,12 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""234a19a5-0736-4a53-bf8b-593db0c88e95"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse and Keyboard"",
-                    ""action"": ""Parry"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7e0389fc-0ddb-4f1f-84ce-29164d2274dd"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Parry"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""ad0fe4ff-14a3-46e8-8475-28db11e53ada"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
-                    ""action"": ""Block"",
+                    ""action"": ""BlockAndParry"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -351,8 +320,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
         m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Target = m_Player.FindAction("Target", throwIfNotFound: true);
-        m_Player_Parry = m_Player.FindAction("Parry", throwIfNotFound: true);
-        m_Player_Block = m_Player.FindAction("Block", throwIfNotFound: true);
+        m_Player_BlockAndParry = m_Player.FindAction("BlockAndParry", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -420,8 +388,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Dodge;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Target;
-    private readonly InputAction m_Player_Parry;
-    private readonly InputAction m_Player_Block;
+    private readonly InputAction m_Player_BlockAndParry;
     public struct PlayerActions
     {
         private @PlayerControllers m_Wrapper;
@@ -432,8 +399,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
         public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Target => m_Wrapper.m_Player_Target;
-        public InputAction @Parry => m_Wrapper.m_Player_Parry;
-        public InputAction @Block => m_Wrapper.m_Player_Block;
+        public InputAction @BlockAndParry => m_Wrapper.m_Player_BlockAndParry;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -461,12 +427,9 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
             @Target.started += instance.OnTarget;
             @Target.performed += instance.OnTarget;
             @Target.canceled += instance.OnTarget;
-            @Parry.started += instance.OnParry;
-            @Parry.performed += instance.OnParry;
-            @Parry.canceled += instance.OnParry;
-            @Block.started += instance.OnBlock;
-            @Block.performed += instance.OnBlock;
-            @Block.canceled += instance.OnBlock;
+            @BlockAndParry.started += instance.OnBlockAndParry;
+            @BlockAndParry.performed += instance.OnBlockAndParry;
+            @BlockAndParry.canceled += instance.OnBlockAndParry;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -489,12 +452,9 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
             @Target.started -= instance.OnTarget;
             @Target.performed -= instance.OnTarget;
             @Target.canceled -= instance.OnTarget;
-            @Parry.started -= instance.OnParry;
-            @Parry.performed -= instance.OnParry;
-            @Parry.canceled -= instance.OnParry;
-            @Block.started -= instance.OnBlock;
-            @Block.performed -= instance.OnBlock;
-            @Block.canceled -= instance.OnBlock;
+            @BlockAndParry.started -= instance.OnBlockAndParry;
+            @BlockAndParry.performed -= instance.OnBlockAndParry;
+            @BlockAndParry.canceled -= instance.OnBlockAndParry;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -538,7 +498,6 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
         void OnDodge(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnTarget(InputAction.CallbackContext context);
-        void OnParry(InputAction.CallbackContext context);
-        void OnBlock(InputAction.CallbackContext context);
+        void OnBlockAndParry(InputAction.CallbackContext context);
     }
 }

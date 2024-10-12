@@ -40,11 +40,12 @@ public class PlayerBlockingState :PlayerBaseState
             playerStateMachine.SwitchState(new PlayerTargetingState(playerStateMachine));
             return;
         }
-        if (playerStateMachine.targeter.currentTarget == null)
+        //如果設置了這個條件,在沒有目標的時候,動畫會不同撥放
+       /* if (playerStateMachine.targeter.currentTarget == null)
         {
             playerStateMachine.SwitchState(new PlayerFreeLookState(playerStateMachine));
             return;
-        }
+        }*/
     }
     public override void Exit()
     {

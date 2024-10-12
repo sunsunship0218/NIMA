@@ -43,15 +43,21 @@ public class PlayerFreeLookState : PlayerBaseState
             return;
         }
         //按下躲避,進入Dashing
-      /*  if (playerStateMachine.playerInputHandler.isDashing)
+     if (playerStateMachine.playerInputHandler.isDashing)
         {
             playerStateMachine.SwitchState(new PlayerDashingState(playerStateMachine));
             return;
-        }*/
+        }
         //按下防禦,進入防禦
-        if (playerStateMachine.playerInputHandler.isBlocking)
+        if (playerStateMachine.playerInputHandler.isBlocking )
         {
             playerStateMachine.SwitchState(new PlayerBlockingState(playerStateMachine));
+            return;
+        }
+        //按下格擋,在格擋範圍],進入格擋
+        if (playerStateMachine.playerInputHandler.isParrying)
+        {
+            playerStateMachine.SwitchState(new PlayerParringState(playerStateMachine));
             return;
         }
         //計算移動距離

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
+using UnityEngine.InputSystem.Interactions;
 
 
 //將輸入要處理的邏輯綁訂到回調
@@ -20,7 +21,9 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
     public bool isOnLockon;
     public bool isAttacking { get; private set; }
     public bool isDashing { get; private set; }
+    //格檔跟防禦的相關變數
     public bool isBlocking;
+    public bool isParrying;
 
     PlayerControllers playercontrollers;
     void Awake()
@@ -94,21 +97,41 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
         }
         isOnLockon=!isOnLockon;
     }
-    public void OnParry(InputAction.CallbackContext context)
-    {
-
-    }
-    public void OnBlock(InputAction.CallbackContext context)
+    public void OnBlockAndParry(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            isBlocking = true;
+            if (context.interaction is TapInteraction)
+            {
+                // 短按格擋
+                isParrying = true;
+                isBlocking = false;
+                StartCoroutine(ResetParry());
+            }
+            else if (context.interaction is HoldInteraction)
+            {
+                // 長按防禦
+                isParrying = false;
+                isBlocking = true;
+              
+            }
         }
+
         else if (context.canceled)
         {
+            
             isBlocking = false;
+            isParrying = false;
         }
     }
+    private IEnumerator ResetParry()
+    {
+        // 等待一個幀後重置 isParrying
+        yield return null;
+        isParrying = false;
+        Debug.Log("Parry reset at: " + Time.time);
+    }
 }
+
 
 
