@@ -26,11 +26,16 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
     public bool isParrying;
 
     PlayerControllers playercontrollers;
+    //持續按住不攻擊
+   const float holdTimeThreshold = 0.4f; 
+    private float holdTimer = 0f;
+    private bool isButtonHeld = false;
     void Awake()
     {
         playercontrollers = new PlayerControllers();
      
     }
+  
     void Start()
     {
 
@@ -38,7 +43,24 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
         playercontrollers.Player.SetCallbacks(this);
         playercontrollers.Player.Enable();
     }
-     void OnDestroy()
+    private void Update()
+    {
+        //按下按鈕
+        if (isButtonHeld)
+        {
+            // 持續按住按鈕更新時間
+            holdTimer += Time.deltaTime;
+
+            if (holdTimer >= holdTimeThreshold)
+            {
+                // 持續按住超過時間,不攻擊
+                isAttacking = false;
+                isButtonHeld = false; 
+                Debug.Log("Hold Time Exceeded: Attacking: " + isAttacking);
+            }
+        }
+    }
+    void OnDestroy()
      {
         playercontrollers.Player.Disable();
      }
@@ -58,15 +80,26 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
     }
     public void OnAttack(InputAction.CallbackContext context)
     {
-      
-        if (context.performed)
+        //短按攻擊
+        if (context.performed && context.interaction is PressInteraction)
         {
+            isButtonHeld = true;
             isAttacking = true;
+            Debug.Log("isPress: " + "Attacking: "+isAttacking);
         }
-        else  if(context.canceled)
+        //長按不攻擊
+        else if (context.performed && context.interaction is HoldInteraction)
         {
-            isAttacking= false;
+          
+            isAttacking = false;
+            Debug.Log("isHold: " + "Attacking: " + isAttacking);
         }
+        else if (context.canceled)
+        {
+            isAttacking = false;
+            isButtonHeld = false;
+        }
+     
     }
     public void OnDodge(InputAction.CallbackContext context)
     {
