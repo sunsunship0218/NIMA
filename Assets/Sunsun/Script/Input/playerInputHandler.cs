@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
+using UnityEngine.InputSystem.Interactions;
 
 
 //將輸入要處理的邏輯綁訂到回調
@@ -20,14 +21,21 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
     public bool isOnLockon;
     public bool isAttacking { get; private set; }
     public bool isDashing { get; private set; }
+    //格檔跟防禦的相關變數
     public bool isBlocking;
+    public bool isParrying;
 
     PlayerControllers playercontrollers;
+    //持續按住不攻擊
+   const float holdTimeThreshold = 0.4f; 
+    private float holdTimer = 0f;
+    private bool isButtonHeld = false;
     void Awake()
     {
         playercontrollers = new PlayerControllers();
      
     }
+  
     void Start()
     {
 
@@ -35,7 +43,24 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
         playercontrollers.Player.SetCallbacks(this);
         playercontrollers.Player.Enable();
     }
-     void OnDestroy()
+    private void Update()
+    {
+        //按下按鈕
+        if (isButtonHeld)
+        {
+            // 持續按住按鈕更新時間
+            holdTimer += Time.deltaTime;
+
+            if (holdTimer >= holdTimeThreshold)
+            {
+                // 持續按住超過時間,不攻擊
+                isAttacking = false;
+                isButtonHeld = false; 
+                Debug.Log("Hold Time Exceeded: Attacking: " + isAttacking);
+            }
+        }
+    }
+    void OnDestroy()
      {
         playercontrollers.Player.Disable();
      }
@@ -55,15 +80,26 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
     }
     public void OnAttack(InputAction.CallbackContext context)
     {
-      
-        if (context.performed)
+        //短按攻擊
+        if (context.performed && context.interaction is PressInteraction)
         {
+            isButtonHeld = true;
             isAttacking = true;
+            Debug.Log("isPress: " + "Attacking: "+isAttacking);
         }
-        else  if(context.canceled)
+        //長按不攻擊
+        else if (context.performed && context.interaction is HoldInteraction)
         {
-            isAttacking= false;
+          
+            isAttacking = false;
+            Debug.Log("isHold: " + "Attacking: " + isAttacking);
         }
+        else if (context.canceled)
+        {
+            isAttacking = false;
+            isButtonHeld = false;
+        }
+     
     }
     public void OnDodge(InputAction.CallbackContext context)
     {
@@ -94,21 +130,41 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
         }
         isOnLockon=!isOnLockon;
     }
-    public void OnParry(InputAction.CallbackContext context)
-    {
-
-    }
-    public void OnBlock(InputAction.CallbackContext context)
+    public void OnBlockAndParry(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            isBlocking = true;
+            if (context.interaction is TapInteraction)
+            {
+                // 短按格擋
+                isParrying = true;
+                isBlocking = false;
+                StartCoroutine(ResetParry());
+            }
+            else if (context.interaction is HoldInteraction)
+            {
+                // 長按防禦
+                isParrying = false;
+                isBlocking = true;
+              
+            }
         }
+
         else if (context.canceled)
         {
+            
             isBlocking = false;
+            isParrying = false;
         }
     }
+    private IEnumerator ResetParry()
+    {
+        // 等待一個幀後重置 isParrying
+        yield return null;
+        isParrying = false;
+        Debug.Log("Parry reset at: " + Time.time);
+    }
 }
+
 
 
