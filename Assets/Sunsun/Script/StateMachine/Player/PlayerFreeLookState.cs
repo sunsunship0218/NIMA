@@ -15,13 +15,6 @@ public class PlayerFreeLookState : PlayerBaseState
     readonly int FREELOOKSPEEDHASH = Animator.StringToHash("FreeLookSpeed");
     const float animatorDampSpeed = 0.14f;
     const float crossfadeDuration = 0.1f;
-    //躲避
-    //躲避的方向
-    Vector2 dodgingDirectionInput;
-    //躲避維持的時間
-    float DodgingDuration;
-    Vector3 dodgingDirection;
-    Vector3 dodgeVelocity;
     public override void Enter()
     {
      //   playerStateMachine.StopTrail();
@@ -40,12 +33,6 @@ public class PlayerFreeLookState : PlayerBaseState
         if (playerStateMachine.playerInputHandler.isAttacking)
         {
             playerStateMachine.SwitchState(new PlayerAttackingState(playerStateMachine, 0));
-            return;
-        }
-        //按下躲避,進入Dashing
-     if (playerStateMachine.playerInputHandler.isDashing)
-        {
-            playerStateMachine.SwitchState(new PlayerDashingState(playerStateMachine));
             return;
         }
         //按下防禦,進入防禦
@@ -96,20 +83,7 @@ public class PlayerFreeLookState : PlayerBaseState
     void Ondodge()
     {
         Debug.Log("DODGE");
-        dodgingDirectionInput = playerStateMachine.playerInputHandler.movementValue;
-        DodgingDuration = playerStateMachine.DodgeTime;
-
-        // 获取相对于相机的方向
-        Vector3 forward = playerStateMachine.mainCameraTransform.forward;
-        Vector3 right = playerStateMachine.mainCameraTransform.right;
-        forward.y = 0f;
-        right.y = 0f;
-        forward.Normalize();
-        right.Normalize();
-        dodgingDirection = (right * dodgingDirectionInput.x + forward * dodgingDirectionInput.y).normalized;
-        dodgeVelocity = dodgingDirection * (playerStateMachine.DodgeDistance / playerStateMachine.DodgeTime);
-        DodgingDuration = playerStateMachine.DodgeTime;
-
+        playerStateMachine.SwitchState(new PlayerDashingState(playerStateMachine, playerStateMachine.playerInputHandler.movementValue));
     }
 
     void FaceMovementDirection(Vector3 movementVec3,float deltatime)
@@ -123,12 +97,7 @@ public class PlayerFreeLookState : PlayerBaseState
 
     Vector3 calculateMovement(float deltatime )
     {
-        if (DodgingDuration > 0f)
-        {
-            DodgingDuration -= deltatime;
-            return dodgeVelocity;
-        }
-
+      
         Vector3 forward, right ;
         forward = playerStateMachine.mainCameraTransform.forward;
         right = playerStateMachine.mainCameraTransform.right;

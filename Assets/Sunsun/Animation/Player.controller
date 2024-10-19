@@ -171,7 +171,7 @@ AnimatorStateMachine:
     m_Position: {x: 350, y: 540, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5233832324843222860}
-    m_Position: {x: 340, y: 240, z: 0}
+    m_Position: {x: 350, y: 300, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -454,7 +454,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 946a2b71657ad8c4f84e5f961c1713c4, type: 2}
+    m_Motion: {fileID: 7400000, guid: 4bdebd8c858b03347895e76f19b1f8d3, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 1}
     m_TimeScale: 1
@@ -630,7 +630,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Parry
-  m_Speed: 1
+  m_Speed: 1.39
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []

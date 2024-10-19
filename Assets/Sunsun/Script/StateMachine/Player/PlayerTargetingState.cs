@@ -11,10 +11,6 @@ public class PlayerTargetingState : PlayerBaseState
     readonly int LockOnForwardHASH = Animator.StringToHash("LockonForward");
     readonly int LockonRightHASH = Animator.StringToHash("LockonRight");
     const float animatorDampSpeed = 0.1f;
-    //躲避的方向
-    Vector2 dodgingDirectionInput;
-    //躲避維持的時間
-    float DodgingDuration;
     public override void Enter()
     {
         playerStateMachine.playerInputHandler.isOnLockon = true;
@@ -106,26 +102,18 @@ public class PlayerTargetingState : PlayerBaseState
     void Ondodge()
     {
         Debug.Log("DODGE");
-        dodgingDirectionInput = playerStateMachine.playerInputHandler.movementValue;
-        DodgingDuration = playerStateMachine.DodgeTime;
+        playerStateMachine.SwitchState(new PlayerDashingState(playerStateMachine, playerStateMachine.playerInputHandler.movementValue));
     }
 
     //計算移動距離
-      Vector3 CalculateMovement(float deltatime)
+    Vector3 CalculateMovement(float deltatime)
       {
         Vector3 movement = new Vector3();
-        if (DodgingDuration > 0f)
-        {
-            movement += playerStateMachine.transform.right * dodgingDirectionInput.x * playerStateMachine.DodgeDistance / playerStateMachine.DodgeTime;
-            movement += playerStateMachine.transform.forward * dodgingDirectionInput.y * playerStateMachine.DodgeDistance / playerStateMachine.DodgeTime;
-
-            DodgingDuration -= deltatime;
-        }
-        else
-        {
+      
+        
             movement += playerStateMachine.transform.right * playerStateMachine.playerInputHandler.movementValue.x;
             movement += playerStateMachine.transform.forward * playerStateMachine.playerInputHandler.movementValue.y;
-        }
+        
 
         return movement;
       }
