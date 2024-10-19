@@ -15,6 +15,14 @@ public abstract class PlayerBaseState : State
     {
         playerStateMachine.characterController.Move((motion+playerStateMachine.forceReceiver.movement)*deltatime);
     }
+    protected void Move(Vector3 motion)
+    {
+        playerStateMachine.characterController.Move(motion + playerStateMachine.forceReceiver.movement);
+    }
+    protected void MoveWithDeltatime(float deltatime)
+    {
+        Move(Vector3.zero, deltatime);
+    }
     protected void Facetarget()
     {
         if (playerStateMachine.targeter.currentTarget == null){ return; }
@@ -23,12 +31,6 @@ public abstract class PlayerBaseState : State
         faceTargetPos.y = 0f;
         playerStateMachine.transform.rotation = Quaternion.LookRotation(faceTargetPos);
     }
-   
-    protected void MoveWithDeltatime(float deltatime)
-    {
-        Move(Vector3.zero,deltatime);
-    }
-
     protected void ReturntoLocomotion()
     {
         // 有目標的話,繼續鎖定

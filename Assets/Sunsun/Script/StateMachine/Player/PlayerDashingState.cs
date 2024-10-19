@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerDashingState : PlayerBaseState
 {
-    Vector3 dodgingDirectionInput;
+    Vector2 dodgingDirectionInput;
     Vector3 dodgeDirection;
-    public PlayerDashingState(PlayerStateMachine playerStateMachine, Vector3 dodgingDirectionInput) : base(playerStateMachine)
+    public PlayerDashingState(PlayerStateMachine playerStateMachine, Vector2 dodgingDirectionInput) : base(playerStateMachine)
     {
         this.dodgingDirectionInput = dodgingDirectionInput;
     }
@@ -16,33 +16,46 @@ public class PlayerDashingState : PlayerBaseState
     readonly int DodgeRightHASH = Animator.StringToHash("DashingRight");
     const float animatorDampSpeed = 0.14f;
     const float crossfadeDuration = 0.1f;
+    //
     float DodgingDuration;
     public override void Enter()
     {
         //獲取玩家輸入方向
         dodgingDirectionInput = playerStateMachine.playerInputHandler.movementValue.normalized;
-        if (dodgingDirectionInput == Vector3.zero)
+
+        if (dodgingDirectionInput == Vector2.zero)
         {
-           dodgingDirectionInput = new Vector3(0f, 1f); // 向前
+            dodgingDirectionInput = new Vector2(0, 1); // 向前
         }
+
         //躲避方向
-        dodgeDirection = (playerStateMachine.transform.forward * dodgingDirectionInput.y + playerStateMachine.transform.right * dodgingDirectionInput.x).normalized;
+        dodgeDirection = playerStateMachine.transform.forward.normalized;
+            /*(playerStateMachine.transform.forward * dodgingDirectionInput.y + 
+                                            playerStateMachine.transform.right * dodgingDirectionInput.x).normalized;*/
         //躲避時間
         DodgingDuration = playerStateMachine.DodgeTime;
-         playerStateMachine.animator.SetFloat(DodgeForwardHASH, dodgingDirectionInput.y);
+        
+        //動畫撥放
+        playerStateMachine.animator.SetFloat(DodgeForwardHASH, dodgingDirectionInput.y);
         playerStateMachine.animator.SetFloat(DodgeRightHASH, dodgingDirectionInput.x);
-
         playerStateMachine.animator.CrossFadeInFixedTime(DodgeBlendtreeHASH, crossfadeDuration);
+        //無敵時間
         playerStateMachine.playerHealth.healthSystem.SetInvunerable(true);
         Debug.Log(dodgingDirectionInput);
     }
     public override void Update(float deltatime)
     {
+  
         Facetarget();
         //計算躲避的位移
-        Vector3 movement = playerStateMachine.transform.forward * playerStateMachine.DodgeDistance;
-        Move(movement, deltatime);
-
+        float dodgeSpeed = playerStateMachine.DodgeDistance / playerStateMachine.DodgeTime;
+        Vector3 movement  = dodgeSpeed * dodgeDirection *deltatime;
+        // movement += playerStateMachine.transform.right * dodgingDirectionInput.x * dodgeSpeed;
+        //     movement += playerStateMachine.transform.forward * dodgingDirectionInput.y * dodgeSpeed;
+        Move(movement);
+        Debug.Log("Dodging Direction Input: " + dodgingDirectionInput);
+        Debug.Log("Dodge Direction: " + dodgeDirection);
+        Debug.Log("Movement: " + movement);
         //減少時長
         DodgingDuration -= deltatime;
         //獲取動畫撥放狀態,防止沒有撥放完就切換狀態
