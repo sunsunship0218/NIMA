@@ -53,9 +53,6 @@ public class PlayerDashingState : PlayerBaseState
         // movement += playerStateMachine.transform.right * dodgingDirectionInput.x * dodgeSpeed;
         //     movement += playerStateMachine.transform.forward * dodgingDirectionInput.y * dodgeSpeed;
         Move(movement);
-        Debug.Log("Dodging Direction Input: " + dodgingDirectionInput);
-        Debug.Log("Dodge Direction: " + dodgeDirection);
-        Debug.Log("Movement: " + movement);
         //減少時長
         DodgingDuration -= deltatime;
         //獲取動畫撥放狀態,防止沒有撥放完就切換狀態
