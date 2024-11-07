@@ -1,33 +1,71 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class EnemyAttackingState : EnemyBaseState
 {
-    readonly int AttackHASH = Animator.StringToHash("Attack");
+ //   readonly int AttackHASH = Animator.StringToHash("Attack");
     const float TransitionDuration = 0.1f;
+    int AttackCombo=0;
+    float lastAttackTime = 0f;
+    //ä¸Šæ¬¡æ”»æ“Š
+    int lastAttackIndex = -1;
+    //æ”»æ“Šå‹•ç•«å­˜æ”¾çš„é™£åˆ—
+    readonly int[] AttackHashes = new int[]
+    {
+        Animator.StringToHash("Attack1"),
+        Animator.StringToHash("Attack2"),
+        Animator.StringToHash("Attack3")
+    };
+
     public EnemyAttackingState(EnemyStateMachine enemyStateMachine) : base(enemyStateMachine) { }
     Attack attack;
     public override void Enter()
     {
-        //§ðÀ»¶Ë®`§P©w
+        //
+        // éšæœºé€‰æ‹©ä¸€ä¸ªæ”»å‡»åŠ¨ç”»
+        int randomIndex ;
+        do
+        {
+            randomIndex = Random.Range(0, AttackHashes.Length);
+        } while (randomIndex == lastAttackIndex);
+        lastAttackIndex = randomIndex;
+        int selectedAttackHash = AttackHashes[randomIndex];
+
+        //æ”»æ“Šå‚·å®³åˆ¤å®š
         enemyStatemachine.weaponDamageL.SetAttack(enemyStatemachine.AttackingDamage, enemyStatemachine.KnockBack);
-        //§ðÀ»¶Ë®`§P©w
+        //æ”»æ“Šå‚·å®³åˆ¤å®š
         enemyStatemachine.weaponDamageR.SetAttack(enemyStatemachine.AttackingDamage, enemyStatemachine.KnockBack);
-        //§ðÀ»°Êµe¼·©ñ¤Á´«
-        enemyStatemachine.animator.CrossFadeInFixedTime(AttackHASH,TransitionDuration);
+        //
+
+
+        // æ’­æ”¾é€‰å®šçš„æ”»å‡»åŠ¨ç”»
+        enemyStatemachine.animator.CrossFadeInFixedTime(selectedAttackHash, TransitionDuration, 0);
+        //æ”»æ“Šå‹•ç•«æ’¥æ”¾åˆ‡æ›
+        // enemyStatemachine.animator.CrossFadeInFixedTime(AttackHASH,TransitionDuration);
+
+
     }
     public override void Update(float deltaTime)
     {
-        //§¹¦¨°Êµe¼·©ñ
-        if (GetNormalizedTime(enemyStatemachine.animator)>=1)
+        //å®Œæˆå‹•ç•«æ’¥æ”¾,åˆ‡æ›ç‹€æ…‹
+        AnimatorStateInfo currentStateInfo =enemyStatemachine.animator.GetCurrentAnimatorStateInfo(0);
+        if (currentStateInfo.normalizedTime >= 0.8 && currentStateInfo.IsName("Attack1") || currentStateInfo.IsName("Attack2") || currentStateInfo.IsName("Attack3"))
+        {
+                enemyStatemachine.SwitchState(new EnemyIdleState(enemyStatemachine));
+        }
+        if (IsinAttackingRange())
+        {
+            return;
+        }
+        else if (enemyStatemachine.target != null)
         {
             enemyStatemachine.SwitchState(new EnemyChasingState(enemyStatemachine));
         }
-       
     }
     public override void Exit()
     {
-    
+        Debug.Log("Exist Attacking state");
     }
  }

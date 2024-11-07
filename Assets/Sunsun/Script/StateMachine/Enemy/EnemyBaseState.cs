@@ -13,17 +13,29 @@ public abstract class EnemyBaseState :State
     //檢查跟玩家的距離,決定攻擊/追逐 巡邏,預設為idle
     protected  bool IsInChasingRange( )
     {
-        float distance = (enemyStatemachine.player.transform.position - enemyStatemachine.transform.position).sqrMagnitude;
+      float distance = (enemyStatemachine.player.transform.position - enemyStatemachine.transform.position).sqrMagnitude;
      return  distance <= enemyStatemachine.detectionPlayerRange *enemyStatemachine.detectionPlayerRange;
     }
     protected bool IsinAttackingRange()
     {
+        
         //比較距離,直接給予true /false
         float distance = (enemyStatemachine.player.transform.position - enemyStatemachine.transform.position).sqrMagnitude;
         //比較距離,直接給予true /false
+       
         return distance <= enemyStatemachine.AttackRange * enemyStatemachine.AttackRange;
     }
 
+    //其他判斷攻擊的條件
+    protected bool ShouldAttack()
+    {
+        return false;
+    }
+    //判斷攻擊的條件
+    protected bool ShouldBlock()
+    {
+        return false;
+    }
     protected void Move(Vector3 motion, float deltatime)
     {
         enemyStatemachine.characterController.Move((motion + enemyStatemachine.forceReceiver.movement) * deltatime);

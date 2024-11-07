@@ -12,18 +12,24 @@ public class EnemyChasingState : EnemyBaseState
     const float animatorDampSpeed = 0.14f;
     public override void Enter()
     {
+        Debug.Log("¶i¤J°l³v");
        enemyStatemachine.animator.CrossFadeInFixedTime(LocomotionBlendtreeHASH, crossfadeDuration);
     }
     public override void Update(float deltaTime)
     {
         if (!IsInChasingRange())
         {
+            Debug.Log("not in chasing range");
             enemyStatemachine.SwitchState(new EnemyIdleState(enemyStatemachine));
             return;
         }
-        else if(IsinAttackingRange())
+        else if(IsinAttackingRange() || ShouldAttack())
         {
             enemyStatemachine.SwitchState(new EnemyAttackingState(enemyStatemachine));
+        }
+        else if (ShouldBlock())
+        {
+            enemyStatemachine.SwitchState(new EnemyBlockState(enemyStatemachine));
         }
         // In chasing range
         MoveToPlayer(deltaTime);

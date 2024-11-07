@@ -51,10 +51,11 @@ public class EnemyStateMachine : StateMachine
     public ForceReceiver forceReceiver { get; private set; }
     //玩家
     public GameObject player { get; private set; }
-
+    public PlayerStateMachine playerStateMachine;
     void Start()
     {
-         player =  GameObject.FindGameObjectWithTag("Player");
+        player =  GameObject.FindGameObjectWithTag("Player");
+      //  playerStateMachine = player.GetComponentInChildren<PlayerStateMachine>();
         //關掉自動旋轉跟更新路徑,改以手動設定
         agent.updatePosition = false;
         agent.updateRotation = false;
@@ -66,8 +67,10 @@ public class EnemyStateMachine : StateMachine
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionPlayerRange);
+        Gizmos.DrawWireSphere(transform.position, AttackRange);
     }
 
+ 
     private void OnEnable()
     {
         Debug.Log("Enemy HandleTakeDamage");

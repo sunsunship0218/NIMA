@@ -5,9 +5,13 @@ public class HealthSystem
 {
    float health;
    float MaxHealth;
+    //格擋值
+    float postureAmount;
+    float postureAmountMax;
     public bool IsInvunerable;
    public event Action OnTakeDamage;
    public event EventHandler OnHealthChange;
+    public event EventHandler OnPostureChange;
    public event Action OnDie;
 
     //初始化血量
@@ -55,7 +59,6 @@ public class HealthSystem
          */
 
     }
-
     //治療
     public void HealAmount(int healAmount)
     {
@@ -70,10 +73,19 @@ public class HealthSystem
              }
         */
     }
-
     //無傷
     public  void SetInvunerable(bool isInvunerable)
     {
         this.IsInvunerable = isInvunerable;     
+    }
+    //增加格擋值
+    public void PostureIncrese(int amount)
+    {
+        postureAmount += amount;
+        if (OnPostureChange != null)
+        {
+            OnPostureChange(this, EventArgs.Empty);
+        }
+       
     }
 }

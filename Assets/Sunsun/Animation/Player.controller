@@ -87,7 +87,7 @@ BlendTree:
   m_Name: movementMotion
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 9de49fa4cc7738e4c9aa95679cc6981c, type: 2}
+    m_Motion: {fileID: 7400000, guid: 2a7a3f650c9b9964bb81f2ed7da0c2d6, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -95,7 +95,7 @@ BlendTree:
     m_DirectBlendParameter: Horizon_Input
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 9c38cdc6571f112479499934a45bfa54, type: 2}
+    m_Motion: {fileID: 7400000, guid: a1e91283fb8115847a342d2cd650fcf0, type: 2}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -538,7 +538,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: bda09ea8d362bca4e82df0075f25de32, type: 2}
+  m_Motion: {fileID: 7400000, guid: 31da3b4803570b94ab6b24c7a4d51953, type: 2}
   m_Tag: Attack
   m_SpeedParameter: 
   m_MirrorParameter: 
