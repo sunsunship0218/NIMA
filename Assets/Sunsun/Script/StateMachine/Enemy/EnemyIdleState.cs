@@ -12,7 +12,7 @@ public class EnemyIdleState : EnemyBaseState
     public override void Enter()
     {
         
-        enemyStatemachine.animator.CrossFadeInFixedTime(LocomotionBlendtreeHASH, crossfadeDuration);
+        enemyStatemachine.animator.CrossFadeInFixedTime(LocomotionBlendtreeHASH, crossfadeDuration,0);
      
     }
     public override void Update(float deltaTime)

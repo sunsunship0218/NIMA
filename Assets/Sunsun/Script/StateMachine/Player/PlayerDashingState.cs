@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using VFX;
 public class PlayerDashingState : PlayerBaseState
 {
     Vector2 dodgingDirectionInput;
     Vector3 dodgeDirection;
+
     public PlayerDashingState(PlayerStateMachine playerStateMachine, Vector2 dodgingDirectionInput) : base(playerStateMachine)
     {
         this.dodgingDirectionInput = dodgingDirectionInput;
@@ -20,6 +21,7 @@ public class PlayerDashingState : PlayerBaseState
     float DodgingDuration;
     public override void Enter()
     {
+
         //獲取玩家輸入方向
         dodgingDirectionInput = playerStateMachine.playerInputHandler.movementValue.normalized;
 
@@ -41,11 +43,11 @@ public class PlayerDashingState : PlayerBaseState
         playerStateMachine.animator.CrossFadeInFixedTime(DodgeBlendtreeHASH, crossfadeDuration);
         //無敵時間
         playerStateMachine.playerHealth.healthSystem.SetInvunerable(true);
-        Debug.Log(dodgingDirectionInput);
+       // Debug.Log(dodgingDirectionInput);
     }
     public override void Update(float deltatime)
     {
-  
+       MeshTrail.Instance.playGhostTrail();
         Facetarget();
         //計算躲避的位移
         float dodgeSpeed = playerStateMachine.DodgeDistance / playerStateMachine.DodgeTime;
