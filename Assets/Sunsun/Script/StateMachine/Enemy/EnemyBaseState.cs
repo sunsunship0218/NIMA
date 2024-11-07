@@ -24,6 +24,16 @@ public abstract class EnemyBaseState :State
         return distance <= enemyStatemachine.AttackRange * enemyStatemachine.AttackRange;
     }
 
+    //其他判斷攻擊的條件
+    protected bool ShouldAttack()
+    {
+        return true;
+    }
+    //判斷攻擊的條件
+    protected bool ShouldBlock()
+    {
+        return enemyStatemachine.playerStateMachine.playerInputHandler.isAttacking;
+    }
     protected void Move(Vector3 motion, float deltatime)
     {
         enemyStatemachine.characterController.Move((motion + enemyStatemachine.forceReceiver.movement) * deltatime);
