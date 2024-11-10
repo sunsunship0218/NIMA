@@ -29,12 +29,22 @@ public abstract class EnemyBaseState :State
     //其他判斷攻擊的條件
     protected bool ShouldAttack()
     {
-        return false;
+        //增加隨機概率
+        int rand = Random.Range(0, 100);
+        bool attackChance = rand < 60;
+        return IsinAttackingRange() && attackChance;
     }
     //判斷攻擊的條件
     protected bool ShouldBlock()
     {
-        return false;
+        //增加隨機概率
+        int rand = Random.Range(0, 100);
+        bool blockChance = rand < 40;
+        if (enemyStatemachine.playerStateMachine.playerInputHandler.isAttacking)
+        {
+            blockChance = rand < 80;
+        }
+        return IsinAttackingRange() && blockChance;
     }
     protected void Move(Vector3 motion, float deltatime)
     {

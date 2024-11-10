@@ -10,6 +10,7 @@ public class EnemyChasingState : EnemyBaseState
     readonly int SpeedHASH = Animator.StringToHash("Speed");
     const float crossfadeDuration = 0.1f;
     const float animatorDampSpeed = 0.14f;
+    
     public override void Enter()
     {
         Debug.Log("¶i¤J°l³v");
@@ -23,7 +24,7 @@ public class EnemyChasingState : EnemyBaseState
             enemyStatemachine.SwitchState(new EnemyIdleState(enemyStatemachine));
             return;
         }
-        else if(IsinAttackingRange() || ShouldAttack())
+        else if( ShouldAttack())
         {
             enemyStatemachine.SwitchState(new EnemyAttackingState(enemyStatemachine));
         }

@@ -15,8 +15,9 @@ public class EnemyBlockState : EnemyBaseState
     }
     public override void Update(float deltaTime)
     {
+        AnimatorStateInfo currentStateInfo = enemyStatemachine.animator.GetCurrentAnimatorStateInfo(0);
         //完成動畫撥放
-        if (GetNormalizedTime(enemyStatemachine.animator) >= 1)
+        if (currentStateInfo.normalizedTime>0.8f)
         {
             enemyStatemachine.SwitchState(new EnemyChasingState(enemyStatemachine));
         }

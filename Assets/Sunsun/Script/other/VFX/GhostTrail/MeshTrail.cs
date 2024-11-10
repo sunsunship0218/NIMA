@@ -16,6 +16,9 @@ namespace VFX
 
         [Header("Shader related")]
         public Material shaderMaterial;
+        public string shaderVarRef;
+        public float shaderVarRate = 0.1f;
+        public float shaderVarRefreshRate = 0.05f;
 
         public bool istrailActive;
         //放player的skinnedMeshRendrer
@@ -72,13 +75,25 @@ namespace VFX
                     skinnedMeshRenderers[i].BakeMesh(trailMesh);
                     meshFilter.mesh = trailMesh;
                     meshRenderer.material = shaderMaterial;
-
+                    //trail動畫
+                    StartCoroutine(StartAnimateTrail(meshRenderer.material, 0, shaderVarRate, shaderVarRefreshRate));
                     Destroy(ghTrailGOJ, meshDestoryDelayTime);
                 }
            
                 yield return new WaitForSeconds(mesFreshRate);
             }
             istrailActive = false;
+        }
+
+        IEnumerator StartAnimateTrail(Material mat, float goal,float rate, float refreshrate)
+        {
+            float AnimateValue = mat.GetFloat(shaderVarRef);
+            while (AnimateValue > goal)
+            {
+                AnimateValue -= rate;
+                mat.SetFloat(shaderVarRef, AnimateValue);
+                yield return new WaitForSeconds(refreshrate);
+            }
         }
     }
 }
