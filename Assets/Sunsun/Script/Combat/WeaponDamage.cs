@@ -27,20 +27,29 @@ public class WeaponDamage : MonoBehaviour
 
         if (other.tag == "Enemy")
         {
+            EnemyStateMachine enemyStateMachine = other.GetComponent<EnemyStateMachine>();
+            if (enemyStateMachine != null)
+            {
+                // 增加被击中敌人的 hitCount
+                enemyStateMachine.hitCount++;
+                // 更新被击中敌人的 lastHitTime
+                enemyStateMachine.lastHitTime = Time.time;
+            }
             Vector3 hitposition = other.ClosestPointOnBounds(transform.position);
             hitParticleEffect.PlayHitParticle(hitposition);
-            timeManager.DoBulletTime(0.4f);
+            timeManager.DoBulletTime(0.01f);
             enemyHealth.healthSystem.Damage(damage);
             audioSource.Play();
       //    Debug.Log("enemy HP :"+enemyHealth.healthSystem.GetHealth());
         }
         if (other.tag == "Player")
         {
+            
             audioSource.Play();
             Vector3 hitposition = other.ClosestPointOnBounds(transform.position);
             hitParticleEffect.PlayHitParticle(hitposition);
             playerHealth.healthSystem.Damage(damage);
-            timeManager.DoBulletTime(0.2f);
+        
             
             
             // Debug.Log("player HP :"+playerHealth.healthSystem.GetHealth());

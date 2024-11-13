@@ -56,7 +56,7 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
                 // 持續按住超過時間,不攻擊
                 isAttacking = false;
                 isButtonHeld = false; 
-                Debug.Log("Hold Time Exceeded: Attacking: " + isAttacking);
+           
             }
         }
     }
@@ -85,14 +85,14 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
         {
             isButtonHeld = true;
             isAttacking = true;
-            Debug.Log("isPress: " + "Attacking: "+isAttacking);
+        
         }
         //長按不攻擊
         else if (context.performed && context.interaction is HoldInteraction)
         {
           
             isAttacking = false;
-            Debug.Log("isHold: " + "Attacking: " + isAttacking);
+           
         }
         else if (context.canceled)
         {

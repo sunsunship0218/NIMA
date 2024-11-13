@@ -13,24 +13,29 @@ public class EnemyChasingState : EnemyBaseState
     
     public override void Enter()
     {
-        Debug.Log("¶i¤J°l³v");
+
        enemyStatemachine.animator.CrossFadeInFixedTime(LocomotionBlendtreeHASH, crossfadeDuration);
     }
     public override void Update(float deltaTime)
     {
+      //  Debug.Log("Retreat? "+ShouldRetreat());
         if (!IsInChasingRange())
         {
-            Debug.Log("not in chasing range");
+          //  Debug.Log("not in chasing range");
             enemyStatemachine.SwitchState(new EnemyIdleState(enemyStatemachine));
             return;
         }
-        else if( ShouldAttack())
+        else if (ShouldAttack())
         {
             enemyStatemachine.SwitchState(new EnemyAttackingState(enemyStatemachine));
         }
         else if (ShouldBlock())
         {
             enemyStatemachine.SwitchState(new EnemyBlockState(enemyStatemachine));
+        }
+        else if (ShouldRetreat())
+        { 
+            enemyStatemachine.SwitchState(new EnemyRetreatState(enemyStatemachine));
         }
         // In chasing range
         MoveToPlayer(deltaTime);

@@ -47,7 +47,11 @@ public class PlayerDashingState : PlayerBaseState
     }
     public override void Update(float deltatime)
     {
-       MeshTrail.Instance.playGhostTrail();
+        MeshTrail meshTrail = playerStateMachine.GetComponentInChildren<VFX.MeshTrail>();
+        if (meshTrail != null)
+        {
+            meshTrail.playGhostTrail();
+        }
         Facetarget();
         //計算躲避的位移
         float dodgeSpeed = playerStateMachine.DodgeDistance / playerStateMachine.DodgeTime;

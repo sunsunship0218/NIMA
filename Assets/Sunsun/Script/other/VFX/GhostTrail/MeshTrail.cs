@@ -29,6 +29,7 @@ namespace VFX
 
         void Awake()
         {
+            
             if (Instance == null)
             {
                 Instance = this;
@@ -37,6 +38,7 @@ namespace VFX
             {
                 Destroy(gameObject); // 如果已有其他實例，銷毀這個，保持單例
             }
+            
         }
         public  void playGhostTrail()
         {

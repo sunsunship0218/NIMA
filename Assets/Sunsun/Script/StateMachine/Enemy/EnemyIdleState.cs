@@ -20,13 +20,13 @@ public class EnemyIdleState : EnemyBaseState
         MoveWithDeltatime(deltaTime);
         if (IsInChasingRange())
         {
-            Debug.Log("IsIChasingRange: "+ IsInChasingRange() );
+          
             enemyStatemachine.SwitchState(new EnemyChasingState(enemyStatemachine));
             return;
         }
         else if (IsinAttackingRange())
         {
-            Debug.Log("IsInAttackingRange: "+IsinAttackingRange() );
+          
             enemyStatemachine.SwitchState(new EnemyAttackingState(enemyStatemachine));
         }
         FacePlayer();
@@ -34,6 +34,6 @@ public class EnemyIdleState : EnemyBaseState
     }
     public override void Exit()
     {
-        Debug.Log("exit the idle");
+      
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using VFX;
 
 public class EnemyAttackingState : EnemyBaseState
 {
@@ -26,6 +27,7 @@ public class EnemyAttackingState : EnemyBaseState
     Attack attack;
     public override void Enter()
     {
+        //避免被卡楨的時間影響
         lastAttackTime = Time.time;
         // 開始新的連擊
         currentComboStep = 0;
@@ -51,13 +53,14 @@ public class EnemyAttackingState : EnemyBaseState
 
     }
     public override void Update(float deltaTime)
-    {
-
+    {      
         // 檢查攻擊動畫是否完成
         AnimatorStateInfo currentStateInfo = enemyStatemachine.animator.GetCurrentAnimatorStateInfo(0);
         bool isAttackAnimationFinished = currentStateInfo.normalizedTime >= 0.8f &&
             (currentStateInfo.IsName("Attack1") || currentStateInfo.IsName("Attack2") || currentStateInfo.IsName("Attack3"));
 
+       
+     
         //完成動畫撥放,切換狀態
         if (isAttackAnimationFinished)
         {
@@ -73,9 +76,8 @@ public class EnemyAttackingState : EnemyBaseState
                     }
                     else
                     {
-                        // 連擊結束，重置連擊步驟並重新開始
-                        currentComboStep = 0;
-                        doComboAttacks(currentComboStep);
+                        // 連擊結束，重置連擊步驟並重新開始,讓機率決定要做什麼
+                        enemyStatemachine.SwitchState(new EnemyChasingState(enemyStatemachine));
                     }
                 }
                 else if (enemyStatemachine.target != null)
@@ -94,6 +96,7 @@ public class EnemyAttackingState : EnemyBaseState
     public override void Exit()
     {
         Debug.Log("Exist Attacking state");
+        
     }
 
     void doComboAttacks(int comboStep)
