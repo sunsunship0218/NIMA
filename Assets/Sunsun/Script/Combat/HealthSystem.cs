@@ -1,5 +1,6 @@
 
 using System;
+using UnityEngine;
 
 public class HealthSystem 
 {
@@ -14,18 +15,29 @@ public class HealthSystem
     public event EventHandler OnPostureChange;
    public event Action OnDie;
 
-    //初始化血量
-    public HealthSystem(float Maxhealth)
+    //初始化血量跟格黨值
+    public HealthSystem(float Maxhealth, float maxPosture)
     {
-        //最大血量
+        //最大血量,最大格黨
        this.MaxHealth = Maxhealth;
+        this.postureAmountMax = maxPosture;
         //現在血量
-        health= Maxhealth;
+        health = Maxhealth;
+        postureAmount = 0;
     }
   
     public float GetHealth()
     {
        return health;
+    }
+    public float GetPostureAmount()
+    {
+        return postureAmount;
+    }
+
+    public float GetPostureAmountMax()
+    {
+        return postureAmountMax;
     }
     //返回現在血量
     public float ReturnHealth( )
@@ -81,11 +93,14 @@ public class HealthSystem
     //增加格擋值
     public void PostureIncrese(int amount)
     {
-        postureAmount += amount;
-        if (OnPostureChange != null)
-        {
-            OnPostureChange(this, EventArgs.Empty);
-        }
-       
+        postureAmount = Mathf.Min(postureAmount + amount, postureAmountMax);
+        OnPostureChange?.Invoke(this, EventArgs.Empty);
+
+    }
+    //減少格黨
+    public  void PostureDecrease(int amount)
+    {
+        postureAmount = Mathf.Max(postureAmount - amount, 0);
+        OnPostureChange?.Invoke(this, EventArgs.Empty);
     }
 }

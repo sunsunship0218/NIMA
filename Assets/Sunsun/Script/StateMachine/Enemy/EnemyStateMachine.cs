@@ -31,14 +31,24 @@ public class EnemyStateMachine : StateMachine
     //處理右手攻擊
     [field: SerializeField]
     public WeaponDamage weaponDamageR { get; private set; }
+    //攻擊combo
+    [field: SerializeField]
+    public Attack[] Attacks { get; private set; }
 
     [field: SerializeField]
     public float AttackRange { get; private set; }
 
     [field: SerializeField]
     public int AttackingDamage { get; private set; }
-    //擊退距離
+    //被擊中的次數
+    public int hitCount ;
+    //被擊中的時間
+    public float lastHitTime;
+        //重製時間
     [field: SerializeField]
+    public float hitCountResetTime { get;private set; }
+       //擊退距離
+       [field: SerializeField]
     public int KnockBack { get; private set; } = -1;
     //距離偵測的參數
     [field: SerializeField]
@@ -49,20 +59,24 @@ public class EnemyStateMachine : StateMachine
 
     [field: SerializeField]
     public ForceReceiver forceReceiver { get; private set; }
+    //後退
+    [field: SerializeField]
+    public float RetreatRange { get; private set; }
     //玩家
-    public GameObject player { get; private set; }
+    public GameObject player;
+    public Vector3 playerPosition;
     public PlayerStateMachine playerStateMachine;
     void Start()
     {
         player =  GameObject.FindGameObjectWithTag("Player");
-      //  playerStateMachine = player.GetComponentInChildren<PlayerStateMachine>();
+       playerStateMachine = player.GetComponentInChildren<PlayerStateMachine>();
         //關掉自動旋轉跟更新路徑,改以手動設定
-        agent.updatePosition = false;
+        agent.updatePosition =false;
         agent.updateRotation = false;
         //this 就是現在的PlayerStateMachine實例
         SwitchState(new EnemyIdleState(this));
     }
-
+   
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -74,8 +88,18 @@ public class EnemyStateMachine : StateMachine
     private void OnEnable()
     {
         Debug.Log("Enemy HandleTakeDamage");
-        health.healthSystem.OnTakeDamage += HandleTakeDamage;
-        health.healthSystem.OnDie += HandleDie;
+        if (health != null && health.healthSystem != null)
+        {
+            Debug.Log("訂閱handle Take damage");
+            health.healthSystem.OnTakeDamage += HandleTakeDamage;
+            health.healthSystem.OnDie += HandleDie;
+        }
+        else
+        {
+
+            Debug.LogError("Health or HealthSystem is null in OnEnable");
+        }
+      
     }
 
     private void OnDisable()
@@ -84,7 +108,6 @@ public class EnemyStateMachine : StateMachine
         health.healthSystem.OnDie -= HandleDie;
     }
 
-    //敵人事件沒有被訂閱
     void HandleTakeDamage()
     {
        

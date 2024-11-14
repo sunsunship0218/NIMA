@@ -20,20 +20,20 @@ public class EnemyIdleState : EnemyBaseState
         MoveWithDeltatime(deltaTime);
         if (IsInChasingRange())
         {
-            Debug.Log("IsIChasingRange: "+ IsInChasingRange() );
+          
             enemyStatemachine.SwitchState(new EnemyChasingState(enemyStatemachine));
             return;
         }
         else if (IsinAttackingRange())
         {
-            Debug.Log("IsInAttackingRange: "+IsinAttackingRange() );
-            enemyStatemachine.SwitchState(new EnemyAttackingState(enemyStatemachine));
+          
+            enemyStatemachine.SwitchState(new EnemyAttackingState(enemyStatemachine, 0));
         }
         FacePlayer();
         enemyStatemachine.animator.SetFloat(SpeedHASH, 0f, animatorDampSpeed, deltaTime);
     }
     public override void Exit()
     {
-        Debug.Log("exit the idle");
+      
     }
 }

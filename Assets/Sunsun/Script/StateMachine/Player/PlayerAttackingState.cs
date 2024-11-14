@@ -23,6 +23,7 @@ public class PlayerAttackingState : PlayerBaseState
     }
     public override void Update(float deltatime)
     {
+        Facetarget();
         //移動
        MoveWithDeltatime(deltatime);    
         //進行攻擊跟狀態判定
