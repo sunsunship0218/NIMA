@@ -27,7 +27,7 @@ public class EnemyIdleState : EnemyBaseState
         else if (IsinAttackingRange())
         {
           
-            enemyStatemachine.SwitchState(new EnemyAttackingState(enemyStatemachine));
+            enemyStatemachine.SwitchState(new EnemyAttackingState(enemyStatemachine, 0));
         }
         FacePlayer();
         enemyStatemachine.animator.SetFloat(SpeedHASH, 0f, animatorDampSpeed, deltaTime);

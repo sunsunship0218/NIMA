@@ -7,14 +7,12 @@ public class EnemyImpactState : EnemyBaseState
     public EnemyImpactState(EnemyStateMachine enemyStateMachine) : base(enemyStateMachine) { }
     readonly int ImpactHASH = Animator.StringToHash("Impact");
     const float crossfadeDuration = 0.14f;
-    float duration;
     public override void Enter()
     {
         Debug.Log("enter ENEMY IMPACT");
         enemyStatemachine.animator.CrossFadeInFixedTime(ImpactHASH, crossfadeDuration);
-        // 增加被击中敌人的 hitCount
         enemyStatemachine.hitCount++;
-            // 更新被击中敌人的 lastHitTime
+        // 更新被击中敌人的 lastHitTime
         enemyStatemachine.lastHitTime = Time.time;
  
     }
@@ -25,13 +23,15 @@ public class EnemyImpactState : EnemyBaseState
         if (currentStateInfo.IsName("Impact") && currentStateInfo.normalizedTime > 0.8f)
         {
             enemyStatemachine.SwitchState(new EnemyIdleState(enemyStatemachine));
+      
         }
-
-        if (enemyStatemachine .hitCount> 0 && 
-            Time .unscaledTime- enemyStatemachine .lastHitTime> enemyStatemachine.hitCountResetTime)
+//重置被打中的次數
+       if (enemyStatemachine .hitCount> 0 && 
+            Time .time- enemyStatemachine.lastHitTime> enemyStatemachine.hitCountResetTime)
         {
             enemyStatemachine.hitCount = 0;
         }
+        Debug.Log(enemyStatemachine.hitCount);
 
     }
     public override void Exit()

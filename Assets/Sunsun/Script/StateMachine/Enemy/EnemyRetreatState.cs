@@ -16,7 +16,8 @@ public class EnemyRetreatState : EnemyBaseState
     }
     public override void Update(float deltaTime)
     {
-
+        // 更新角色控制器以確保位置更新
+        MoveWithDeltatime(deltaTime);
         //獲取動畫撥放狀態,防止沒有撥放完就切換狀態
         AnimatorStateInfo currentStateInfo = enemyStatemachine.animator.GetCurrentAnimatorStateInfo(0);
         if (currentStateInfo.IsName("Retreat") && currentStateInfo.normalizedTime >0.8f)
@@ -48,6 +49,9 @@ public class EnemyRetreatState : EnemyBaseState
 
             enemyStatemachine.agent.destination = retreatPosition;
             Move(enemyStatemachine.agent.desiredVelocity.normalized * enemyStatemachine.MovementSpeed, deltaTime);
+
+            // 同步 NavMeshAgent 的位置
+            enemyStatemachine.agent.nextPosition = enemyStatemachine.transform.position;
         }
     }
 }

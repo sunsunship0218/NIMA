@@ -27,7 +27,7 @@ public class EnemyChasingState : EnemyBaseState
         }
         else if (ShouldAttack())
         {
-            enemyStatemachine.SwitchState(new EnemyAttackingState(enemyStatemachine));
+            enemyStatemachine.SwitchState(new EnemyAttackingState(enemyStatemachine,0));
         }
         else if (ShouldBlock())
         {

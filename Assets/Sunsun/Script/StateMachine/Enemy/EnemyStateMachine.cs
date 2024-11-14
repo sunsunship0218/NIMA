@@ -31,6 +31,9 @@ public class EnemyStateMachine : StateMachine
     //處理右手攻擊
     [field: SerializeField]
     public WeaponDamage weaponDamageR { get; private set; }
+    //攻擊combo
+    [field: SerializeField]
+    public Attack[] Attacks { get; private set; }
 
     [field: SerializeField]
     public float AttackRange { get; private set; }
@@ -38,7 +41,7 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField]
     public int AttackingDamage { get; private set; }
     //被擊中的次數
-    public int hitCount = 0;
+    public int hitCount ;
     //被擊中的時間
     public float lastHitTime;
         //重製時間
@@ -61,18 +64,19 @@ public class EnemyStateMachine : StateMachine
     public float RetreatRange { get; private set; }
     //玩家
     public GameObject player;
+    public Vector3 playerPosition;
     public PlayerStateMachine playerStateMachine;
     void Start()
     {
         player =  GameObject.FindGameObjectWithTag("Player");
        playerStateMachine = player.GetComponentInChildren<PlayerStateMachine>();
         //關掉自動旋轉跟更新路徑,改以手動設定
-        agent.updatePosition = false;
+        agent.updatePosition =false;
         agent.updateRotation = false;
         //this 就是現在的PlayerStateMachine實例
         SwitchState(new EnemyIdleState(this));
     }
-
+   
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
