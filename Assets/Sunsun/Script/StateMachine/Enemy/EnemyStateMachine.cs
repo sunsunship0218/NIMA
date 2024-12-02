@@ -34,10 +34,12 @@ public class EnemyStateMachine : StateMachine
     //攻擊combo
     [field: SerializeField]
     public Attack[] Attacks { get; private set; }
-
+    //攻擊距離
     [field: SerializeField]
     public float AttackRange { get; private set; }
-
+    //繞行距離
+    [field: SerializeField]
+    public float CirclingAroundRange {  get; private set; }
     [field: SerializeField]
     public int AttackingDamage { get; private set; }
     //被擊中的次數
@@ -66,8 +68,26 @@ public class EnemyStateMachine : StateMachine
     public GameObject player;
     public Vector3 playerPosition;
     public PlayerStateMachine playerStateMachine;
+    //狀態機參數
+    public EnemyBaseState IdleState { get; set; }
+    public EnemyBaseState CirclingState { get; set; }
+    public EnemyBaseState ChasingState { get; set; }
+    public EnemyBaseState AttackingState { get; set; }
+    public EnemyBaseState BlockState { get; set; }
+    public EnemyBaseState RetreatState { get; set; }
+    public EnemyBaseState DeadState { get; set; }
+    public EnemyBaseState ImpactState { get; set; }
     void Start()
     {
+        //狀態賦值初始化
+        IdleState = new EnemyIdleState(this);
+        ChasingState = new EnemyChasingState(this);
+        AttackingState = new EnemyAttackingState(this, 0);
+        BlockState = new EnemyBlockState(this);
+        RetreatState = new EnemyRetreatState(this);
+        DeadState = new EnemyDeadState(this);
+        ImpactState = new EnemyImpactState(this);
+        //Get componment
         player =  GameObject.FindGameObjectWithTag("Player");
        playerStateMachine = player.GetComponentInChildren<PlayerStateMachine>();
         //關掉自動旋轉跟更新路徑,改以手動設定
