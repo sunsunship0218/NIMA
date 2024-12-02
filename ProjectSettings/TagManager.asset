@@ -7,6 +7,7 @@ TagManager:
   - Checkpoints
   - Enemy
   - RagDoll
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - ignoreCamColider
   - Ragdoll
   - Metal
-  - 
-  - 
+  - LayerMask
+  - SeeThrough
   - 
   - 
   - 

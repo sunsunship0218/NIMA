@@ -18,25 +18,7 @@ public class EnemyChasingState : EnemyBaseState
     }
     public override void Update(float deltaTime)
     {
-      //  Debug.Log("Retreat? "+ShouldRetreat());
-        if (!IsInChasingRange())
-        {
-          //  Debug.Log("not in chasing range");
-            enemyStatemachine.SwitchState(new EnemyIdleState(enemyStatemachine));
-            return;
-        }
-        else if (ShouldAttack())
-        {
-            enemyStatemachine.SwitchState(new EnemyAttackingState(enemyStatemachine,0));
-        }
-        else if (ShouldBlock())
-        {
-            enemyStatemachine.SwitchState(new EnemyBlockState(enemyStatemachine));
-        }
-        else if (ShouldRetreat())
-        { 
-            enemyStatemachine.SwitchState(new EnemyRetreatState(enemyStatemachine));
-        }
+        ChangeState();
         // In chasing range
         MoveToPlayer(deltaTime);
         FacePlayer();
@@ -61,4 +43,6 @@ public class EnemyChasingState : EnemyBaseState
         //AI的速度參數跟
         enemyStatemachine.agent.velocity =enemyStatemachine.characterController.velocity;
     }
+
+ 
 }
