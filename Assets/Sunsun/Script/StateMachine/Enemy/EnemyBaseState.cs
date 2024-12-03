@@ -166,7 +166,7 @@ public abstract class EnemyBaseState :State
             enemyStatemachine.SwitchState(new EnemyIdleState(enemyStatemachine));
             return;
         }
-        if ( IsInCirclingRange() && enemyStatemachine.CirclingState!=null)
+      else  if ( IsInCirclingRange() && enemyStatemachine.CirclingState!=null)
         {
             enemyStatemachine.SwitchState(new EnemyCirclingState(enemyStatemachine));
         }

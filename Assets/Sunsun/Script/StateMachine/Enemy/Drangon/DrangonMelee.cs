@@ -8,7 +8,7 @@ public class DrangonMelee : EnemyStateMachine
     {
         // 初始化共用的狀態
         IdleState = new EnemyIdleState(this);
-     //   CirclingState = new EnemyCirclingState(this);
+        CirclingState = new EnemyCirclingState(this);
         ChasingState = new EnemyChasingState(this);
         DeadState = new EnemyDeadState(this);
         // 初始化特定的狀態

@@ -18,9 +18,13 @@ public class EnemyIdleState : EnemyBaseState
     public override void Update(float deltaTime)
     {
         MoveWithDeltatime(deltaTime);
+        if (IsInCirclingRange())
+        {
+            enemyStatemachine.SwitchState(new EnemyCirclingState(enemyStatemachine));
+            return;
+        }
         if (IsInChasingRange())
         {
-          
             enemyStatemachine.SwitchState(new EnemyChasingState(enemyStatemachine));
             return;
         }
