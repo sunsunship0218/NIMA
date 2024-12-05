@@ -25,7 +25,7 @@ public class WeaponDamage : MonoBehaviour
         if(other.tag!="Player" && other.tag != "Enemy") { return; }
         alreadyColiWith.Add(other);
 
-        if (other.tag == "Enemy")
+        if (other.tag =="Enemy")
         {
             EnemyStateMachine enemyStateMachine = other.GetComponent<EnemyStateMachine>();
             if (enemyStateMachine != null)
@@ -36,18 +36,20 @@ public class WeaponDamage : MonoBehaviour
                 enemyStateMachine.lastHitTime = Time.time;
             }
             Vector3 hitposition = other.ClosestPointOnBounds(transform.position);
+            //播放特效
             hitParticleEffect.PlayHitParticle(hitposition);
             timeManager.DoBulletTime(0.01f);
             enemyHealth.healthSystem.Damage(damage);
             audioSource.Play();
-      //    Debug.Log("enemy HP :"+enemyHealth.healthSystem.GetHealth());
+       // Debug.Log("enemy HP :"+enemyHealth.healthSystem.GetHealth());
+            Debug.Log("ENEMYＨＩＴ");
         }
         if (other.tag == "Player")
         {
             
             audioSource.Play();
             Vector3 hitposition = other.ClosestPointOnBounds(transform.position);
-            hitParticleEffect.PlayHitParticle(hitposition);
+         //   hitParticleEffect.PlayHitParticle(hitposition);
             playerHealth.healthSystem.Damage(damage);
         
             
@@ -57,7 +59,6 @@ public class WeaponDamage : MonoBehaviour
 
         if(other.TryGetComponent<ForceReceiver>(out ForceReceiver forceReceiver))
         {
-            //�ھ����h�Z��,�Ӭݻݭn�h�h��
             Vector3 direction = (other.transform.position - myColi.transform.position).normalized;
             forceReceiver.AddForce(direction*knockback);
         }

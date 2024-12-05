@@ -42,13 +42,13 @@ namespace VFX
         }
         public  void playGhostTrail()
         {
-            Debug.Log("call playGhostTrail");
+        
             if (!istrailActive)
             {
-                Debug.Log("run condition");
+
                 istrailActive = true;
                 StartCoroutine(StartActiveTrail(activetime));
-                Debug.Log("already start corountines");
+             
             }
 
         }

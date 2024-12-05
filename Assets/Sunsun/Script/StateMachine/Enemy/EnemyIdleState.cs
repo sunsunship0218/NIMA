@@ -18,20 +18,9 @@ public class EnemyIdleState : EnemyBaseState
     public override void Update(float deltaTime)
     {
         MoveWithDeltatime(deltaTime);
-        if (IsInCirclingRange())
-        {
-            enemyStatemachine.SwitchState(new EnemyCirclingState(enemyStatemachine));
-            return;
-        }
         if (IsInChasingRange())
         {
             enemyStatemachine.SwitchState(new EnemyChasingState(enemyStatemachine));
-            return;
-        }
-        else if (IsinAttackingRange())
-        {
-          
-            enemyStatemachine.SwitchState(new EnemyAttackingState(enemyStatemachine, 0));
         }
         FacePlayer();
         enemyStatemachine.animator.SetFloat(SpeedHASH, 0f, animatorDampSpeed, deltaTime);

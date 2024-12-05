@@ -34,79 +34,47 @@ public abstract class EnemyBaseState :State
     protected  bool IsInCirclingRange()
     {
         float distance = (enemyStatemachine.player.transform.position - enemyStatemachine.transform.position).sqrMagnitude;
-        return distance <= enemyStatemachine.RetreatRange * enemyStatemachine.RetreatRange;
+        return distance <= enemyStatemachine.CirclingAroundRange * enemyStatemachine.CirclingAroundRange;
     }
-    //其他判斷攻擊的條件
+    //隨機權重調整
     protected bool ShouldAttack()
     {
-        float healthPercentage = enemyStatemachine.health.healthSystem.ReturnHealth()/100;
-        int baseChance = 10;
-        if (healthPercentage > 0.7f)
-        // 生命值高>70%，增加攻擊機率
+        float healthPercentage = enemyStatemachine.health.healthSystem.ReturnHealth() / 100f;
+        if (healthPercentage < 0.3f)
         {
-            baseChance += 20;
+            return false;
         }
-        // 玩家正在攻擊,降低機率
-        if (enemyStatemachine.playerStateMachine.playerInputHandler.isAttacking)
-        {
-            baseChance -= 20;
-        }
-        // 限制概率在0-100
-        baseChance = Mathf.Clamp(baseChance, 0, 100);
-        int rand = Random.Range(0, 100);
-        bool attackChance = rand < baseChance;
-        return IsinAttackingRange() && attackChance;
+
+        bool isPlayerVulnerable = !enemyStatemachine.playerStateMachine.playerInputHandler.isBlocking &&
+                                  !enemyStatemachine.playerStateMachine.playerInputHandler.isAttacking;
+        return IsinAttackingRange();
+    
     }
     //判斷防禦的條件
     protected bool ShouldBlock()
     {
-        float healthPercentage = enemyStatemachine.health.healthSystem.ReturnHealth() / 100;
-        int baseChance = 20;
-        //生命值大於80,減少防禦
-        if (healthPercentage > 0.7f)     
+        int rand = Random.Range(0, 10);
+        if (!IsinAttackingRange())
         {
-            baseChance -= 5;
+            return false;
         }
+        float healthPercentage = enemyStatemachine.health.healthSystem.ReturnHealth() / 100f;
+        // 生命值越低，格擋概率越高
         if (healthPercentage < 0.5f)
         {
-            baseChance += 15;
+            return rand < 7; // 70% 概率格擋
         }
-        if (healthPercentage < 0.3f)
-        {
-            baseChance += 20;
-        }
-        // 受到連續攻擊，增加格黨機率
-        if (enemyStatemachine.hitCount >= 1)
-        {
-            baseChance += 10;
-            enemyStatemachine.hitCount = 0; // 後退重置hitcount
-        }
-        //玩家持續攻擊,增加格黨機率
-        if (enemyStatemachine.playerStateMachine.playerInputHandler.isAttacking)
-        {
-            baseChance = 95;
-        }
-        // 格黨防禦攻擊減少概率
-        if (enemyStatemachine.playerStateMachine.playerInputHandler.isBlocking ||
-            enemyStatemachine.playerStateMachine.playerInputHandler.isParrying ||
-            enemyStatemachine.playerStateMachine.playerInputHandler.isDashing)
-        {
-            baseChance -= 30;
-        }
-        int rand = Random.Range(0, 100);
-        bool blockChance = rand < baseChance;
-      //  Debug.Log(blockChance);
-        return IsinAttackingRange() && blockChance;
+        return rand < 5; // 50% 概率格擋
     }
     //判斷後退的條件
     protected bool ShouldRetreat()
     {
         float healthPercentage = enemyStatemachine.health.healthSystem.ReturnHealth() / 100;
-        float retreatCooldown = 2.0f; // 後退的冷卻時間
-        float lastRetreatTime = -Mathf.Infinity;
+        float Cooldown = 2.0f; // 後退的冷卻時間
+        float lastTime = -Mathf.Infinity;
         int baseChance = 10;
         // 如果在冷卻時間內，不進行後退
-        if (Time.time < lastRetreatTime + retreatCooldown)
+        if (Time.time < lastTime +Cooldown)
         {
             return false; 
         }
@@ -137,6 +105,7 @@ public abstract class EnemyBaseState :State
         bool retreatChance = rand < baseChance;
         return IsInRetreatRange() && IsinAttackingRange() && retreatChance;
     }
+    
 
     protected void Move(Vector3 motion, float deltatime)
     {
@@ -157,43 +126,4 @@ public abstract class EnemyBaseState :State
       enemyStatemachine.transform.rotation = Quaternion.LookRotation(faceTargetPos);
     }
 
-    protected void ChangeState()
-    {
-        //  Debug.Log("Retreat? "+ShouldRetreat());
-        if (!IsInChasingRange())
-        {
-            //  Debug.Log("not in chasing range");
-            enemyStatemachine.SwitchState(new EnemyIdleState(enemyStatemachine));
-            return;
-        }
-      else  if ( IsInCirclingRange() && enemyStatemachine.CirclingState!=null)
-        {
-            enemyStatemachine.SwitchState(new EnemyCirclingState(enemyStatemachine));
-        }
-        else if (ShouldAttack())
-        {
-            if (enemyStatemachine.AttackingState != null)
-            {
-                enemyStatemachine.SwitchState(new EnemyAttackingState(enemyStatemachine, 0));
-                return;
-            }
-        }
-        else if (ShouldBlock())
-        {
-            if (enemyStatemachine.BlockState != null)
-            {
-                enemyStatemachine.SwitchState(new EnemyBlockState(enemyStatemachine));
-                return;
-            }
-        }
-        else if (ShouldRetreat())
-        {
-            if (enemyStatemachine.RetreatState != null)
-            {
-                enemyStatemachine.SwitchState(new EnemyRetreatState(enemyStatemachine));
-                return;
-            }
-
-        }
-    }
 }

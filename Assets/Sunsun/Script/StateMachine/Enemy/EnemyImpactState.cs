@@ -31,7 +31,7 @@ public class EnemyImpactState : EnemyBaseState
         {
             enemyStatemachine.hitCount = 0;
         }
-        Debug.Log(enemyStatemachine.hitCount);
+    
 
     }
     public override void Exit()

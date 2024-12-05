@@ -17,10 +17,12 @@ public  abstract class StateMachine : MonoBehaviour
 
     public void SwitchState(State nextState)
     {
+     
         //if current state != null
         currentState?.Exit();
         currentState = nextState;
         //進入nextState
         currentState.Enter();
+
     }
 }

@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Sunsun/Scenes/Main.unity
     guid: 5ff3ba039ccd20045843c3773f7643e4
   - enabled: 1
-    path: Assets/Sunsun/Scenes/Level_1.unity
+    path: Assets/Sunsun/Scenes/Level_medium.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}

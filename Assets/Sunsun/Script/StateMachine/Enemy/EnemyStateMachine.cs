@@ -46,11 +46,13 @@ public class EnemyStateMachine : StateMachine
     public int hitCount ;
     //被擊中的時間
     public float lastHitTime;
-        //重製時間
+    //
+    public float lastCirclingTime;
+    //重製時間
     [field: SerializeField]
     public float hitCountResetTime { get;private set; }
-       //擊退距離
-       [field: SerializeField]
+    //擊退距離
+    [field: SerializeField]
     public int KnockBack { get; private set; } = -1;
     //距離偵測的參數
     [field: SerializeField]
@@ -58,7 +60,8 @@ public class EnemyStateMachine : StateMachine
     //移動參數
     [field: SerializeField]
     public float MovementSpeed { get; private set; }
-
+    [field: SerializeField]
+    public float circlingSpeed {  get; private set; }
     [field: SerializeField]
     public ForceReceiver forceReceiver { get; private set; }
     //後退
@@ -82,9 +85,10 @@ public class EnemyStateMachine : StateMachine
         //狀態賦值初始化
         IdleState = new EnemyIdleState(this);
         ChasingState = new EnemyChasingState(this);
+    CirclingState = new EnemyChasingState(this);
         AttackingState = new EnemyAttackingState(this, 0);
         BlockState = new EnemyBlockState(this);
-        RetreatState = new EnemyRetreatState(this);
+      //  RetreatState = new EnemyRetreatState(this);
         DeadState = new EnemyDeadState(this);
         ImpactState = new EnemyImpactState(this);
         //Get componment
@@ -102,6 +106,8 @@ public class EnemyStateMachine : StateMachine
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionPlayerRange);
         Gizmos.DrawWireSphere(transform.position, AttackRange);
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, CirclingAroundRange);
     }
 
  

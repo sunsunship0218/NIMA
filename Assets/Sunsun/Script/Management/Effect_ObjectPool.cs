@@ -45,5 +45,12 @@ public class Effect_ObjectPool : MonoBehaviour
         pool.Enqueue(recovery);
         recovery.Stop();
     }
-    // Update is called once per frame
+
+ public IEnumerator WaitForParticleToFinish(ParticleSystem particleSystem)
+    {
+//µ¥«Ý¼½©ñµ²§ô
+        yield return new WaitUntil(() => !particleSystem.IsAlive());
+
+        Recovery(particleSystem);
+    }
 }

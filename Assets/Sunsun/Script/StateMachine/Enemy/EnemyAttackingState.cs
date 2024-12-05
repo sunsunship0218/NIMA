@@ -7,6 +7,8 @@ using VFX;
 
 public class EnemyAttackingState : EnemyBaseState
 {
+    bool isAttacking = false;
+
     const float TransitionDuration = 0.15f;
     //攻擊時間的紀錄
     float lastAttackTime = 0f;
@@ -20,6 +22,7 @@ public class EnemyAttackingState : EnemyBaseState
     float previousFrameTime;
     Attack attack;
     //
+
     readonly int[] AttackHashes;
     public EnemyAttackingState(EnemyStateMachine enemyStateMachine, int attackIndex) : base(enemyStateMachine) 
     {
@@ -35,33 +38,15 @@ public class EnemyAttackingState : EnemyBaseState
   
     public override void Enter()
     {
-        
-        Debug.Log("IS IN CHASING RANGE ? : " + IsInChasingRange());
-        Debug.Log("IS IN ATTACK RANGE ? : +" + IsinAttackingRange());
         // 開始新的連擊
         currentComboStep = 0;
-        // 隨機進行單個攻擊
-        /*
-        int randomIndex ;
-        do
-        {
-            randomIndex = Random.Range(0, AttackHashes.Length);
-        } while (randomIndex == lastAttackIndex);
-        lastAttackIndex = randomIndex;
-        int selectedAttackHash = AttackHashes[randomIndex];
-        // 播放选定的攻击动画
-        enemyStatemachine.animator.CrossFadeInFixedTime(selectedAttackHash, TransitionDuration, 0);
-          //攻擊傷害判定
-        enemyStatemachine.weaponDamageL.SetAttack(enemyStatemachine.AttackingDamage, enemyStatemachine.KnockBack);
-        //攻擊傷害判定
-        enemyStatemachine.weaponDamageR.SetAttack(enemyStatemachine.AttackingDamage, enemyStatemachine.KnockBack);
-        */
         doComboAttacks(currentComboStep);
 
 
     }
     public override void Update(float deltaTime)
     {
+     
         // 更新角色控制器以確保位置更新
         MoveWithDeltatime(deltaTime);
         //朝向腳色攻擊
@@ -85,7 +70,7 @@ public class EnemyAttackingState : EnemyBaseState
         // 更新 previousFrameTime
         previousFrameTime = normalizedTime;
 
-        if ( !IsinAttackingRange())
+        if ( !IsinAttackingRange() || !IsInCirclingRange())
         {
             enemyStatemachine.SwitchState(new EnemyChasingState(enemyStatemachine));
             return;
@@ -124,7 +109,7 @@ public class EnemyAttackingState : EnemyBaseState
     }
     public override void Exit()
     {
-        Debug.Log("Exist Attacking state");
+
         
     }
 

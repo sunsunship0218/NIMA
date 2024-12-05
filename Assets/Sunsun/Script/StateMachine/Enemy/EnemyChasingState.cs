@@ -13,12 +13,39 @@ public class EnemyChasingState : EnemyBaseState
     
     public override void Enter()
     {
-
-       enemyStatemachine.animator.CrossFadeInFixedTime(LocomotionBlendtreeHASH, crossfadeDuration);
+        enemyStatemachine.agent.enabled = true;
+        enemyStatemachine.agent.updatePosition = false;
+        enemyStatemachine.agent.updateRotation = false;
+        enemyStatemachine.animator.CrossFadeInFixedTime(LocomotionBlendtreeHASH, crossfadeDuration);
     }
     public override void Update(float deltaTime)
     {
-        ChangeState();
+        if (!IsInChasingRange())
+        {
+            enemyStatemachine.SwitchState(new EnemyIdleState(enemyStatemachine));
+        }
+        else if (IsInCirclingRange() && !IsinAttackingRange())
+        {
+            enemyStatemachine.SwitchState(new EnemyCirclingState(enemyStatemachine));
+        }
+        else if (IsinAttackingRange())
+        {
+
+            float attackWeight = 0.6f;
+            float blockWeight = 0.4f;
+
+            float randomValue = Random.value;
+
+            if (randomValue < attackWeight)
+            {
+                enemyStatemachine.SwitchState(new EnemyAttackingState(enemyStatemachine, 0));
+            }
+            else
+            {
+                enemyStatemachine.SwitchState(new EnemyBlockState(enemyStatemachine));
+            }
+        }
+
         // In chasing range
         MoveToPlayer(deltaTime);
         FacePlayer();
@@ -36,7 +63,7 @@ public class EnemyChasingState : EnemyBaseState
         if (enemyStatemachine.agent.isOnNavMesh)
         {
             //移動到玩家所在的地點
-            enemyStatemachine.agent.destination = enemyStatemachine.player.transform.position;
+            enemyStatemachine.agent.destination = enemyStatemachine.playerStateMachine.transform.position;
             Move(enemyStatemachine.agent.desiredVelocity.normalized * enemyStatemachine.MovementSpeed, deltatime);
         }
        

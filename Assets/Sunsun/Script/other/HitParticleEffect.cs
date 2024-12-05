@@ -9,5 +9,6 @@ public class HitParticleEffect : MonoBehaviour
     {
         //在指定位置/碰撞位置撥放特效
         pool.ReuseParticlePlay( hitposition, Quaternion.identity);
+        pool.StartCoroutine(pool.WaitForParticleToFinish(pool.EffectPrefab));
     }
 }
