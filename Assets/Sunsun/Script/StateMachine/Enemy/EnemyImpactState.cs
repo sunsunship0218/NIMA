@@ -9,7 +9,6 @@ public class EnemyImpactState : EnemyBaseState
     const float crossfadeDuration = 0.14f;
     public override void Enter()
     {
-        Debug.Log("enter ENEMY IMPACT");
         enemyStatemachine.animator.CrossFadeInFixedTime(ImpactHASH, crossfadeDuration);
         enemyStatemachine.hitCount++;
         // 更新被击中敌人的 lastHitTime

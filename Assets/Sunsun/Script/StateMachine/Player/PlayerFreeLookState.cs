@@ -15,6 +15,7 @@ public class PlayerFreeLookState : PlayerBaseState
     readonly int FREELOOKSPEEDHASH = Animator.StringToHash("FreeLookSpeed");
     const float animatorDampSpeed = 0.14f;
     const float crossfadeDuration = 0.1f;
+    float speed;
     public override void Enter()
     {
      //   playerStateMachine.StopTrail();
@@ -50,13 +51,11 @@ public class PlayerFreeLookState : PlayerBaseState
         //計算移動距離
         Vector3 movementVec3 = calculateMovement(deltatime);
         Move(movementVec3 *  playerStateMachine.freeLookMoveSpeed,deltatime);
+        //根據輸入播放對應的動畫
+        speed = Mathf.SmoothStep(speed, playerStateMachine.playerInputHandler.movementValue.magnitude, 0.1f);
+        playerStateMachine.animator.SetFloat(FREELOOKSPEEDHASH, speed, animatorDampSpeed, deltatime);
 
-        if (playerStateMachine.playerInputHandler.movementValue == Vector2.zero)
-        {
-            playerStateMachine.animator.SetFloat(FREELOOKSPEEDHASH, 0, animatorDampSpeed, deltatime);
-            return;
-        }
-        playerStateMachine.animator.SetFloat(FREELOOKSPEEDHASH, 1, animatorDampSpeed, deltatime);
+    
         FaceMovementDirection(movementVec3,deltatime);
 
       
@@ -82,17 +81,21 @@ public class PlayerFreeLookState : PlayerBaseState
 
     void Ondodge()
     {
-        Debug.Log("DODGE");
+ 
         playerStateMachine.SwitchState(new PlayerDashingState(playerStateMachine, playerStateMachine.playerInputHandler.movementValue));
     }
 
     void FaceMovementDirection(Vector3 movementVec3,float deltatime)
     {
-        playerStateMachine.transform.rotation = Quaternion.Lerp(
-             playerStateMachine.transform.rotation,// current transform
-             Quaternion.LookRotation(movementVec3),//rotated target's tranform
-            deltatime * playerStateMachine.moveRotationDamping
-             ) ;
+        if (movementVec3.sqrMagnitude > 0.0001f)
+        {
+            playerStateMachine.transform.rotation = Quaternion.Lerp(
+            playerStateMachine.transform.rotation,// current transform
+            Quaternion.LookRotation(movementVec3),//rotated target's tranform
+           deltatime * playerStateMachine.moveRotationDamping
+            );
+        }
+           
     }
 
     Vector3 calculateMovement(float deltatime )

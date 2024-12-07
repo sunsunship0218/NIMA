@@ -42,14 +42,12 @@ public class WeaponDamage : MonoBehaviour
             enemyHealth.healthSystem.Damage(damage);
             audioSource.Play();
        // Debug.Log("enemy HP :"+enemyHealth.healthSystem.GetHealth());
-            Debug.Log("ENEMYＨＩＴ");
         }
         if (other.tag == "Player")
         {
             
             audioSource.Play();
-            Vector3 hitposition = other.ClosestPointOnBounds(transform.position);
-         //   hitParticleEffect.PlayHitParticle(hitposition);
+            Vector3 hitposition = other.ClosestPointOnBounds(transform.position); 
             playerHealth.healthSystem.Damage(damage);
         
             

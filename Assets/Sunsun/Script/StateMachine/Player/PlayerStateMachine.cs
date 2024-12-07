@@ -36,6 +36,8 @@ public class PlayerStateMachine : StateMachine
     public WeaponDamage RightweaponDamage { get; private set; }
     [field: SerializeField]
     public WeaponDamage LeftweaponDamage { get; private set; }
+    [field: SerializeField]
+    public BlockPostureHandler blockPostureHandler{ get; private set; }
     //其他componment
     [field: SerializeField]
     public Animator animator { get; private set; }
@@ -86,8 +88,12 @@ public class PlayerStateMachine : StateMachine
     //Damage事件訂閱方法
      void HandleTakeDamage()
     {
-        Debug.Log("HandleTakeDamage triggered, switching to PlayerImpactState");
         SwitchState(new PlayerImpactState(this));
+    }
+    //格擋值滿了訂閱
+    void HandlePostureFull()
+    {
+
     }
     //死亡訂閱方法
     void HealthSystem_OnDie()
@@ -95,21 +101,5 @@ public class PlayerStateMachine : StateMachine
         textMeshProUGUI.gameObject.SetActive(true);
         SwitchState(new PlayerDeadState(this));
     }
-    // Test play effect
-    /*
-    public void PlayTrail()
-    {
-        if (trailRenderer != null && playerInputHandler.isAttacking)
-        {
-            trailRenderer.emitting = true;
-        }
-    }
-    public void StopTrail()
-    {
-        if (trailRenderer != null)
-        {
-            trailRenderer.emitting = false;
-        }
-    }
-    */
+    
 }

@@ -20,12 +20,13 @@ public class PlayerBlockingState :PlayerBaseState
     }
     public override void Update(float deltaTime)
     {
-       MoveWithDeltatime(deltaTime);
+        playerStateMachine.blockPostureHandler.SetPosture(5f *2);
+        MoveWithDeltatime(deltaTime);
         //緩衝時間
         timer += deltaTime;
         //獲取動畫撥放狀態,防止沒有撥放完就切換狀態
         AnimatorStateInfo currentStateInfo = playerStateMachine.animator.GetCurrentAnimatorStateInfo(0);
-        if (currentStateInfo.IsName("Block") && currentStateInfo.normalizedTime < 0.8f)
+        if (currentStateInfo.IsName("Block") && currentStateInfo.normalizedTime < 0.7f)
         {
             return;  
         }

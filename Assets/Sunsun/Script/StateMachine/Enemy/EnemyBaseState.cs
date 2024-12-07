@@ -26,6 +26,30 @@ public abstract class EnemyBaseState :State
         //比較距離,直接給予true /false       
           return distance <= enemyStatemachine.AttackRange * enemyStatemachine.AttackRange;
     }
+    protected bool IsinLongAttackingRange()
+    {
+
+        //比較距離,直接給予true /false
+        float distance = (enemyStatemachine.player.transform.position - enemyStatemachine.transform.position).sqrMagnitude;
+        //比較距離,直接給予true /false       
+        return distance <= enemyStatemachine.LongAttackRange * enemyStatemachine.LongAttackRange;
+    }
+    protected bool IsinShortAttackingRange()
+    {
+
+        //比較距離,直接給予true /false
+        float distance = (enemyStatemachine.player.transform.position - enemyStatemachine.transform.position).sqrMagnitude;
+        //比較距離,直接給予true /false       
+        return distance <= enemyStatemachine.ShortAttackRange * enemyStatemachine.ShortAttackRange;
+    }
+
+    protected bool IsinMidAttackRange()
+    {
+        //比較距離,直接給予true /false
+        float distance = (enemyStatemachine.player.transform.position - enemyStatemachine.transform.position).sqrMagnitude;
+        //比較距離,直接給予true /false       
+        return distance <= enemyStatemachine.MidAttackRange * enemyStatemachine.MidAttackRange;
+    }
     protected bool IsInRetreatRange()
     {
         float distance = (enemyStatemachine.player.transform.position - enemyStatemachine.transform.position).sqrMagnitude;
@@ -106,7 +130,6 @@ public abstract class EnemyBaseState :State
         return IsInRetreatRange() && IsinAttackingRange() && retreatChance;
     }
     
-
     protected void Move(Vector3 motion, float deltatime)
     {
         enemyStatemachine.characterController.Move((motion + enemyStatemachine.forceReceiver.movement) * deltatime);

@@ -20,7 +20,7 @@ public class HealthSystem
     {
         //最大血量,最大格黨
        this.MaxHealth = Maxhealth;
-        this.postureAmountMax = maxPosture;
+       this.postureAmountMax = maxPosture;
         //現在血量
         health = Maxhealth;
         postureAmount = 0;
@@ -91,14 +91,14 @@ public class HealthSystem
         this.IsInvunerable = isInvunerable;     
     }
     //增加格擋值
-    public void PostureIncrese(int amount)
+    public void PostureIncrese(float amount)
     {
         postureAmount = Mathf.Min(postureAmount + amount, postureAmountMax);
         OnPostureChange?.Invoke(this, EventArgs.Empty);
 
     }
     //減少格黨
-    public  void PostureDecrease(int amount)
+    public  void PostureDecrease(float amount)
     {
         postureAmount = Mathf.Max(postureAmount - amount, 0);
         OnPostureChange?.Invoke(this, EventArgs.Empty);
