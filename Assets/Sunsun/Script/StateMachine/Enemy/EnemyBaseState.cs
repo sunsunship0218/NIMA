@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public abstract class EnemyBaseState :State
@@ -14,25 +15,11 @@ public abstract class EnemyBaseState :State
     protected  bool IsInChasingRange( )
     {
        float distance = (enemyStatemachine.player.transform.position - enemyStatemachine.transform.position).sqrMagnitude;
-        return  distance <= enemyStatemachine.detectionPlayerRange *enemyStatemachine.detectionPlayerRange;
+      
+        return distance > enemyStatemachine.AttackRange * enemyStatemachine.AttackRange
+            && distance <= enemyStatemachine.detectionPlayerRange * enemyStatemachine.detectionPlayerRange;
 
-       
-    }
-    protected bool IsinAttackingRange()
-    {
 
-        //比較距離,直接給予true /false
-        float distance = (enemyStatemachine.player.transform.position - enemyStatemachine.transform.position).sqrMagnitude;
-        //比較距離,直接給予true /false       
-          return distance <= enemyStatemachine.AttackRange * enemyStatemachine.AttackRange;
-    }
-    protected bool IsinLongAttackingRange()
-    {
-
-        //比較距離,直接給予true /false
-        float distance = (enemyStatemachine.player.transform.position - enemyStatemachine.transform.position).sqrMagnitude;
-        //比較距離,直接給予true /false       
-        return distance <= enemyStatemachine.LongAttackRange * enemyStatemachine.LongAttackRange;
     }
     protected bool IsinShortAttackingRange()
     {
@@ -42,13 +29,26 @@ public abstract class EnemyBaseState :State
         //比較距離,直接給予true /false       
         return distance <= enemyStatemachine.ShortAttackRange * enemyStatemachine.ShortAttackRange;
     }
-
     protected bool IsinMidAttackRange()
     {
         //比較距離,直接給予true /false
         float distance = (enemyStatemachine.player.transform.position - enemyStatemachine.transform.position).sqrMagnitude;
         //比較距離,直接給予true /false       
-        return distance <= enemyStatemachine.MidAttackRange * enemyStatemachine.MidAttackRange;
+        return distance > (enemyStatemachine.ShortAttackRange * enemyStatemachine.ShortAttackRange)
+            && distance <= (enemyStatemachine.MidAttackRange * enemyStatemachine.MidAttackRange);
+    }
+    protected bool IsinLongAttackingRange()
+    {
+
+        //比較距離,直接給予true /false
+        float distance = (enemyStatemachine.player.transform.position - enemyStatemachine.transform.position).sqrMagnitude;
+        //比較距離,直接給予true /false       
+        return distance > (enemyStatemachine.MidAttackRange * enemyStatemachine.MidAttackRange)
+           && distance <= (enemyStatemachine.LongAttackRange * enemyStatemachine.LongAttackRange);
+    }
+    protected bool IsinAttackingRange()
+    {
+        return IsinShortAttackingRange() ||  IsinLongAttackingRange() || IsinMidAttackRange();
     }
     protected bool IsInRetreatRange()
     {

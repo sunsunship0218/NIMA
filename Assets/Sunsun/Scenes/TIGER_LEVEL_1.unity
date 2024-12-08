@@ -370,7 +370,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 28841369}
-  m_LocalRotation: {x: 0.07054811, y: -0.18064639, z: 0.012992036, w: 0.98092866}
+  m_LocalRotation: {x: 0.07054811, y: -0.18064642, z: 0.01299204, w: 0.98092866}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1366,7 +1366,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 341894368}
   m_LocalRotation: {x: -0.21340656, y: 0.06542754, z: -0.0143256085, w: 0.9746649}
-  m_LocalPosition: {x: 0.20918012, y: -0.071041584, z: 10.843332}
+  m_LocalPosition: {x: -0.17537129, y: -0.26556492, z: 9.17635}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1835,8 +1835,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 392049751}
-  m_LocalRotation: {x: 0.07054811, y: -0.1806464, z: 0.012992039, w: 0.9809287}
-  m_LocalPosition: {x: -3.0267923, y: 1.9679999, z: -7.1514826}
+  m_LocalRotation: {x: 0.07054811, y: -0.18064646, z: 0.012992041, w: 0.9809287}
+  m_LocalPosition: {x: -3.0267923, y: 1.9679999, z: -10.001482}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2247,7 +2247,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 580707835}
-  m_LocalRotation: {x: 0.07048917, y: -0.18504095, z: 0.013308092, w: 0.9801092}
+  m_LocalRotation: {x: 0.070489176, y: -0.18504097, z: 0.013308095, w: 0.9801092}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2517,7 +2517,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 775324477}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.550003, y: 0.407, z: 4.7}
+  m_LocalPosition: {x: -2.93, y: 0.407, z: -2.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3045,7 +3045,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 938716046}
-  m_LocalRotation: {x: 0.082904674, y: -0.1804683, z: 0.015267604, w: 0.9799617}
+  m_LocalRotation: {x: 0.0829047, y: -0.18046832, z: 0.015267608, w: 0.9799617}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6143,35 +6143,35 @@ MonoBehaviour:
     <Damage>k__BackingField: 10
     <knockbackRange>k__BackingField: 5
   <MidAttacks>k__BackingField:
-  - <AnimationName>k__BackingField: 
-    <TransitionDuration>k__BackingField: 0
+  - <AnimationName>k__BackingField: Attack4
+    <TransitionDuration>k__BackingField: 0.14
     <ComboStateIndex>k__BackingField: 0
-    <ComboAttackTime>k__BackingField: 0
-    <ForceTime>k__BackingField: 0
-    <Force>k__BackingField: 0
-    <Damage>k__BackingField: 0
-    <knockbackRange>k__BackingField: 0
-  - <AnimationName>k__BackingField: 
-    <TransitionDuration>k__BackingField: 0
-    <ComboStateIndex>k__BackingField: 0
-    <ComboAttackTime>k__BackingField: 0
-    <ForceTime>k__BackingField: 0
-    <Force>k__BackingField: 0
-    <Damage>k__BackingField: 0
-    <knockbackRange>k__BackingField: 0
+    <ComboAttackTime>k__BackingField: 0.5
+    <ForceTime>k__BackingField: 0.1
+    <Force>k__BackingField: 1
+    <Damage>k__BackingField: 10
+    <knockbackRange>k__BackingField: 2
+  - <AnimationName>k__BackingField: Attack5
+    <TransitionDuration>k__BackingField: 0.14
+    <ComboStateIndex>k__BackingField: 1
+    <ComboAttackTime>k__BackingField: 0.5
+    <ForceTime>k__BackingField: 0.1
+    <Force>k__BackingField: 2
+    <Damage>k__BackingField: 15
+    <knockbackRange>k__BackingField: 1
   <LongAttacks>k__BackingField:
-  - <AnimationName>k__BackingField: 
-    <TransitionDuration>k__BackingField: 0
+  - <AnimationName>k__BackingField: Attack6
+    <TransitionDuration>k__BackingField: 0.14
     <ComboStateIndex>k__BackingField: 0
-    <ComboAttackTime>k__BackingField: 0
-    <ForceTime>k__BackingField: 0
-    <Force>k__BackingField: 0
-    <Damage>k__BackingField: 0
-    <knockbackRange>k__BackingField: 0
-  <AttackRange>k__BackingField: 10
-  <LongAttackRange>k__BackingField: 10
+    <ComboAttackTime>k__BackingField: 0.5
+    <ForceTime>k__BackingField: 0.1
+    <Force>k__BackingField: 1
+    <Damage>k__BackingField: 10
+    <knockbackRange>k__BackingField: 2
+  <AttackRange>k__BackingField: 15
+  <LongAttackRange>k__BackingField: 15
   <ShortAttackRange>k__BackingField: 4
-  <MidAttackRange>k__BackingField: 7.5
+  <MidAttackRange>k__BackingField: 9
   <CirclingAroundRange>k__BackingField: 5.5
   <AttackingDamage>k__BackingField: 15
   hitCount: 0
@@ -6179,7 +6179,7 @@ MonoBehaviour:
   lastCirclingTime: 0
   <hitCountResetTime>k__BackingField: 2
   <KnockBack>k__BackingField: 3
-  <detectionPlayerRange>k__BackingField: 20
+  <detectionPlayerRange>k__BackingField: 30
   <MovementSpeed>k__BackingField: 3
   <circlingSpeed>k__BackingField: 1
   <forceReceiver>k__BackingField: {fileID: 775324479}
@@ -6201,15 +6201,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a8555e10ca669434993a97a213b10960, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.06659216
+      value: 0.092227444
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a8555e10ca669434993a97a213b10960, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.06659216
+      value: 0.092227444
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a8555e10ca669434993a97a213b10960, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.06659216
+      value: 0.092227444
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a8555e10ca669434993a97a213b10960, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6221,7 +6221,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a8555e10ca669434993a97a213b10960, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.37
+      value: -1.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a8555e10ca669434993a97a213b10960, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6544,7 +6544,7 @@ Transform:
   m_GameObject: {fileID: 1515518159}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.0088, y: 1.0088, z: 1.0088}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -8268,7 +8268,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1917826334}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.1332076, y: 2.07, z: -5.6014824}
+  m_LocalPosition: {x: 2.1332076, y: 2.07, z: -5.601482}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9424,8 +9424,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2137453812}
-  m_LocalRotation: {x: 0.16538522, y: -0.07908803, z: 0.013306701, w: 0.9829627}
-  m_LocalPosition: {x: 3.2329998, y: 3.8700001, z: -7}
+  m_LocalRotation: {x: 0.18556572, y: -0.114130065, z: 0.021705193, w: 0.97574}
+  m_LocalPosition: {x: 3.2329998, y: 3.8700001, z: -6.9999995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16204,7 +16204,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2618369495689891361}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.16, y: -0.102, z: -1.55}
+  m_LocalPosition: {x: -5.16, y: -0.102, z: -4.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

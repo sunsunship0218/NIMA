@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using UnityEditor;
 using UnityEngine;
 using VFX;
@@ -14,12 +15,15 @@ public class EnemyAttackingState : EnemyBaseState
     //連擊
     const float ComboResetTime = 1.0f;
     int currentComboStep = 0;
-    const int maxComboSteps = 6;
+   readonly int maxShortComboSteps;
+    readonly int maxMidComboSteps;
+    readonly int maxLongComboSteps;
+
     //
     bool alreadyAppliedForce;
     float previousFrameTime;
 
-    Attack Shortattack;
+   Attack ShortAttack;
     Attack MidAttack;
     Attack LongAttack;
     //存放攻擊的陣列
@@ -27,35 +31,64 @@ public class EnemyAttackingState : EnemyBaseState
     readonly int[] MidRangeAttackHashes;
     readonly int[] LongRangeAttackHashes;
 
-    private readonly Dictionary<AttackRange, int[]> attackAnimations = new Dictionary<AttackRange, int[]>
-{
-    { AttackRange.Short, new int[] { Animator.StringToHash("ShortAttack1"), Animator.StringToHash("ShortAttack2") } },
-    { AttackRange.Mid, new int[] { Animator.StringToHash("MidAttack1"), Animator.StringToHash("MidAttack2") } },
-    { AttackRange.Long, new int[] { Animator.StringToHash("LongAttack1") } }
-};
-    public enum AttackRange
-    {
-        Short,
-        Mid,
-        Long
-    }
     public EnemyAttackingState(EnemyStateMachine enemyStateMachine, int attackIndex) : base(enemyStateMachine)
     {
-        
-     }
+        //短距離
+        ShortAttack = enemyStatemachine.ShortAttacks[attackIndex];
+        //動畫initial hash name
+        ShortRangeAttackHashes = new int[enemyStatemachine.ShortAttacks.Length];
+        for (int i = 0; i < enemyStatemachine.ShortAttacks.Length; i++)
+        {
+            ShortRangeAttackHashes[i] = Animator.StringToHash(enemyStateMachine.ShortAttacks[i].AnimationName);
+        }
+
+        //中距離
+        MidAttack = enemyStatemachine.MidAttacks[attackIndex];
+        //動畫initial hash name
+       MidRangeAttackHashes = new int[enemyStatemachine.MidAttacks.Length];
+        for (int i = 0; i < enemyStatemachine.MidAttacks.Length; i++)
+        {
+            MidRangeAttackHashes[i] = Animator.StringToHash(enemyStateMachine.MidAttacks[i].AnimationName);
+        }
+
+        //長距離
+       LongAttack = enemyStatemachine.LongAttacks[attackIndex];
+        //動畫initial hash name
+        LongRangeAttackHashes = new int[enemyStatemachine.LongAttacks.Length];
+        for (int i = 0; i < enemyStatemachine.LongAttacks.Length; i++)
+        {
+            LongRangeAttackHashes[i] = Animator.StringToHash(enemyStateMachine.LongAttacks[i].AnimationName);
+        }
+
+        //各距離最大的
+        maxShortComboSteps = enemyStatemachine.ShortAttacks.Length;
+        maxMidComboSteps =enemyStatemachine.MidAttacks.Length;
+        maxLongComboSteps =enemyStatemachine.LongAttacks.Length;
+    }
 
 
     public override void Enter()
     {
-        // 開始新的連擊
-        //doComboAttacks(currentComboStep);
+        if (IsinShortAttackingRange())
+        {
+            Debug.Log(" IN SHORT RANGE ATTACK");
+            doShortComboAttacks(currentComboStep);
+        }
+        else if(IsinMidAttackRange())
+        {
+            Debug.Log(" IN MID RANGE ATTACK");
+            doMidComboAttacks(currentComboStep);
+        }
+        else
+        {
+            Debug.Log(" IN LONG RANGE ATTACK");
+            doLongComboAttacks(currentComboStep);
+        }
 
 
     }
     public override void Update(float deltaTime)
     {
-
-
         // 更新角色控制器以確保位置更新
         MoveWithDeltatime(deltaTime);
         //朝向腳色攻擊
@@ -81,7 +114,7 @@ public class EnemyAttackingState : EnemyBaseState
         // 更新 previousFrameTime
         previousFrameTime = normalizedTime;
 
-        if (!IsinAttackingRange() || !IsInCirclingRange())
+        if (!IsinAttackingRange() && !IsInCirclingRange())
         {
             enemyStatemachine.SwitchState(new EnemyChasingState(enemyStatemachine));
             return;
@@ -92,52 +125,41 @@ public class EnemyAttackingState : EnemyBaseState
             //檢查攻擊狀態冷卻
             if (Time.time - lastAttackTime > AttackCoolTIme)
             {
+                currentComboStep++;
                 //這裡要替換成距離
-                if (IsinAttackingRange())
+                if (IsinShortAttackingRange())
                 {
-                    //連擊還沒結束
-                    if (currentComboStep < maxComboSteps - 1)
-                    {
-                        currentComboStep++;
-                        //doComboAttacks(currentComboStep);
-                    }
-                    else
-                    {
-                        // 連擊結束後，檢查是否需要追逐
-                        if (IsInChasingRange() && !IsinAttackingRange())
-                        {
-                            enemyStatemachine.SwitchState(new EnemyChasingState(enemyStatemachine));
-                        }
-                        else
-                        {
-                            enemyStatemachine.SwitchState(new EnemyIdleState(enemyStatemachine));
-                        }
-                    }
+                    doShortComboAttacks(currentComboStep);
                 }
-
+                else if (IsinMidAttackRange())
+                {
+                    doMidComboAttacks(currentComboStep);
+                }
+                else if (IsinLongAttackingRange()) { 
+                    doLongComboAttacks(currentComboStep);
+                }
             }
+            else
+            {
+                TransitionAfterCombo();
+            }
+           
 
         }
     }
     public override void Exit()
     {
 
+    }
 
-    }
-    AttackRange GetAttackRange(float distanceToPlayer)
-    {
-        if (distanceToPlayer <= 2.0f) return AttackRange.Short;
-        if (distanceToPlayer <= 5.0f) return AttackRange.Mid;
-        return AttackRange.Long;
-    }
-    /*  void doComboAttacks(int comboStep)
+    void doShortComboAttacks(int comboStep)
       {
-          if(comboStep>=0 && comboStep< maxComboSteps)
+          if(comboStep>=0 && comboStep< maxShortComboSteps)
           {
-              int selectedAttackHash = AttackHashes[comboStep];
+              int selectedAttackHash = ShortRangeAttackHashes[comboStep];
               // 攻擊傷害判定
-              enemyStatemachine.weaponDamageL.SetAttack(attack.Damage, attack.knockbackRange);
-              enemyStatemachine.weaponDamageR.SetAttack(attack.Damage, attack.knockbackRange);
+              enemyStatemachine.weaponDamageL.SetAttack(ShortAttack.Damage, ShortAttack.knockbackRange);
+              enemyStatemachine.weaponDamageR.SetAttack(ShortAttack.Damage, ShortAttack.knockbackRange);
 
               // 播放選定的攻擊動畫
             enemyStatemachine.animator.CrossFadeInFixedTime(selectedAttackHash, TransitionDuration, 0);
@@ -145,5 +167,44 @@ public class EnemyAttackingState : EnemyBaseState
           }
 
       }
-    */
+    void doMidComboAttacks(int comboStep)
+    {
+        if (comboStep >= 0 && comboStep < maxMidComboSteps)
+        {
+            int selectedAttackHash = MidRangeAttackHashes[comboStep];
+            // 攻擊傷害判定
+            enemyStatemachine.weaponDamageL.SetAttack(MidAttack.Damage, MidAttack.knockbackRange);
+            enemyStatemachine.weaponDamageR.SetAttack(MidAttack.Damage, MidAttack.knockbackRange);
+
+            // 播放選定的攻擊動畫
+            enemyStatemachine.animator.CrossFadeInFixedTime(selectedAttackHash, TransitionDuration, 0);
+            lastAttackTime = Time.time; // 更新最後攻擊時間
+        }
+
+    }
+
+    void doLongComboAttacks(int comboStep)
+    {
+        if (comboStep >= 0 && comboStep < maxLongComboSteps)
+        {
+            int selectedAttackHash = LongRangeAttackHashes[comboStep];
+            // 攻擊傷害判定
+            enemyStatemachine.weaponDamageL.SetAttack(LongAttack.Damage, LongAttack.knockbackRange);
+            enemyStatemachine.weaponDamageR.SetAttack(LongAttack.Damage, LongAttack.knockbackRange);
+
+            // 播放選定的攻擊動畫
+            enemyStatemachine.animator.CrossFadeInFixedTime(selectedAttackHash, TransitionDuration, 0);
+            lastAttackTime = Time.time; // 更新最後攻擊時間
+        }
+
+    }
+
+    void TransitionAfterCombo()
+    {
+        // 連擊結束後，檢查是否需要追逐
+        if (IsInChasingRange() && !IsinAttackingRange())
+        {
+            enemyStatemachine.SwitchState(new EnemyChasingState(enemyStatemachine));
+        }
+    }
 }
