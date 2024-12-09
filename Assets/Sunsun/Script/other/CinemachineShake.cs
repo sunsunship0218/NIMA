@@ -13,11 +13,13 @@ public class CinemachineShake : MonoBehaviour
     float Shaketimer;
     private void Awake()
     {
-        Instance = this;
+        virtualCamera = GetComponent<CinemachineVirtualCamera>();
+        multiChannelPerlin =virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+
     }
     void Start()
     {
-       virtualCamera = GetComponent<CinemachineVirtualCamera>();
+    
     }
 
     // Update is called once per frame
@@ -40,11 +42,17 @@ public class CinemachineShake : MonoBehaviour
       
     }
     public void ShakeCamera(float intensity, float time)
-    {
-        CinemachineBasicMultiChannelPerlin multiChannelPerlin =
-            virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-         
+    {    
         multiChannelPerlin.m_AmplitudeGain = intensity;
         Shaketimer = time;
+    }
+    
+    IEnumerator WaitTime(float shaketime)
+    {
+        yield return new WaitForSeconds(shaketime);
+    }
+    void Intencity()
+    {
+
     }
 }
