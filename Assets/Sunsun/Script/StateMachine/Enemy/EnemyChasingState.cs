@@ -13,7 +13,6 @@ public class EnemyChasingState : EnemyBaseState
     
     public override void Enter()
     {
-        Debug.Log(" IN CHASING¢à¢Ï¢Ü¢Õ¢Ó");
         enemyStatemachine.agent.enabled = true;
         enemyStatemachine.agent.updatePosition = false;
         enemyStatemachine.agent.updateRotation = false;
@@ -23,16 +22,21 @@ public class EnemyChasingState : EnemyBaseState
     {
         if (IsinAttackingRange())
         {
+             if (IsInCirclingRange() && IsinShortAttackingRange())
+            {
+                int chance = Random.Range(0, 1);
+                if (chance > 0.5)
+                {
+                    enemyStatemachine.SwitchState(new EnemyCirclingState(enemyStatemachine));
+                }
+                enemyStatemachine.SwitchState(new EnemyAttackingState(enemyStatemachine, 0));
+            }
             enemyStatemachine.SwitchState(new EnemyAttackingState(enemyStatemachine,0));
             return;
         }
         if (!IsInChasingRange())
         {
             enemyStatemachine.SwitchState(new EnemyIdleState(enemyStatemachine));
-        }
-        else if (IsInCirclingRange() && !IsinShortAttackingRange())
-        {
-            enemyStatemachine.SwitchState(new EnemyCirclingState(enemyStatemachine));
         }
         if (!IsinAttackingRange())
         {

@@ -66,7 +66,7 @@ namespace VFX
         { 
             while (ActiveDuration > 0)
             {
-                Debug.Log("Creating trail objects...");
+             
                 //顯示時間遞減
                 ActiveDuration -= mesFreshRate;
                 if (skinnedMeshRenderers == null)

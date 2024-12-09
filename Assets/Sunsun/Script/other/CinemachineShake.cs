@@ -8,6 +8,7 @@ public class CinemachineShake : MonoBehaviour
     public static CinemachineShake Instance { get; private set; }
     //my cinemachine camera
     CinemachineVirtualCamera virtualCamera;
+    CinemachineBasicMultiChannelPerlin multiChannelPerlin;
     //timer
     float Shaketimer;
     private void Awake()

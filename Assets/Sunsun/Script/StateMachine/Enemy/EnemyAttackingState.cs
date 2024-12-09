@@ -69,6 +69,7 @@ public class EnemyAttackingState : EnemyBaseState
 
     public override void Enter()
     {
+     
         if (IsinShortAttackingRange())
         {
             Debug.Log(" IN SHORT RANGE ATTACK");
@@ -81,16 +82,17 @@ public class EnemyAttackingState : EnemyBaseState
         }
         else
         {
-            Debug.Log(" IN LONG RANGE ATTACK");
-            doLongComboAttacks(currentComboStep);
+            //Debug.Log(" IN LONG RANGE ATTACK");
+            doLongComboAttacks(currentComboStep,Time.deltaTime);
         }
 
 
     }
     public override void Update(float deltaTime)
     {
-        // 更新角色控制器以確保位置更新
-        MoveWithDeltatime(deltaTime);
+      
+        // 更新角色控制器agent以確保位置更新
+         MoveWithDeltatime(deltaTime);
         //朝向腳色攻擊
         FacePlayer();
 
@@ -103,14 +105,26 @@ public class EnemyAttackingState : EnemyBaseState
             (currentStateInfo.IsName("Attack1") || currentStateInfo.IsName("Attack2") || currentStateInfo.IsName("Attack3")
             || currentStateInfo.IsName("Attack4") || currentStateInfo.IsName("Attack5") || currentStateInfo.IsName("Attack6")
             );
+    
 
-        // 检查是否需要施加力
-        /*if (normalizedTime >= attack.ForceTime && !alreadyAppliedForce)
-        {
-            // 施加向前的力
-            enemyStatemachine.forceReceiver.AddForce(enemyStatemachine.transform.forward * attack.Force);
-            alreadyAppliedForce = true;
-        }*/
+
+     /*   if (normalizedTime >= ShortAttack.ForceTime && !alreadyAppliedForce)
+         {
+             // 施加向前的力
+             enemyStatemachine.forceReceiver.AddForce(enemyStatemachine.transform.forward * ShortAttack.Force);
+             alreadyAppliedForce = true;
+         }
+         if (normalizedTime >= MidAttack.ForceTime && !alreadyAppliedForce)
+         {
+             // 施加向前的力
+             enemyStatemachine.forceReceiver.AddForce(enemyStatemachine.transform.forward * MidAttack.Force);
+             alreadyAppliedForce = true;
+         }
+         if (normalizedTime >= LongAttack.ForceTime && !alreadyAppliedForce)
+         {
+             enemyStatemachine.forceReceiver.AddForce(enemyStatemachine.transform.forward * LongAttack.Force);
+             alreadyAppliedForce = true;
+         }*/
         // 更新 previousFrameTime
         previousFrameTime = normalizedTime;
 
@@ -121,11 +135,23 @@ public class EnemyAttackingState : EnemyBaseState
         }
         //完成動畫撥放,切換狀態
         if (isAttackAnimationFinished)
-        {
+        {  
             //檢查攻擊狀態冷卻
             if (Time.time - lastAttackTime > AttackCoolTIme)
             {
                 currentComboStep++;
+                if (IsinLongAttackingRange() && currentComboStep > maxLongComboSteps)
+                {
+                    currentComboStep = 0;
+                }
+                if (IsinMidAttackRange() && currentComboStep > maxMidComboSteps)
+                {
+                    currentComboStep = 0;
+                }
+                if (IsinShortAttackingRange() && currentComboStep > maxShortComboSteps)
+                {
+                    currentComboStep = 0;
+                }
                 //這裡要替換成距離
                 if (IsinShortAttackingRange())
                 {
@@ -136,7 +162,7 @@ public class EnemyAttackingState : EnemyBaseState
                     doMidComboAttacks(currentComboStep);
                 }
                 else if (IsinLongAttackingRange()) { 
-                    doLongComboAttacks(currentComboStep);
+                    doLongComboAttacks(currentComboStep,deltaTime);
                 }
             }
             else
@@ -154,7 +180,9 @@ public class EnemyAttackingState : EnemyBaseState
 
     void doShortComboAttacks(int comboStep)
       {
-          if(comboStep>=0 && comboStep< maxShortComboSteps)
+        Debug.Log("Short ComBo: " + comboStep);
+      
+            if (comboStep>=0 && comboStep< maxShortComboSteps)
           {
               int selectedAttackHash = ShortRangeAttackHashes[comboStep];
               // 攻擊傷害判定
@@ -169,6 +197,8 @@ public class EnemyAttackingState : EnemyBaseState
       }
     void doMidComboAttacks(int comboStep)
     {
+      
+        Debug.Log("MID ComBo: " + comboStep);
         if (comboStep >= 0 && comboStep < maxMidComboSteps)
         {
             int selectedAttackHash = MidRangeAttackHashes[comboStep];
@@ -183,14 +213,20 @@ public class EnemyAttackingState : EnemyBaseState
 
     }
 
-    void doLongComboAttacks(int comboStep)
+    void doLongComboAttacks(int comboStep,float deltatime)
     {
+       
+        Debug.Log("LOng ComBo: " + comboStep);
         if (comboStep >= 0 && comboStep < maxLongComboSteps)
         {
             int selectedAttackHash = LongRangeAttackHashes[comboStep];
             // 攻擊傷害判定
             enemyStatemachine.weaponDamageL.SetAttack(LongAttack.Damage, LongAttack.knockbackRange);
             enemyStatemachine.weaponDamageR.SetAttack(LongAttack.Damage, LongAttack.knockbackRange);
+            //
+            enemyStatemachine.forceReceiver.AddForce(enemyStatemachine.transform.forward * LongAttack.Force);
+            alreadyAppliedForce = true;
+            Debug.Log(enemyStatemachine.transform.forward * LongAttack.Force);
 
             // 播放選定的攻擊動畫
             enemyStatemachine.animator.CrossFadeInFixedTime(selectedAttackHash, TransitionDuration, 0);
@@ -207,4 +243,6 @@ public class EnemyAttackingState : EnemyBaseState
             enemyStatemachine.SwitchState(new EnemyChasingState(enemyStatemachine));
         }
     }
+
+
 }

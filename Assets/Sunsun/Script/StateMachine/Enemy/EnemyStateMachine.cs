@@ -154,6 +154,14 @@ public class EnemyStateMachine : StateMachine
         health.healthSystem.OnDie -= HandleDie;
     }
 
+    private void OnAnimatorMove()
+    {
+ 
+        facePlayer();
+        Vector3 newPosition = animator.deltaPosition;
+        characterController.Move(newPosition);
+
+    }
     void HandleTakeDamage()
     {
        
@@ -162,5 +170,13 @@ public class EnemyStateMachine : StateMachine
     private void HandleDie()
     {
         SwitchState(new EnemyDeadState(this));
+    }
+ void facePlayer()
+    {
+        if (player == null) { return; }
+        Vector3 faceTargetPos;
+        faceTargetPos = player.transform.position - this.transform.position;
+        faceTargetPos.y = 0f;
+       this.transform.rotation = Quaternion.LookRotation(faceTargetPos);
     }
 }

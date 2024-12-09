@@ -37,7 +37,7 @@ public class EnemyCirclingState : EnemyBaseState
             enemyStatemachine.SwitchState(new EnemyAttackingState(enemyStatemachine, 0));
             return;
         }
-        else if (IsinShortAttackingRange())  
+        else if (IsinAttackingRange())  
         {
             enemyStatemachine.SwitchState(new EnemyAttackingState(enemyStatemachine, 0));
             return;

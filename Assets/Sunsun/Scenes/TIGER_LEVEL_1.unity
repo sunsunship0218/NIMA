@@ -1366,7 +1366,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 341894368}
   m_LocalRotation: {x: -0.21340656, y: 0.06542754, z: -0.0143256085, w: 0.9746649}
-  m_LocalPosition: {x: -0.17537129, y: -0.26556492, z: 9.17635}
+  m_LocalPosition: {x: 0.8318983, y: -0.00090789795, z: 11.698127}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2501,7 +2501,6 @@ GameObject:
   m_Component:
   - component: {fileID: 775324478}
   - component: {fileID: 775324480}
-  - component: {fileID: 775324479}
   m_Layer: 0
   m_Name: Tiger
   m_TagString: Enemy
@@ -2517,7 +2516,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 775324477}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.93, y: 0.407, z: -2.06}
+  m_LocalPosition: {x: 3.34, y: 0.407, z: 3.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2525,21 +2524,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &775324479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 775324477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d83d1b896951c748b21658db900a655, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterController: {fileID: 1413591549}
-  agent: {fileID: 1413591550}
-  drag: 0.3
 --- !u!114 &775324480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3045,7 +3029,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 938716046}
-  m_LocalRotation: {x: 0.0829047, y: -0.18046832, z: 0.015267608, w: 0.9799617}
+  m_LocalRotation: {x: 0.082904674, y: -0.1804683, z: 0.015267603, w: 0.9799617}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5869,6 +5853,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 17f6b7e241658ae4fa28889d60da7c63, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1413591556}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 17f6b7e241658ae4fa28889d60da7c63, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1413591557}
   m_SourcePrefab: {fileID: 100100000, guid: 17f6b7e241658ae4fa28889d60da7c63, type: 3}
 --- !u!4 &1413591545 stripped
 Transform:
@@ -5931,7 +5918,7 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 6.41
+  m_Height: 6.44
   m_Radius: 2
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -6129,7 +6116,7 @@ MonoBehaviour:
   - <AnimationName>k__BackingField: Attack2
     <TransitionDuration>k__BackingField: 0.14
     <ComboStateIndex>k__BackingField: 1
-    <ComboAttackTime>k__BackingField: 0.5
+    <ComboAttackTime>k__BackingField: 0.8
     <ForceTime>k__BackingField: 0.1
     <Force>k__BackingField: 1
     <Damage>k__BackingField: 10
@@ -6137,7 +6124,7 @@ MonoBehaviour:
   - <AnimationName>k__BackingField: Attack3
     <TransitionDuration>k__BackingField: 0.14
     <ComboStateIndex>k__BackingField: 2
-    <ComboAttackTime>k__BackingField: 0.5
+    <ComboAttackTime>k__BackingField: 0.8
     <ForceTime>k__BackingField: 0.1
     <Force>k__BackingField: 1
     <Damage>k__BackingField: 10
@@ -6164,14 +6151,14 @@ MonoBehaviour:
     <TransitionDuration>k__BackingField: 0.14
     <ComboStateIndex>k__BackingField: 0
     <ComboAttackTime>k__BackingField: 0.5
-    <ForceTime>k__BackingField: 0.1
-    <Force>k__BackingField: 1
+    <ForceTime>k__BackingField: -1
+    <Force>k__BackingField: 20
     <Damage>k__BackingField: 10
     <knockbackRange>k__BackingField: 2
-  <AttackRange>k__BackingField: 15
-  <LongAttackRange>k__BackingField: 15
+  <AttackRange>k__BackingField: 10
+  <LongAttackRange>k__BackingField: 10
   <ShortAttackRange>k__BackingField: 4
-  <MidAttackRange>k__BackingField: 9
+  <MidAttackRange>k__BackingField: 7
   <CirclingAroundRange>k__BackingField: 5.5
   <AttackingDamage>k__BackingField: 15
   hitCount: 0
@@ -6182,11 +6169,26 @@ MonoBehaviour:
   <detectionPlayerRange>k__BackingField: 30
   <MovementSpeed>k__BackingField: 3
   <circlingSpeed>k__BackingField: 1
-  <forceReceiver>k__BackingField: {fileID: 775324479}
+  <forceReceiver>k__BackingField: {fileID: 1413591557}
   <RetreatRange>k__BackingField: 5
   player: {fileID: 919132148475874214}
   playerPosition: {x: 0, y: 0, z: 0}
   playerStateMachine: {fileID: 5866666020441574247}
+--- !u!114 &1413591557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413591547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d83d1b896951c748b21658db900a655, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterController: {fileID: 1413591549}
+  agent: {fileID: 1413591550}
+  drag: 0.3
 --- !u!1001 &1443429914
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6201,15 +6203,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a8555e10ca669434993a97a213b10960, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.092227444
+      value: 0.053099025
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a8555e10ca669434993a97a213b10960, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.092227444
+      value: 0.053099025
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a8555e10ca669434993a97a213b10960, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.092227444
+      value: 0.053099025
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a8555e10ca669434993a97a213b10960, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9424,7 +9426,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2137453812}
-  m_LocalRotation: {x: 0.18556572, y: -0.114130065, z: 0.021705193, w: 0.97574}
+  m_LocalRotation: {x: 0.15641648, y: 0.008221895, z: -0.0013021129, w: 0.9876561}
   m_LocalPosition: {x: 3.2329998, y: 3.8700001, z: -6.9999995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
