@@ -4,33 +4,34 @@ using UnityEngine;
 
 public class PlayerAttackingState : PlayerBaseState
 {
-    public PlayerAttackingState(PlayerStateMachine playerStateMachine , int attackIndex) : base(playerStateMachine)
+    public PlayerAttackingState(PlayerStateMachine playerStateMachine, int attackIndex) : base(playerStateMachine)
     {
         attack = playerStateMachine.Attacks[attackIndex];
     }
-    Attack  attack;
+    Attack attack;
     float previousFrameTime;
     bool alreadyApplyForce;
     public override void Enter()
     {
         //搖晃相機
-      //  CinemachineShake.Instance.ShakeCamera(2f, 1f);
+        //  CinemachineShake.Instance.ShakeCamera(2f, 1f);
         //攻擊傷害判定
         playerStateMachine.RightweaponDamage.SetAttack(attack.Damage, attack.knockbackRange);
         playerStateMachine.LeftweaponDamage.SetAttack(attack.Damage, attack.knockbackRange);
         playerStateMachine.animator.CrossFadeInFixedTime(attack.AnimationName, attack.TransitionDuration);
-   //   playerStateMachine.PlayTrail();
+        //   playerStateMachine.PlayTrail();
     }
     public override void Update(float deltatime)
     {
         Facetarget();
+        FaceEnemy();
         //移動
-       MoveWithDeltatime(deltatime);    
+        MoveWithDeltatime(deltatime);
         //進行攻擊跟狀態判定
         float NormalizedTime = GetNormalizedTime(playerStateMachine.animator);
-        if(NormalizedTime >= previousFrameTime && NormalizedTime < 1f)
+        if (NormalizedTime >= previousFrameTime && NormalizedTime < 1f)
         {
-            if(NormalizedTime >= attack.ForceTime)
+            if (NormalizedTime >= attack.ForceTime)
             {
                 TryApplyForce();
             }
@@ -62,7 +63,7 @@ public class PlayerAttackingState : PlayerBaseState
 
     void TryApplyForce()
     {
-        if(alreadyApplyForce) { return; }
+        if (alreadyApplyForce) { return; }
         playerStateMachine.forceReceiver.AddForce(playerStateMachine.transform.forward * attack.Force);
         alreadyApplyForce = true;
     }
@@ -74,7 +75,7 @@ public class PlayerAttackingState : PlayerBaseState
         {
             return;
         }
-        if(normalizedTime< attack.ComboAttackTime) { return; }
+        if (normalizedTime < attack.ComboAttackTime) { return; }
         //如果可以連擊
         playerStateMachine.SwitchState
         (
@@ -86,6 +87,6 @@ public class PlayerAttackingState : PlayerBaseState
         );
     }
     //計算動畫切換的時間
-  
+
 
 }

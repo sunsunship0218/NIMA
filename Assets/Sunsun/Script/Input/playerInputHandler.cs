@@ -19,7 +19,7 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
 
     //狀態變數
     public bool isOnLockon;
-    public bool isAttacking { get; private set; }
+    public bool isAttacking;
     public bool isDashing { get; private set; }
     //格檔跟防禦的相關變數
     public bool isBlocking;
@@ -85,6 +85,7 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
         {
             isButtonHeld = true;
             isAttacking = true;
+
         
         }
         //長按不攻擊

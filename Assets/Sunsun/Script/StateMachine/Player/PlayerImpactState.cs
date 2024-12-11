@@ -10,7 +10,7 @@ public class PlayerImpactState : PlayerBaseState
     float duration;
     public override void Enter()
     {
-        Debug.Log("enter impact");
+     
         playerStateMachine.animator.CrossFadeInFixedTime(ImpactHASH, crossfadeDuration);
        
     }
@@ -22,7 +22,7 @@ public class PlayerImpactState : PlayerBaseState
         if (duration <= 0f)
         {
             //避免撥放到一半,馬上切換到Locomotion
-            if (playerStateMachine.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.85f)
+            if (playerStateMachine.animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.85f)
             {
                 ReturntoLocomotion();
             }

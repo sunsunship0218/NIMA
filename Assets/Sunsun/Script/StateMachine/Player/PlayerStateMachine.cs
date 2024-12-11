@@ -36,12 +36,17 @@ public class PlayerStateMachine : StateMachine
     public WeaponDamage RightweaponDamage { get; private set; }
     [field: SerializeField]
     public WeaponDamage LeftweaponDamage { get; private set; }
+    [field: SerializeField]
+    public BlockPostureHandler blockPostureHandler{ get; private set; }
     //其他componment
     [field: SerializeField]
     public Animator animator { get; private set; }
 
     [field: SerializeField]
     public Targeter targeter { get; private set; }
+    //處存面向敵人的清單
+    [SerializeField]
+   public List<GameObject> EnemyList;
 
     [field: SerializeField]
     public  PlayerHealth playerHealth { get; private set; }
@@ -51,7 +56,6 @@ public class PlayerStateMachine : StateMachine
     //UI
     [field: SerializeField]
     public TextMeshProUGUI textMeshProUGUI{ get; private set; }
-  //  [SerializeField] TrailRenderer trailRenderer;
 
     public Transform mainCameraTransform { get; private set; }
     void Start()
@@ -59,8 +63,10 @@ public class PlayerStateMachine : StateMachine
         textMeshProUGUI.gameObject.SetActive(false);
         mainCameraTransform = Camera.main.transform;
         //this 就是現在的PlayerStateMachine實例
-        SwitchState(new PlayerFreeLookState(this)); 
-     }
+        SwitchState(new PlayerFreeLookState(this));
+        CollectEnemies();
+    }
+
 
     //事件啟用訂閱
     private void OnEnable()
@@ -86,8 +92,12 @@ public class PlayerStateMachine : StateMachine
     //Damage事件訂閱方法
      void HandleTakeDamage()
     {
-        Debug.Log("HandleTakeDamage triggered, switching to PlayerImpactState");
         SwitchState(new PlayerImpactState(this));
+    }
+    //格擋值滿了訂閱
+    void HandlePostureFull()
+    {
+
     }
     //死亡訂閱方法
     void HealthSystem_OnDie()
@@ -95,21 +105,19 @@ public class PlayerStateMachine : StateMachine
         textMeshProUGUI.gameObject.SetActive(true);
         SwitchState(new PlayerDeadState(this));
     }
-    // Test play effect
-    /*
-    public void PlayTrail()
+    
+    //敵人的List
+  void CollectEnemies()
     {
-        if (trailRenderer != null && playerInputHandler.isAttacking)
+        EnemyList.Clear(); // 確保清空列表
+        GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject enemy in enemyObjects)
         {
-            trailRenderer.emitting = true;
+           EnemyList.Add(enemy);
         }
     }
-    public void StopTrail()
-    {
-        if (trailRenderer != null)
-        {
-            trailRenderer.emitting = false;
-        }
-    }
-    */
+
+
+
 }

@@ -128,7 +128,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ded64c58-eb0b-43b1-8ef9-e26872ca1415"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -275,6 +275,17 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""BlockAndParry"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""47fd50cc-6d82-4901-b93a-de65c3b1c957"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""BlockAndParry"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

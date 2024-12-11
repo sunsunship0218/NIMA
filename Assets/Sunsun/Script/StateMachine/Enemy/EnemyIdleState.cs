@@ -20,14 +20,11 @@ public class EnemyIdleState : EnemyBaseState
         MoveWithDeltatime(deltaTime);
         if (IsInChasingRange())
         {
-          
             enemyStatemachine.SwitchState(new EnemyChasingState(enemyStatemachine));
-            return;
         }
-        else if (IsinAttackingRange())
-        {
-          
-            enemyStatemachine.SwitchState(new EnemyAttackingState(enemyStatemachine, 0));
+        if (IsinAttackingRange())
+        { 
+            enemyStatemachine.SwitchState(new EnemyAttackingState(enemyStatemachine,0));
         }
         FacePlayer();
         enemyStatemachine.animator.SetFloat(SpeedHASH, 0f, animatorDampSpeed, deltaTime);

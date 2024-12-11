@@ -6,7 +6,9 @@ public class WeaponDamage : MonoBehaviour
 {
     [SerializeField] Collider myColi;
     [SerializeField] PlayerHealth playerHealth;
-    [SerializeField] EnemyHealth enemyHealth;
+    [SerializeField] List<GameObject> enemyList;
+    [SerializeField] List<EnemyHealth> enemyHealthList;
+    EnemyHealth enemyHealth;
     [SerializeField] TimeManager timeManager;
     [SerializeField] HitParticleEffect hitParticleEffect;
     [SerializeField] AudioSource audioSource;
@@ -14,6 +16,11 @@ public class WeaponDamage : MonoBehaviour
     int damage;
     float knockback;
 
+   void Awake()
+    {
+        EnemyHealth[] enemies = FindObjectsOfType<EnemyHealth>();
+        enemyHealthList = new List<EnemyHealth>(enemies);
+    }
     private void OnEnable()
     {
         alreadyColiWith.Clear();
@@ -25,9 +32,10 @@ public class WeaponDamage : MonoBehaviour
         if(other.tag!="Player" && other.tag != "Enemy") { return; }
         alreadyColiWith.Add(other);
 
-        if (other.tag == "Enemy")
+        if (other.tag =="Enemy")
         {
             EnemyStateMachine enemyStateMachine = other.GetComponent<EnemyStateMachine>();
+            enemyHealth = other.GetComponent<EnemyHealth>();
             if (enemyStateMachine != null)
             {
                 // 增加被击中敌人的 hitCount
@@ -36,18 +44,24 @@ public class WeaponDamage : MonoBehaviour
                 enemyStateMachine.lastHitTime = Time.time;
             }
             Vector3 hitposition = other.ClosestPointOnBounds(transform.position);
-            hitParticleEffect.PlayHitParticle(hitposition);
+            //播放特效
             timeManager.DoBulletTime(0.01f);
-            enemyHealth.healthSystem.Damage(damage);
-            audioSource.Play();
-      //    Debug.Log("enemy HP :"+enemyHealth.healthSystem.GetHealth());
+         
+            if (enemyHealth != null)
+            {
+                hitParticleEffect.PlayHitParticle(hitposition);
+                audioSource.Play();
+                enemyHealth.healthSystem.Damage(damage);
+                
+             
+            }
+             Debug.Log("enemy HP :"+enemyHealth.healthSystem.GetHealth());
         }
         if (other.tag == "Player")
         {
             
             audioSource.Play();
-            Vector3 hitposition = other.ClosestPointOnBounds(transform.position);
-            hitParticleEffect.PlayHitParticle(hitposition);
+            Vector3 hitposition = other.ClosestPointOnBounds(transform.position); 
             playerHealth.healthSystem.Damage(damage);
         
             
@@ -57,7 +71,6 @@ public class WeaponDamage : MonoBehaviour
 
         if(other.TryGetComponent<ForceReceiver>(out ForceReceiver forceReceiver))
         {
-            //�ھ����h�Z��,�Ӭݻݭn�h�h��
             Vector3 direction = (other.transform.position - myColi.transform.position).normalized;
             forceReceiver.AddForce(direction*knockback);
         }

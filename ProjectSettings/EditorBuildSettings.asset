@@ -5,13 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Sunsun/Scenes/Login_Register.unity
-    guid: d8877cccc5dedfc4e8e5ebd305eee6c7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Sunsun/Scenes/Main.unity
     guid: 5ff3ba039ccd20045843c3773f7643e4
   - enabled: 1
-    path: Assets/Sunsun/Scenes/Level_1.unity
+    path: Assets/Sunsun/Scenes/TIGER_LEVEL_1.unity
+    guid: ab672ffc915ebd243ab35b6851ca36dd
+  - enabled: 1
+    path: Assets/Sunsun/Scenes/Level_Drgon.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Sunsun/Scenes/TEST.unity
+    guid: 8089d157e4424114788bc520c06c9783
   m_configObjects: {}

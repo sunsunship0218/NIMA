@@ -15,7 +15,7 @@ public class Effect_ObjectPool : MonoBehaviour
             ParticleSystem particle =Instantiate(EffectPrefab) as ParticleSystem;
             pool.Enqueue(particle);
             particle.gameObject.SetActive(false);
-             Debug.Log($"物件池初始化完成，總共生成 {pool.Count} 個特效物件。");
+         
         }
     }
     public void ReuseParticlePlay(Vector3 hitposition,Quaternion quaternion)
@@ -45,5 +45,12 @@ public class Effect_ObjectPool : MonoBehaviour
         pool.Enqueue(recovery);
         recovery.Stop();
     }
-    // Update is called once per frame
+
+ public IEnumerator WaitForParticleToFinish(ParticleSystem particleSystem)
+    {
+//等待播放結束
+        yield return new WaitUntil(() => !particleSystem.IsAlive());
+
+        Recovery(particleSystem);
+    }
 }

@@ -11,7 +11,6 @@ public class GroundEffect : MonoBehaviour
         if (other.tag =="Ground")
         {
             pool.ReuseParticlePlay(Sole_coli.transform.position, Quaternion.identity);
-            Debug.Log("¦Ñªê­°¸¨");
         }
 
     }

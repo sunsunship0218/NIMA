@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponHandler : MonoBehaviour
 {
-    public float damage;
+  //  public float damage;
     [SerializeField] List<GameObject> weapon;
 
     public void EnableWeapon(int weaponIndex)
