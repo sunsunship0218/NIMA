@@ -85,6 +85,7 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
         {
             isButtonHeld = true;
             isAttacking = true;
+
         
         }
         //長按不攻擊

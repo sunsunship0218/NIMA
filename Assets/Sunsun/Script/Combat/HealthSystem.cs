@@ -60,6 +60,7 @@ public class HealthSystem
         //血量變化如果到0,死
         if(health == 0)
         {
+            
             OnDie?.Invoke();
         }
         /*

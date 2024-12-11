@@ -149,4 +149,6 @@ public abstract class EnemyBaseState :State
       enemyStatemachine.transform.rotation = Quaternion.LookRotation(faceTargetPos);
     }
 
+  
+
 }

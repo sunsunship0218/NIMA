@@ -25,6 +25,21 @@ public class TigerEffect : MonoBehaviour
     [SerializeField] VisualEffect ATK3_Slash3;
     [SerializeField] AudioClip Attack3Clip1;
 
+    [Header("Attack4 effect")]
+    [SerializeField] VisualEffect ATK4_Slash1;
+    [SerializeField] VisualEffect ATK4_Slash2;
+    [SerializeField] VisualEffect ATK4_Slash3;
+    [SerializeField] AudioClip Attack4Clip1;
+
+    [Header("Attack5 effect")]
+    [SerializeField] AudioClip Attack5Clip1;
+
+    [Header("Attack6 effect")]
+    [SerializeField] AudioClip Attack6Clip1;
+
+    [Header("Attack7 effect")]
+    [SerializeField] AudioClip Attack7Clip1;
+
     [Header("Ground effect")]
     [SerializeField] GameObject tiger_SoleColi;
     [SerializeField] AudioClip GroundClip;
@@ -74,6 +89,14 @@ public class TigerEffect : MonoBehaviour
         ATK3_Slash3.Stop();
         audioSource.Stop();
     }
+    public void Attack4Play() { }
+    public void Attack4Stop() { }
+    public void Attack5Play() { }
+    public void Attack5Stop() { }
+    public void Attack6Play() { }
+    public void Attack6Stop() { }
+    public void Attack7Play() { }
+    public void Attack7Stop() { }
 
     public void GroundedEffectPlay()
     {

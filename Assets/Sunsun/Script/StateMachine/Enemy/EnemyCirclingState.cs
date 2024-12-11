@@ -6,7 +6,7 @@ public class EnemyCirclingState : EnemyBaseState
 {
     public EnemyCirclingState(EnemyStateMachine enemyStateMachine) : base(enemyStateMachine) { }
     //不是座標,是數組作為處存隨機數,1-3秒
-    Vector2 CirclingTimeRange = new Vector2(1,3);
+    Vector2 CirclingTimeRange = new Vector2(1, 2.5f);
     float timer ;
     //animator parameter
     readonly int CirclingBlendtreeHASH = Animator.StringToHash("Circling");
@@ -17,6 +17,8 @@ public class EnemyCirclingState : EnemyBaseState
     bool isTimerInitialized = false;
     public override void Enter()
     {
+        enemyStatemachine.animator.applyRootMotion = false;
+        Debug.Log("Circling");
         if (!isTimerInitialized)
         {
             enemyStatemachine.lastCirclingTime = Time.time;
@@ -25,6 +27,7 @@ public class EnemyCirclingState : EnemyBaseState
             //初始化方向
             circlingDir = Random.Range(0, 2) == 0 ? 1 : -1;
             timer = Random.Range(CirclingTimeRange.x, CirclingTimeRange.y);
+            isTimerInitialized = true; 
         }
   
 
@@ -32,23 +35,19 @@ public class EnemyCirclingState : EnemyBaseState
     public override void Update(float deltaTime)
     {
         timer -= deltaTime;
-        if (timer <0 && IsInCirclingRange())
+        if (timer <0 )
         {
             enemyStatemachine.SwitchState(new EnemyAttackingState(enemyStatemachine, 0));
             return;
         }
-        else if (IsinAttackingRange())  
+        else if (IsinLongAttackingRange() || IsinMidAttackRange())  
         {
             enemyStatemachine.SwitchState(new EnemyAttackingState(enemyStatemachine, 0));
             return;
         }
     
         
-        if (!IsInCirclingRange())
-        {
-            enemyStatemachine.SwitchState(new EnemyChasingState(enemyStatemachine));
-        }
-    
+   
         // 檢查繞行時間是否超過最大時間
         // 執行繞行行為
         CircleAroundPlayer(deltaTime);
@@ -56,6 +55,7 @@ public class EnemyCirclingState : EnemyBaseState
     }
     public override void Exit()
     {
+        enemyStatemachine.animator.applyRootMotion = true;
         isTimerInitialized = false;
     }
     private void CircleAroundPlayer(float deltaTime)

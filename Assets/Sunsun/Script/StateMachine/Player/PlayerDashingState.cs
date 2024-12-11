@@ -22,6 +22,8 @@ public class PlayerDashingState : PlayerBaseState
     public override void Enter()
     {
 
+        Debug.Log("ENter DASH");
+
         //獲取玩家輸入方向
         dodgingDirectionInput = playerStateMachine.playerInputHandler.movementValue.normalized;
 
@@ -80,7 +82,7 @@ public class PlayerDashingState : PlayerBaseState
     public override void Exit()
     {
         playerStateMachine.playerHealth.healthSystem.SetInvunerable(false);
-
+        Debug.Log("EXISＤＡＳＨ");
 
     }
 }

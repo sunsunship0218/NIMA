@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Tiger : EnemyStateMachine
 {
+    public static event Action OnTigerDestroyed;
+
     void Start()
     {
         // 初始化共用的狀態
@@ -21,6 +24,7 @@ public class Tiger : EnemyStateMachine
         // 訂閱擊中次數檢查事件
         health.healthSystem.OnTakeDamage += HandleHitCountCheck;
     }
+    //增加格擋值
     private void HandleHitCountCheck()
     {
         if (hitCount > 2)
@@ -29,4 +33,9 @@ public class Tiger : EnemyStateMachine
             hitCount = 0; // 重置?中次?
         }
     }
+    void OnDestroy()
+    {
+        OnTigerDestroyed?.Invoke();
+    }
+
 }

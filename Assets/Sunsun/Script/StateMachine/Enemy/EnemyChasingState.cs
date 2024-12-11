@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,7 @@ public class EnemyChasingState : EnemyBaseState
     public override void Enter()
     {
         enemyStatemachine.agent.enabled = true;
+        enemyStatemachine.animator.applyRootMotion = false;
         enemyStatemachine.agent.updatePosition = false;
         enemyStatemachine.agent.updateRotation = false;
         enemyStatemachine.animator.CrossFadeInFixedTime(LocomotionBlendtreeHASH, crossfadeDuration);
@@ -22,17 +24,7 @@ public class EnemyChasingState : EnemyBaseState
     {
         if (IsinAttackingRange())
         {
-             if (IsInCirclingRange() && IsinShortAttackingRange())
-            {
-                int chance = Random.Range(0, 1);
-                if (chance > 0.5)
-                {
-                    enemyStatemachine.SwitchState(new EnemyCirclingState(enemyStatemachine));
-                }
                 enemyStatemachine.SwitchState(new EnemyAttackingState(enemyStatemachine, 0));
-            }
-            enemyStatemachine.SwitchState(new EnemyAttackingState(enemyStatemachine,0));
-            return;
         }
         if (!IsInChasingRange())
         {
@@ -49,9 +41,11 @@ public class EnemyChasingState : EnemyBaseState
     }
     public override void Exit()
     {
+        enemyStatemachine.animator.applyRootMotion = true;
         //­«³]¸ô®|
-      enemyStatemachine.agent.ResetPath();
+        enemyStatemachine.agent.ResetPath();
       enemyStatemachine.agent.velocity = Vector3.zero;
+
     }
 
     void MoveToPlayer(float deltatime)

@@ -13,8 +13,7 @@ public class PlayerAttackingState : PlayerBaseState
     bool alreadyApplyForce;
     public override void Enter()
     {
-        //·n®Ì¬Û¾÷
-      //  CinemachineShake.Instance.ShakeCamera(2f, 1f);
+        Debug.Log(playerStateMachine.playerInputHandler.isAttacking);
         //§ðÀ»¶Ë®`§P©w
         playerStateMachine.RightweaponDamage.SetAttack(attack.Damage, attack.knockbackRange);
         playerStateMachine.LeftweaponDamage.SetAttack(attack.Damage, attack.knockbackRange);
@@ -23,9 +22,8 @@ public class PlayerAttackingState : PlayerBaseState
     }
     public override void Update(float deltatime)
     {
-        Facetarget();
         //²¾°Ê
-       MoveWithDeltatime(deltatime);    
+        MoveWithDeltatime(deltatime);    
         //¶i¦æ§ðÀ»¸òª¬ºA§P©w
         float NormalizedTime = GetNormalizedTime(playerStateMachine.animator);
         if(NormalizedTime >= previousFrameTime && NormalizedTime < 1f)
@@ -38,8 +36,9 @@ public class PlayerAttackingState : PlayerBaseState
             //«ö¤U§ðÀ»Áä
             if (playerStateMachine.playerInputHandler.isAttacking)
             {
-                TryComboAttack(NormalizedTime);
                 Facetarget();
+                TryComboAttack(NormalizedTime);
+            
             }
         }
         else
@@ -57,7 +56,7 @@ public class PlayerAttackingState : PlayerBaseState
     }
     public override void Exit()
     {
-
+        Debug.Log(playerStateMachine.playerInputHandler.isAttacking);
     }
 
     void TryApplyForce()

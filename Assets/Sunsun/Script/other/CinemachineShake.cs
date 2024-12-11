@@ -41,18 +41,20 @@ public class CinemachineShake : MonoBehaviour
         }
       
     }
-    public void ShakeCamera(float intensity, float time)
+    public void ShakeCamera(float intensity, float shaketime)
     {    
-        multiChannelPerlin.m_AmplitudeGain = intensity;
-        Shaketimer = time;
+     
+        Shaketimer = shaketime;
+        StartCoroutine(WaitTime(shaketime));
     }
     
     IEnumerator WaitTime(float shaketime)
     {
         yield return new WaitForSeconds(shaketime);
+        ResetIntencity();
     }
-    void Intencity()
+    void ResetIntencity()
     {
-
+        multiChannelPerlin.m_AmplitudeGain = 0f;
     }
 }

@@ -44,6 +44,9 @@ public class PlayerStateMachine : StateMachine
 
     [field: SerializeField]
     public Targeter targeter { get; private set; }
+    //處存面向敵人的清單
+    [SerializeField]
+   public List<GameObject> EnemyList;
 
     [field: SerializeField]
     public  PlayerHealth playerHealth { get; private set; }
@@ -53,7 +56,6 @@ public class PlayerStateMachine : StateMachine
     //UI
     [field: SerializeField]
     public TextMeshProUGUI textMeshProUGUI{ get; private set; }
-  //  [SerializeField] TrailRenderer trailRenderer;
 
     public Transform mainCameraTransform { get; private set; }
     void Start()
@@ -61,8 +63,10 @@ public class PlayerStateMachine : StateMachine
         textMeshProUGUI.gameObject.SetActive(false);
         mainCameraTransform = Camera.main.transform;
         //this 就是現在的PlayerStateMachine實例
-        SwitchState(new PlayerFreeLookState(this)); 
-     }
+        SwitchState(new PlayerFreeLookState(this));
+        CollectEnemies();
+    }
+
 
     //事件啟用訂閱
     private void OnEnable()
@@ -102,4 +106,18 @@ public class PlayerStateMachine : StateMachine
         SwitchState(new PlayerDeadState(this));
     }
     
+    //敵人的List
+  void CollectEnemies()
+    {
+        EnemyList.Clear(); // 確保清空列表
+        GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject enemy in enemyObjects)
+        {
+           EnemyList.Add(enemy);
+        }
+    }
+
+
+
 }

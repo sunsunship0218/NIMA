@@ -31,6 +31,33 @@ public abstract class PlayerBaseState : State
         faceTargetPos.y = 0f;
         playerStateMachine.transform.rotation = Quaternion.LookRotation(faceTargetPos);
     }
+  public void FaceEnemy()
+    {
+        if (playerStateMachine. EnemyList.Count == 0 || playerStateMachine.EnemyList == null)
+            return;
+        GameObject nearestEnemy = null;
+        float nearestDistance = Mathf.Infinity;
+        //找出最近的敵人
+        foreach (var enemy in playerStateMachine.EnemyList)
+        {
+            float DistanceToEnemy = Vector3.Distance(playerStateMachine.transform.position, enemy.transform.position);
+            if (DistanceToEnemy < nearestDistance)
+            {
+                nearestDistance = DistanceToEnemy;
+                nearestEnemy = enemy;
+            }
+        }
+        //面向敵人
+        if (nearestEnemy != null)
+        {
+            Vector3 faceTargetPos = nearestEnemy.transform.position - playerStateMachine.transform.position;
+            faceTargetPos.y = 0f; // 忽略y軸，讓旋轉只影響水平面
+            playerStateMachine.transform.rotation = Quaternion.LookRotation(faceTargetPos);
+        }
+
+
+
+    }
     protected void ReturntoLocomotion()
     {
         // 有目標的話,繼續鎖定

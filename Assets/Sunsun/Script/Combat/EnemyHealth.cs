@@ -8,7 +8,6 @@ public class EnemyHealth : MonoBehaviour
     void Awake()
     {
         healthSystem = new HealthSystem(100, 0);
-            Debug.Log(healthSystem.GetHealth());
     }
 
 }

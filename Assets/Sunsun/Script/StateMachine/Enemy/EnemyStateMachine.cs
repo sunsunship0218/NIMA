@@ -99,7 +99,7 @@ public class EnemyStateMachine : StateMachine
         //ª¬ºA½á­Èªì©l¤Æ
         IdleState = new EnemyIdleState(this);
         ChasingState = new EnemyChasingState(this);
-        CirclingState = new EnemyChasingState(this);
+        CirclingState = new EnemyCirclingState(this);
         AttackingState = new EnemyAttackingState(this, 0);
         BlockState = new EnemyBlockState(this);
       //  RetreatState = new EnemyRetreatState(this);
@@ -169,6 +169,7 @@ public class EnemyStateMachine : StateMachine
     }
     private void HandleDie()
     {
+        Debug.Log("DIE");
         SwitchState(new EnemyDeadState(this));
     }
  void facePlayer()

@@ -17,12 +17,13 @@ public  abstract class StateMachine : MonoBehaviour
 
     public void SwitchState(State nextState)
     {
-     
+        State oldState = currentState;
         //if current state != null
         currentState?.Exit();
         currentState = nextState;
         //進入nextState
         currentState.Enter();
+        Debug.Log("Switching from " + oldState?.GetType().Name + " to " + nextState.GetType().Name);
 
     }
 }
