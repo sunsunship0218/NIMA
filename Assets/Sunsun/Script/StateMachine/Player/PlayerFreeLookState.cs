@@ -22,6 +22,7 @@ public class PlayerFreeLookState : PlayerBaseState
         Debug.Log("Enter freelook");
      //   playerStateMachine.StopTrail();
         playerStateMachine.playerInputHandler.isOnLockon = false;
+        playerStateMachine.playerInputHandler.isAttacking = false;
         playerStateMachine.animator.CrossFadeInFixedTime(unLockOnBlendtreeHASH, crossfadeDuration);
 
         //按下鎖定後切換狀態  
