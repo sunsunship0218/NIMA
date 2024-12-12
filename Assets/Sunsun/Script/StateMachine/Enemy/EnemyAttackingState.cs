@@ -81,7 +81,6 @@ public class EnemyAttackingState : EnemyBaseState
         }
         else if(IsinMidAttackRange())
         {
-            Debug.Log(" IN MID RANGE ATTACK");
             doMidComboAttacks(currentComboStep);
         }
         else
