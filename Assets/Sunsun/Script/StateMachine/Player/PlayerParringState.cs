@@ -12,7 +12,6 @@ public class PlayerParringState : PlayerBaseState
     public PlayerParringState(PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
     public override void Enter()
     {
-        Debug.Log($"Enter Parry: "+ Time.time);
         timer = 0f;
         playerStateMachine.playerHealth.healthSystem.SetInvunerable(true);
         playerStateMachine.animator.CrossFadeInFixedTime(ParryHash, duration);
@@ -50,7 +49,7 @@ public class PlayerParringState : PlayerBaseState
     }
     public override void Exit()
     {
-        Debug.Log($"Exit Parry Block: " + Time.time);
+
             playerStateMachine.playerHealth.healthSystem.SetInvunerable(false);
     }
 }

@@ -85,8 +85,8 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
         {
             isButtonHeld = true;
             isAttacking = true;
+            holdTimer = 0f;
 
-        
         }
         //長按不攻擊
         else if (context.performed && context.interaction is HoldInteraction)
@@ -163,7 +163,7 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
         // 等待一個幀後重置 isParrying
         yield return null;
         isParrying = false;
-        Debug.Log("Parry reset at: " + Time.time);
+     
     }
 }
 
