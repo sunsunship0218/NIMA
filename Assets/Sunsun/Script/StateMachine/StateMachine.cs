@@ -23,7 +23,7 @@ public  abstract class StateMachine : MonoBehaviour
         currentState = nextState;
         //進入nextState
         currentState.Enter();
-        Debug.Log("Switching from " + oldState?.GetType().Name + " to " + nextState.GetType().Name);
+       
 
     }
 }

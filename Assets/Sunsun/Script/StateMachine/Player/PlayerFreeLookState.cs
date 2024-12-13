@@ -18,11 +18,9 @@ public class PlayerFreeLookState : PlayerBaseState
     float speed;
     public override void Enter()
     {
-        Debug.Log("Enter free look, player attaking bool: "+playerStateMachine.playerInputHandler.isAttacking);
-        Debug.Log("Enter freelook");
-     //   playerStateMachine.StopTrail();
+        Debug.Log("Enter freeLook");
         playerStateMachine.playerInputHandler.isOnLockon = false;
-        playerStateMachine.playerInputHandler.isAttacking = false;
+      playerStateMachine.playerInputHandler.isAttacking = false;
         playerStateMachine.animator.CrossFadeInFixedTime(unLockOnBlendtreeHASH, crossfadeDuration);
 
         //按下鎖定後切換狀態  
@@ -37,6 +35,7 @@ public class PlayerFreeLookState : PlayerBaseState
         if (playerStateMachine.playerInputHandler.isAttacking)
         {
             Debug.Log("Press Attack");
+            Debug.Log("Is Attacking?" + playerStateMachine.playerInputHandler.isAttacking);
             playerStateMachine.SwitchState(new PlayerAttackingState(playerStateMachine, 0));
             return;
         }

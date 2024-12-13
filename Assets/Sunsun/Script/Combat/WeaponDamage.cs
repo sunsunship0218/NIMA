@@ -20,6 +20,7 @@ public class WeaponDamage : MonoBehaviour
     {
         EnemyHealth[] enemies = FindObjectsOfType<EnemyHealth>();
         enemyHealthList = new List<EnemyHealth>(enemies);
+        playerHealth =FindObjectOfType<PlayerHealth>();
     }
     private void OnEnable()
     {

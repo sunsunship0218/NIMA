@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,21 +13,23 @@ public abstract class State
     public abstract void Update(float deltaTime);
     public abstract void Exit();
 
-  protected  float GetNormalizedTime(Animator animator)
+    protected float GetNormalizedTime(Animator animator, string tag)
     {
-        AnimatorStateInfo currentStateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        AnimatorStateInfo NextStateInfo = animator.GetNextAnimatorStateInfo(0);
-        if (animator.IsInTransition(0) && NextStateInfo.IsTag("Attack"))
+        AnimatorStateInfo currentInfo = animator.GetCurrentAnimatorStateInfo(0);
+        AnimatorStateInfo nextInfo = animator.GetNextAnimatorStateInfo(0);
+
+        if (animator.IsInTransition(0) && nextInfo.IsTag(tag))
         {
-            return NextStateInfo.normalizedTime;
+            return nextInfo.normalizedTime;
         }
-        else if (!animator.IsInTransition(0) && currentStateInfo.IsTag("Attack"))
+        else if (!animator.IsInTransition(0) && currentInfo.IsTag(tag))
         {
-            return currentStateInfo.normalizedTime;
+            return currentInfo.normalizedTime;
         }
         else
         {
-            return 0;
+            return 0f;
         }
     }
+
 }

@@ -81,7 +81,6 @@ public class EnemyAttackingState : EnemyBaseState
         }
         else if(IsinMidAttackRange())
         {
-            Debug.Log(" IN MID RANGE ATTACK");
             doMidComboAttacks(currentComboStep);
         }
         else
@@ -101,7 +100,7 @@ public class EnemyAttackingState : EnemyBaseState
         FacePlayer();
 
         // 獲取當前動畫的進行時間
-        float normalizedTime = GetNormalizedTime(enemyStatemachine.animator);
+        float normalizedTime = GetNormalizedTime(enemyStatemachine.animator,"Attack");
 
         // 獲取動畫完成度
         AnimatorStateInfo currentStateInfo = enemyStatemachine.animator.GetCurrentAnimatorStateInfo(0);

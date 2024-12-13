@@ -17,6 +17,12 @@ public class ForceReceiver : MonoBehaviour
 
     public Vector3 movement =>impact+ Vector3.up * verticalVelocity;
 
+    private void Awake()
+    {
+        characterController = GetComponent<CharacterController>();
+        agent = GetComponent<NavMeshAgent>();
+    }
+
     void Update()
      {
         //在地面/接近地面
