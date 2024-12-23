@@ -27,12 +27,7 @@ public class BossAttackingState : BossBaseState
     readonly int[] ShortRangeAttackHashes;
     readonly int[] MidRangeAttackHashes;
     readonly int[] LongRangeAttackHashes;
-    //BOSS階段
-    public enum BossPhase
-    {
-        Phase1,
-        Phase2
-    }
+
     public BossAttackingState(BossStateMachine enemyStateMachine, int attackIndex) : base(enemyStateMachine)
     {
         //短距離
@@ -71,25 +66,15 @@ public class BossAttackingState : BossBaseState
 
     public override void Enter()
     {
-        Debug.Log("Enter BOSS ATK");
-
-        if (IsinShortAttackingRange())
+        if (enemyStatemachine.inPhase2 == false)
+        {
+            Phase1ATK();
+        }
+        else if (enemyStatemachine.inPhase2 == true)
         {
 
-
-            doShortComboAttacks(currentComboStep);
-
-
         }
-        else if (IsinMidAttackRange())
-        {
-            doMidComboAttacks(currentComboStep);
-        }
-        else
-        {
-            //Debug.Log(" IN LONG RANGE ATTACK");
-            doLongComboAttacks(currentComboStep, Time.deltaTime);
-        }
+      
 
 
     }
@@ -114,7 +99,7 @@ public class BossAttackingState : BossBaseState
 
 
 
-        if (normalizedTime >= ShortAttack.ForceTime && !alreadyAppliedForce)
+      if (normalizedTime >= ShortAttack.ForceTime && !alreadyAppliedForce)
         {
             // 施加向前的力
             enemyStatemachine.forceReceiver.AddForce(enemyStatemachine.transform.forward * ShortAttack.Force);
@@ -133,6 +118,7 @@ public class BossAttackingState : BossBaseState
         }
         // 更新 previousFrameTime
         previousFrameTime = normalizedTime;
+  
 
     /*    if (!IsinAttackingRange() && !IsInCirclingRange())
         {
@@ -196,10 +182,28 @@ public class BossAttackingState : BossBaseState
         Debug.Log("EXIT BOSS ATK");
     }
 
+    void Phase1ATK()
+    {
+        if (IsinShortAttackingRange())
+        {
+            doShortComboAttacks(currentComboStep);
+        }
+        else if (IsinMidAttackRange())
+        {
+            doMidComboAttacks(currentComboStep);
+        }
+        else
+        {
+            //Debug.Log(" IN LONG RANGE ATTACK");
+            doLongComboAttacks(currentComboStep, Time.deltaTime);
+        }
+    }
+    void Phase2ATK()
+    {
+        Debug.Log("Phase2 ATK");
+    }
     void doShortComboAttacks(int comboStep)
     {
-
-
         if (comboStep >= 0 && comboStep < maxShortComboSteps)
         {
             int selectedAttackHash = ShortRangeAttackHashes[comboStep];

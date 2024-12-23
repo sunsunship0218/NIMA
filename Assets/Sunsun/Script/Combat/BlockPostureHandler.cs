@@ -13,6 +13,14 @@ public class BlockPostureHandler : MonoBehaviour
     {
 
     }
+
+    private void Update()
+    {
+        if (playerHealth.healthSystem.GetPostureAmount() > 0)
+        {
+            playerHealth.healthSystem.PostureDecrease(5f * Time.deltaTime);
+        }
+    }
     private void OnEnable()
     {
         alreadyColiWith.Clear();
@@ -26,13 +34,16 @@ public class BlockPostureHandler : MonoBehaviour
 
         if (other.tag == "Enemy")
         {
+            //Posture在
             EnemyStateMachine enemyStateMachine = other.GetComponent<EnemyStateMachine>();
-            playerHealth.healthSystem.PostureIncrese(posture);
+            playerHealth.healthSystem.PostureIncrese(50);
+            Debug.Log(posture);
        
 
         }
         if (other.tag == "Player")
         {
+        
             enemyHealth.healthSystem.PostureIncrese(posture);
 
         }
@@ -42,5 +53,7 @@ public class BlockPostureHandler : MonoBehaviour
     {
       this.posture = posture;
     }
+
+    //處理試鍵訂閱
 
 }

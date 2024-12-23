@@ -18,7 +18,7 @@ public class EnemyCirclingState : EnemyBaseState
     public override void Enter()
     {
         enemyStatemachine.animator.applyRootMotion = false;
-        Debug.Log("Circling");
+    //    Debug.Log("Circling");
         if (!isTimerInitialized)
         {
             enemyStatemachine.lastCirclingTime = Time.time;

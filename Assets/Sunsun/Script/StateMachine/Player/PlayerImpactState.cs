@@ -10,7 +10,7 @@ public class PlayerImpactState : PlayerBaseState
     float duration;
     public override void Enter()
     {
-     
+        Debug.Log("Eneter Impact");
         playerStateMachine.animator.CrossFadeInFixedTime(ImpactHASH, crossfadeDuration);
        
     }
@@ -19,14 +19,12 @@ public class PlayerImpactState : PlayerBaseState
         MoveWithDeltatime(deltaTime);
         //影響的時間結束
         duration -= deltaTime;
-        if (duration <= 0f)
-        {
+      
             //避免撥放到一半,馬上切換到Locomotion
-            if (playerStateMachine.animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.85f)
+            if (playerStateMachine.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f)
             {
                 ReturntoLocomotion();
             }
-        }
     }
     public override void Exit()
     {

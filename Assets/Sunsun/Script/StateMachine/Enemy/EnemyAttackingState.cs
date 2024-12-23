@@ -73,11 +73,7 @@ public class EnemyAttackingState : EnemyBaseState
 
         if (IsinShortAttackingRange())
         {
-        
-          
-                doShortComboAttacks(currentComboStep);
-            
-           
+           doShortComboAttacks(currentComboStep);
         }
         else if(IsinMidAttackRange())
         {
@@ -160,7 +156,7 @@ public class EnemyAttackingState : EnemyBaseState
                 if (IsinShortAttackingRange())
                 {
                    float chance = Random.Range(0, 3);
-                    if (chance >1.75)
+                    if (chance >2.5)
                     {
                         enemyStatemachine.SwitchState(new EnemyCirclingState(enemyStatemachine));
                     }

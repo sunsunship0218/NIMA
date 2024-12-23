@@ -67,13 +67,13 @@ public class PlayerStateMachine : StateMachine
         CollectEnemies();
     }
 
-
     //事件啟用訂閱
     private void OnEnable()
     {
         if (playerHealth != null && playerHealth.healthSystem != null)
         {
             playerHealth.healthSystem.OnTakeDamage += HandleTakeDamage;
+            playerHealth.healthSystem.OnStagger += HandlePostureFull;
             playerHealth.healthSystem.OnDie += HealthSystem_OnDie;
             Debug.Log("Subscribed to health system events");
         }
@@ -87,6 +87,7 @@ public class PlayerStateMachine : StateMachine
     {
         playerHealth.healthSystem.OnTakeDamage -= HandleTakeDamage;
         playerHealth.healthSystem.OnDie -= HealthSystem_OnDie;
+        playerHealth.healthSystem.OnDie -= HealthSystem_OnDie;
     }
 
     //Damage事件訂閱方法
@@ -97,7 +98,12 @@ public class PlayerStateMachine : StateMachine
     //格擋值滿了訂閱
     void HandlePostureFull()
     {
-
+        //清空格擋值
+        playerHealth.healthSystem.SetPostureDefault();
+        playerHealth.healthSystem.Damage(40);
+        //進入impact   
+        SwitchState(new PlayerImpactState(this));
+        Debug.Log("FULL To IMPACT");
     }
     //死亡訂閱方法
     void HealthSystem_OnDie()
@@ -105,9 +111,13 @@ public class PlayerStateMachine : StateMachine
         textMeshProUGUI.gameObject.SetActive(true);
         SwitchState(new PlayerDeadState(this));
     }
-    
+    //格黨滿了的訂閱方法
+    void HealthSystem_OnStagger()
+    {
+        SwitchState(new PlayerImpactState(this));
+    }
     //敵人的List
-  void CollectEnemies()
+    void CollectEnemies()
     {
         EnemyList.Clear(); // 確保清空列表
         GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag("Enemy");

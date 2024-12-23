@@ -53,6 +53,7 @@ public class WeaponDamage : MonoBehaviour
                 hitParticleEffect.PlayHitParticle(hitposition);
                 audioSource.Play();
                 enemyHealth.healthSystem.Damage(damage);
+                playerHealth.healthSystem.HealAmount(10);
                 
              
             }

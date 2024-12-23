@@ -35,6 +35,12 @@ public class Tiger : EnemyStateMachine
     }
     void OnDestroy()
     {
+        //從攻擊面向敵人的List移除
+        this.playerStateMachine.EnemyList.Remove(this.gameObject);
+        //恢復玩家血量
+       this.playerStateMachine.playerHealth.healthSystem.HealAmount(45);
+        Debug.Log(this.playerStateMachine.playerHealth.healthSystem.ReturnHealth());
+        //引發事件
         OnTigerDestroyed?.Invoke();
     }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 using UnityEngine.InputSystem.Interactions;
+using UnityEngine.SceneManagement;
 
 
 //將輸入要處理的邏輯綁訂到回調
@@ -33,7 +34,8 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
     void Awake()
     {
         playercontrollers = new PlayerControllers();
-     
+ 
+
     }
   
     void Start()
@@ -58,6 +60,7 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
                 isButtonHeld = false; 
            
             }
+         
         }
     }
     void OnDestroy()
@@ -158,6 +161,7 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
             isParrying = false;
         }
     }
+ 
     private IEnumerator ResetParry()
     {
         // 等待一個幀後重置 isParrying

@@ -12,12 +12,15 @@ public class HealthBar : MonoBehaviour
     public float health;
     private void Awake()
     {
-        PlayerInitial();
-        EnemyInitial();
+        if (playerHealth != null)
+            PlayerInitial();
+
+        if (enemyHealth != null)
+            EnemyInitial();
     }
    void PlayerInitial()
     {
-        maxHealth = playerHealth.healthSystem.GetHealth();
+        maxHealth = playerHealth.healthSystem.GetMaxHealth();
         healthBar.maxValue = maxHealth;
         healthBar.value = maxHealth;
         playerHealth.healthSystem.OnHealthChange += P_HealthSystem_OnHealthChange;
@@ -26,6 +29,7 @@ public class HealthBar : MonoBehaviour
     {
         Debug.Log(("Enemy health bar"));
         Debug.Log("Enemy health"+maxHealth);
+        Debug.Log("name?"+enemyHealth.gameObject.name);
         maxHealth = enemyHealth.healthSystem.GetHealth();
         healthBar.maxValue = maxHealth;
         healthBar.value = maxHealth;
