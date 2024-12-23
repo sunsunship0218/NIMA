@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Sunsun/Scenes/Level_Drgon.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+  - enabled: 0
     path: Assets/Sunsun/Scenes/TEST.unity
     guid: 8089d157e4424114788bc520c06c9783
   m_configObjects: {}

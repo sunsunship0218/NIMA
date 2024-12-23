@@ -5,15 +5,16 @@ using UnityEngine;
 public class HealthSystem 
 {
    float health;
-   float MaxHealth;
+public  float MaxHealth;
     //格擋值
-    float postureAmount;
+   float postureAmount;
     float postureAmountMax;
     public bool IsInvunerable;
    public event Action OnTakeDamage;
    public event EventHandler OnHealthChange;
     public event EventHandler OnPostureChange;
    public event Action OnDie;
+    public event Action OnStagger;
 
     //初始化血量跟格黨值
     public HealthSystem(float Maxhealth, float maxPosture)
@@ -29,6 +30,10 @@ public class HealthSystem
     public float GetHealth()
     {
        return health;
+    }
+    public float GetMaxHealth()
+    {
+        return MaxHealth;
     }
     public float GetPostureAmount()
     {
@@ -80,11 +85,11 @@ public class HealthSystem
         {
             health = MaxHealth;
         }
-        /*     if (onHealthChange != null)
-             {
-                 onHealthChange(this, EventArgs.Empty);
-             }
-        */
+        if (OnHealthChange != null)
+        {
+            OnHealthChange(this, EventArgs.Empty);
+        }
+
     }
     //無傷
     public  void SetInvunerable(bool isInvunerable)
@@ -92,16 +97,27 @@ public class HealthSystem
         this.IsInvunerable = isInvunerable;     
     }
     //增加格擋值
+    //如果格擋值滿了,呼叫處理的事件
     public void PostureIncrese(float amount)
     {
         postureAmount = Mathf.Min(postureAmount + amount, postureAmountMax);
         OnPostureChange?.Invoke(this, EventArgs.Empty);
 
+        if (postureAmount == postureAmountMax)
+        {
+
+            OnStagger?.Invoke();
+        }
     }
     //減少格黨
     public  void PostureDecrease(float amount)
     {
         postureAmount = Mathf.Max(postureAmount - amount, 0);
         OnPostureChange?.Invoke(this, EventArgs.Empty);
+    }
+    //重設格擋
+    public void SetPostureDefault()
+    {
+        postureAmount = 0;
     }
 }

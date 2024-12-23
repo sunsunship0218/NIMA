@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this);
         DontDestroyOnLoad(Player);
         DontDestroyOnLoad(Camera);
+  //訂閱各個敵人死亡事件,敵人的事件寫在各自初始化的狀態機
         Tiger.OnTigerDestroyed += HandleTigerDeath;
     }
     void OnDestroy()
@@ -30,14 +31,11 @@ public class GameManager : MonoBehaviour
     }
     void HandleTigerDeath()
     {
-        StartCoroutine(PlayAnimationAndSwitchScene());
-    }
-    IEnumerator PlayAnimationAndSwitchScene()
-    {
-        yield return new WaitForSeconds(1.0f);
+        //改成在同一個scene,用圍欄,補切換scene
+        Debug.Log("level1 finished");
 
-        SceneManager.LoadScene("Level_Drgon");
     }
+  
 }
 
 public class Player

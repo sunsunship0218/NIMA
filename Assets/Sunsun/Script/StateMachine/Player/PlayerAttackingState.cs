@@ -12,15 +12,13 @@ public class PlayerAttackingState : PlayerBaseState
     bool alreadyApplyForce;
     public override void Enter()
     {
-        Debug.Log("Enter ATK");
+
         
         //§ðÀ»¶Ë®`§P©w
         playerStateMachine.RightweaponDamage.SetAttack(attack.Damage, attack.knockbackRange);
         playerStateMachine.LeftweaponDamage.SetAttack(attack.Damage, attack.knockbackRange);
         playerStateMachine.animator.CrossFadeInFixedTime(attack.AnimationName, attack.TransitionDuration);
-        Debug.Log($"Enter ATK with AnimationName: {attack.AnimationName}, " +
-     $"TransitionDuration: {attack.TransitionDuration}," +
-     $"AttackTime:{attack.ComboAttackTime}");
+     
     }
     public override void Update(float deltatime)
     {
@@ -31,7 +29,7 @@ public class PlayerAttackingState : PlayerBaseState
         MoveWithDeltatime(deltatime);
         //¶i¦æ§ðÀ»¸òª¬ºA§P©w
         float NormalizedTime = GetNormalizedTime(playerStateMachine.animator,"Attack");
-        Debug.Log("NormalizedTime: "+NormalizedTime);
+    
         if (NormalizedTime >=0 && NormalizedTime < 1f)
         {
             if (NormalizedTime >= attack.ForceTime)
@@ -54,13 +52,14 @@ public class PlayerAttackingState : PlayerBaseState
             else
             {
                 playerStateMachine.SwitchState(new PlayerFreeLookState(playerStateMachine));
+             
             }
         }
         previousFrameTime = NormalizedTime;
     }
     public override void Exit()
     {
-        Debug.Log("Exit ATK");
+      
     }
     void TryApplyForce()
     {

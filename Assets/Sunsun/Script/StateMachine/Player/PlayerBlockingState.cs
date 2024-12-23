@@ -12,7 +12,7 @@ public class PlayerBlockingState :PlayerBaseState
     public PlayerBlockingState (PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
     public override void Enter()
     {
-        Debug.Log($"Enter Block: {Time.time}");
+        playerStateMachine.blockPostureHandler.SetPosture(25f);
         timer = 0f;
         playerStateMachine.playerHealth.healthSystem.SetInvunerable(true);
         playerStateMachine.animator.CrossFadeInFixedTime(BlockHASH, duration);
@@ -20,7 +20,6 @@ public class PlayerBlockingState :PlayerBaseState
     }
     public override void Update(float deltaTime)
     {
-        playerStateMachine.blockPostureHandler.SetPosture(5f *2);
         MoveWithDeltatime(deltaTime);
         //緩衝時間
         timer += deltaTime;
@@ -50,7 +49,7 @@ public class PlayerBlockingState :PlayerBaseState
     }
     public override void Exit()
     {
-        Debug.Log($"Exit Block: {Time.time}");
+     
         playerStateMachine.playerHealth.healthSystem.SetInvunerable(false);
     }
 }

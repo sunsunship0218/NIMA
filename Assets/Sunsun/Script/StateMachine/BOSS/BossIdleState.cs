@@ -36,17 +36,9 @@ public class BossIdleState : BossBaseState
             bool isAttackAnimationFinished = currentStateInfo.normalizedTime > 0.95f && currentStateInfo.IsName("Anticipation");
             if (isAttackAnimationFinished && IsinAttackingRange())
             {
-                Debug.Log("«e·nµ²§ô");
-                Debug.Log("IN BOSS ATK RANGE");
                 enemyStatemachine.SwitchState(new BossAttackingState(enemyStatemachine, 0));
             }
-        /*    if (IsinAttackingRange())
-            {
-                
-                Debug.Log(currentStateInfo.normalizedTime);
-                //
-            }
-        */
+       
         }
 
         FacePlayer();

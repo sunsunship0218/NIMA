@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System;
 
 public class BossStateMachine : StateMachine
 {
+  //  public  event Action OnTigerDestroyed;
     //componment
     [field: SerializeField]
     public Animator animator { get; private set; }
@@ -86,9 +88,16 @@ public class BossStateMachine : StateMachine
     public PlayerStateMachine playerStateMachine;
     //Some Flag
   public  bool inTheZone = false;
+    public bool inPhase2 ;
+    public enum BossPhase
+    {
+        Phase1,
+        Phase2
+    }
     //狀態機參數
     private void Start()
     {
+        inPhase2 = false;
         //Get componment
         player = GameObject.FindGameObjectWithTag("Player");
         playerStateMachine = player.GetComponentInChildren<PlayerStateMachine>();
@@ -98,6 +107,7 @@ public class BossStateMachine : StateMachine
         //this 就是現在的PlayerStateMachine實例
         SwitchState(new BossIdleState(this));
     }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -113,6 +123,7 @@ public class BossStateMachine : StateMachine
 
 
     }
+
     private void OnEnable()
     {
         Debug.Log("Enemy HandleTakeDamage");
@@ -144,10 +155,32 @@ public class BossStateMachine : StateMachine
         characterController.Move(newPosition);
 
     }
+
+    private void HandleHitCountCheck()
+    {
+        if (hitCount > 2)
+        {
+         //   SwitchState(BlockState);
+            //格擋/後退
+            hitCount = 0; // 重置?中次?
+        }
+    }
     void HandleTakeDamage()
     {
+        CheckPhaseChanging();
+      
+    }
+    void CheckPhaseChanging()
+    {
+        if (inPhase2 == false && (health.healthSystem.GetHealth() <= health.healthSystem.MaxHealth * 0.5f))
+        {
 
-       // SwitchState(new EnemyImpactState(this));
+           SwitchState(new BossPhase2TransitionState(this));
+        }
+        else
+        {
+            SwitchState(new BossImpactState(this));
+        }
     }
     private void HandleDie()
     {
