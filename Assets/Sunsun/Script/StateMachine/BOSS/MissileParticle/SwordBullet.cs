@@ -2,27 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//子彈產生的位置
 public class SwordBullet : MonoBehaviour
 {
-    public ArcMissileSpawner spawner;
+    public GameObject particleprefab;
+    [SerializeField] BossStateMachine stateMachine;
     Vector2 direction;
     //產生子彈
     //在特效呼叫這個程式
-    //gameobject 預設位置
-    void Start()
-    {
-      
-    }
+    //gameobject 是預設位置
 
-    // Update is called once per frame
-    void Update()
-    {
-        direction = (transform.localRotation * Vector2.right).normalized;
-    }
+    //Rotation對齊為BOSS的朝向
+    //Direction為BOSS朝向
+    //BOSS已經面向玩家,所以
     public void Shoot()
     {
-        GameObject go = Instantiate(spawner.gameObject, transform.position, Quaternion.identity);
+        Debug.Log("Already shoot");
+        Quaternion rotation = stateMachine.transform.rotation;
+        GameObject go = Instantiate(particleprefab, transform.position, rotation);
         ArcMissileSpawner arcMissile =go.GetComponent<ArcMissileSpawner>();
-        arcMissile.Direction = direction;
+        arcMissile.Direction = stateMachine.transform.forward.normalized;
     }
 }
