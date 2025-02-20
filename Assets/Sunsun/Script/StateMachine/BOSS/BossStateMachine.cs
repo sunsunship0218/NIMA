@@ -33,6 +33,7 @@ public class BossStateMachine : StateMachine
     public WeaponDamage weaponDamageR { get; private set; }
 
     //不同攻擊combo
+    //Phase1
     [field: SerializeField]
     public Attack[] ShortAttacks { get; private set; }
 
@@ -41,6 +42,15 @@ public class BossStateMachine : StateMachine
 
     [field: SerializeField]
     public Attack[] LongAttacks { get; private set; }
+    //Phase2
+    [field: SerializeField]
+    public Attack[] S2_ShortAttacks { get; private set; }
+
+    [field: SerializeField]
+    public Attack[] S2_MidAttacks { get; private set; }
+
+    [field: SerializeField]
+    public Attack[] S2_LongAttacks { get; private set; }
     //觸發進場動畫區域
     [field: SerializeField]
     public GameObject TriggerZone { get; private set; }

@@ -156,7 +156,7 @@ public class EnemyAttackingState : EnemyBaseState
                 if (IsinShortAttackingRange())
                 {
                    float chance = Random.Range(0, 3);
-                    if (chance >2.5)
+                    if (chance >1.8)
                     {
                         enemyStatemachine.SwitchState(new EnemyCirclingState(enemyStatemachine));
                     }
