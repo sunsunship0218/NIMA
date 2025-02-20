@@ -9781,7 +9781,6 @@ GameObject:
   - component: {fileID: 7668481495888580777}
   - component: {fileID: 5855905902149539276}
   - component: {fileID: 4923149233067913349}
-  - component: {fileID: 3822120031520763156}
   m_Layer: 0
   m_Name: "\u9752\u9F8D1031 (1)"
   m_TagString: Enemy
@@ -9891,7 +9890,7 @@ Transform:
   - {fileID: 8927782142764234474}
   - {fileID: 7623845388102159064}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &5427758428845708635
 Animator:
@@ -10045,48 +10044,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5349974922d2cb34f9cc9e21bb22c43a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3822120031520763156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4981173303331664354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71aab68172a55ae4abfdd9deec698abb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <animator>k__BackingField: {fileID: 5427758428845708635}
-  <agent>k__BackingField: {fileID: 7384264429118133770}
-  <characterController>k__BackingField: {fileID: 7245949964495149536}
-  <ragDoll>k__BackingField: {fileID: 7668481495888580777}
-  <target>k__BackingField: {fileID: 0}
-  <health>k__BackingField: {fileID: 0}
-  <weaponDamageL>k__BackingField: {fileID: 8105258246606193783}
-  <weaponDamageR>k__BackingField: {fileID: 8209751736414579718}
-  <ShortAttacks>k__BackingField: []
-  <MidAttacks>k__BackingField: []
-  <LongAttacks>k__BackingField: []
-  <AttackRange>k__BackingField: 2
-  <LongAttackRange>k__BackingField: 0
-  <ShortAttackRange>k__BackingField: 0
-  <MidAttackRange>k__BackingField: 0
-  <CirclingAroundRange>k__BackingField: 0
-  <AttackingDamage>k__BackingField: 15
-  hitCount: 0
-  lastHitTime: 0
-  lastCirclingTime: 0
-  <hitCountResetTime>k__BackingField: 2
-  <KnockBack>k__BackingField: 3
-  <detectionPlayerRange>k__BackingField: 10
-  <MovementSpeed>k__BackingField: 3
-  <circlingSpeed>k__BackingField: 0
-  <forceReceiver>k__BackingField: {fileID: 0}
-  <RetreatRange>k__BackingField: 5
-  player: {fileID: 0}
-  playerPosition: {x: 0, y: 0, z: 0}
-  playerStateMachine: {fileID: 0}
 --- !u!1 &5090420807596853038
 GameObject:
   m_ObjectHideFlags: 0

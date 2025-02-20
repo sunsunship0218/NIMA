@@ -93269,23 +93269,16 @@ AnimationClip:
     intParameter: 2
     messageOptions: 0
   - time: 0.3
-    functionName: Attack1Play
+    functionName: PlayeCombo5Effect
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.46666667
+  - time: 0.4
     functionName: DisableWeapon
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.5
-    functionName: Attack1Stop
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
+    intParameter: 2
     messageOptions: 0

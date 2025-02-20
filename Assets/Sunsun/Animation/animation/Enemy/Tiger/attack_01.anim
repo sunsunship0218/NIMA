@@ -73435,11 +73435,11 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.2
-    functionName: 
+    functionName: Attack3Play
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 0
+    intParameter: 2
     messageOptions: 0
   - time: 0.23333333
     functionName: EnableWeapon
@@ -73448,13 +73448,6 @@ AnimationClip:
     floatParameter: 0
     intParameter: 2
     messageOptions: 0
-  - time: 0.33333334
-    functionName: 
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
   - time: 0.36666667
     functionName: DisableWeapon
     data: 
@@ -73462,8 +73455,15 @@ AnimationClip:
     floatParameter: 0
     intParameter: 2
     messageOptions: 0
+  - time: 0.4
+    functionName: Attack3Stop
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.46666667
-    functionName: 
+    functionName: Attack3_2Play
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -73474,10 +73474,17 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 0
+    intParameter: 2
     messageOptions: 0
   - time: 0.7
     functionName: DisableWeapon
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 2
+    messageOptions: 0
+  - time: 0.76666665
+    functionName: Attack3_2Stop
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

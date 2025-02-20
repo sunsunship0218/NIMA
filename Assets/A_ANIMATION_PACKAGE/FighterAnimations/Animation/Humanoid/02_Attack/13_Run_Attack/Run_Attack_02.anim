@@ -100302,7 +100302,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.7
+  - time: 0.76666665
     functionName: GroundedEffectStop
     data: 
     objectReferenceParameter: {fileID: 0}

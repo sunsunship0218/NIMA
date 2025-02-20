@@ -14,7 +14,7 @@ public class SwordBullet : MonoBehaviour
 
     //Rotation對齊為BOSS的朝向
     //Direction為BOSS朝向
-    //BOSS已經面向玩家,所以
+    //BOSS已經面向玩家
     public void Shoot()
     {
         Debug.Log("Already shoot");

@@ -11,23 +11,35 @@ public class BossAttackingState : BossBaseState
     //連擊
     const float ComboResetTime = 1.0f;
     int currentComboStep = 0;
-    readonly int maxShortComboSteps;
-    readonly int maxMidComboSteps;
-    readonly int maxLongComboSteps;
+    //Phase1
+    readonly int maxShortComboSteps=0;
+    readonly int maxMidComboSteps=0;
+    readonly int maxLongComboSteps=0;
+    //Phase2
+    readonly int S2maxShortComboSteps = 0;
+    readonly int S2maxMidComboSteps = 0;
+    readonly int S2maxLongComboSteps = 0;
 
-    //
     bool alreadyAppliedForce;
     float previousFrameTime;
-
+    //Phas1
     Attack ShortAttack;
     Attack MidAttack;
     Attack LongAttack;
+    //Phase2
+    Attack S2_ShortAttack;
+    Attack S2_MidAttack;
+    Attack S2_LongAttack;
     //階段攻擊陣列
     //存放攻擊的陣列
+    //Phase1
     readonly int[] ShortRangeAttackHashes;
     readonly int[] MidRangeAttackHashes;
     readonly int[] LongRangeAttackHashes;
-
+    //phase2
+    readonly int[] S2_ShortRangeAttackHashes;
+    readonly int[] S2_MidRangeAttackHashes;
+    readonly int[] S2_LongRangeAttackHashes;
     public BossAttackingState(BossStateMachine enemyStateMachine, int attackIndex) : base(enemyStateMachine)
     {
         //短距離
@@ -61,18 +73,52 @@ public class BossAttackingState : BossBaseState
         maxShortComboSteps = enemyStatemachine.ShortAttacks.Length;
         maxMidComboSteps = enemyStatemachine.MidAttacks.Length;
         maxLongComboSteps = enemyStatemachine.LongAttacks.Length;
+        //------------------------------------------------------------------------
+        //Phase 2
+        //短距離
+        S2_ShortAttack = enemyStatemachine.S2_ShortAttacks[attackIndex];
+        //動畫initial hash name
+        S2_ShortRangeAttackHashes = new int[enemyStatemachine.S2_ShortAttacks.Length];
+        for (int i = 0; i < enemyStatemachine.S2_ShortAttacks.Length; i++)
+        {
+            S2_ShortRangeAttackHashes[i] = Animator.StringToHash(enemyStateMachine.S2_ShortAttacks[i].AnimationName);
+        }
+
+        //中距離
+        S2_MidAttack = enemyStatemachine.S2_MidAttacks[attackIndex];
+        //動畫initial hash name
+        S2_MidRangeAttackHashes = new int[enemyStatemachine.S2_MidAttacks.Length];
+        for (int i = 0; i < enemyStatemachine.S2_MidAttacks.Length; i++)
+        {
+            S2_MidRangeAttackHashes[i] = Animator.StringToHash(enemyStateMachine.S2_MidAttacks[i].AnimationName);
+        }
+
+        //長距離
+        S2_MidAttack = enemyStatemachine.S2_MidAttacks[attackIndex];
+        //動畫initial hash name
+        S2_MidRangeAttackHashes = new int[enemyStatemachine.S2_MidAttacks.Length];
+        for (int i = 0; i < enemyStatemachine.S2_LongAttacks.Length; i++)
+        {
+            S2_ShortRangeAttackHashes[i] = Animator.StringToHash(enemyStateMachine.S2_ShortAttacks[i].AnimationName);
+        }
+
+        //各距離最大的
+        S2maxShortComboSteps = enemyStatemachine.S2_ShortAttacks.Length;
+        S2maxMidComboSteps = enemyStatemachine.S2_MidAttacks.Length;
+        S2maxLongComboSteps = enemyStatemachine.S2_LongAttacks.Length;
     }
 
 
     public override void Enter()
     {
+        Debug.Log("enter boss atk");
         if (enemyStatemachine.inPhase2 == false)
         {
             Phase1ATK();
         }
         else if (enemyStatemachine.inPhase2 == true)
         {
-
+            Phase2ATK();
         }
       
 
@@ -90,12 +136,9 @@ public class BossAttackingState : BossBaseState
         float normalizedTime = GetNormalizedTime(enemyStatemachine.animator, "Attack");
 
         // 獲取動畫完成度
+        int attackTagHash = Animator.StringToHash("Attack");
         AnimatorStateInfo currentStateInfo = enemyStatemachine.animator.GetCurrentAnimatorStateInfo(0);
-        bool isAttackAnimationFinished = currentStateInfo.normalizedTime >= 0.95f &&
-            (currentStateInfo.IsName("Attack1") || currentStateInfo.IsName("Attack2") || currentStateInfo.IsName("Attack3")
-            || currentStateInfo.IsName("Attack4") || currentStateInfo.IsName("Attack5") || currentStateInfo.IsName("Attack6")
-            || currentStateInfo.IsName("Attack7")
-            );
+        bool isAttackAnimationFinished = currentStateInfo.normalizedTime >= 0.95f && currentStateInfo.tagHash == attackTagHash;
 
 
 
@@ -192,7 +235,7 @@ public class BossAttackingState : BossBaseState
         {
             doMidComboAttacks(currentComboStep);
         }
-        else
+        else if (IsinLongAttackingRange())
         {
             //Debug.Log(" IN LONG RANGE ATTACK");
             doLongComboAttacks(currentComboStep, Time.deltaTime);
@@ -200,8 +243,21 @@ public class BossAttackingState : BossBaseState
     }
     void Phase2ATK()
     {
-        Debug.Log("Phase2 ATK");
+          if (IsinShortAttackingRange())
+        {
+            doShortComboAttacks(currentComboStep);
+        }
+        else if (IsinMidAttackRange())
+        {
+            doMidComboAttacks(currentComboStep);
+        }
+        else if (IsinLongAttackingRange())
+        {
+            //Debug.Log(" IN LONG RANGE ATTACK");
+            doLongComboAttacks(currentComboStep, Time.deltaTime);
+        }
     }
+    //Phase1
     void doShortComboAttacks(int comboStep)
     {
         if (comboStep >= 0 && comboStep < maxShortComboSteps)
@@ -233,7 +289,6 @@ public class BossAttackingState : BossBaseState
         }
 
     }
-
     void doLongComboAttacks(int comboStep, float deltatime)
     {
 
@@ -255,7 +310,59 @@ public class BossAttackingState : BossBaseState
         }
 
     }
+    //Phase2
+    void S2_ShortComboAttacks(int comboStep)
+    {
+        if (comboStep >= 0 && comboStep < S2maxShortComboSteps)
+        {
+            int selectedAttackHash = S2_ShortRangeAttackHashes[comboStep];
+            // 攻擊傷害判定
+            enemyStatemachine.weaponDamageL.SetAttack(S2_ShortAttack.Damage, S2_ShortAttack.knockbackRange);
+            enemyStatemachine.weaponDamageR.SetAttack(S2_ShortAttack.Damage, S2_ShortAttack.knockbackRange);
 
+            // 播放選定的攻擊動畫
+            enemyStatemachine.animator.CrossFadeInFixedTime(selectedAttackHash, TransitionDuration, 0);
+            lastAttackTime = Time.time; // 更新最後攻擊時間
+        }
+
+    }
+    void S2_doMidComboAttacks(int comboStep)
+    {
+
+        if (comboStep >= 0 && comboStep <S2maxMidComboSteps)
+        {
+            int selectedAttackHash = S2_MidRangeAttackHashes[comboStep];
+            // 攻擊傷害判定
+            enemyStatemachine.weaponDamageL.SetAttack(S2_MidAttack.Damage, S2_MidAttack.knockbackRange);
+            enemyStatemachine.weaponDamageR.SetAttack(S2_MidAttack.Damage, S2_MidAttack.knockbackRange);
+
+            // 播放選定的攻擊動畫
+            enemyStatemachine.animator.CrossFadeInFixedTime(selectedAttackHash, TransitionDuration, 0);
+            lastAttackTime = Time.time; // 更新最後攻擊時間
+        }
+
+    }
+    void S2_doLongComboAttacks(int comboStep, float deltatime)
+    {
+
+
+        if (comboStep >= 0 && comboStep < S2maxLongComboSteps)
+        {
+            int selectedAttackHash = S2_LongRangeAttackHashes[comboStep];
+            // 攻擊傷害判定
+            enemyStatemachine.weaponDamageL.SetAttack(S2_LongAttack.Damage, S2_LongAttack.knockbackRange);
+            enemyStatemachine.weaponDamageR.SetAttack(S2_LongAttack.Damage, S2_LongAttack.knockbackRange);
+            //
+            enemyStatemachine.forceReceiver.AddForce(enemyStatemachine.transform.forward * S2_LongAttack.Force);
+            alreadyAppliedForce = true;
+
+
+            // 播放選定的攻擊動畫
+            enemyStatemachine.animator.CrossFadeInFixedTime(selectedAttackHash, TransitionDuration, 0);
+            lastAttackTime = Time.time; // 更新最後攻擊時間
+        }
+
+    }
     void TransitionAfterCombo()
     {
         // 連擊結束後，檢查是否需要追逐
