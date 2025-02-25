@@ -142,7 +142,7 @@ public class BossAttackingState : BossBaseState
 
 
 
-      if (normalizedTime >= ShortAttack.ForceTime && !alreadyAppliedForce)
+        if (normalizedTime >= ShortAttack.ForceTime && !alreadyAppliedForce)
         {
             // 施加向前的力
             enemyStatemachine.forceReceiver.AddForce(enemyStatemachine.transform.forward * ShortAttack.Force);
@@ -176,48 +176,86 @@ public class BossAttackingState : BossBaseState
             if (Time.time - lastAttackTime > AttackCoolTIme)
             {
                 currentComboStep++;
-                if (IsinLongAttackingRange() && currentComboStep > maxLongComboSteps)
+                //Stage 2
+                if (enemyStatemachine.inPhase2 )
                 {
-                    currentComboStep = 0;
-                }
-                if (IsinMidAttackRange() && currentComboStep > maxMidComboSteps)
-                {
-                    currentComboStep = 0;
-                }
-                if (IsinShortAttackingRange() && currentComboStep > maxShortComboSteps)
-                {
-                    currentComboStep = 0;
-                }
-                //這裡要替換成距離
-                if (IsinShortAttackingRange())
-                {
-                    doShortComboAttacks(currentComboStep);
-               /*     float chance = Random.Range(0, 3);
-                    if (chance > 1.75)
+                    if (IsinLongAttackingRange() && currentComboStep >= S2maxLongComboSteps)
                     {
-                        enemyStatemachine.SwitchState(new EnemyCirclingState(enemyStatemachine));
+                        currentComboStep = 0;
                     }
-                    else
+                    if (IsinMidAttackRange() && currentComboStep >= S2maxMidComboSteps)
                     {
-                      
+                        currentComboStep = 0;
                     }
-               */
+                    if (IsinShortAttackingRange() && currentComboStep >= S2maxShortComboSteps)
+                    {
+                        currentComboStep = 0;
+                    }
+
+                    // 撥放 Phase2 攻擊
+                    if (IsinShortAttackingRange())
+                    {
+                        S2_doShortComboAttacks(currentComboStep);
+                    }
+                    else if (IsinMidAttackRange())
+                    {
+                        S2_doMidComboAttacks(currentComboStep);
+                    }
+                    else if (IsinLongAttackingRange())
+                    {
+                        S2_doLongComboAttacks(currentComboStep, deltaTime);
+                    }
+
+
                 }
-                else if (IsinMidAttackRange())
+                //Stage 1
+                if (!enemyStatemachine.inPhase2) 
                 {
-                    doMidComboAttacks(currentComboStep);
+                   
+                    if (IsinLongAttackingRange() && currentComboStep > maxLongComboSteps)
+                    {
+                        currentComboStep = 0;
+                    }
+                    if (IsinMidAttackRange() && currentComboStep > maxMidComboSteps)
+                    {
+                        currentComboStep = 0;
+                    }
+                    if (IsinShortAttackingRange() && currentComboStep > maxShortComboSteps)
+                    {
+                        currentComboStep = 0;
+                    }
+                    if (IsinShortAttackingRange())
+                    {
+                        doShortComboAttacks(currentComboStep);
+                        /*     float chance = Random.Range(0, 3);
+                             if (chance > 1.75)
+                             {
+                                 enemyStatemachine.SwitchState(new EnemyCirclingState(enemyStatemachine));
+                             }
+                             else
+                             {
+
+                             }
+                        */
+                    }
+                    else if (IsinMidAttackRange())
+                    {
+                        doMidComboAttacks(currentComboStep);
+                    }
+                    else if (IsinLongAttackingRange())
+                    {
+                        doLongComboAttacks(currentComboStep, deltaTime);
+                    }
+
                 }
-                else if (IsinLongAttackingRange())
-                {
-                    doLongComboAttacks(currentComboStep, deltaTime);
-                }
+               
+           
+              
             }
             else
             {
                 TransitionAfterCombo();
             }
-
-
         }
     }
     public override void Exit()
