@@ -94,12 +94,12 @@ public class BossAttackingState : BossBaseState
         }
 
         //長距離
-        S2_MidAttack = enemyStatemachine.S2_MidAttacks[attackIndex];
+        S2_LongAttack = enemyStatemachine.S2_LongAttacks[attackIndex];
         //動畫initial hash name
-        S2_MidRangeAttackHashes = new int[enemyStatemachine.S2_MidAttacks.Length];
+        S2_LongRangeAttackHashes = new int[enemyStatemachine.S2_LongAttacks.Length];
         for (int i = 0; i < enemyStatemachine.S2_LongAttacks.Length; i++)
         {
-            S2_ShortRangeAttackHashes[i] = Animator.StringToHash(enemyStateMachine.S2_ShortAttacks[i].AnimationName);
+            S2_LongRangeAttackHashes[i] = Animator.StringToHash(enemyStateMachine.S2_LongAttacks[i].AnimationName);
         }
 
         //各距離最大的
@@ -245,16 +245,16 @@ public class BossAttackingState : BossBaseState
     {
           if (IsinShortAttackingRange())
         {
-            doShortComboAttacks(currentComboStep);
+            S2_doShortComboAttacks(currentComboStep);
         }
         else if (IsinMidAttackRange())
         {
-            doMidComboAttacks(currentComboStep);
+            S2_doMidComboAttacks(currentComboStep);
         }
         else if (IsinLongAttackingRange())
         {
             //Debug.Log(" IN LONG RANGE ATTACK");
-            doLongComboAttacks(currentComboStep, Time.deltaTime);
+            S2_doLongComboAttacks(currentComboStep, Time.deltaTime);
         }
     }
     //Phase1
@@ -311,7 +311,7 @@ public class BossAttackingState : BossBaseState
 
     }
     //Phase2
-    void S2_ShortComboAttacks(int comboStep)
+    void S2_doShortComboAttacks(int comboStep)
     {
         if (comboStep >= 0 && comboStep < S2maxShortComboSteps)
         {
