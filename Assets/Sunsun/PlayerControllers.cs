@@ -297,9 +297,18 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
             ""id"": ""407eab84-22f9-4e50-b7a6-07385be50e28"",
             ""actions"": [
                 {
-                    ""name"": ""Navigate"",
+                    ""name"": ""Navigate_Pad"",
                     ""type"": ""Button"",
                     ""id"": ""54424997-a0c6-43f8-a831-fa7945962300"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Navigate_mouse"",
+                    ""type"": ""Button"",
+                    ""id"": ""7f43d299-e758-44fb-89a9-700649041347"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -314,7 +323,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Navigate"",
+                    ""action"": ""Navigate_Pad"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -325,7 +334,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Navigate"",
+                    ""action"": ""Navigate_Pad"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -336,7 +345,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Navigate"",
+                    ""action"": ""Navigate_Pad"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -347,7 +356,51 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Navigate"",
+                    ""action"": ""Navigate_Pad"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1e2ad81d-6dcd-40db-8b67-1f3e12e2495a"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Navigate_mouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ea99b890-acfd-496c-ba82-2390b9dee20b"",
+                    ""path"": ""*/{Menu}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Navigate_mouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ee75fceb-2dc2-4d90-9cd3-bb607e4b5fba"",
+                    ""path"": ""*/{Menu}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Navigate_mouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""253cdf0a-6951-4a99-8618-c88c2d24150b"",
+                    ""path"": ""*/{Menu}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Navigate_mouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -395,7 +448,8 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
         m_Player_BlockAndParry = m_Player.FindAction("BlockAndParry", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-        m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
+        m_UI_Navigate_Pad = m_UI.FindAction("Navigate_Pad", throwIfNotFound: true);
+        m_UI_Navigate_mouse = m_UI.FindAction("Navigate_mouse", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -551,12 +605,14 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
     // UI
     private readonly InputActionMap m_UI;
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
-    private readonly InputAction m_UI_Navigate;
+    private readonly InputAction m_UI_Navigate_Pad;
+    private readonly InputAction m_UI_Navigate_mouse;
     public struct UIActions
     {
         private @PlayerControllers m_Wrapper;
         public UIActions(@PlayerControllers wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Navigate => m_Wrapper.m_UI_Navigate;
+        public InputAction @Navigate_Pad => m_Wrapper.m_UI_Navigate_Pad;
+        public InputAction @Navigate_mouse => m_Wrapper.m_UI_Navigate_mouse;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -566,16 +622,22 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
-            @Navigate.started += instance.OnNavigate;
-            @Navigate.performed += instance.OnNavigate;
-            @Navigate.canceled += instance.OnNavigate;
+            @Navigate_Pad.started += instance.OnNavigate_Pad;
+            @Navigate_Pad.performed += instance.OnNavigate_Pad;
+            @Navigate_Pad.canceled += instance.OnNavigate_Pad;
+            @Navigate_mouse.started += instance.OnNavigate_mouse;
+            @Navigate_mouse.performed += instance.OnNavigate_mouse;
+            @Navigate_mouse.canceled += instance.OnNavigate_mouse;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
         {
-            @Navigate.started -= instance.OnNavigate;
-            @Navigate.performed -= instance.OnNavigate;
-            @Navigate.canceled -= instance.OnNavigate;
+            @Navigate_Pad.started -= instance.OnNavigate_Pad;
+            @Navigate_Pad.performed -= instance.OnNavigate_Pad;
+            @Navigate_Pad.canceled -= instance.OnNavigate_Pad;
+            @Navigate_mouse.started -= instance.OnNavigate_mouse;
+            @Navigate_mouse.performed -= instance.OnNavigate_mouse;
+            @Navigate_mouse.canceled -= instance.OnNavigate_mouse;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -623,6 +685,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
     }
     public interface IUIActions
     {
-        void OnNavigate(InputAction.CallbackContext context);
+        void OnNavigate_Pad(InputAction.CallbackContext context);
+        void OnNavigate_mouse(InputAction.CallbackContext context);
     }
 }
