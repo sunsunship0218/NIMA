@@ -313,6 +313,15 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""1"",
+                    ""type"": ""Button"",
+                    ""id"": ""2a698399-4fda-4b4b-8080-aee5ffb2f7ae"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -403,6 +412,17 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                     ""action"": ""Navigate_mouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d7d93597-09a7-4743-b509-48a324baef94"",
+                    ""path"": ""*/{Forward}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -450,6 +470,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate_Pad = m_UI.FindAction("Navigate_Pad", throwIfNotFound: true);
         m_UI_Navigate_mouse = m_UI.FindAction("Navigate_mouse", throwIfNotFound: true);
+        m_UI__1 = m_UI.FindAction("1", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -607,12 +628,14 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
     private readonly InputAction m_UI_Navigate_Pad;
     private readonly InputAction m_UI_Navigate_mouse;
+    private readonly InputAction m_UI__1;
     public struct UIActions
     {
         private @PlayerControllers m_Wrapper;
         public UIActions(@PlayerControllers wrapper) { m_Wrapper = wrapper; }
         public InputAction @Navigate_Pad => m_Wrapper.m_UI_Navigate_Pad;
         public InputAction @Navigate_mouse => m_Wrapper.m_UI_Navigate_mouse;
+        public InputAction @_1 => m_Wrapper.m_UI__1;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -628,6 +651,9 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
             @Navigate_mouse.started += instance.OnNavigate_mouse;
             @Navigate_mouse.performed += instance.OnNavigate_mouse;
             @Navigate_mouse.canceled += instance.OnNavigate_mouse;
+            @_1.started += instance.On_1;
+            @_1.performed += instance.On_1;
+            @_1.canceled += instance.On_1;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -638,6 +664,9 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
             @Navigate_mouse.started -= instance.OnNavigate_mouse;
             @Navigate_mouse.performed -= instance.OnNavigate_mouse;
             @Navigate_mouse.canceled -= instance.OnNavigate_mouse;
+            @_1.started -= instance.On_1;
+            @_1.performed -= instance.On_1;
+            @_1.canceled -= instance.On_1;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -687,5 +716,6 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
     {
         void OnNavigate_Pad(InputAction.CallbackContext context);
         void OnNavigate_mouse(InputAction.CallbackContext context);
+        void On_1(InputAction.CallbackContext context);
     }
 }
