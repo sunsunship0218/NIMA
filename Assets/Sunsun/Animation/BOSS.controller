@@ -77,10 +77,10 @@ AnimatorStateMachine:
     m_Position: {x: 0, y: 0, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4848728356397437124}
-    m_Position: {x: 560, y: 360, z: 0}
+    m_Position: {x: 560, y: 370, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 481467903953940821}
-    m_Position: {x: 810, y: 350, z: 0}
+    m_Position: {x: 810, y: 370, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -466,7 +466,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: S2ATK2 0
+  m_Name: S2ATK3
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

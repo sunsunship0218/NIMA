@@ -275,9 +275,27 @@
             "id": "407eab84-22f9-4e50-b7a6-07385be50e28",
             "actions": [
                 {
-                    "name": "Navigate",
+                    "name": "Navigate_Pad",
                     "type": "Button",
                     "id": "54424997-a0c6-43f8-a831-fa7945962300",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Navigate_mouse",
+                    "type": "Button",
+                    "id": "7f43d299-e758-44fb-89a9-700649041347",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "1",
+                    "type": "Button",
+                    "id": "2a698399-4fda-4b4b-8080-aee5ffb2f7ae",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -292,7 +310,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Navigate",
+                    "action": "Navigate_Pad",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -303,7 +321,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Navigate",
+                    "action": "Navigate_Pad",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -314,7 +332,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Navigate",
+                    "action": "Navigate_Pad",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -325,7 +343,62 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Navigate",
+                    "action": "Navigate_Pad",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1e2ad81d-6dcd-40db-8b67-1f3e12e2495a",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse and Keyboard",
+                    "action": "Navigate_mouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ea99b890-acfd-496c-ba82-2390b9dee20b",
+                    "path": "*/{Menu}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse and Keyboard",
+                    "action": "Navigate_mouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ee75fceb-2dc2-4d90-9cd3-bb607e4b5fba",
+                    "path": "*/{Menu}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse and Keyboard",
+                    "action": "Navigate_mouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "253cdf0a-6951-4a99-8618-c88c2d24150b",
+                    "path": "*/{Menu}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse and Keyboard",
+                    "action": "Navigate_mouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d7d93597-09a7-4743-b509-48a324baef94",
+                    "path": "*/{Forward}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
