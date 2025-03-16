@@ -22,8 +22,6 @@ public class PlayerAttackingState : PlayerBaseState
     }
     public override void Update(float deltatime)
     {
-
-        Facetarget();
         FaceEnemy();
         //²¾°Ê
         MoveWithDeltatime(deltatime);

@@ -27,7 +27,7 @@ public abstract class PlayerBaseState : State
     {
         if (playerStateMachine.targeter.currentTarget == null)
         {
-                playerStateMachine.SwitchState(new PlayerFreeLookState(playerStateMachine));
+            //    playerStateMachine.SwitchState(new PlayerFreeLookState(playerStateMachine));
                 return;
         }
        Vector3 faceTargetPos;
@@ -37,18 +37,22 @@ public abstract class PlayerBaseState : State
     }
   public void FaceEnemy()
     {
-        if (playerStateMachine. EnemyList.Count == 0 || playerStateMachine.EnemyList == null)
+        // 如果清單為 null 或空，就不做任何旋轉更新（保持現有方向）
+        if (playerStateMachine.EnemyList == null || playerStateMachine.EnemyList.Count == 0)
         {
             playerStateMachine.SwitchState(new PlayerFreeLookState(playerStateMachine));
             return;
-
         }
-            
         GameObject nearestEnemy = null;
         float nearestDistance = Mathf.Infinity;
         //找出最近的敵人
         foreach (var enemy in playerStateMachine.EnemyList)
         {
+            if (enemy == null)
+            {
+                continue;
+            }
+
             float DistanceToEnemy = Vector3.Distance(playerStateMachine.transform.position, enemy.transform.position);
             if (DistanceToEnemy < nearestDistance)
             {
@@ -63,6 +67,7 @@ public abstract class PlayerBaseState : State
             faceTargetPos.y = 0f; // 忽略y軸，讓旋轉只影響水平面
             playerStateMachine.transform.rotation = Quaternion.LookRotation(faceTargetPos);
         }
+
 
 
 
