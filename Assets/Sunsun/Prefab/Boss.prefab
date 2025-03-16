@@ -483,7 +483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eea7d0892dbb2646b6f50e49baa4ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myColi: {fileID: 331356744823454109}
+  myColi: {fileID: 0}
   playerHealth: {fileID: 0}
   enemyList: []
   enemyHealthList: []
@@ -584,7 +584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleprefab: {fileID: 1984267876791719359, guid: 5ded2c8e00b4eb0439ea27bd4ce796e2, type: 3}
-  stateMachine: {fileID: 3363172564930296300}
+  stateMachine: {fileID: 0}
 --- !u!1 &1132436916848940386
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,7 +631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eea7d0892dbb2646b6f50e49baa4ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myColi: {fileID: 331356744823454109}
+  myColi: {fileID: 0}
   playerHealth: {fileID: 0}
   enemyList: []
   enemyHealthList: []
@@ -2441,17 +2441,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1440373436452860061}
-  - component: {fileID: 4313137718600755905}
-  - component: {fileID: 3363172564930296300}
-  - component: {fileID: 411308595913275860}
-  - component: {fileID: 331356744823454109}
   - component: {fileID: 2509463060888784634}
-  - component: {fileID: 1760688989816702134}
-  - component: {fileID: 2211426341363527057}
   - component: {fileID: 2758664930012250946}
   - component: {fileID: 5348716185064925419}
   - component: {fileID: 2509232340404831462}
-  - component: {fileID: 4796267893977046952}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Enemy
@@ -2471,10 +2464,10 @@ Transform:
   m_LocalScale: {x: 0.3272707, y: 0.3272707, z: 0.3272707}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5555129858010056014}
   - {fileID: 3332103506694493355}
   - {fileID: 2876844329328425227}
   - {fileID: 5659888083218662129}
-  - {fileID: 5555129858010056014}
   - {fileID: 5538502895707794779}
   - {fileID: 1142959792972733503}
   - {fileID: 8797854398430159349}
@@ -2497,184 +2490,8 @@ Transform:
   - {fileID: 9090875287336446959}
   - {fileID: 8837200669739393304}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -174.552, z: 0.04}
---- !u!95 &4313137718600755905
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3297215454791395816}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 2392c7da74add9448a8f8c99a50c4d6c, type: 3}
-  m_Controller: {fileID: 9100000, guid: 992a0f5405013e74dbd90c0d23a6749f, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3363172564930296300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3297215454791395816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e30b09d991195234bbae50c71f70556f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <animator>k__BackingField: {fileID: 4313137718600755905}
-  <agent>k__BackingField: {fileID: 411308595913275860}
-  <characterController>k__BackingField: {fileID: 331356744823454109}
-  <target>k__BackingField: {fileID: 1760688989816702134}
-  <health>k__BackingField: {fileID: 2758664930012250946}
-  <weaponDamageL>k__BackingField: {fileID: 3665573042509707347}
-  <weaponDamageR>k__BackingField: {fileID: 5892810704675824471}
-  <ShortAttacks>k__BackingField:
-  - <AnimationName>k__BackingField: Attack1
-    <TransitionDuration>k__BackingField: 0.14
-    <ComboStateIndex>k__BackingField: 0
-    <ComboAttackTime>k__BackingField: 0.5
-    <ForceTime>k__BackingField: -1
-    <Force>k__BackingField: 1
-    <Damage>k__BackingField: 5
-    <knockbackRange>k__BackingField: 5
-  - <AnimationName>k__BackingField: Attack2
-    <TransitionDuration>k__BackingField: 0.14
-    <ComboStateIndex>k__BackingField: 1
-    <ComboAttackTime>k__BackingField: 0.8
-    <ForceTime>k__BackingField: -1
-    <Force>k__BackingField: 1
-    <Damage>k__BackingField: 10
-    <knockbackRange>k__BackingField: 5
-  - <AnimationName>k__BackingField: Attack3
-    <TransitionDuration>k__BackingField: 0.14
-    <ComboStateIndex>k__BackingField: 2
-    <ComboAttackTime>k__BackingField: 0.8
-    <ForceTime>k__BackingField: -1
-    <Force>k__BackingField: 1
-    <Damage>k__BackingField: 10
-    <knockbackRange>k__BackingField: 5
-  - <AnimationName>k__BackingField: Attack4
-    <TransitionDuration>k__BackingField: 0.14
-    <ComboStateIndex>k__BackingField: 3
-    <ComboAttackTime>k__BackingField: 0.8
-    <ForceTime>k__BackingField: -1
-    <Force>k__BackingField: 1
-    <Damage>k__BackingField: 10
-    <knockbackRange>k__BackingField: 5
-  <MidAttacks>k__BackingField:
-  - <AnimationName>k__BackingField: Attack4
-    <TransitionDuration>k__BackingField: 0.14
-    <ComboStateIndex>k__BackingField: 0
-    <ComboAttackTime>k__BackingField: 0.5
-    <ForceTime>k__BackingField: -1
-    <Force>k__BackingField: 1
-    <Damage>k__BackingField: 5
-    <knockbackRange>k__BackingField: 5
-  - <AnimationName>k__BackingField: Attack5
-    <TransitionDuration>k__BackingField: 0.14
-    <ComboStateIndex>k__BackingField: 1
-    <ComboAttackTime>k__BackingField: 0.8
-    <ForceTime>k__BackingField: -1
-    <Force>k__BackingField: 1
-    <Damage>k__BackingField: 10
-    <knockbackRange>k__BackingField: 5
-  <LongAttacks>k__BackingField:
-  - <AnimationName>k__BackingField: Attack6
-    <TransitionDuration>k__BackingField: 0.14
-    <ComboStateIndex>k__BackingField: 0
-    <ComboAttackTime>k__BackingField: 0.5
-    <ForceTime>k__BackingField: -1
-    <Force>k__BackingField: 1
-    <Damage>k__BackingField: 5
-    <knockbackRange>k__BackingField: 5
-  - <AnimationName>k__BackingField: Attack7
-    <TransitionDuration>k__BackingField: 0.14
-    <ComboStateIndex>k__BackingField: 1
-    <ComboAttackTime>k__BackingField: 0.8
-    <ForceTime>k__BackingField: -1
-    <Force>k__BackingField: 1
-    <Damage>k__BackingField: 10
-    <knockbackRange>k__BackingField: 5
-  <TriggerZone>k__BackingField: {fileID: 0}
-  <LongAttackRange>k__BackingField: 15
-  <ShortAttackRange>k__BackingField: 8
-  <MidAttackRange>k__BackingField: 10
-  <CirclingAroundRange>k__BackingField: 0
-  <AttackingDamage>k__BackingField: 5
-  hitCount: 0
-  lastHitTime: 0
-  lastCirclingTime: 0
-  <hitCountResetTime>k__BackingField: 0
-  <KnockBack>k__BackingField: -1
-  <detectionPlayerRange>k__BackingField: 0
-  <MovementSpeed>k__BackingField: 0
-  <circlingSpeed>k__BackingField: 0
-  <forceReceiver>k__BackingField: {fileID: 2211426341363527057}
-  <RetreatRange>k__BackingField: 0
-  player: {fileID: 0}
-  playerPosition: {x: 0, y: 0, z: 0}
-  playerStateMachine: {fileID: 0}
-  inTheZone: 0
-  inPhase2: 0
---- !u!195 &411308595913275860
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3297215454791395816}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!143 &331356744823454109
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3297215454791395816}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 6.58
-  m_Radius: 1.71
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 3.27, z: 0}
 --- !u!114 &2509463060888784634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2690,33 +2507,6 @@ MonoBehaviour:
   weapon:
   - {fileID: 1132436916848940386}
   - {fileID: 798851912061361612}
---- !u!114 &1760688989816702134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3297215454791395816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5349974922d2cb34f9cc9e21bb22c43a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2211426341363527057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3297215454791395816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d83d1b896951c748b21658db900a655, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterController: {fileID: 331356744823454109}
-  agent: {fileID: 411308595913275860}
-  drag: 0.3
 --- !u!114 &2758664930012250946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2757,22 +2547,6 @@ MonoBehaviour:
   myColi: {fileID: 0}
   playerHealth: {fileID: 0}
   enemyHealth: {fileID: 0}
---- !u!114 &4796267893977046952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3297215454791395816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78eb0c7f9170d994ab05f84bb7f0be88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  swordBullets:
-  - {fileID: 569316624247927644}
-  - {fileID: 2860937183419316985}
-  - {fileID: 7980007648379874154}
 --- !u!1 &3542775597546168472
 GameObject:
   m_ObjectHideFlags: 0
@@ -2881,7 +2655,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleprefab: {fileID: 1984267876791719359, guid: 5ded2c8e00b4eb0439ea27bd4ce796e2, type: 3}
-  stateMachine: {fileID: 3363172564930296300}
+  stateMachine: {fileID: 0}
 --- !u!1 &4020402099614473335
 GameObject:
   m_ObjectHideFlags: 0
@@ -4230,6 +4004,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5555129858010056014}
+  - component: {fileID: 182807166468711937}
+  - component: {fileID: 7828841784993343281}
+  - component: {fileID: 2112186985351576869}
+  - component: {fileID: 6123729208607742952}
+  - component: {fileID: 454941361322006183}
+  - component: {fileID: 5586615594656275949}
   m_Layer: 0
   m_Name: Armature
   m_TagString: Untagged
@@ -4253,6 +4033,228 @@ Transform:
   m_Father: {fileID: 1440373436452860061}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &182807166468711937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6582579005638664765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e30b09d991195234bbae50c71f70556f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <animator>k__BackingField: {fileID: 0}
+  <agent>k__BackingField: {fileID: 0}
+  <characterController>k__BackingField: {fileID: 0}
+  <target>k__BackingField: {fileID: 0}
+  <health>k__BackingField: {fileID: 2758664930012250946}
+  <weaponDamageL>k__BackingField: {fileID: 3665573042509707347}
+  <weaponDamageR>k__BackingField: {fileID: 5892810704675824471}
+  <ShortAttacks>k__BackingField:
+  - <AnimationName>k__BackingField: Attack1
+    <TransitionDuration>k__BackingField: 0.14
+    <ComboStateIndex>k__BackingField: 0
+    <ComboAttackTime>k__BackingField: 0.5
+    <ForceTime>k__BackingField: -1
+    <Force>k__BackingField: 1
+    <Damage>k__BackingField: 5
+    <knockbackRange>k__BackingField: 5
+  - <AnimationName>k__BackingField: Attack2
+    <TransitionDuration>k__BackingField: 0.14
+    <ComboStateIndex>k__BackingField: 1
+    <ComboAttackTime>k__BackingField: 0.8
+    <ForceTime>k__BackingField: -1
+    <Force>k__BackingField: 1
+    <Damage>k__BackingField: 10
+    <knockbackRange>k__BackingField: 5
+  - <AnimationName>k__BackingField: Attack3
+    <TransitionDuration>k__BackingField: 0.14
+    <ComboStateIndex>k__BackingField: 2
+    <ComboAttackTime>k__BackingField: 0.8
+    <ForceTime>k__BackingField: -1
+    <Force>k__BackingField: 1
+    <Damage>k__BackingField: 10
+    <knockbackRange>k__BackingField: 5
+  - <AnimationName>k__BackingField: Attack4
+    <TransitionDuration>k__BackingField: 0.14
+    <ComboStateIndex>k__BackingField: 3
+    <ComboAttackTime>k__BackingField: 0.8
+    <ForceTime>k__BackingField: -1
+    <Force>k__BackingField: 1
+    <Damage>k__BackingField: 10
+    <knockbackRange>k__BackingField: 5
+  <MidAttacks>k__BackingField:
+  - <AnimationName>k__BackingField: Attack4
+    <TransitionDuration>k__BackingField: 0.14
+    <ComboStateIndex>k__BackingField: 0
+    <ComboAttackTime>k__BackingField: 0.5
+    <ForceTime>k__BackingField: -1
+    <Force>k__BackingField: 1
+    <Damage>k__BackingField: 5
+    <knockbackRange>k__BackingField: 5
+  - <AnimationName>k__BackingField: Attack5
+    <TransitionDuration>k__BackingField: 0.14
+    <ComboStateIndex>k__BackingField: 1
+    <ComboAttackTime>k__BackingField: 0.8
+    <ForceTime>k__BackingField: -1
+    <Force>k__BackingField: 1
+    <Damage>k__BackingField: 10
+    <knockbackRange>k__BackingField: 5
+  <LongAttacks>k__BackingField:
+  - <AnimationName>k__BackingField: Attack6
+    <TransitionDuration>k__BackingField: 0.14
+    <ComboStateIndex>k__BackingField: 0
+    <ComboAttackTime>k__BackingField: 0.5
+    <ForceTime>k__BackingField: -1
+    <Force>k__BackingField: 1
+    <Damage>k__BackingField: 5
+    <knockbackRange>k__BackingField: 5
+  - <AnimationName>k__BackingField: Attack7
+    <TransitionDuration>k__BackingField: 0.14
+    <ComboStateIndex>k__BackingField: 1
+    <ComboAttackTime>k__BackingField: 0.8
+    <ForceTime>k__BackingField: -1
+    <Force>k__BackingField: 1
+    <Damage>k__BackingField: 10
+    <knockbackRange>k__BackingField: 5
+  <S2_ShortAttacks>k__BackingField: []
+  <S2_MidAttacks>k__BackingField: []
+  <S2_LongAttacks>k__BackingField: []
+  <TriggerZone>k__BackingField: {fileID: 0}
+  <LongAttackRange>k__BackingField: 15
+  <ShortAttackRange>k__BackingField: 8
+  <MidAttackRange>k__BackingField: 10
+  <CirclingAroundRange>k__BackingField: 0
+  <AttackingDamage>k__BackingField: 5
+  hitCount: 0
+  lastHitTime: 0
+  lastCirclingTime: 0
+  <hitCountResetTime>k__BackingField: 0
+  <KnockBack>k__BackingField: -1
+  <detectionPlayerRange>k__BackingField: 0
+  <MovementSpeed>k__BackingField: 0
+  <circlingSpeed>k__BackingField: 0
+  <forceReceiver>k__BackingField: {fileID: 0}
+  <RetreatRange>k__BackingField: 0
+  player: {fileID: 0}
+  playerPosition: {x: 0, y: 0, z: 0}
+  playerStateMachine: {fileID: 0}
+  inTheZone: 0
+  inPhase2: 0
+--- !u!114 &7828841784993343281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6582579005638664765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78eb0c7f9170d994ab05f84bb7f0be88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swordBullets:
+  - {fileID: 569316624247927644}
+  - {fileID: 2860937183419316985}
+  - {fileID: 7980007648379874154}
+  weaponTrail: {fileID: 0}
+  smoke_particle: {fileID: 0}
+  ground_Coli: {fileID: 0}
+  smoke_ground: {fileID: 0}
+  smoke_audio: {fileID: 0}
+  attack_audio: {fileID: 0}
+  move_audio: {fileID: 0}
+  ground_audio: {fileID: 0}
+  groundClip: {fileID: 0}
+  roar_clip: {fileID: 0}
+  ATK1_clip: {fileID: 0}
+  ATK2_clip: {fileID: 0}
+  ATK3_clip: {fileID: 0}
+  ATK5_clip: {fileID: 0}
+  MOVE5_clip: {fileID: 0}
+--- !u!95 &2112186985351576869
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6582579005638664765}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!195 &6123729208607742952
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6582579005638664765}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!143 &454941361322006183
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6582579005638664765}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 6.58
+  m_Radius: 1.71
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.42, z: 0}
+--- !u!114 &5586615594656275949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6582579005638664765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5349974922d2cb34f9cc9e21bb22c43a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6735060754218966497
 GameObject:
   m_ObjectHideFlags: 0
@@ -4362,7 +4364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleprefab: {fileID: 1984267876791719359, guid: 5ded2c8e00b4eb0439ea27bd4ce796e2, type: 3}
-  stateMachine: {fileID: 3363172564930296300}
+  stateMachine: {fileID: 0}
 --- !u!1 &6859066279971899469
 GameObject:
   m_ObjectHideFlags: 0

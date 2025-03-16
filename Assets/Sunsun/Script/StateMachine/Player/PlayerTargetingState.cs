@@ -48,7 +48,8 @@ public class PlayerTargetingState : PlayerBaseState
         UpdAnimator(deltatime);
         //朝向目標
         Facetarget();
-   
+
+
     }
     public override void Exit()
     {

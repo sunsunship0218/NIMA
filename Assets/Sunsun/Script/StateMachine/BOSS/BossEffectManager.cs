@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossEffectManager : MonoBehaviour
 {
   [SerializeField]  SwordBullet [] swordBullets;
-  [SerializeField] GameObject weaponTrail;
+ // [SerializeField] GameObject weaponTrail;
  [SerializeField] ParticleSystem smoke_particle;
  [SerializeField] GameObject ground_Coli;
 
@@ -35,11 +35,11 @@ public class BossEffectManager : MonoBehaviour
     }
     public void PlayWeaponTrail()
     {
-        weaponTrail.SetActive(true);
+     //   weaponTrail.SetActive(true);
     }
     public void StopWeaponTrail()
     {
-        weaponTrail?.SetActive(false);
+        //weaponTrail?.SetActive(false);
     }
 
     public void PlaySmoke()

@@ -25,7 +25,11 @@ public abstract class PlayerBaseState : State
     }
     protected void Facetarget()
     {
-        if (playerStateMachine.targeter.currentTarget == null){ return; }
+        if (playerStateMachine.targeter.currentTarget == null)
+        {
+                playerStateMachine.SwitchState(new PlayerFreeLookState(playerStateMachine));
+                return;
+        }
        Vector3 faceTargetPos;
         faceTargetPos = playerStateMachine.targeter.currentTarget.transform.position - playerStateMachine.transform.position;
         faceTargetPos.y = 0f;
@@ -34,7 +38,12 @@ public abstract class PlayerBaseState : State
   public void FaceEnemy()
     {
         if (playerStateMachine. EnemyList.Count == 0 || playerStateMachine.EnemyList == null)
+        {
+            playerStateMachine.SwitchState(new PlayerFreeLookState(playerStateMachine));
             return;
+
+        }
+            
         GameObject nearestEnemy = null;
         float nearestDistance = Mathf.Infinity;
         //找出最近的敵人
