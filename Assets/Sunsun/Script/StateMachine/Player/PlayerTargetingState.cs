@@ -23,6 +23,8 @@ public class PlayerTargetingState : PlayerBaseState
     }
     public override void Update(float deltatime)
     {
+        //朝向目標
+        Facetarget();
         //攻擊的話要切換狀態
         if (playerStateMachine.playerInputHandler.isAttacking)
         {
@@ -37,7 +39,12 @@ public class PlayerTargetingState : PlayerBaseState
             return;
         }
         //現在沒有鎖定目標的話,回到freelook
-        if (playerStateMachine.targeter.currentTarget == null)
+        if (playerStateMachine.targeter.currentTarget != null)
+        {
+            Facetarget();
+       
+        }
+        else
         {
             playerStateMachine.SwitchState(new PlayerFreeLookState(playerStateMachine));
             return;
@@ -46,8 +53,7 @@ public class PlayerTargetingState : PlayerBaseState
         Move(movement * playerStateMachine.LockonMoveSpeed, deltatime);
         //更新動畫
         UpdAnimator(deltatime);
-        //朝向目標
-        Facetarget();
+
 
 
     }

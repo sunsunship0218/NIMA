@@ -31522,7 +31522,7 @@ MonoBehaviour:
   <animator>k__BackingField: {fileID: 605235361}
   <agent>k__BackingField: {fileID: 605235364}
   <characterController>k__BackingField: {fileID: 605235365}
-  <target>k__BackingField: {fileID: 1521007141091911865}
+  <target>k__BackingField: {fileID: 0}
   <health>k__BackingField: {fileID: 605235370}
   <weaponDamageL>k__BackingField: {fileID: 3665573041763931389}
   <weaponDamageR>k__BackingField: {fileID: 5892810704348368889}
@@ -68537,8 +68537,7 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 0.025332943
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4923149233067913349, guid: 4f610edf976667f4c91a63a4d17ea6ea, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 81207597669814570, guid: 4f610edf976667f4c91a63a4d17ea6ea, type: 3}
@@ -68560,6 +68559,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4981173303331664354, guid: 4f610edf976667f4c91a63a4d17ea6ea, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1714398939}
+    - targetCorrespondingSourceObject: {fileID: 4981173303331664354, guid: 4f610edf976667f4c91a63a4d17ea6ea, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1714398944}
     - targetCorrespondingSourceObject: {fileID: 4584034646986080532, guid: 4f610edf976667f4c91a63a4d17ea6ea, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1903471837}
@@ -68627,6 +68629,18 @@ MonoBehaviour:
   ATK7_clip: {fileID: 8300000, guid: 4604e8211ceabe846a9ef84bd5603bd2, type: 3}
   weaponTrail: {fileID: 1526847782}
   ATK_audio: {fileID: 1236945017}
+--- !u!114 &1714398944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488565623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5349974922d2cb34f9cc9e21bb22c43a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1717953439
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82857,7 +82871,7 @@ MonoBehaviour:
   <animator>k__BackingField: {fileID: 2112186984604291467}
   <agent>k__BackingField: {fileID: 6123729208916064070}
   <characterController>k__BackingField: {fileID: 454941359500212745}
-  <target>k__BackingField: {fileID: 1521007141091911865}
+  <target>k__BackingField: {fileID: 0}
   <health>k__BackingField: {fileID: 0}
   <weaponDamageL>k__BackingField: {fileID: 3665573041763931389}
   <weaponDamageR>k__BackingField: {fileID: 5892810704348368889}
@@ -85281,17 +85295,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1521007141091911865 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5558009311920188567, guid: dd4bef9f9e0e9fd4d811c0e6f1fcbf12, type: 3}
-  m_PrefabInstance: {fileID: 6357314565445600302}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7491453573313436558}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5349974922d2cb34f9cc9e21bb22c43a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1531561973943561926
 Transform:
   m_ObjectHideFlags: 0
@@ -97086,7 +97089,7 @@ PrefabInstance:
     - target: {fileID: 3668266075551329001, guid: dd4bef9f9e0e9fd4d811c0e6f1fcbf12, type: 3}
       propertyPath: targets.Array.data[0]
       value: 
-      objectReference: {fileID: 1521007141091911865}
+      objectReference: {fileID: 0}
     - target: {fileID: 3668266075551329001, guid: dd4bef9f9e0e9fd4d811c0e6f1fcbf12, type: 3}
       propertyPath: targets.Array.data[1]
       value: 
@@ -97173,15 +97176,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4344795701587413853, guid: dd4bef9f9e0e9fd4d811c0e6f1fcbf12, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.000091552734
+      value: -0.000030517578
       objectReference: {fileID: 0}
     - target: {fileID: 4344795701587413853, guid: dd4bef9f9e0e9fd4d811c0e6f1fcbf12, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0000009536743
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4344795701587413853, guid: dd4bef9f9e0e9fd4d811c0e6f1fcbf12, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.00005197525
+      value: -0.000017166138
       objectReference: {fileID: 0}
     - target: {fileID: 4344795701587413853, guid: dd4bef9f9e0e9fd4d811c0e6f1fcbf12, type: 3}
       propertyPath: m_LocalRotation.w
@@ -97627,7 +97630,8 @@ PrefabInstance:
       propertyPath: m_Elasticity
       value: 0.1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5558009311920188567, guid: dd4bef9f9e0e9fd4d811c0e6f1fcbf12, type: 3}
     m_RemovedGameObjects:
     - {fileID: 7758833640637396725, guid: dd4bef9f9e0e9fd4d811c0e6f1fcbf12, type: 3}
     - {fileID: 4413521076261433327, guid: dd4bef9f9e0e9fd4d811c0e6f1fcbf12, type: 3}
@@ -128110,7 +128114,7 @@ MonoBehaviour:
   <agent>k__BackingField: {fileID: 8675017753499469008}
   <characterController>k__BackingField: {fileID: 4082830581504232253}
   <ragDoll>k__BackingField: {fileID: 3144220112608478353}
-  <target>k__BackingField: {fileID: 1521007141091911865}
+  <target>k__BackingField: {fileID: 0}
   <health>k__BackingField: {fileID: 7858996945404099640}
   <weaponDamageL>k__BackingField: {fileID: 2620216737574955999}
   <weaponDamageR>k__BackingField: {fileID: 5392594489419638030}
