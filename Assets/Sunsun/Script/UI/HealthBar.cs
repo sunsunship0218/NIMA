@@ -18,7 +18,7 @@ public class HealthBar : MonoBehaviour
         if (enemyHealth != null)
             EnemyInitial();
     }
-   void PlayerInitial()
+    void PlayerInitial()
     {
         maxHealth = playerHealth.healthSystem.GetMaxHealth();
         healthBar.maxValue = maxHealth;
