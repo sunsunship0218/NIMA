@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 
 public class WeaponDamage : MonoBehaviour
 {
@@ -13,6 +15,10 @@ public class WeaponDamage : MonoBehaviour
     [SerializeField] HitParticleEffect hitParticleEffect;
     [SerializeField] AudioSource audioSource;
     List<Collider> alreadyColiWith =new List<Collider>();
+
+    // 定義一個事件，當 enemy 被攻擊時觸發
+    public static event Action OnEnemyHit;
+
     int damage;
     float knockback;
 
@@ -39,10 +45,13 @@ public class WeaponDamage : MonoBehaviour
             enemyHealth = other.GetComponent<EnemyHealth>();
             if (enemyStateMachine != null)
             {
-                // 增加被击中敌人的 hitCount
+                // 增加被擊中敵人的 hitCount
                 enemyStateMachine.hitCount++;
-                // 更新被击中敌人的 lastHitTime
+                // 更新被擊中敵人的 lastHitTime
                 enemyStateMachine.lastHitTime = Time.time;
+                //觸發事件
+                OnEnemyHit?.Invoke();
+
             }
             Vector3 hitposition = other.ClosestPointOnBounds(transform.position);
             //播放特效

@@ -53,14 +53,12 @@ public class PlayerStateMachine : StateMachine
 
     [field: SerializeField]
     public RagDoll ragDoll { get; private set; }
-    //UI
-    [field: SerializeField]
-    public TextMeshProUGUI textMeshProUGUI{ get; private set; }
+  
 
     public Transform mainCameraTransform { get; private set; }
     void Start()
      {
-        textMeshProUGUI.gameObject.SetActive(false);
+        
         mainCameraTransform = Camera.main.transform;
         //this 就是現在的PlayerStateMachine實例
         SwitchState(new PlayerFreeLookState(this));
@@ -108,7 +106,7 @@ public class PlayerStateMachine : StateMachine
     //死亡訂閱方法
     void HealthSystem_OnDie()
     {
-        textMeshProUGUI.gameObject.SetActive(true);
+       
         SwitchState(new PlayerDeadState(this));
     }
     //格黨滿了的訂閱方法

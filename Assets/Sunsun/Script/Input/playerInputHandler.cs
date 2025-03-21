@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 using UnityEngine.InputSystem.Interactions;
-using UnityEngine.SceneManagement;
-
 
 //將輸入要處理的邏輯綁訂到回調
 public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerActions
@@ -17,16 +15,19 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
     public event Action dodgeEvent;
     public event Action targetEvent;
     public event Action cancelTargetEvent;
+    public event Action<PlayerInput> onControlsChanged;
 
     //狀態變數
     public bool isOnLockon;
     public bool isAttacking;
     public bool isDashing { get; private set; }
+    public bool isUsingPad { get; private set; }
     //格檔跟防禦的相關變數
     public bool isBlocking;
     public bool isParrying;
 
     PlayerControllers playercontrollers;
+    PlayerInput playerInput;
     //持續按住不攻擊
    const float holdTimeThreshold = 0.4f; 
     private float holdTimer = 0f;
@@ -34,8 +35,8 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
     void Awake()
     {
         playercontrollers = new PlayerControllers();
+        playerInput=GetComponent<PlayerInput>();
  
-
     }
   
     void Start()
@@ -168,6 +169,26 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
         yield return null;
         isParrying = false;
      
+    }
+
+    private void OnControllerChange(PlayerInput input)
+    {
+        if(input.currentControlScheme != "Gamepad")
+        {
+            isUsingPad = false;
+        }
+        isUsingPad = true;
+    }
+    void OnEnable()
+    {
+        if (playerInput != null)
+        {
+            playerInput.onControlsChanged += OnControllerChange;
+        }
+    }
+    void OnDisable()
+    {
+        playerInput.onControlsChanged -= OnControllerChange;
     }
 }
 

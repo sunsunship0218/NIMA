@@ -18,6 +18,16 @@ public class HealthBar : MonoBehaviour
         if (enemyHealth != null)
             EnemyInitial();
     }
+
+    private void LateUpdate()
+    {
+        if(enemyHealth != null)
+        {
+            //強迫world space UI面對相機
+            transform.LookAt(transform.position + Camera.main.transform.forward);
+
+        }
+    }
     void PlayerInitial()
     {
         maxHealth = playerHealth.healthSystem.GetMaxHealth();

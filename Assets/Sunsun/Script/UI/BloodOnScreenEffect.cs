@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,13 +22,23 @@ public class BloodOnScreenEffect : MonoBehaviour
     {
         //更新現在血量
         health = playerHealth.healthSystem.GetHealth();
+
         IMGEffect();
     }
 
     void IMGEffect()
     {
-        float transparency = 1f -(health/maxHealth);
+        float transparency;
+        float ratio = (health / maxHealth);
         Color IMGcolor = Color.white;
+        if (ratio > 0.8f)
+        {
+            transparency = 0f;
+        }
+        else
+        {
+            transparency = (0.8f - ratio);
+        }
         IMGcolor.a = transparency;
         HealthimpactIMG.color = IMGcolor;
     }

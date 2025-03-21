@@ -13,7 +13,7 @@ public  float MaxHealth;
    public event Action OnTakeDamage;
    public event EventHandler OnHealthChange;
     public event EventHandler OnPostureChange;
-   public event Action OnDie;
+   public  event Action OnDie;
     public event Action OnStagger;
 
     //初始化血量跟格黨值
