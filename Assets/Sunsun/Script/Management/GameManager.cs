@@ -18,9 +18,9 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        DontDestroyOnLoad(this);
-        DontDestroyOnLoad(Player);
-        DontDestroyOnLoad(Camera);
+     //   DontDestroyOnLoad(this);
+    //    DontDestroyOnLoad(Player);
+      //  DontDestroyOnLoad(Camera);
   //訂閱各個敵人死亡事件,敵人的事件寫在各自初始化的狀態機
         Tiger.OnTigerDestroyed += HandleTigerDeath;
     }

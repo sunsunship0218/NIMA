@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 using UnityEngine.InputSystem.Interactions;
+using UnityEngine.EventSystems;
 
 //將輸入要處理的邏輯綁訂到回調
 public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerActions
@@ -45,6 +46,8 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
         //playerInputHandler回傳callbacks
         playercontrollers.Player.SetCallbacks(this);
         playercontrollers.Player.Enable();
+        playercontrollers.UI.Enable();
+
     }
     private void Update()
     {
@@ -84,6 +87,11 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
     }
     public void OnAttack(InputAction.CallbackContext context)
     {
+        //點擊UI時,不攻擊
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
         //短按攻擊
         if (context.performed && context.interaction is PressInteraction)
         {
@@ -135,6 +143,7 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
         }
         isOnLockon=!isOnLockon;
     }
+
     public void OnBlockAndParry(InputAction.CallbackContext context)
     {
         if (context.performed)

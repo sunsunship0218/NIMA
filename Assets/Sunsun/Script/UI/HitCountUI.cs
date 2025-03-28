@@ -7,15 +7,15 @@ using UnityEngine.UI;
 public class HitCountUI : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI textMeshProUGUI;
-    [SerializeField]
     int hits = 0;
     void OnAwake()
     {
         textMeshProUGUI = GetComponent<TextMeshProUGUI>();
-        textMeshProUGUI.text = hits.ToString();
+        textMeshProUGUI.gameObject.SetActive(false);
     }
     void HandleHitcount()
     {
+        textMeshProUGUI.gameObject.SetActive(true);
         hits++;
         textMeshProUGUI.text = hits.ToString();
     }
