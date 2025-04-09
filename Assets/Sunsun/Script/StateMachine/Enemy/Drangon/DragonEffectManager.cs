@@ -12,7 +12,10 @@ public class DragonEffectManager : MonoBehaviour
     [SerializeField] AudioClip ATK6_clip;
     [SerializeField] AudioClip ATK7_clip;
 
-    [SerializeField] GameObject weaponTrail;
+    [SerializeField]ParticleSystem weaponEffect1;
+    [SerializeField] ParticleSystem weaponEffect2;
+    [SerializeField] ParticleSystem weaponEffect3;
+
     [SerializeField] AudioSource ATK_audio;
     public void Play_ATK1()
     {
@@ -50,14 +53,39 @@ public class DragonEffectManager : MonoBehaviour
         ATK_audio.Play();
     }
 
-    public  void PlayTrail()
+    //1
+    public  void PlayEffect1()
     {
-        weaponTrail.SetActive(true);
+     
+        weaponEffect1.Play();
+    }
+    public void StopEffect1()
+    {
+      weaponEffect1.Stop();
 
     }
-    public void StopTrail()
+    //2
+    public void PlayEffect2()
     {
-       weaponTrail.SetActive (false);
+
+        weaponEffect2.Play();
+    }
+    public void StopEffect2()
+    {
+        weaponEffect2.Stop();
 
     }
+    //3
+    public void PlayEffect3()
+    {
+
+        weaponEffect3.Play();
+    }
+    public void StopEffect3()
+    {
+        weaponEffect3.Stop();
+
+    }
+    //4
+   
 }

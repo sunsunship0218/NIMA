@@ -19,7 +19,13 @@ public class PlayerEffect : MonoBehaviour
     [Header("Dodge_SFX")]
     [SerializeField] AudioClip dodgeClip;
     [SerializeField] AudioSource audiosource;
+    [Header("ATK_Voice")]
+    [SerializeField]  AudioClip[] AttackVoiceClips;
+    [Header("Hurt_Voice")]
+    [SerializeField] AudioClip[]HurtClips;
 
+    [SerializeField] AudioSource VoiceSource;
+    [SerializeField] AudioSource HurtSource;
     public void PlayCombo1Effect()
     {
         audiosource.clip = combo1Clip;
@@ -55,5 +61,20 @@ public class PlayerEffect : MonoBehaviour
     {
         audiosource.clip = dodgeClip;
         audiosource.Play();
+    }
+    public void PlayRandomAttackSound()
+    {
+        // 在 gruntClips 中隨機選一個
+        int randomIndex = Random.Range(0, AttackVoiceClips.Length);
+       VoiceSource.clip = AttackVoiceClips[randomIndex];
+        VoiceSource.Play();
+    }
+
+    public void PlayRandomHurtSound()
+    {
+        // 在 gruntClips 中隨機選一個
+        int randomIndex = Random.Range(0, HurtClips.Length);
+        HurtSource.clip =HurtClips[randomIndex];
+        HurtSource.Play();
     }
 }
