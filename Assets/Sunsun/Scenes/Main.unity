@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 19932459}
   - component: {fileID: 19932458}
   m_Layer: 5
-  m_Name: LOAD GAME
+  m_Name: Tutorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1246,7 +1246,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: NEW GAME
+  m_text: 'START
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cd7987f77cb91384d91dffd8abe576ae, type: 2}
   m_sharedMaterial: {fileID: 5415150539122570324, guid: cd7987f77cb91384d91dffd8abe576ae, type: 2}
@@ -1951,7 +1953,7 @@ GameObject:
   - component: {fileID: 851384461}
   - component: {fileID: 851384460}
   m_Layer: 5
-  m_Name: NEW GAME (1)
+  m_Name: Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
