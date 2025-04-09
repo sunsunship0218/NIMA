@@ -20,7 +20,7 @@ public class TimeManager : MonoBehaviour
         Time.timeScale = slowFactor;
         // 調整物理系統的時間縮放
         Time.fixedDeltaTime = Time.timeScale * slowFactor;
-        Debug.Log("DO Bullet time: "+ slowFactor);
+  //      Debug.Log("DO Bullet time: "+ slowFactor);
         StartCoroutine(wait(duration));
     }
     IEnumerator wait(float duration)

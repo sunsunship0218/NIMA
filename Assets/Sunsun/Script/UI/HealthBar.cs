@@ -37,9 +37,9 @@ public class HealthBar : MonoBehaviour
     }
     void EnemyInitial()
     {
-        Debug.Log(("Enemy health bar"));
-        Debug.Log("Enemy health"+maxHealth);
-        Debug.Log("name?"+enemyHealth.gameObject.name);
+       // Debug.Log(("Enemy health bar"));
+     //   Debug.Log("Enemy health"+maxHealth);
+      //  Debug.Log("name?"+enemyHealth.gameObject.name);
         maxHealth = enemyHealth.healthSystem.GetHealth();
         healthBar.maxValue = maxHealth;
         healthBar.value = maxHealth;

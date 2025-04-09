@@ -22,7 +22,7 @@ public class PlayerDashingState : PlayerBaseState
     public override void Enter()
     {
 
-        Debug.Log("ENter DASH");
+      //  Debug.Log("ENter DASH");
 
         //獲取玩家輸入方向
         dodgingDirectionInput = playerStateMachine.playerInputHandler.movementValue.normalized;
@@ -68,7 +68,7 @@ public class PlayerDashingState : PlayerBaseState
         bool AnimationFinished = (currentStateInfo.IsName("DodgeBlendtree") && currentStateInfo.normalizedTime >=0.8f);
         if (DodgingDuration <= 0f && AnimationFinished)
         {
-            Debug.Log(AnimationFinished);
+          //  Debug.Log(AnimationFinished);
             if (playerStateMachine.targeter.currentTarget == null)
             {
                 playerStateMachine.SwitchState(new PlayerTargetingState(playerStateMachine));
@@ -82,7 +82,7 @@ public class PlayerDashingState : PlayerBaseState
     public override void Exit()
     {
         playerStateMachine.playerHealth.healthSystem.SetInvunerable(false);
-        Debug.Log("EXISＤＡＳＨ");
+     //   Debug.Log("EXISＤＡＳＨ");
 
     }
 }

@@ -62,11 +62,12 @@ public class WeaponDamage : MonoBehaviour
                 hitParticleEffect.PlayHitParticle(hitposition);
                 audioSource.Play();
                 enemyHealth.healthSystem.Damage(damage);
-                playerHealth.healthSystem.HealAmount(10);
+                //回血攻擊
+              //  playerHealth.healthSystem.HealAmount(10);
                 
              
             }
-             Debug.Log("enemy HP :"+enemyHealth.healthSystem.GetHealth());
+             //Debug.Log("enemy HP :"+enemyHealth.healthSystem.GetHealth());
         }
         if (other.tag == "Player")
         {

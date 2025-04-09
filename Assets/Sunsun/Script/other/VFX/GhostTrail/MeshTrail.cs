@@ -16,7 +16,7 @@ namespace VFX
 
         [Header("Mesh Releted")]
         public float activetime;
-       [ SerializeField] float meshDestoryDelayTime =3f;
+       [ SerializeField] float meshDestoryDelayTime =10f;
         public Transform spawnPosition;
 
         [Header("Shader related")]
@@ -31,6 +31,10 @@ namespace VFX
 
         [SerializeField] float mesFreshRate = 0.1f;
 
+        // 新增分批處理的變數
+        [SerializeField] float delayBetweenBatches = 0.01f;
+        // 每幀處理幾個 SkinnedMeshRenderer
+        [SerializeField] int batchSize =6; 
 
         void Awake()
         {
@@ -98,14 +102,21 @@ namespace VFX
                     MeshRenderer meshRenderer = trailGO.GetComponent<MeshRenderer>();
                     MeshFilter meshFilter = trailGO.GetComponent<MeshFilter>();
 
-                    // 從物件池中獲取一個 Mesh
+                    // 從物件池中獲取一個 Mesh,    這裡進行 BakeMesh 操作
                     Mesh trailMesh = meshPool.Get();
                     skinnedMeshRenderers[i].BakeMesh(trailMesh);
                     meshFilter.mesh = trailMesh;
+                    //每個材質一直建立的話會卡頓
                     meshRenderer.material = new Material(shaderMaterial);
                     //trail動畫
                     StartCoroutine(StartAnimateTrail(meshRenderer.material, 0, shaderVarRate, shaderVarRefreshRate));
                     StartCoroutine(ReturnToPool(trailGO, trailMesh, meshDestoryDelayTime));
+
+                    // 分批處理：每處理 batchSize 個後等待短暫延遲
+                    if ((i + 1) % batchSize == 0)
+                    {
+                        yield return new WaitForSeconds(delayBetweenBatches);
+                    }
 
                 }
            

@@ -108,7 +108,7 @@ public class PlayerTargetingState : PlayerBaseState
 
     void Ondodge()
     {
-        Debug.Log("DODGE");
+      //  Debug.Log("DODGE");
         playerStateMachine.SwitchState(new PlayerDashingState(playerStateMachine, playerStateMachine.playerInputHandler.movementValue));
     }
 

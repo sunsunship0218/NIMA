@@ -188,6 +188,10 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
         }
         isUsingPad = true;
     }
+    public bool GetIsAttacking()
+    {
+        return isAttacking;
+    }
     void OnEnable()
     {
         if (playerInput != null)

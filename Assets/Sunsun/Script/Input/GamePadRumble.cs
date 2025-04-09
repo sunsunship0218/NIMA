@@ -8,6 +8,7 @@ public class GamePadRumble : MonoBehaviour
     [SerializeField] float lowFrequency;
     [SerializeField] float highFrequency;
     [SerializeField] float duration;
+    [SerializeField] PlayerStateMachine playerStateMachine;
     Gamepad gamepad;
     [SerializeField] playerInputHandler inputHandler;
     private void Awake()
@@ -27,7 +28,7 @@ public class GamePadRumble : MonoBehaviour
     private void HandleHitRumble()
     {
         gamepad = Gamepad.current;
-        if (gamepad != null && inputHandler.isUsingPad) 
+        if (gamepad != null && inputHandler.isUsingPad &&playerStateMachine.playerInputHandler.GetIsAttacking()==true) 
         {
             gamepad.SetMotorSpeeds(lowFrequency, highFrequency);
             StartCoroutine(StopRumbleAfterDuration(duration,gamepad));
