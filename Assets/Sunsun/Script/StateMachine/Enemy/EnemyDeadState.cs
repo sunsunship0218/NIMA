@@ -27,6 +27,7 @@ public class EnemyDeadState : EnemyBaseState
         if (isAnimationFinished)
         {
             isDestroyed = true;
+            //物件池記的換
             GameObject.Destroy(enemyStatemachine.gameObject);
      
         }

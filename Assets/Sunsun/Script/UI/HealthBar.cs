@@ -21,7 +21,7 @@ public class HealthBar : MonoBehaviour
 
     private void LateUpdate()
     {
-        if(enemyHealth != null)
+        if(enemyHealth != null && enemyHealth.IsBoss!=true )
         {
             //強迫world space UI面對相機
             transform.LookAt(transform.position + Camera.main.transform.forward);
