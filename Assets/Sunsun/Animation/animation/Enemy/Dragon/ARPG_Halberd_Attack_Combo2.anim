@@ -63305,7 +63305,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 2
     messageOptions: 0
-  - time: 0.7
+  - time: 0.71666664
     functionName: PlayEffect1
     data: 
     objectReferenceParameter: {fileID: 0}
