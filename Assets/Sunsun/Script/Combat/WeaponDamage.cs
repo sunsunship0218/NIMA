@@ -51,11 +51,12 @@ public class WeaponDamage : MonoBehaviour
                 enemyStateMachine.lastHitTime = Time.time;
                 //觸發事件
                 OnEnemyHit?.Invoke();
+                //碰撞處理要separeate from player and enemy other colider colision
 
             }
             Vector3 hitposition = other.ClosestPointOnBounds(transform.position);
             //播放特效
-            timeManager.DoBulletTime(0.01f);
+            timeManager.DoBulletTime(0.05f);
          
             if (enemyHealth != null)
             {

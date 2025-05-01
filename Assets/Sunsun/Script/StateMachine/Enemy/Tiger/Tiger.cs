@@ -6,7 +6,7 @@ using System;
 public class Tiger : EnemyStateMachine
 {
     public static event Action OnTigerDestroyed;
-
+    [SerializeField]
     void Start()
     {
         // 初始化共用的狀態

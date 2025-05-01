@@ -19,8 +19,9 @@ public class TimeManager : MonoBehaviour
         //控制時間減速
         Time.timeScale = slowFactor;
         // 調整物理系統的時間縮放
-        Time.fixedDeltaTime = Time.timeScale * slowFactor;
-  //      Debug.Log("DO Bullet time: "+ slowFactor);
+        //   Time.fixedDeltaTime = Time.timeScale * slowFactor;
+        Time.fixedDeltaTime = originalFixedDeltaTime * Time.timeScale;
+        //      Debug.Log("DO Bullet time: "+ slowFactor);
         StartCoroutine(wait(duration));
     }
     IEnumerator wait(float duration)

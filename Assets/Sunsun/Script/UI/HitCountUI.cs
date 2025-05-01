@@ -19,6 +19,7 @@ public class HitCountUI : MonoBehaviour
         hitText.SetActive(true);
         hits++;
         textMeshProUGUI.text = hits.ToString();
+        //fade out 5 sec
     }
     private void OnEnable()
     {
