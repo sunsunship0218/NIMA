@@ -18,7 +18,17 @@ public class HealthBar : MonoBehaviour
         if (enemyHealth != null)
             EnemyInitial();
     }
-   void PlayerInitial()
+
+    private void LateUpdate()
+    {
+        if(enemyHealth != null && enemyHealth.IsBoss!=true )
+        {
+            //強迫world space UI面對相機
+            transform.LookAt(transform.position + Camera.main.transform.forward);
+
+        }
+    }
+    void PlayerInitial()
     {
         maxHealth = playerHealth.healthSystem.GetMaxHealth();
         healthBar.maxValue = maxHealth;
@@ -27,9 +37,9 @@ public class HealthBar : MonoBehaviour
     }
     void EnemyInitial()
     {
-        Debug.Log(("Enemy health bar"));
-        Debug.Log("Enemy health"+maxHealth);
-        Debug.Log("name?"+enemyHealth.gameObject.name);
+       // Debug.Log(("Enemy health bar"));
+     //   Debug.Log("Enemy health"+maxHealth);
+      //  Debug.Log("name?"+enemyHealth.gameObject.name);
         maxHealth = enemyHealth.healthSystem.GetHealth();
         healthBar.maxValue = maxHealth;
         healthBar.value = maxHealth;

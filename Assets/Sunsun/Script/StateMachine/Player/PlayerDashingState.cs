@@ -22,7 +22,7 @@ public class PlayerDashingState : PlayerBaseState
     public override void Enter()
     {
 
-        Debug.Log("ENter DASH");
+      //  Debug.Log("ENter DASH");
 
         //獲取玩家輸入方向
         dodgingDirectionInput = playerStateMachine.playerInputHandler.movementValue.normalized;
@@ -45,7 +45,9 @@ public class PlayerDashingState : PlayerBaseState
         playerStateMachine.animator.CrossFadeInFixedTime(DodgeBlendtreeHASH, crossfadeDuration);
         //無敵時間
         playerStateMachine.playerHealth.healthSystem.SetInvunerable(true);
-       // Debug.Log(dodgingDirectionInput);
+        // Debug.Log(dodgingDirectionInput);
+
+      
     }
     public override void Update(float deltatime)
     {
@@ -65,10 +67,10 @@ public class PlayerDashingState : PlayerBaseState
         DodgingDuration -= deltatime;
         //獲取動畫撥放狀態,防止沒有撥放完就切換狀態
         AnimatorStateInfo currentStateInfo = playerStateMachine.animator.GetCurrentAnimatorStateInfo(0);
-        bool AnimationFinished = (currentStateInfo.IsName("DodgeBlendtree") && currentStateInfo.normalizedTime >=0.8f);
+        bool AnimationFinished = (currentStateInfo.IsName("DodgeBlendtree") && currentStateInfo.normalizedTime >=0.95f);
         if (DodgingDuration <= 0f && AnimationFinished)
         {
-            Debug.Log(AnimationFinished);
+          //  Debug.Log(AnimationFinished);
             if (playerStateMachine.targeter.currentTarget == null)
             {
                 playerStateMachine.SwitchState(new PlayerTargetingState(playerStateMachine));
@@ -82,7 +84,7 @@ public class PlayerDashingState : PlayerBaseState
     public override void Exit()
     {
         playerStateMachine.playerHealth.healthSystem.SetInvunerable(false);
-        Debug.Log("EXISＤＡＳＨ");
+     //   Debug.Log("EXISＤＡＳＨ");
 
     }
 }

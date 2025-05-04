@@ -133,17 +133,17 @@ public class EnemyStateMachine : StateMachine
  
     private void OnEnable()
     {
-        Debug.Log("Enemy HandleTakeDamage");
+      //  Debug.Log("Enemy HandleTakeDamage");
         if (health != null && health.healthSystem != null)
         {
-            Debug.Log("­q¾\handle Take damage");
+           // Debug.Log("­q¾\handle Take damage");
             health.healthSystem.OnTakeDamage += HandleTakeDamage;
             health.healthSystem.OnDie += HandleDie;
         }
         else
         {
 
-            Debug.LogError("Health or HealthSystem is null in OnEnable");
+          //  Debug.LogError("Health or HealthSystem is null in OnEnable");
         }
       
     }

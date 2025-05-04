@@ -195,7 +195,7 @@ public class BossStateMachine : StateMachine
     private void HandleDie()
     {
         Debug.Log("DIE");
-       // SwitchState(new EnemyDeadState(this));
+        SwitchState(new BossDeadState(this));
     }
     void facePlayer()
     {

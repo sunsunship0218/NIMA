@@ -10,7 +10,7 @@ public class PlayerImpactState : PlayerBaseState
     float duration;
     public override void Enter()
     {
-        Debug.Log("Eneter Impact");
+      //  Debug.Log("Eneter Impact");
         playerStateMachine.animator.CrossFadeInFixedTime(ImpactHASH, crossfadeDuration);
        
     }

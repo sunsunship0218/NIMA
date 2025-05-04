@@ -6,7 +6,7 @@ using System;
 public class Tiger : EnemyStateMachine
 {
     public static event Action OnTigerDestroyed;
-
+    [SerializeField]
     void Start()
     {
         // 初始化共用的狀態
@@ -39,7 +39,7 @@ public class Tiger : EnemyStateMachine
         this.playerStateMachine.EnemyList.Remove(this.gameObject);
         //恢復玩家血量
        this.playerStateMachine.playerHealth.healthSystem.HealAmount(45);
-        Debug.Log(this.playerStateMachine.playerHealth.healthSystem.ReturnHealth());
+      //  Debug.Log(this.playerStateMachine.playerHealth.healthSystem.ReturnHealth());
         //引發事件
         OnTigerDestroyed?.Invoke();
     }

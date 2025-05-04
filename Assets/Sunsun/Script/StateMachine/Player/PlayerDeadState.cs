@@ -8,7 +8,7 @@ public class PlayerDeadState : PlayerBaseState
     float duration;
     public override void Enter()
     {
-        Debug.Log("Player dead enter");
+      //  Debug.Log("Player dead enter");
         playerStateMachine.ragDoll.toogleRagdoll(true);
         playerStateMachine.RightweaponDamage.gameObject.SetActive(false);
         playerStateMachine.LeftweaponDamage.gameObject.SetActive(false);
