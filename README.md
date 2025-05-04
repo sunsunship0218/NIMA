@@ -1,3 +1,20 @@
-畢業專題名稱:Burning Night
-預告片:https://youtu.be/RZSAlYSrwRk?si=sYPP82SLPman-fMR
-//待填寫
+# Burning Night 
+
+畢業專題最後正式名稱：Burning Night  
+預告片連結：[觀看預告片](https://youtu.be/RZSAlYSrwRk?si=sYPP82SLPman-fMR)
+
+##  遊戲簡介
+在蔽日至暗之夜，點亮希望之火用心中殘存的希望，焚燒黑夜。
+是一款3D快節奏動作遊戲。
+## 主要功能
+
+## 主要開發工具
+
+##  開發者
+:主程式,主企劃,專案管理,動畫組合與調整,打光,關卡
+:角色建模,骨架,材質與貼圖
+:場景建模,材質與貼圖
+:2D概念美術,腳色設計
+:主要攻擊特效製作
+
+
