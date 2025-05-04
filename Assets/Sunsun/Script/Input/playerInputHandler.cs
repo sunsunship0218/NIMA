@@ -33,6 +33,10 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
    const float holdTimeThreshold = 0.4f; 
     private float holdTimer = 0f;
     private bool isButtonHeld = false;
+    //DASH的冷卻參數
+    public float DodgeCooldown = 1f; // 冷卻秒數
+    private float lastDodgeTime = Mathf.NegativeInfinity; // 記錄上次閃避的時間
+    [SerializeField] PlayerStateMachine playerStateMachine;
     void Awake()
     {
         playercontrollers = new PlayerControllers();
@@ -120,6 +124,20 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
         {
             return;
         }
+        // 冷卻中，不執行 dodge
+        if (Time.time < lastDodgeTime + DodgeCooldown)
+        {
+
+            return; 
+        }
+        // 1. 還在動畫中 ,禁止再次 Dodge
+        if (playerStateMachine.IsDodgeAnimationPlaying())
+        {
+            return;
+        }
+
+
+        lastDodgeTime = Time.time;
         dodgeEvent?.Invoke();
     }
     public void OnLook(InputAction.CallbackContext context)

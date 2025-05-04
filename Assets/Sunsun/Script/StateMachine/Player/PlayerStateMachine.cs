@@ -53,7 +53,7 @@ public class PlayerStateMachine : StateMachine
 
     [field: SerializeField]
     public RagDoll ragDoll { get; private set; }
-  
+   
 
     public Transform mainCameraTransform { get; private set; }
     void Start()
@@ -124,6 +124,11 @@ public class PlayerStateMachine : StateMachine
         {
            EnemyList.Add(enemy);
         }
+    }
+    public bool IsDodgeAnimationPlaying()
+    {
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        return stateInfo.IsName("DodgeBlendtree") && stateInfo.normalizedTime < 1f;
     }
 
 
