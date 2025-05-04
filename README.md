@@ -19,7 +19,7 @@
 
 
 ## 主要開發工具
-
+Unity,Visual Studio2022, nomad, blender,git,CSP
 ##  開發者
 - **sunship0218**
   - 主程式(遊戲內所有功能)
