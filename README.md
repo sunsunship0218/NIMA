@@ -14,12 +14,13 @@
  ###  **擊中敵人可累積能量條**
  ![未命名的影片_ 使用 Clipchamp 製作 (2)](https://github.com/user-attachments/assets/9de4484e-20aa-4511-8b22-e2c9f66cd9f2)
 
--
+
  ###  **能量條滿時可啟動「治療效果」,隨時間逐漸衰退**
  -![未命名的影片_ 使用 Clipchamp 製作 (1)](https://github.com/user-attachments/assets/6f15586b-9c2c-482b-8495-7ea27c86edc5)
 
-
- 
+## 操作說明
+//支援鍵盤 手把 待更新
+//Steam連結
 
 
 
