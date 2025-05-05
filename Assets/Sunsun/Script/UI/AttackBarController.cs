@@ -73,16 +73,15 @@ public class AttackBarController : MonoBehaviour
                     attackSilder.value = attackBarValue / maxAttackBarValue;
             }
         }
-        else
-        {
-            // 在冷卻期間（不可累積時），即使攻擊碰撞發生也不增加攻擊條數值
-            // 但如果需要在此期間仍觸發回血（例如條件滿足時），可以保留或調整以下邏輯：
-            if (playerHealth != null && attackBarValue > 0f)
-            {
-                playerHealth.healthSystem.HealAmount(10);
-           //     Debug.Log("Player healed during cooldown");
-            }
-        }
+       
+        // 在冷卻期間（不可累積時），即使攻擊碰撞發生也不增加攻擊條數值
+       // 但如果需要在此期間仍觸發回血（例如條件滿足時），可以保留或調整以下邏輯：
+        if (playerHealth != null && attackBarValue > 0f && isBarFull==true)
+         {
+             playerHealth.healthSystem.HealAmount(10);
+           // Debug.Log("Player healed during cooldown");
+         }
+        
     }
 
     private void OnEnable()
