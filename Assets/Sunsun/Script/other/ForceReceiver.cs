@@ -59,4 +59,11 @@ public class ForceReceiver : MonoBehaviour
             agent.enabled = false;
         }
     }
+
+    public void ResetForce(Vector3 force)
+    {
+        impact = Vector3.zero;
+        verticalVelocity = 0f;
+        dampingVelocity = Vector3.zero;
+    }
 }
