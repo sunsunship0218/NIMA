@@ -7,6 +7,7 @@ public class TimeManager : MonoBehaviour
     bool waiting;
     float originalFixedDeltaTime;
     [SerializeField] float slowFactor =0.2f;
+    bool busy;
     private void Awake()
     {
         originalFixedDeltaTime = Time.fixedDeltaTime;
@@ -38,5 +39,34 @@ public class TimeManager : MonoBehaviour
         waiting = false; // 重置waiting标志
     }
 
+    public void DoHitStop  (
+       float freeze = 0.02f,   // 完全停止
+       float slow = 0.05f,   // 慢動作
+       float slowFac = 0.3f     // 慢動作倍率
+    )
+    {
+        if (busy) return;
+        StartCoroutine(HitStopRoutine(freeze, slow, slowFac));
+    }
+
+    IEnumerator HitStopRoutine(float freeze, float slow, float fac)
+    {
+        busy = true;
+
+        /*  Freeze */
+        Time.timeScale = 0f;
+        Time.fixedDeltaTime = 0f;
+        yield return new WaitForSecondsRealtime(freeze);
+
+        /*  Slow */
+        Time.timeScale = fac;
+        Time.fixedDeltaTime = originalFixedDeltaTime * fac;
+        yield return new WaitForSecondsRealtime(slow);
+
+        /*  Recover */
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = originalFixedDeltaTime;
+        busy = false;
+    }
 
 }

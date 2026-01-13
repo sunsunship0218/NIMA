@@ -80,10 +80,10 @@ AnimatorStateMachine:
     m_Position: {x: 320, y: 430, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 481467903953940821}
-    m_Position: {x: 580, y: 430, z: 0}
+    m_Position: {x: 610, y: 430, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8602273415925056687}
-    m_Position: {x: 580, y: 490, z: 0}
+    m_Position: {x: 620, y: 490, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2275146549129145353}
     m_Position: {x: 970, y: 390, z: 0}
@@ -708,7 +708,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400002, guid: 72ffed45430b6094493d8a325f67a9ae, type: 3}
+  m_Motion: {fileID: 7400002, guid: 9213d30a2ca755b46a636a424bd0866e, type: 3}
   m_Tag: Attack
   m_SpeedParameter: 
   m_MirrorParameter: 

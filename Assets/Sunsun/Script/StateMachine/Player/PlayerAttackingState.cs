@@ -22,6 +22,7 @@ public class PlayerAttackingState : PlayerBaseState
     }
     public override void Update(float deltatime)
     {
+        //偵測到敵人再面像敵人
         FaceEnemy();
         //移動
         MoveWithDeltatime(deltatime);
@@ -57,7 +58,9 @@ public class PlayerAttackingState : PlayerBaseState
     }
     public override void Exit()
     {
-      
+        //如果離開狀態了,雖然動畫中斷,但計算還在繼續
+        //把force reset
+        playerStateMachine.forceReceiver.ResetForce(playerStateMachine.transform.forward );
     }
     void TryApplyForce()
     {
@@ -76,4 +79,6 @@ public class PlayerAttackingState : PlayerBaseState
         //如果可以連擊
         playerStateMachine.SwitchState ( new PlayerAttackingState ( playerStateMachine,attack.ComboStateIndex  ));
     }
+
+ 
 }

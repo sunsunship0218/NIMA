@@ -56,8 +56,10 @@ public class WeaponDamage : MonoBehaviour
             }
             Vector3 hitposition = other.ClosestPointOnBounds(transform.position);
             //播放特效
-            timeManager.DoBulletTime(0.05f);
-         
+            //Hitstop
+            //  timeManager.DoBulletTime(0.05f);
+            timeManager.DoHitStop(0.02f, 0.06f, 0.3f);
+
             if (enemyHealth != null)
             {
                 hitParticleEffect.PlayHitParticle(hitposition);

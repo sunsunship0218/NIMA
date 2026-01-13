@@ -3,18 +3,14 @@ using UnityEngine;
 
 public class EnemyObjectPool : MonoBehaviour
 {
-    public static EnemyObjectPool Instance;
-
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] int initialPoolSize = 10;
 
     Queue<GameObject> pool = new Queue<GameObject>();
-    Transform container;
+    private Transform container;
 
     void Awake()
     {
-        Instance = this;
-        container = new GameObject("EnemyPool").transform;
 
         for (int i = 0; i < initialPoolSize; i++)
         {
@@ -24,9 +20,10 @@ public class EnemyObjectPool : MonoBehaviour
         }
     }
 
-    public GameObject GetFromPool()
+    public GameObject GetFromPool(Vector3 spawnPosition)
     {
         GameObject obj = pool.Count > 0 ? pool.Dequeue() : Instantiate(enemyPrefab, container);
+        obj.transform.position = spawnPosition;
         obj.SetActive(true);
         return obj;
     }

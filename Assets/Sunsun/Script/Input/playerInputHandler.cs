@@ -36,6 +36,11 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
     //DASH的冷卻參數
     public float DodgeCooldown = 1f; // 冷卻秒數
     private float lastDodgeTime = Mathf.NegativeInfinity; // 記錄上次閃避的時間
+  //滑鼠靈敏度參數
+
+
+    private float pitch = 0f;
+    private float yaw = 0f;
     [SerializeField] PlayerStateMachine playerStateMachine;
     void Awake()
     {
@@ -51,6 +56,8 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
         playercontrollers.Player.SetCallbacks(this);
         playercontrollers.Player.Enable();
         playercontrollers.UI.Enable();
+        // 鎖游標
+        Cursor.lockState = CursorLockMode.Locked; 
 
     }
     private void Update()
@@ -142,7 +149,8 @@ public class playerInputHandler : MonoBehaviour, PlayerControllers.IPlayerAction
     }
     public void OnLook(InputAction.CallbackContext context)
     {
-        
+      
+
     }
     public void OnTarget(InputAction.CallbackContext context)
     {
